@@ -1,0 +1,45 @@
+{
+  "name": "reisstest",
+  "version": "1.0.0",
+  "description": "ReissTest NPM settings",
+  "main": "index.js",
+  "scripts": {
+    "build-dev": "set NODE_ENV=development&& babel-node server.js",
+    "build-prod": "set NODE_ENV=production&& webpack && babel-node server.js",
+    "fast": "set NODE_ENV=development&& webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/A64Danil/ReissTest.git"
+  },
+  "author": "Danil X",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/A64Danil/ReissTest/issues"
+  },
+  "homepage": "https://github.com/A64Danil/ReissTest#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.4.0-alpha.1"
+  },
+  "devDependencies": {
+    "@webpack-cli/init": "0.0.8",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "html-webpack-plugin": "^3.2.0",
+    "react-hot-loader": "^4.0.0",
+    "serviceworker-webpack-plugin": "^1.0.0-alpha02",
+    "webpack": "^4.12.1",
+    "webpack-cli": "^3.0.8",
+    "webpack-config": "^7.5.0",
+    "webpack-dev-middleware": "^3.1.3",
+    "webpack-hot-middleware": "^2.22.2"
+  }
+}
