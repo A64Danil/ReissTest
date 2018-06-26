@@ -8,6 +8,7 @@ const app = express();
 const isDevelopment = process.env.NODE_ENV === 'development';
 
 if (isDevelopment) {
+    console.log("Вы в режиме разработчика");
     const webpack = require('webpack');
     const webpackConfig = require('./webpack.config.babel').default;
     const compiler = webpack(webpackConfig);

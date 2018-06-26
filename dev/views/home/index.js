@@ -15,7 +15,7 @@ export default class Home extends React.Component {
     render() {
         return (
             <h1 onClick={this.clickHandler}>
-                {`Hello ${this.state.name}!`}
+                {`Hey, he2llo ${this.state.name}!`}
             </h1>
         );
     }
