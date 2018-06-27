@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 
 import {
     browserHistory
@@ -7,13 +7,29 @@ import {
 
 
 import App from './views/app';
-import Home from './views/home';
-
-
 export default () => (
-    <Router history={browserHistory}>
-        <Route path='/' component={App}>
-            <Route path='home' component={Home} />
-        </Route>
-    </Router>
+    <BrowserRouter>
+        <Route path='/' component={App} />
+    </BrowserRouter>
 );
+//
+// export default () => (
+//     <Router history={browserHistory}>
+//         <div>
+//             <Route path='/' component={App} />
+//             <Route path='/' component={Home} />
+//         </div>
+//     </Router>
+// );
+
+
+/*
+            <div></div>
+            <ul>
+                <li><Link to="/">Home</Link></li>
+                <li><Link to="/about">About</Link></li>
+                <li><Link to="/quests">Quests</Link></li>
+            </ul>
+
+            <hr/>
+  * */

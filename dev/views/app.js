@@ -1,14 +1,15 @@
 import React from 'react';
 
 import Menu from '../components/menu';
+import Main from '../components/main';
 
 // Global CSS styles
-import './global.css';
+import styles from './global.css';
 
 const App = () => (
-    <div className="app-container">
+    <div className={styles["app-container"]}>
         <Menu />
-        <div className="page-container"></div>
+        <Main />
     </div>
 );
 
