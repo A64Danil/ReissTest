@@ -4,8 +4,8 @@
   "description": "ReissTest NPM settings",
   "main": "index.js",
   "scripts": {
-    "b-dev": "set NODE_ENV=development&& webpack && babel-node server.js",
-    "b-prod": "set NODE_ENV=production&& webpack && babel-node server.js",
+    "dev": "set NODE_ENV=development&& webpack && babel-node server.js",
+    "prod": "set NODE_ENV=production&& webpack && babel-node server.js",
     "fast": "set NODE_ENV=development&& webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -35,6 +35,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.11",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.4.0",
     "postcss-loader": "^2.1.5",
