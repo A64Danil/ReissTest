@@ -3,13 +3,12 @@ body {background-color: #ccc; margin: 0;}
 .app-container__2R1gR {    display: flex;
     flex-direction: row;
 }
-.app-container__2R1gR > * {}.main__uxKcd {background: #eee;}
-/* hello */.menu__mo1s5 {
+.app-container__2R1gR > * {}.menu__3Q2-r {
     top: 0;
     left: 0;
     bottom: 0;
     background-color: tomato;
-    .toggle-btn__2MOia {
+    .toggle-btn__luqKG {
       position: absolute;
       top: 5px;
       right: 10px;
@@ -23,12 +22,13 @@ body {background-color: #ccc; margin: 0;}
 $blue: #056ef0;
 $column: 200px;
 
-.menu__mo1s5 {
+.menu__3Q2-r {
     width: calc(4 * $column);
 }
 
-.menu_link__mjupT {
+.menu_link__3UzpJ {
     background: color-mod($blue alpha(90%));
     width: $column;
-}
+}.main__1p1DJ {background: #eee;}
+/* hello */
 /*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzdHlsZS5jc3MiLCJzb3VyY2VSb290IjoiIn0=*/
