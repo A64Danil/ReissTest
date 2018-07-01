@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import Button from "./Button";
 
 // var json = require('../../model/quests.json');
 import json from "../../model/quests.json";
@@ -13,29 +14,34 @@ const QuestItem = props => (
 
 const testVar = json;
 
-const nextBtn = props => <button>Далее, к вопросу №{props + 1}</button>;
-
-const prevBtn = props => <button>Назад, к вопросу №{props - 1}</button>;
+//TODO: Delete this func
+function ButtonOrig(props) {
+	let action = props.action;
+	// Возвращает DOM элемент. Например:
+	if (action === "next") {
+		return (
+			<button data-action={action}>
+				Далее, к вопросу №{props.curQuest + 1}
+			</button>
+		);
+	} else if (action === "prev") {
+		return (
+			<button data-action={action}>
+				Назад, к вопросу №{props.curQuest - 1}
+			</button>
+		);
+	}
+}
 
 const QuestList = (props, sec) => {
 	console.log(props[sec]);
 	let tmpVal = props[sec];
-	console.log("А тут будет второй параметр" + sec);
-
 	let questItems = (
 		<div data-key={tmpVal.index} key={tmpVal.index}>
 			<h3>{tmpVal.title}</h3>
 			<p>heh {tmpVal.description}</p>
 		</div>
 	);
-
-	// let questItems = tmpVal.map((item, index) => (
-	// 	<div data-key={index} key={index}>
-	// 		<h3>{item.title}</h3>
-	// 		<p>heh {item.description}</p>
-	// 	</div>
-	// ));
-
 	return questItems;
 };
 
@@ -47,8 +53,7 @@ export default class Quest extends React.Component {
 			nameTwo: "One",
 			currentQuestID: 1
 		};
-		this.nextQuestID = this.nextQuestID.bind(this);
-		this.prevQuestID = this.prevQuestID.bind(this);
+		this.changeCurrentQuestID = this.changeCurrentQuestID.bind(this);
 		this.clickHandler = this.clickHandler.bind(this);
 	}
 
@@ -56,19 +61,17 @@ export default class Quest extends React.Component {
 		this.setState({ name: "Active", nameTwo: "NameTwoActive" });
 	}
 
-	nextQuestID(e) {
-		this.setState({ currentQuestID: this.state.currentQuestID + 1 });
-	}
-	prevQuestID(e) {
-		this.setState({ currentQuestID: this.state.currentQuestID - 1 });
-	}
-
 	changeCurrentQuestID(e) {
-		if (false) {
+		let action = e.target.dataset.action;
+		if (action === "next") {
 			console.log("Уа!! Попали в кнопку некст!");
+			this.setState({ currentQuestID: this.state.currentQuestID + 1 });
+		} else if (action === "prev") {
+			console.log("Уа!! Попали в кнопку прев!");
+			this.setState({ currentQuestID: this.state.currentQuestID - 1 });
 		}
-		console.log(event.currentTarget);
-		this.setState({ currentQuestID: 1 });
+
+		//this.setState({ currentQuestID: 1 });
 	}
 
 	render() {
@@ -76,14 +79,14 @@ export default class Quest extends React.Component {
 
 		return (
 			<Fragment>
-				<h1 onClick={this.clickHandler}>Hello Kitty! {this.state.name}</h1>
-				<p>Here will be a qustion, {this.state.nameTwo}</p>
+				<h1 onClick={this.clickHandler}>Тест Рейса. {this.state.name}</h1>
 				<div>{QuestList(json, this.state.currentQuestID)}</div>
-				<div onClick={this.nextQuestID}>
-					{nextBtn(this.state.currentQuestID)}
+
+				<div onClick={this.changeCurrentQuestID}>
+					<Button action="next" curQuest={this.state.currentQuestID} />
 				</div>
-				<div onClick={this.prevQuestID}>
-					{prevBtn(this.state.currentQuestID)}
+				<div>
+					<Button action="prev" curQuest={this.state.currentQuestID} />
 				</div>
 			</Fragment>
 		);
