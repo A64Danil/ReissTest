@@ -30,7 +30,7 @@ export default class Button extends React.Component {
 			);
 		} else if (action === "prev") {
 			return (
-				<button onClick={this.changeCurrentQuestID} data-action={action}>
+				<button data-action={action}>
 					Назад, к вопросу №{this.props.curQuest - 1}
 				</button>
 			);

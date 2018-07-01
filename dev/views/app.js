@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { createStore } from "redux";
 
 import Menu from "../components/Menu";
 import Main from "../components/Main";
@@ -7,24 +8,45 @@ import Main from "../components/Main";
 import styles from "./global.css";
 
 const initialState = {
+	currentQuestIDinStore: 0,
 	testState: "initial State"
 };
 
-export default class App extends React.Component {
+function reducer(state = initialState, action) {
+	switch (action.type) {
+		case "CHANGE_CURRENT_QUEST_ID":
+			return { ...state, currentQuestIDinStore: action.payload };
+	}
+	return state;
+}
+
+const store = createStore(reducer);
+
+const changeCurrentQuestID = {
+	type: "CHANGE_CURRENT_QUEST_ID",
+	payload: 2
+};
+
+store.dispatch(changeCurrentQuestID);
+console.log(store.getState());
+export default class App extends Component {
 	constructor() {
 		super();
 		if (!this.state) {
 			this.state = initialState;
 		}
-		this.state = { testState: "someValue", path: location.pathname };
+		this.state = {
+			testState: "this state in App class Component",
+			path: location.pathname
+		};
 	}
 
 	componentDidMount() {
-		console.log("hello after mount");
+		console.log("hello after mount 0^42");
 	}
 
 	render() {
-		console.log(this.state);
+		console.log(store.getState());
 		return (
 			<div className={styles["app-container"]} data-some="helllo">
 				<Menu />
@@ -33,12 +55,3 @@ export default class App extends React.Component {
 		);
 	}
 }
-//
-// const App = () => (
-//     <div className={styles["app-container"]}>
-//         <Menu />
-//         <Main />
-//     </div>
-// );
-//
-// export default App;

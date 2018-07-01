@@ -1,10 +1,25 @@
 import React, { Fragment } from "react";
+import { createStore } from "redux";
 import Button from "./Button";
 
 // var json = require('../../model/quests.json');
 import json from "../../model/quests.json";
 
 console.log(json); // this will show the info it in firebug console
+
+function reducer(state, action) {
+	switch (action.type) {
+		case "CHANGE_CURRENT_QUEST_ID":
+			return { ...state, currentQuestIDinStore: action.payload };
+	}
+	return state;
+}
+const store = createStore(reducer);
+
+const changeCurrentQuestID = {
+	type: "CHANGE_CURRENT_QUEST_ID",
+	payload: 7
+};
 
 const QuestItem = props => (
 	<li data-key={props.index}>
@@ -77,6 +92,8 @@ export default class Quest extends React.Component {
 	render() {
 		console.log(this.state);
 
+		store.dispatch(changeCurrentQuestID);
+		console.log(store.getState());
 		return (
 			<Fragment>
 				<h1 onClick={this.clickHandler}>Тест Рейса. {this.state.name}</h1>
@@ -85,7 +102,7 @@ export default class Quest extends React.Component {
 				<div onClick={this.changeCurrentQuestID}>
 					<Button action="next" curQuest={this.state.currentQuestID} />
 				</div>
-				<div>
+				<div onClick={this.changeCurrentQuestID}>
 					<Button action="prev" curQuest={this.state.currentQuestID} />
 				</div>
 			</Fragment>
