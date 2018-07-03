@@ -1,14 +1,15 @@
 import React from "react";
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { createHistory, useBasename } from "history";
 
 import { browserHistory } from "react-router";
 
 import App from "./views/app";
+
 export default () => (
-	<BrowserRouter history={browserHistory}>
+	<Router history={browserHistory}>
 		<Route path="/" component={App} />
-	</BrowserRouter>
+	</Router>
 );
 
 //

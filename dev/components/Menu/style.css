@@ -1,3 +1,7 @@
+
+.menu_link__active{
+    font-weight: bold;
+}
 .menu {
     top: 0;
     left: 0;
@@ -14,6 +18,7 @@
   }
 }
 
+
 $blue: #056ef0;
 $column: 200px;
 
@@ -25,3 +30,4 @@ $column: 200px;
     background: color-mod($blue alpha(90%));
     width: $column;
 }
+

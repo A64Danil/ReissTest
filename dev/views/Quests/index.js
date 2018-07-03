@@ -1,12 +1,16 @@
 import React, { Fragment } from "react";
+import { Switch, Route } from "react-router-dom";
+import shortid from "shortid";
 import { createStore } from "redux";
 import Button from "./Button";
+//import QuestItem from "./QuestItem";
 
 // var json = require('../../model/quests.json');
 import json from "../../model/quests.json";
 
 console.log(json); // this will show the info it in firebug console
-
+//TODO: Clear all this commented area
+/*
 function reducer(state, action) {
 	switch (action.type) {
 		case "CHANGE_CURRENT_QUEST_ID":
@@ -15,58 +19,39 @@ function reducer(state, action) {
 	return state;
 }
 const store = createStore(reducer);
-
 const changeCurrentQuestID = {
 	type: "CHANGE_CURRENT_QUEST_ID",
 	payload: 7
 };
 
-const QuestItem = props => (
+const QuestItemOLD = props => (
 	<li data-key={props.index}>
 		{hey} - {props.item.title}
 	</li>
 );
-
-const testVar = json;
-
-//TODO: Delete this func
-function ButtonOrig(props) {
-	let action = props.action;
-	// Возвращает DOM элемент. Например:
-	if (action === "next") {
-		return (
-			<button data-action={action}>
-				Далее, к вопросу №{props.curQuest + 1}
-			</button>
-		);
-	} else if (action === "prev") {
-		return (
-			<button data-action={action}>
-				Назад, к вопросу №{props.curQuest - 1}
-			</button>
-		);
-	}
-}
-
-const QuestList = (props, sec) => {
-	console.log(props[sec]);
-	let tmpVal = props[sec];
+*/
+const QuestList = (props, index) => {
+	console.log(props[index]);
+	let tmpVal = props[index];
 	let questItems = (
-		<div data-key={tmpVal.index} key={tmpVal.index}>
+		<div data-key={"QuestID_" + index} key={index + shortid.generate()}>
+			<h6>
+				Вопрос {index + 1} из {props.length}
+			</h6>
 			<h3>{tmpVal.title}</h3>
-			<p>heh {tmpVal.description}</p>
+			<p>{tmpVal.description}</p>
 		</div>
 	);
 	return questItems;
 };
 
 export default class Quest extends React.Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			name: "Rest",
 			nameTwo: "One",
-			currentQuestID: 1
+			currentQuestID: 0
 		};
 		this.changeCurrentQuestID = this.changeCurrentQuestID.bind(this);
 		this.clickHandler = this.clickHandler.bind(this);
@@ -85,26 +70,27 @@ export default class Quest extends React.Component {
 			console.log("Уа!! Попали в кнопку прев!");
 			this.setState({ currentQuestID: this.state.currentQuestID - 1 });
 		}
-
-		//this.setState({ currentQuestID: 1 });
 	}
 
 	render() {
-		console.log(this.state);
-
-		store.dispatch(changeCurrentQuestID);
-		console.log(store.getState());
+		//store.dispatch(changeCurrentQuestID);
+		//console.log(store.getState());
 		return (
 			<Fragment>
 				<h1 onClick={this.clickHandler}>Тест Рейса. {this.state.name}</h1>
+
 				<div>{QuestList(json, this.state.currentQuestID)}</div>
 
-				<div onClick={this.changeCurrentQuestID}>
-					<Button action="next" curQuest={this.state.currentQuestID} />
-				</div>
-				<div onClick={this.changeCurrentQuestID}>
-					<Button action="prev" curQuest={this.state.currentQuestID} />
-				</div>
+				<Button
+					action="prev"
+					onClick={this.changeCurrentQuestID}
+					curQuest={this.state.currentQuestID}
+				/>
+				<Button
+					onClick={this.changeCurrentQuestID}
+					action="next"
+					curQuest={this.state.currentQuestID}
+				/>
 			</Fragment>
 		);
 	}
