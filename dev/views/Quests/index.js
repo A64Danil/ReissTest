@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import shortid from "shortid";
 import { connect } from "react-redux";
 import Button from "./Button";
+import Select from "./Select";
 
 //import { createStore } from "redux";
 //import { reducer } from "../../store/reducers";
@@ -66,36 +67,43 @@ class Quest extends React.Component {
 
 	changeCurrentQuestID(e) {
 		let action = e.target.dataset.action;
-		if (action === "next") {
-			console.log("Уа!! Попали в кнопку некст!");
+		if (this.props.currentQuestIDinStore == json.length) {
+			console.log("Дошли до последнего итема", json.length);
+		}
+
+		if (
+			action === "next" &&
+			this.props.currentQuestIDinStore < json.length - 1
+		) {
+			console.log("Уа!! Попали в кнопку некст! Длина массива - " + json.length);
 			this.props.changeCurrentQuestID(this.props.currentQuestIDinStore + 1);
-			//this.setState({ currentQuestID: this.state.currentQuestID + 1 });
-		} else if (action === "prev") {
+		} else if (action === "prev" && this.props.currentQuestIDinStore > 0) {
 			console.log("Уа!! Попали в кнопку прев!");
 			this.props.changeCurrentQuestID(this.props.currentQuestIDinStore - 1);
-			//this.setState({ currentQuestID: this.state.currentQuestID - 1 });
 		}
 	}
 
 	render() {
 		//store.dispatch(changeCurrentQuestID);
 		//console.log(this.props);
-		console.log(this.props.changeCurrentQuestID);
+		//console.log(this.props.changeCurrentQuestID);
 		return (
 			<Fragment>
 				<h1 onClick={this.clickHandler}>Тест Рейса. {this.state.name}</h1>
 
 				<div>{QuestList(json, this.props.currentQuestIDinStore)}</div>
-
+				<Select />
 				<Button
 					action="prev"
 					onClick={this.changeCurrentQuestID}
 					curQuest={this.props.currentQuestIDinStore}
+					questLength={json.length}
 				/>
 				<Button
 					onClick={this.changeCurrentQuestID}
 					action="next"
 					curQuest={this.props.currentQuestIDinStore}
+					questLength={json.length}
 				/>
 			</Fragment>
 		);
