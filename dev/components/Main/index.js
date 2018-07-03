@@ -20,25 +20,25 @@ class Main extends React.Component {
 	}
 
 	componentWillMount() {
-		//store.dispatch(changeCurrentQuestID(3));
-		console.log("From main.js:");
 		//this.state = { path: location.pathname };
-		console.log(this.state);
-		console.log(this.state.path);
+		//console.log(this.state);
 	}
 
 	render() {
-		const { changeCurrentQuestID } = this.props;
+		//const { changeCurrentQuestID } = this.props;
 		// В этом месте мы принимаем параметры от app.js
-		console.log(this.props);
+		//console.log(this.props);
 		// Здесь мы можем брать пропсы и вызывать из них функции
-		changeCurrentQuestID(4);
+		//changeCurrentQuestID(4);
 		return (
 			<main className={styles.main}>
 				<Switch>
 					<Route exact path="/" component={Home} />
 					<Route path="/about" component={About} />
-					<Route path="/quests" component={Quest} />
+					<Route
+						path="/quests"
+						component={props => <Quest {...this.props} foo="lol" />}
+					/>
 					<Route path="*" component={Home} />
 				</Switch>
 			</main>

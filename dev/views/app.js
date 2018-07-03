@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { connect, Provider } from "react-redux";
-import { createStore, bindActionCreators } from "redux";
-import { reducer } from "../store/reducers";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import { reducer, initialState } from "../store/reducers";
 
 import Menu from "../components/Menu";
 import Main from "../components/Main";
@@ -11,16 +11,16 @@ import styles from "./global.css";
 
 export const ACTION_CHANGE_CURRENT_QUEST_ID = "CHANGE_CURRENT_QUEST_ID";
 
-const store = createStore(reducer);
-console.log(store.getState());
-
-// const WrappedMainComponent = connect(
-// 	putStateToProps,
-// 	putActionToProps
-// )(Main);
+const store = createStore(
+	reducer,
+	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+store.subscribe(() => {
+	console.log("Стор изменён", store.getState());
+});
 
 export default class App extends Component {
-	/* constructor() {
+	constructor() {
 		super();
 		if (!this.state) {
 			this.state = initialState;
@@ -29,11 +29,11 @@ export default class App extends Component {
 			testState: "this state in App class Component",
 			path: location.pathname
 		};
-	} */
+	}
 
-	// componentDidMount() {
-	// 	console.log("hello after mount 0^42");
-	// }
+	componentDidMount() {
+		console.log("hello after mount 0^42");
+	}
 
 	render() {
 		console.log(store.getState());

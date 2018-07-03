@@ -3,10 +3,7 @@ body {background-color: #ccc; margin: 0;}
 .app-container__2R1gR {    display: flex;
     flex-direction: row;
 }
-.app-container__2R1gR > * {}.main__1p1DJ {
-	background: #eee;
-}
-
+.app-container__2R1gR > * {}
 .menu_link__active__VTf_3{
     font-weight: bold;
 }
@@ -39,5 +36,8 @@ $column: 200px;
     width: $column;
 }
 
+.main__1p1DJ {
+	background: #eee;
+}
 
 /*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzdHlsZS5jc3MiLCJzb3VyY2VSb290IjoiIn0=*/

@@ -1,11 +1,13 @@
 import React, { Fragment } from "react";
 import { Switch, Route } from "react-router-dom";
 import shortid from "shortid";
-import { createStore } from "redux";
+import { connect } from "react-redux";
 import Button from "./Button";
+
+//import { createStore } from "redux";
+//import { reducer } from "../../store/reducers";
 //import QuestItem from "./QuestItem";
 
-// var json = require('../../model/quests.json');
 import json from "../../model/quests.json";
 
 console.log(json); // this will show the info it in firebug console
@@ -45,7 +47,7 @@ const QuestList = (props, index) => {
 	return questItems;
 };
 
-export default class Quest extends React.Component {
+class Quest extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -53,6 +55,7 @@ export default class Quest extends React.Component {
 			nameTwo: "One",
 			currentQuestID: 0
 		};
+
 		this.changeCurrentQuestID = this.changeCurrentQuestID.bind(this);
 		this.clickHandler = this.clickHandler.bind(this);
 	}
@@ -65,33 +68,37 @@ export default class Quest extends React.Component {
 		let action = e.target.dataset.action;
 		if (action === "next") {
 			console.log("Уа!! Попали в кнопку некст!");
-			this.setState({ currentQuestID: this.state.currentQuestID + 1 });
+			this.props.changeCurrentQuestID(this.props.currentQuestIDinStore + 1);
+			//this.setState({ currentQuestID: this.state.currentQuestID + 1 });
 		} else if (action === "prev") {
 			console.log("Уа!! Попали в кнопку прев!");
-			this.setState({ currentQuestID: this.state.currentQuestID - 1 });
+			this.props.changeCurrentQuestID(this.props.currentQuestIDinStore - 1);
+			//this.setState({ currentQuestID: this.state.currentQuestID - 1 });
 		}
 	}
 
 	render() {
 		//store.dispatch(changeCurrentQuestID);
-		//console.log(store.getState());
+		//console.log(this.props);
+		console.log(this.props.changeCurrentQuestID);
 		return (
 			<Fragment>
 				<h1 onClick={this.clickHandler}>Тест Рейса. {this.state.name}</h1>
 
-				<div>{QuestList(json, this.state.currentQuestID)}</div>
+				<div>{QuestList(json, this.props.currentQuestIDinStore)}</div>
 
 				<Button
 					action="prev"
 					onClick={this.changeCurrentQuestID}
-					curQuest={this.state.currentQuestID}
+					curQuest={this.props.currentQuestIDinStore}
 				/>
 				<Button
 					onClick={this.changeCurrentQuestID}
 					action="next"
-					curQuest={this.state.currentQuestID}
+					curQuest={this.props.currentQuestIDinStore}
 				/>
 			</Fragment>
 		);
 	}
 }
+export default connect()(Quest);
