@@ -7,11 +7,11 @@ import {
 export const initialState = {
 	currentQuestIDinStore: 0,
 	questAnswers: {
-		id1: 5,
-		id2: 5,
+		id0: "здесь будет записан ответ на первый вопрос",
+		id1: 50111,
+		id2: 50222,
 		id3: 5,
-		id4: 5,
-		id5: 5
+		id4: 5
 	},
 	testQuestAnswers: 0,
 	testState: "initial State"
@@ -24,7 +24,11 @@ export const reducer = (state = initialState, action) => {
 		case "CHANGE_CURRENT_QUEST_ID":
 			return { ...state, currentQuestIDinStore: action.payload };
 		case "CHANGE_QUEST_ANSWER":
-			return { ...state, testQuestAnswers: action.payload };
+			const { questAnswers, currentQuestIDinStore } = state;
+			let linkToCurrentQuestAnswer = questAnswers["id" + currentQuestIDinStore];
+			console.log(currentQuestIDinStore);
+			console.log(linkToCurrentQuestAnswer);
+			return { ...state, (questAnswers.id0): action.payload };
 	}
 	return state;
 };

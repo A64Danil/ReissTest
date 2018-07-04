@@ -50,6 +50,7 @@ class Main extends React.Component {
 const putStateToProps = state => {
 	return {
 		currentQuestIDinStore: state.currentQuestIDinStore,
+		questAnswers: state.questAnswers,
 		testQuestAnswers: state.testQuestAnswers,
 		testState: state.testState
 	};
