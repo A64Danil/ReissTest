@@ -1,6 +1,15 @@
-body {background-color: #ccc; margin: 0;}
-
-.app-container {    display: flex;
-    flex-direction: row;
+body {
+	background-color: #ccc;
+	margin: 0;
 }
-.app-container > * {}
+
+.app-container {
+	display: flex;
+	flex-direction: row;
+}
+.app-container > * {
+}
+
+.test_style {
+	color: red;
+}

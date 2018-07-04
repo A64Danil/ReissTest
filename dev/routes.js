@@ -1,13 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { createHistory, useBasename } from "history";
-
-import { browserHistory } from "react-router";
+//import { createHistory, useBasename } from "history";
+import { hashHistory } from "react-router";
+import { syncHistoryWithStore } from "react-router-redux";
 
 import App from "./views/app";
 
 export default () => (
-	<Router history={browserHistory}>
+	<Router history={hashHistory}>
 		<Route path="/" component={App} />
 	</Router>
 );

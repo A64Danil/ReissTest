@@ -10,6 +10,7 @@ import Main from "../components/Main";
 import styles from "./global.css";
 
 export const ACTION_CHANGE_CURRENT_QUEST_ID = "CHANGE_CURRENT_QUEST_ID";
+export const ACTION_CHANGE_QUEST_ANSWER = "CHANGE_QUEST_ANSWER";
 
 const store = createStore(
 	reducer,

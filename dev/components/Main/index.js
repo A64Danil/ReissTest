@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Switch, Route } from "react-router-dom";
-import { changeCurrentQuestID } from "../../store/actions";
+import { changeCurrentQuestID, changeQuestAnswer } from "../../store/actions";
 
 import Home from "../../views/Home";
 import About from "../../views/About";
@@ -50,6 +50,7 @@ class Main extends React.Component {
 const putStateToProps = state => {
 	return {
 		currentQuestIDinStore: state.currentQuestIDinStore,
+		testQuestAnswers: state.testQuestAnswers,
 		testState: state.testState
 	};
 };
@@ -57,7 +58,8 @@ const putStateToProps = state => {
 // Привязывает функции к пропсам
 const putActionToProps = dispatch => {
 	return {
-		changeCurrentQuestID: bindActionCreators(changeCurrentQuestID, dispatch)
+		changeCurrentQuestID: bindActionCreators(changeCurrentQuestID, dispatch),
+		changeQuestAnswer: bindActionCreators(changeQuestAnswer, dispatch)
 	};
 };
 

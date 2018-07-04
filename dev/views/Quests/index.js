@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { Switch, Route } from "react-router-dom";
 import shortid from "shortid";
 import { connect } from "react-redux";
+import styles from "./slider.css";
 import Button from "./Button";
 import Select from "./Select";
 
@@ -54,9 +55,11 @@ class Quest extends React.Component {
 		this.state = {
 			name: "Rest",
 			nameTwo: "One",
-			currentQuestID: 0
+			currentQuestID: 0,
+			questAnswer: 0
 		};
 
+		this.some = this.some.bind(this);
 		this.changeCurrentQuestID = this.changeCurrentQuestID.bind(this);
 		this.clickHandler = this.clickHandler.bind(this);
 	}
@@ -83,16 +86,26 @@ class Quest extends React.Component {
 		}
 	}
 
+	some(e) {
+		this.props.changeQuestAnswer(e.currentTarget.value);
+		console.log("Вариант ответа: " + e.currentTarget.value);
+		this.setState({ questAnswer: e.currentTarget.value });
+		console.log(this.state.questAnswer);
+	}
+
 	render() {
 		//store.dispatch(changeCurrentQuestID);
-		//console.log(this.props);
+		console.log(this.props);
 		//console.log(this.props.changeCurrentQuestID);
 		return (
 			<Fragment>
 				<h1 onClick={this.clickHandler}>Тест Рейса. {this.state.name}</h1>
 
 				<div>{QuestList(json, this.props.currentQuestIDinStore)}</div>
-				<Select />
+				<div className={styles["slidecontainer"]}>
+					<Select onChange={this.some} />
+					<div className="questAnswer" />
+				</div>
 				<Button
 					action="prev"
 					onClick={this.changeCurrentQuestID}
