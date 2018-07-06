@@ -83,7 +83,7 @@ class Quest extends React.Component {
 		//console.log(this.props.changeCurrentQuestID);
 		return (
 			<Fragment>
-				<h1 onClick={this.clickHandler}>Тест Рейса. {this.state.name}</h1>
+				<h1 onClick={this.clickHandler}>0:45. Тест Рейса. {this.state.name}</h1>
 
 				<div>
 					{QuestList(json, this.props.userReducer.currentQuestIDinStore)}

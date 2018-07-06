@@ -7,15 +7,13 @@ export default class Select extends React.Component {
 			<input
 				type="range"
 				min="1"
-				max="10"
+				max="5"
 				defaultValue={this.props.value}
 				className={styles["slider"]}
 				id="myRange"
 				onMouseUp={this.props.onChange}
-				onPress={this.props.onChange}
+				onTouchEnd={this.props.onChange}
 			/>
 		);
 	}
 }
-
-//TODO: add touch events
