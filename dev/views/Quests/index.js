@@ -78,7 +78,8 @@ class Quest extends React.Component {
 	render() {
 		//store.dispatch(changeCurrentQuestID);
 		let currentQuest = "id" + this.props.userReducer.currentQuestIDinStore;
-		console.log(this.props);
+		let currentQuestAnswer = this.props.answerReducer[currentQuest];
+		console.log(currentQuestAnswer);
 		//console.log(this.props.changeCurrentQuestID);
 		return (
 			<Fragment>
@@ -92,7 +93,7 @@ class Quest extends React.Component {
 						onChange={this.answerAccept}
 						value={this.props.answerReducer[currentQuest]}
 					/>
-					<div className="questAnswer" />
+					<div className="questAnswer">Текущий ответ: {currentQuestAnswer}</div>
 				</div>
 				<Button
 					action="prev"

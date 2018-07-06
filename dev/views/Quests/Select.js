@@ -12,7 +12,10 @@ export default class Select extends React.Component {
 				className={styles["slider"]}
 				id="myRange"
 				onMouseUp={this.props.onChange}
+				onPress={this.props.onChange}
 			/>
 		);
 	}
 }
+
+//TODO: add touch events
