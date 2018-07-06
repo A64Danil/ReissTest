@@ -10,7 +10,7 @@ export default new Config().extend("conf/webpack.base.config.js").merge({
 	module: {
 		rules: [
 			{
-				test: /\.css$/,
+				test: /\.newcss$/,
 				use: ExtractTextPlugin.extract({
 					fallback: "style-loader",
 					use: "css-loader!sass-loader"

@@ -8,7 +8,7 @@ export default class Select extends React.Component {
 				type="range"
 				min="1"
 				max="10"
-				defaultValue="5"
+				defaultValue={this.props.value}
 				className={styles["slider"]}
 				id="myRange"
 				onMouseUp={this.props.onChange}

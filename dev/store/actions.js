@@ -10,9 +10,10 @@ export const changeCurrentQuestID = newQuestID => {
 	};
 };
 
-export const changeQuestAnswer = newQuestAnswer => {
+export const changeQuestAnswer = (newQuestAnswer, questID) => {
 	return {
 		type: ACTION_CHANGE_QUEST_ANSWER,
-		payload: newQuestAnswer
+		payload: newQuestAnswer,
+		payloadID: questID
 	};
 };
