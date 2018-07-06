@@ -13,6 +13,9 @@ body {
 .test_style__2Hv3c {
 	color: red;
 }
+.main__1p1DJ {
+	background: #eee;
+}
 
 .menu_link__active__VTf_3{
     font-weight: bold;
@@ -46,9 +49,6 @@ $column: 200px;
     width: $column;
 }
 
-.main__1p1DJ {
-	background: #eee;
-}
 .slidecontainer__FRwBE {
 	width: 100%; /* Width of the outside container */
 }

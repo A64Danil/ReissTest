@@ -4,20 +4,13 @@ import {
 	ACTION_CHANGE_QUEST_ANSWER
 } from "../views/app"; // Action Creators - funcs, who return actions
 
+//const routing = routerReducer;
+
 export const initialState = {
 	currentQuestIDinStore: 0,
-	questAnswers: {
-		id0: "здесь будет записан ответ на первый вопрос",
-		id1: 50111,
-		id2: 50222,
-		id3: 5,
-		id4: 5
-	},
 	testQuestAnswers: 0,
 	testState: "initial State"
 };
-
-const routing = routerReducer;
 
 export const reducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -28,7 +21,7 @@ export const reducer = (state = initialState, action) => {
 			let linkToCurrentQuestAnswer = questAnswers["id" + currentQuestIDinStore];
 			console.log(currentQuestIDinStore);
 			console.log(linkToCurrentQuestAnswer);
-			return { ...state, (questAnswers.id0): action.payload };
+			return { ...state, questAnswers: action.payload };
 	}
 	return state;
 };

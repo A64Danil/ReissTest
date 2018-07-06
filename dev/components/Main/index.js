@@ -27,7 +27,7 @@ class Main extends React.Component {
 	render() {
 		//const { changeCurrentQuestID } = this.props;
 		// В этом месте мы принимаем параметры от app.js
-		//console.log(this.props);
+		console.log(this.props);
 		// Здесь мы можем брать пропсы и вызывать из них функции
 		//changeCurrentQuestID(4);
 		return (
@@ -49,10 +49,12 @@ class Main extends React.Component {
 // Из стейта положить в пропсы
 const putStateToProps = state => {
 	return {
-		currentQuestIDinStore: state.currentQuestIDinStore,
-		questAnswers: state.questAnswers,
-		testQuestAnswers: state.testQuestAnswers,
-		testState: state.testState
+		// currentQuestIDinStore: state.currentQuestIDinStore,
+		// questAnswers: state.questAnswers,
+		// testQuestAnswers: state.testQuestAnswers,
+		// testState: state.testState
+		userReducer: state.userReducer,
+		answerReducer: state.answerReducer
 	};
 };
 

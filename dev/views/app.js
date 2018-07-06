@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import { reducer, initialState } from "../store/reducers";
+//import { reducer, initialState } from "../store/reducers";
+import reducer from "../store";
 
 import Menu from "../components/Menu";
 import Main from "../components/Main";
@@ -23,9 +24,9 @@ store.subscribe(() => {
 export default class App extends Component {
 	constructor() {
 		super();
-		if (!this.state) {
-			this.state = initialState;
-		}
+		// if (!this.state) {
+		// 	this.state = initialState;
+		// }
 		this.state = {
 			testState: "this state in App class Component",
 			path: location.pathname

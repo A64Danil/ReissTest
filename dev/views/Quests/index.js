@@ -34,6 +34,7 @@ const QuestItemOLD = props => (
 	</li>
 );
 */
+
 const QuestList = (props, index) => {
 	console.log(props[index]);
 	let tmpVal = props[index];
@@ -70,19 +71,26 @@ class Quest extends React.Component {
 
 	changeCurrentQuestID(e) {
 		let action = e.target.dataset.action;
-		if (this.props.currentQuestIDinStore == json.length) {
+		if (this.props.userReducer.currentQuestIDinStore == json.length) {
 			console.log("Дошли до последнего итема", json.length);
 		}
 
 		if (
 			action === "next" &&
-			this.props.currentQuestIDinStore < json.length - 1
+			this.props.userReducer.currentQuestIDinStore < json.length - 1
 		) {
 			console.log("Уа!! Попали в кнопку некст! Длина массива - " + json.length);
-			this.props.changeCurrentQuestID(this.props.currentQuestIDinStore + 1);
-		} else if (action === "prev" && this.props.currentQuestIDinStore > 0) {
+			this.props.changeCurrentQuestID(
+				this.props.userReducer.currentQuestIDinStore + 1
+			);
+		} else if (
+			action === "prev" &&
+			this.props.userReducer.currentQuestIDinStore > 0
+		) {
 			console.log("Уа!! Попали в кнопку прев!");
-			this.props.changeCurrentQuestID(this.props.currentQuestIDinStore - 1);
+			this.props.changeCurrentQuestID(
+				this.props.userReducer.currentQuestIDinStore - 1
+			);
 		}
 	}
 
@@ -101,7 +109,9 @@ class Quest extends React.Component {
 			<Fragment>
 				<h1 onClick={this.clickHandler}>Тест Рейса. {this.state.name}</h1>
 
-				<div>{QuestList(json, this.props.currentQuestIDinStore)}</div>
+				<div>
+					{QuestList(json, this.props.userReducer.currentQuestIDinStore)}
+				</div>
 				<div className={styles["slidecontainer"]}>
 					<Select onChange={this.some} />
 					<div className="questAnswer" />
@@ -109,13 +119,13 @@ class Quest extends React.Component {
 				<Button
 					action="prev"
 					onClick={this.changeCurrentQuestID}
-					curQuest={this.props.currentQuestIDinStore}
+					curQuest={this.props.userReducer.currentQuestIDinStore}
 					questLength={json.length}
 				/>
 				<Button
 					onClick={this.changeCurrentQuestID}
 					action="next"
-					curQuest={this.props.currentQuestIDinStore}
+					curQuest={this.props.userReducer.currentQuestIDinStore}
 					questLength={json.length}
 				/>
 			</Fragment>
