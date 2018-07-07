@@ -2,9 +2,10 @@ import React, { Fragment } from "react";
 import { Switch, Route } from "react-router-dom";
 import shortid from "shortid";
 import { connect } from "react-redux";
-import styles from "./slider.css";
-import Button from "./Button";
-import Select from "./Select";
+
+import NavButton from "../../components/Quest/NavButton/NavButton";
+import styles from "../../components/Quest/SelectBar/SelectBar.css";
+import SelectBar from "../../components/Quest/SelectBar/SelectBar";
 
 import json from "../../model/quests.json";
 
@@ -89,19 +90,19 @@ class Quest extends React.Component {
 					{QuestList(json, this.props.userReducer.currentQuestIDinStore)}
 				</div>
 				<div className={styles["slidecontainer"]}>
-					<Select
+					<SelectBar
 						onChange={this.answerAccept}
 						value={this.props.answerReducer[currentQuest]}
 					/>
 					<div className="questAnswer">Текущий ответ: {currentQuestAnswer}</div>
 				</div>
-				<Button
+				<NavButton
 					action="prev"
 					onClick={this.changeCurrentQuestID}
 					curQuest={this.props.userReducer.currentQuestIDinStore}
 					questLength={json.length}
 				/>
-				<Button
+				<NavButton
 					onClick={this.changeCurrentQuestID}
 					action="next"
 					curQuest={this.props.userReducer.currentQuestIDinStore}

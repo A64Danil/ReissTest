@@ -5,8 +5,7 @@ import {
 
 const initialState = {
 	currentQuestIDinStore: 0,
-	testQuestAnswers: 0,
-	testState: "initial State"
+	name: "Unnamed"
 };
 
 export const userReducer = (state = initialState, action) => {

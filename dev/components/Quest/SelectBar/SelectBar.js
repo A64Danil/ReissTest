@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
-import styles from "./slider.css";
+import styles from "./SelectBar.css";
 
-export default class Select extends React.Component {
+export default class SelectBar extends React.Component {
 	render() {
 		return (
 			<input

@@ -19,6 +19,8 @@ const store = createStore(
 );
 store.subscribe(() => {
 	console.log("Стор изменён", store.getState());
+	console.log("Стор изменён", store.getState().userReducer.name);
+	// В этом месте можно делать записи в куки
 });
 
 export default class App extends Component {

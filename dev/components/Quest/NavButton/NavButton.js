@@ -1,6 +1,6 @@
 import React from "react";
 
-export default class Button extends React.Component {
+export default class NavButton extends React.Component {
 	render() {
 		let action = this.props.action;
 		let questIdMaxValue = this.props.questLength - 1;
