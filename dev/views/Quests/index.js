@@ -4,37 +4,19 @@ import shortid from "shortid";
 import { connect } from "react-redux";
 
 import NavButton from "../../components/Quest/NavButton/NavButton";
+import stylesBtn from "../../components/Quest/NavButton/NavButton.scss";
 import styles from "../../components/Quest/SelectBar/SelectBar.css";
 import SelectBar from "../../components/Quest/SelectBar/SelectBar";
+import QuestList from "../../components/Quest/QuestList/QuestList";
 
 import json from "../../model/quests.json";
 
 console.log(json); // this will show the info it in firebug console
 
-const QuestList = (props, index) => {
-	console.log(props[index]);
-	let tmpVal = props[index];
-	let questItems = (
-		<div data-key={"QuestID_" + index} key={index + shortid.generate()}>
-			<h6>
-				Вопрос {index + 1} из {props.length}
-			</h6>
-			<h3>{tmpVal.title}</h3>
-			<p>{tmpVal.description}</p>
-		</div>
-	);
-	return questItems;
-};
-
 class Quest extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			name: "Rest",
-			nameTwo: "One",
-			currentQuestID: 0,
-			questAnswer: 0
-		};
+		this.state = {};
 
 		this.answerAccept = this.answerAccept.bind(this);
 		this.changeCurrentQuestID = this.changeCurrentQuestID.bind(this);
@@ -72,8 +54,34 @@ class Quest extends React.Component {
 
 	answerAccept(e) {
 		let currentQuest = "id" + this.props.userReducer.currentQuestIDinStore;
-		console.log(currentQuest);
-		this.props.changeQuestAnswer(e.currentTarget.value, currentQuest);
+		let tpmVal = e.currentTarget.value;
+		let value;
+		if (tpmVal < 150) {
+			value = 100;
+			console.log("Позиция 1");
+		} else if (tpmVal < 250) {
+			value = 200;
+			console.log("Позиция 2");
+		} else if (tpmVal <= 350) {
+			value = 300;
+			console.log("Позиция 3");
+		} else if (tpmVal <= 450) {
+			value = 400;
+			console.log("Позиция 4");
+		} else {
+			value = 500;
+			console.log("Позиция 5");
+		}
+		/*
+		*0 - 124
+		*125-249
+		*250-274
+		*375-500
+		*
+
+		* */
+		console.log(tpmVal);
+		this.props.changeQuestAnswer(value, currentQuest);
 	}
 
 	render() {
@@ -84,30 +92,36 @@ class Quest extends React.Component {
 		//console.log(this.props.changeCurrentQuestID);
 		return (
 			<Fragment>
-				<h1 onClick={this.clickHandler}>0:45. Тест Рейса. {this.state.name}</h1>
+				<h4 onClick={this.clickHandler}>Тест Рейса</h4>
 
-				<div>
-					{QuestList(json, this.props.userReducer.currentQuestIDinStore)}
-				</div>
+				<QuestList
+					list={json}
+					index={this.props.userReducer.currentQuestIDinStore}
+					currentAnswer={this.props.answerReducer[currentQuest]}
+				/>
 				<div className={styles["slidecontainer"]}>
 					<SelectBar
 						onChange={this.answerAccept}
 						value={this.props.answerReducer[currentQuest]}
 					/>
-					<div className="questAnswer">Текущий ответ: {currentQuestAnswer}</div>
+					<div className={styles.questAnswer}>
+						Текущий ответ: {currentQuestAnswer}
+					</div>
+					<div className={stylesBtn["buttonWrapper"]}>
+						<NavButton
+							action="prev"
+							onClick={this.changeCurrentQuestID}
+							curQuest={this.props.userReducer.currentQuestIDinStore}
+							questLength={json.length}
+						/>
+						<NavButton
+							onClick={this.changeCurrentQuestID}
+							action="next"
+							curQuest={this.props.userReducer.currentQuestIDinStore}
+							questLength={json.length}
+						/>
+					</div>
 				</div>
-				<NavButton
-					action="prev"
-					onClick={this.changeCurrentQuestID}
-					curQuest={this.props.userReducer.currentQuestIDinStore}
-					questLength={json.length}
-				/>
-				<NavButton
-					onClick={this.changeCurrentQuestID}
-					action="next"
-					curQuest={this.props.userReducer.currentQuestIDinStore}
-					questLength={json.length}
-				/>
 			</Fragment>
 		);
 	}

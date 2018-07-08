@@ -8,7 +8,7 @@ import Menu from "../components/Menu";
 import Main from "../components/Main";
 
 // Global CSS styles
-import styles from "./global.css";
+import styles from "./global.scss";
 
 export const ACTION_CHANGE_CURRENT_QUEST_ID = "CHANGE_CURRENT_QUEST_ID";
 export const ACTION_CHANGE_QUEST_ANSWER = "CHANGE_QUEST_ANSWER";

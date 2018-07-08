@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import styles from "./SelectBar.css";
 
 export default class SelectBar extends React.Component {
@@ -6,8 +6,9 @@ export default class SelectBar extends React.Component {
 		return (
 			<input
 				type="range"
-				min="1"
-				max="5"
+				min="100"
+				step="1"
+				max="500"
 				defaultValue={this.props.value}
 				className={styles["slider"]}
 				id="myRange"

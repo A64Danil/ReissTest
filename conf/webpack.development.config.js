@@ -16,7 +16,7 @@ export default new Config().extend("conf/webpack.base.config.js").merge({
 	module: {
 		rules: [
 			{
-				test: /\.css$/,
+				test: /\.(sc|sa|c)ss$/,
 				use: ExtractTextPlugin.extract({
 					fallback: "style-loader",
 					use: [
@@ -29,28 +29,13 @@ export default new Config().extend("conf/webpack.base.config.js").merge({
 								minimize: false
 							}
 						},
+						{
+							loader: "sass-loader"
+						},
 						{ loader: "postcss-loader" }
 					]
 				})
 			}
-			/*
-
-            {
-            test: /\.css$/,
-            use: [
-                'style-loader',
-                {
-                    loader: 'css-loader',
-                    options: {
-                        modules: true,
-                        importLoaders: 1,
-                        localIdentName: "[local]__[hash:base64:5]",
-                        minimize: false
-                    }
-                },
-                { loader: 'postcss-loader' },
-            ]
-        } */
 		]
 	},
 	plugins: [

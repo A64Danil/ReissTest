@@ -11,7 +11,7 @@ export default class NavButton extends React.Component {
 		} else if (action === "next") {
 			return (
 				<button onClick={this.props.onClick} data-action={action}>
-					Далее, к вопросу №{this.props.curQuest + 2}
+					Далее &#62;
 				</button>
 			);
 		} else if (action === "prev" && this.props.curQuest == 0) {
@@ -19,7 +19,7 @@ export default class NavButton extends React.Component {
 		} else if (action === "prev") {
 			return (
 				<button onClick={this.props.onClick} data-action={action}>
-					Назад, к вопросу №{this.props.curQuest}
+					&#60;
 				</button>
 			);
 		}

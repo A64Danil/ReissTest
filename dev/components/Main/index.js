@@ -8,7 +8,7 @@ import Home from "../../views/Home";
 import About from "../../views/About";
 import Quest from "../../views/Quests";
 
-import styles from "./style.css";
+import styles from "./style.sass";
 
 class Main extends React.Component {
 	constructor() {

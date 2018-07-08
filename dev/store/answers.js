@@ -36,7 +36,7 @@ export const answerReducer = (state = initialState, action) => {
 					path: "/",
 					expires,
 					maxAge: 1000,
-					domain: "",
+					/* domain: "pro.qoobeo.ru", */
 					secure: false,
 					httpOnly: false
 				}
