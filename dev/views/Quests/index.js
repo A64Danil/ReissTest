@@ -22,52 +22,62 @@ class Quest extends React.Component {
 
 		this.answerAccept = this.answerAccept.bind(this);
 		this.changeCurrentQuestID = this.changeCurrentQuestID.bind(this);
-		this.questTransition = this.questTransition.bind(this);
+		this.clickHandler = this.clickHandler.bind(this);
 	}
 
-	questTransition() {
-		this.setState(prev => ({ showQuest: !prev.showQuest }));
+	clickHandler() {
+		console.log("Начальный стейт: " + this.state.showQuest);
 	}
 
 	changeCurrentQuestID(e) {
 		let action = e.target.dataset.action;
-		if (this.props.userReducer.currentQuestIDinStore == json.length) {
-			console.log("Дошли до последнего итема", json.length);
-		}
+		this.setState(prev => ({
+			showQuest: !prev.showQuest
+		}));
+		setTimeout(
+			function() {
+				if (this.props.userReducer.currentQuestIDinStore == json.length) {
+					console.log("Дошли до последнего итема", json.length);
+				}
 
-		if (
-			action === "next" &&
-			this.props.userReducer.currentQuestIDinStore < json.length - 1
-		) {
-			console.log("Уа!! Попали в кнопку некст! Длина массива - " + json.length);
-			this.props.changeCurrentQuestID(
-				this.props.userReducer.currentQuestIDinStore + 1
-			);
-		} else if (
-			action === "prev" &&
-			this.props.userReducer.currentQuestIDinStore > 0
-		) {
-			console.log("Уа!! Попали в кнопку прев!");
-			this.props.changeCurrentQuestID(
-				this.props.userReducer.currentQuestIDinStore - 1
-			);
-		}
+				if (
+					action === "next" &&
+					this.props.userReducer.currentQuestIDinStore < json.length - 1
+				) {
+					console.log(
+						"Уа!! Попали в кнопку некст! Длина массива - " + json.length
+					);
+					this.props.changeCurrentQuestID(
+						this.props.userReducer.currentQuestIDinStore + 1
+					);
+				} else if (
+					action === "prev" &&
+					this.props.userReducer.currentQuestIDinStore > 0
+				) {
+					console.log("Уа!! Попали в кнопку прев!");
+					this.props.changeCurrentQuestID(
+						this.props.userReducer.currentQuestIDinStore - 1
+					);
+				}
+			}.bind(this),
+			500
+		);
 	}
 
 	answerAccept(e) {
 		let currentQuest = "id" + this.props.userReducer.currentQuestIDinStore;
 		let tpmVal = e.currentTarget.value;
 		let value = tpmVal;
-
+		// Эта часть вызывает перерисовку
 		if (tpmVal < 150) {
-			//value = 100;
+			value = 100;
 			console.log(value);
-			number_to(value, tpmVal, 100, 1000);
+			//number_to(value, tpmVal, 100, 1000);
 			console.log("Позиция 1");
 		} else if (151 < tpmVal < 250) {
-			//value = 200;
+			value = 200;
 			console.log(value);
-			number_to(value, tpmVal, 200, 1000);
+			//number_to(value, tpmVal, 200, 1000);
 			console.log("Позиция 2");
 		} else if (tpmVal <= 350) {
 			value = 300;
@@ -89,7 +99,7 @@ class Quest extends React.Component {
 
 		* */
 		console.log(tpmVal);
-		//this.props.changeQuestAnswer(value, currentQuest);
+		this.props.changeQuestAnswer(value, currentQuest);
 	}
 
 	render() {
@@ -101,7 +111,7 @@ class Quest extends React.Component {
 		//console.log(this.props.changeCurrentQuestID);
 		return (
 			<Fragment>
-				<h4 onClick={this.questTransition}>Тест Рейса</h4>
+				<h4>Тест Рейса</h4>
 
 				<QuestList
 					show={this.state.showQuest}

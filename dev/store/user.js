@@ -1,7 +1,4 @@
-import {
-	ACTION_CHANGE_CURRENT_QUEST_ID,
-	ACTION_CHANGE_QUEST_ANSWER
-} from "../views/app"; // Action Creators - funcs, who return actions
+import { ACTION_CHANGE_QUEST_ANSWER } from "../views/app"; // Action Creators - funcs, who return actions
 
 const initialState = {
 	currentQuestIDinStore: 0,

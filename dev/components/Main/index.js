@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Switch, Route } from "react-router-dom";
-import { changeCurrentQuestID, changeQuestAnswer } from "../../store/actions";
+import {
+	changeCurrentQuestID,
+	changeQuestAnswer,
+	changeShowQuest
+} from "../../store/actions";
 
 import Home from "../../views/Home";
 import About from "../../views/About";
@@ -54,7 +58,8 @@ const putStateToProps = state => {
 		// testQuestAnswers: state.testQuestAnswers,
 		// testState: state.testState
 		userReducer: state.userReducer,
-		answerReducer: state.answerReducer
+		answerReducer: state.answerReducer,
+		animateReducer: state.animateReducer
 	};
 };
 
@@ -62,7 +67,8 @@ const putStateToProps = state => {
 const putActionToProps = dispatch => {
 	return {
 		changeCurrentQuestID: bindActionCreators(changeCurrentQuestID, dispatch),
-		changeQuestAnswer: bindActionCreators(changeQuestAnswer, dispatch)
+		changeQuestAnswer: bindActionCreators(changeQuestAnswer, dispatch),
+		changeShowQuest: bindActionCreators(changeShowQuest, dispatch)
 	};
 };
 
@@ -70,15 +76,3 @@ export default connect(
 	putStateToProps,
 	putActionToProps
 )(Main);
-
-// const Main = () => (
-//     <main className={styles.main}>
-//         <Switch>
-//             <Route exact path="/" component={Home}/>
-//             <Route path="/about" component={About}/>
-//             <Route path="/quests" component={Quest}/>
-//         </Switch>
-//     </main>
-// )
-//
-// export default Main;

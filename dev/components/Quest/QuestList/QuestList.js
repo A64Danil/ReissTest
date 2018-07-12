@@ -51,33 +51,35 @@ export default class QuestList extends React.Component {
 				show={show}
 				start={{
 					opacity: 0,
-					backgroundColor: "#0000ff"
+					//backgroundColor: "#0000ff",
+					shiftX: 100
 				}}
 				enter={{
 					opacity: [1],
-					backgroundColor: ["#00ff00"],
-					timing: { duration: 2000 }
+					//backgroundColor: ["#00ff00"],
+					timing: { duration: 800 },
+					shiftX: [0]
 				}}
 				update={{
 					// catch interrupts e.g. click button in middle of leave
 					opacity: [1],
-					backgroundColor: ["#00ff00"],
-					timing: { duration: 2000 }
+					//backgroundColor: ["#00ff00"],
+					timing: { duration: 800 }
 				}}
 				leave={{
 					opacity: [0],
-					backgroundColor: ["#ff0000"],
-					timing: { duration: 2000 }
+					//backgroundColor: ["#ff0000"],
+					timing: { duration: 500 },
+					shiftX: [-100]
 				}}
 			>
-				{({ opacity, backgroundColor }) => {
+				{({ opacity, backgroundColor, shiftX }) => {
 					return (
 						<div
 							style={{
 								opacity,
-								marginTop: 10,
-								color: "white",
-								backgroundColor
+								backgroundColor,
+								transform: `translate3D(${shiftX}%, 0, 0)`
 							}}
 						>
 							{questItems}

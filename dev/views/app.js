@@ -12,6 +12,7 @@ import styles from "./global.scss";
 
 export const ACTION_CHANGE_CURRENT_QUEST_ID = "CHANGE_CURRENT_QUEST_ID";
 export const ACTION_CHANGE_QUEST_ANSWER = "CHANGE_QUEST_ANSWER";
+export const ACTION_CHANGE_SHOW_QUEST = "CHANGE_SHOW_QUEST";
 
 const store = createStore(
 	reducer,
