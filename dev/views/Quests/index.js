@@ -16,15 +16,17 @@ console.log(json); // this will show the info it in firebug console
 class Quest extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {
+			showQuest: true
+		};
 
 		this.answerAccept = this.answerAccept.bind(this);
 		this.changeCurrentQuestID = this.changeCurrentQuestID.bind(this);
-		this.clickHandler = this.clickHandler.bind(this);
+		this.questTransition = this.questTransition.bind(this);
 	}
 
-	clickHandler() {
-		this.setState({ name: "Active", nameTwo: "NameTwoActive" });
+	questTransition() {
+		this.setState(prev => ({ showQuest: !prev.showQuest }));
 	}
 
 	changeCurrentQuestID(e) {
@@ -55,12 +57,17 @@ class Quest extends React.Component {
 	answerAccept(e) {
 		let currentQuest = "id" + this.props.userReducer.currentQuestIDinStore;
 		let tpmVal = e.currentTarget.value;
-		let value;
+		let value = tpmVal;
+
 		if (tpmVal < 150) {
-			value = 100;
+			//value = 100;
+			console.log(value);
+			number_to(value, tpmVal, 100, 1000);
 			console.log("Позиция 1");
-		} else if (tpmVal < 250) {
-			value = 200;
+		} else if (151 < tpmVal < 250) {
+			//value = 200;
+			console.log(value);
+			number_to(value, tpmVal, 200, 1000);
 			console.log("Позиция 2");
 		} else if (tpmVal <= 350) {
 			value = 300;
@@ -72,6 +79,7 @@ class Quest extends React.Component {
 			value = 500;
 			console.log("Позиция 5");
 		}
+
 		/*
 		*0 - 124
 		*125-249
@@ -81,7 +89,7 @@ class Quest extends React.Component {
 
 		* */
 		console.log(tpmVal);
-		this.props.changeQuestAnswer(value, currentQuest);
+		//this.props.changeQuestAnswer(value, currentQuest);
 	}
 
 	render() {
@@ -89,16 +97,19 @@ class Quest extends React.Component {
 		let currentQuest = "id" + this.props.userReducer.currentQuestIDinStore;
 		let currentQuestAnswer = this.props.answerReducer[currentQuest];
 		console.log(currentQuestAnswer);
+		console.log(this.state);
 		//console.log(this.props.changeCurrentQuestID);
 		return (
 			<Fragment>
-				<h4 onClick={this.clickHandler}>Тест Рейса</h4>
+				<h4 onClick={this.questTransition}>Тест Рейса</h4>
 
 				<QuestList
+					show={this.state.showQuest}
 					list={json}
 					index={this.props.userReducer.currentQuestIDinStore}
 					currentAnswer={this.props.answerReducer[currentQuest]}
 				/>
+
 				<div className={styles["slidecontainer"]}>
 					<SelectBar
 						onChange={this.answerAccept}
