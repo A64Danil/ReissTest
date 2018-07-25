@@ -58,6 +58,7 @@ body {
 #menu__2D0Gg {
 	width: 100px;
 	position: absolute;
+	z-index: 1000;
 }
 
 .menu_link__3L7oi > a {

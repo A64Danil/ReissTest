@@ -1,51 +1,29 @@
 import React from "react";
 import shortid from "shortid";
-import TransitionGroup from "react-transition-group/TransitionGroup";
 import CSSTransitionGroup from "react-transition-group/CSSTransitionGroup";
+import Animate from "react-move/Animate"; // 1. Перенесим импорт
 //import Transition from "react-transition-group/Transition";
 import styles from "./QuestList.scss";
-
-const duration = 300;
-
-const defaultStyle = {
-	transition: `opacity ${duration}ms ease-in-out`,
-	opacity: 0
-};
-
-const transitionStyles = {
-	entering: { opacity: 0 },
-	entered: { opacity: 1 }
-};
 
 // QuestList = (props, index) =>
 export default class QuestList extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			show: 0,
-			entered: false
-		};
 	}
 
 	componentWillUnmount() {
-		console.log("Cейчас удалим вопрос №" + (this.props.index + 1));
-		var style = {
-			backgroundColor: "#fff318"
-		};
+		console.log("Cейчас удалим " + this.props.index);
 	}
+
 	render() {
-		const { show } = this.state;
-		var style;
 		console.log(this.props);
-		console.log(this.state);
-		const { list, index, currentAnswer } = this.props;
+		const { list, index, currentAnswer, show } = this.props;
 		//console.log(index);
 		let questItems = (
 			<div
 				className={styles.questWrapper}
 				data-key={"QuestID_" + index}
 				key={index + shortid.generate()}
-				style={style}
 			>
 				<div className={styles.questCounter}>
 					{index + 1}/{list.length} желание
@@ -69,33 +47,46 @@ export default class QuestList extends React.Component {
 			</div>
 		);
 		return (
-			<TransitionGroup in={show} timeout={1000} unmountonexit="true">
-				<span>
-					{state => {
-						switch (state) {
-							case "entering":
-								return "Entering…";
-							case "entered":
-								return "Entered!";
-							case "exiting":
-								return "Exiting…";
-							case "exited":
-								return "Exited!";
-						}
-					}}
-				</span>
-				<button
-					onClick={() => {
-						this.setState(state => ({
-							show: 1
-						}));
-					}}
-				>
-					Toggle
-				</button>
-
-				{questItems}
-			</TransitionGroup>
+			<Animate
+				show={show}
+				start={{
+					opacity: 0,
+					//backgroundColor: "#0000ff",
+					shiftX: 100
+				}}
+				enter={{
+					opacity: [1],
+					//backgroundColor: ["#00ff00"],
+					timing: { duration: 800 },
+					shiftX: [0]
+				}}
+				update={{
+					// catch interrupts e.g. click button in middle of leave
+					opacity: [1],
+					//backgroundColor: ["#00ff00"],
+					timing: { duration: 800 }
+				}}
+				leave={{
+					opacity: [0],
+					//backgroundColor: ["#ff0000"],
+					timing: { duration: 500 },
+					shiftX: [-100]
+				}}
+			>
+				{({ opacity, backgroundColor, shiftX }) => {
+					return (
+						<div
+							style={{
+								opacity,
+								backgroundColor,
+								transform: `translate3D(${shiftX}%, 0, 0)`
+							}}
+						>
+							{questItems}
+						</div>
+					);
+				}}
+			</Animate>
 		);
 	}
 }

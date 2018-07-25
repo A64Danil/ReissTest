@@ -10,10 +10,10 @@
         .move-appear-active {    transform: translate3D(0, 0, 0); transition: all 1000ms ease-out;}
 
 
-        .move-enter {opacity: 0; background: red;}
-        .move-enter-active {opacity: 1; transition: all 6000ms ease-in;}
+        .move-enter {opacity: 1; background: red;}
+        .move-enter-active {transform: translate3D(-100%, 0, 0); opacity: 1; transition: all 500ms ease-in;}
         .move-leave {opacity: 1; background: green;}
-        .move-leave-active {opacity: 0;transition: all 6000ms ease-in;}
+        .move-leave-active {transform: translate3D(-100%, 0, 0); opacity: 1;transition: all 1000ms ease-in;}
     </style>
 </head>
 <body>

@@ -1,23 +1,15 @@
 import React from "react";
 import shortid from "shortid";
+import TransitionGroup from "react-transition-group/TransitionGroup";
 import CSSTransitionGroup from "react-transition-group/CSSTransitionGroup";
-import Animate from "react-move/Animate"; // 1. Перенесим импорт
 //import Transition from "react-transition-group/Transition";
 import styles from "./QuestList.scss";
 
 // QuestList = (props, index) =>
 export default class QuestList extends React.Component {
-	constructor(props) {
-		super(props);
-	}
-
-	componentWillUnmount() {
-		console.log("Cейчас удалим " + this.props.index);
-	}
-
 	render() {
 		console.log(this.props);
-		const { list, index, currentAnswer, show } = this.props;
+		const { list, index, currentAnswer } = this.props;
 		//console.log(index);
 		let questItems = (
 			<div
@@ -47,46 +39,17 @@ export default class QuestList extends React.Component {
 			</div>
 		);
 		return (
-			<Animate
-				show={show}
-				start={{
-					opacity: 0,
-					//backgroundColor: "#0000ff",
-					shiftX: 100
-				}}
-				enter={{
-					opacity: [1],
-					//backgroundColor: ["#00ff00"],
-					timing: { duration: 800 },
-					shiftX: [0]
-				}}
-				update={{
-					// catch interrupts e.g. click button in middle of leave
-					opacity: [1],
-					//backgroundColor: ["#00ff00"],
-					timing: { duration: 800 }
-				}}
-				leave={{
-					opacity: [0],
-					//backgroundColor: ["#ff0000"],
-					timing: { duration: 500 },
-					shiftX: [-100]
-				}}
+			<CSSTransitionGroup
+				transitionName="move"
+				transitionAppear={false}
+				transitionAppearTimeout={1000}
+				transitionEnterTimeout={500}
+				transitionLeaveTimeout={1000}
+				transitionEnter={true}
+				transitionLeave={true}
 			>
-				{({ opacity, backgroundColor, shiftX }) => {
-					return (
-						<div
-							style={{
-								opacity,
-								backgroundColor,
-								transform: `translate3D(${shiftX}%, 0, 0)`
-							}}
-						>
-							{questItems}
-						</div>
-					);
-				}}
-			</Animate>
+				{questItems}
+			</CSSTransitionGroup>
 		);
 	}
 }

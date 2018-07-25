@@ -34,6 +34,7 @@ class Quest extends React.Component {
 		this.setState(prev => ({
 			showQuest: !prev.showQuest
 		}));
+
 		setTimeout(
 			function() {
 				if (this.props.userReducer.currentQuestIDinStore == json.length) {
@@ -67,20 +68,23 @@ class Quest extends React.Component {
 	answerAccept(e) {
 		let currentQuest = "id" + this.props.userReducer.currentQuestIDinStore;
 		let tpmVal = e.currentTarget.value;
-		let value = tpmVal;
+		let value;
 		// Эта часть вызывает перерисовку
+
+		console.log(tpmVal);
 		if (tpmVal < 150) {
 			value = 100;
 			console.log(value);
 			//number_to(value, tpmVal, 100, 1000);
 			console.log("Позиция 1");
-		} else if (151 < tpmVal < 250) {
+		} else if (tpmVal < 250) {
 			value = 200;
 			console.log(value);
 			//number_to(value, tpmVal, 200, 1000);
 			console.log("Позиция 2");
-		} else if (tpmVal <= 350) {
+		} else if (tpmVal < 350) {
 			value = 300;
+			console.log(value);
 			console.log("Позиция 3");
 		} else if (tpmVal <= 450) {
 			value = 400;
@@ -89,7 +93,6 @@ class Quest extends React.Component {
 			value = 500;
 			console.log("Позиция 5");
 		}
-
 		/*
 		*0 - 124
 		*125-249
@@ -98,8 +101,14 @@ class Quest extends React.Component {
 		*
 
 		* */
-		console.log(tpmVal);
-		this.props.changeQuestAnswer(value, currentQuest);
+
+		setTimeout(
+			function() {
+				console.log(value);
+				this.props.changeQuestAnswer(value, currentQuest);
+			}.bind(this),
+			500
+		);
 	}
 
 	render() {

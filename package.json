@@ -20,6 +20,7 @@
 	},
 	"homepage": "https://github.com/A64Danil/ReissTest#readme",
 	"dependencies": {
+		"clean-webpack-plugin": "^0.1.19",
 		"express": "^4.16.3",
 		"react": "^16.4.1",
 		"react-cookies": "^0.1.0",
