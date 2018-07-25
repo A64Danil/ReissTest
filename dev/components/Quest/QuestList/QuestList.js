@@ -9,8 +9,9 @@ import styles from "./QuestList.scss";
 export default class QuestList extends React.Component {
 	render() {
 		console.log(this.props);
-		const { list, index, currentAnswer } = this.props;
-		//console.log(index);
+		const { list, index, currentAnswer, btnDirection } = this.props;
+		//console.log(btnDirection);
+		//let animationDirection = "move" + btnDirection;
 		let questItems = (
 			<div
 				className={styles.questWrapper}
@@ -40,10 +41,10 @@ export default class QuestList extends React.Component {
 		);
 		return (
 			<CSSTransitionGroup
-				transitionName="move"
-				transitionAppear={false}
+				transitionName={"move-" + btnDirection}
+				transitionAppear={true}
 				transitionAppearTimeout={1000}
-				transitionEnterTimeout={500}
+				transitionEnterTimeout={1000}
 				transitionLeaveTimeout={1000}
 				transitionEnter={true}
 				transitionLeave={true}

@@ -17,18 +17,21 @@ class Quest extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			showQuest: true
+			btnDirection: "next",
+			currentQuestID: 0
 		};
 
 		this.answerAccept = this.answerAccept.bind(this);
 		this.changeCurrentQuestID = this.changeCurrentQuestID.bind(this);
+		this.changeQuest = this.changeQuest.bind(this);
 		this.clickHandler = this.clickHandler.bind(this);
 	}
 
 	clickHandler() {
-		console.log("Начальный стейт: " + this.state.showQuest);
+		console.log("Начальный стейт: " + this.state);
 	}
 
+	// Устаревшее - удалить
 	changeCurrentQuestID(e) {
 		let action = e.target.dataset.action;
 		this.setState(prev => ({
@@ -63,6 +66,22 @@ class Quest extends React.Component {
 			}.bind(this),
 			500
 		);
+	}
+	changeQuest(e) {
+		let action = e.target.dataset.action;
+		let current = this.state.currentQuestID;
+
+		//this.setState({ currentQuestID: "Привет React" });
+
+		if (action === "next") {
+			current++;
+			this.setState({ btnDirection: "next", currentQuestID: current });
+			console.log("Current state: " + current);
+		} else if (action === "prev") {
+			current--;
+			this.setState({ btnDirection: "prev", currentQuestID: current });
+			console.log("Current state: " + current);
+		}
 	}
 
 	answerAccept(e) {
@@ -123,9 +142,10 @@ class Quest extends React.Component {
 				<h4>Тест Рейса</h4>
 
 				<QuestList
-					show={this.state.showQuest}
 					list={json}
-					index={this.props.userReducer.currentQuestIDinStore}
+					//index={this.props.userReducer.currentQuestIDinStore}
+					index={this.state.currentQuestID}
+					btnDirection={this.state.btnDirection}
 					currentAnswer={this.props.answerReducer[currentQuest]}
 				/>
 
@@ -140,14 +160,18 @@ class Quest extends React.Component {
 					<div className={stylesBtn["buttonWrapper"]}>
 						<NavButton
 							action="prev"
-							onClick={this.changeCurrentQuestID}
-							curQuest={this.props.userReducer.currentQuestIDinStore}
+							//onClick={this.changeCurrentQuestID}
+							onClick={this.changeQuest}
+							// curQuest={this.props.userReducer.currentQuestIDinStore}
+							curQuest={this.state.currentQuestID}
 							questLength={json.length}
 						/>
 						<NavButton
-							onClick={this.changeCurrentQuestID}
 							action="next"
-							curQuest={this.props.userReducer.currentQuestIDinStore}
+							//onClick={this.changeCurrentQuestID}
+							onClick={this.changeQuest}
+							// curQuest={this.props.userReducer.currentQuestIDinStore}
+							curQuest={this.state.currentQuestID}
 							questLength={json.length}
 						/>
 					</div>
