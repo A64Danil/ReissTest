@@ -5,10 +5,14 @@ import CSSTransitionGroup from "react-transition-group/CSSTransitionGroup";
 //import Transition from "react-transition-group/Transition";
 import styles from "./QuestList.scss";
 
+import stylesSB from "../SelectBar/SelectBar.css";
+import SelectBar from "../SelectBar/SelectBar.js";
+
 // QuestList = (props, index) =>
 export default class QuestList extends React.Component {
 	render() {
 		console.log(this.props);
+		console.log(this.state);
 		const { list, index, currentAnswer, btnDirection } = this.props;
 		//console.log(btnDirection);
 		//let animationDirection = "move" + btnDirection;
@@ -37,15 +41,22 @@ export default class QuestList extends React.Component {
 						{list[index].rdesc}
 					</div>
 				</div>
+				<div className={stylesSB["slidecontainer"]}>
+					<SelectBar
+						onChange={this.props.answerAccept}
+						//value={this.props.answerReducer[currentQuest]}
+						//value={this.state.currentQuestAnswer}
+					/>
+				</div>
 			</div>
 		);
 		return (
 			<CSSTransitionGroup
 				transitionName={"move-" + btnDirection}
-				transitionAppear={true}
-				transitionAppearTimeout={1000}
-				transitionEnterTimeout={1000}
-				transitionLeaveTimeout={1000}
+				transitionAppear={false}
+				transitionAppearTimeout={700}
+				transitionEnterTimeout={700}
+				transitionLeaveTimeout={700}
 				transitionEnter={true}
 				transitionLeave={true}
 			>

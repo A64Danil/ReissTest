@@ -5,33 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Одностраничное приложение - Тест Рейса</title>
     <style>
+        #brick {
+            width: 40px;
+            height: 20px;
+            background: #EE6B47;
+            position: relative;
+            cursor: pointer;
+        }
+
+        #path {
+            outline: 1px solid #E8C48E;
+            width: 540px;
+            height: 20px;
+        }
 
         /*  -= Default =- */
         .move-appear {    transform: translate3D(100%, 0, 0);}
-        .move-appear-active {    transform: translate3D(0, 0, 0); transition: all 1000ms ease-out;}
+        .move-appear-active {    transform: translate3D(0, 0, 0); transition: all 700ms ease-out;}
 
         .move-enter {opacity: 1; background: #ffccc2; transform: translate3D(100%, 0, 0);  position: absolute;}
-        .move-enter-active {transform: translate3D(0%, 0, 0); opacity: 1; transition: all 1000ms ease-out;  position: absolute;}
+        .move-enter-active {transform: translate3D(0%, 0, 0); opacity: 1; transition: all 700ms ease-out;  position: absolute;}
         .move-leave {opacity: 1; }
-        .move-leave-active {transform: translate3D(-100%, 0, 0); opacity: 1;transition: all 1000ms ease-out; }
+        .move-leave-active {transform: translate3D(-100%, 0, 0); opacity: 1;transition: all 700ms ease-out; }
 
         /*  -= Next =- */
         .move-next-appear {    transform: translate3D(100%, 0, 0);}
-        .move-next-appear-active {    transform: translate3D(0, 0, 0); transition: all 1000ms ease-out;}
+        .move-next-appear-active {    transform: translate3D(0, 0, 0); transition: all 700ms ease-out;}
 
         .move-next-enter {opacity: 1; background: transparent; transform: translate3D(100%, 0, 0);  position: absolute;}
-        .move-next-enter-active {transform: translate3D(0%, 0, 0); opacity: 1; transition: all 1000ms ease-out;  }
+        .move-next-enter-active {transform: translate3D(0%, 0, 0); opacity: 1; transition: all 700ms ease-out;  }
         .move-next-leave {opacity: 1; }
-        .move-next-leave-active {transform: translate3D(-100%, 0, 0); opacity: 1;transition: all 1000ms ease-out; }
+        .move-next-leave-active {transform: translate3D(-100%, 0, 0); opacity: 1;transition: all 700ms ease-out; }
 
         /*  -= Prev =- */
         .move-prev-appear {    transform: translate3D(100%, 0, 0);}
-        .move-prev-appear-active {    transform: translate3D(0, 0, 0); transition: all 1000ms ease-out;}
+        .move-prev-appear-active {    transform: translate3D(0, 0, 0); transition: all 700ms ease-out;}
 
         .move-prev-enter {opacity: 1; background: transparent; transform: translate3D(-100%, 0, 0);  position: absolute;}
-        .move-prev-enter-active {transform: translate3D(0%, 0, 0); opacity: 1; transition: all 1000ms ease-out; }
+        .move-prev-enter-active {transform: translate3D(0%, 0, 0); opacity: 1; transition: all 700ms ease-out; }
         .move-prev-leave {opacity: 1; }
-        .move-prev-leave-active {transform: translate3D(100%, 0, 0); opacity: 1;transition: all 1000ms ease-out; }
+        .move-prev-leave-active {transform: translate3D(100%, 0, 0); opacity: 1;transition: all 700ms ease-out; }
     </style>
 <link href="style.css" rel="stylesheet"></head>
 <body>
