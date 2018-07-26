@@ -139,84 +139,6 @@ body {
 	padding: 0 35px;
 	margin-left: auto;
 }
-.slidecontainer__1XLQf {
-	width: auto;
-	/* Width of the outside container */
-	background-color: #fff;
-	padding: 10px 22px 50px 22px;
-	padding: 10px 0px 50px 0px;
-}
-
-/* The slider itself */
-.slider__3cExz {
-	-webkit-appearance: none;
-	width: calc(100% - 46px);
-	height: 15px;
-	border-radius: 5px;
-	outline: none;
-	opacity: 0.7;
-	transition: opacity 0.2s;
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+10,3FD847+10,3FD847+90,ffffff+90,ffffff+100 */
-	background: #ffffff;
-	/* Old browsers */
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#3fd847+0,3fd847+17,ffffff+17,ffffff+20,3fd847+20,3fd847+37,ffffff+37,ffffff+40,3fd847+40,3fd847+57,ffffff+57,ffffff+60,3fd847+60,3fd847+77,ffffff+77,ffffff+80,3fd847+80,3fd847+100 */
-	background: #3fd847;
-	/* Old browsers */
-	/* FF3.6-15 */
-	/* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(
-		to right,
-		#3fd847 0%,
-		#3fd847 18%,
-		#ffffff 18%,
-		#ffffff 20.5%,
-		#3fd847 20.5%,
-		#3fd847 38.5%,
-		#ffffff 38.5%,
-		#ffffff 41%,
-		#3fd847 41%,
-		#3fd847 59%,
-		#ffffff 59%,
-		#ffffff 61.5%,
-		#3fd847 61.5%,
-		#3fd847 79.5%,
-		#ffffff 79.5%,
-		#ffffff 82%,
-		#3fd847 82%,
-		#3fd847 100%
-	);
-	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3fd847', endColorstr='#3fd847',GradientType=1 );
-	/* IE6-9 */
-	padding: 0px 0;
-	margin: 20px 22px 20px 22px;
-	border-top: 10px solid #fff;
-	border-bottom: 10px solid #fff;
-}
-
-.slider__3cExz::-webkit-slider-thumb {
-	-webkit-appearance: none;
-	appearance: none;
-	width: 20%;
-	height: 50px;
-	border-radius: 50%;
-	background: #4caf50;
-	cursor: pointer;
-	transition: 0.1s;
-}
-
-.slider__3cExz::-moz-range-thumb {
-	width: 20%;
-	height: 50px;
-	border-radius: 50%;
-	background: #4caf50;
-	cursor: pointer;
-	transition: 0.1s;
-}
-
-.questAnswer__1CVma {
-	opacity: 0;
-}
 .questWrapper__1wuKP {
 	padding-top: 10px;
 	width: 760px;
@@ -329,6 +251,84 @@ body {
 .descWrapper__32BSh[data-descr="5"] .rdesc__3HS5L,
 .descWrapper__32BSh[data-descr="500"] .rdesc__3HS5L {
 	margin-left: -200%;
+}
+.slidecontainer__1XLQf {
+	width: auto;
+	/* Width of the outside container */
+	background-color: #fff;
+	padding: 10px 22px 50px 22px;
+	padding: 10px 0px 50px 0px;
+}
+
+/* The slider itself */
+.slider__3cExz {
+	-webkit-appearance: none;
+	width: calc(100% - 46px);
+	height: 15px;
+	border-radius: 5px;
+	outline: none;
+	opacity: 0.7;
+	transition: opacity 0.2s;
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+10,3FD847+10,3FD847+90,ffffff+90,ffffff+100 */
+	background: #ffffff;
+	/* Old browsers */
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#3fd847+0,3fd847+17,ffffff+17,ffffff+20,3fd847+20,3fd847+37,ffffff+37,ffffff+40,3fd847+40,3fd847+57,ffffff+57,ffffff+60,3fd847+60,3fd847+77,ffffff+77,ffffff+80,3fd847+80,3fd847+100 */
+	background: #3fd847;
+	/* Old browsers */
+	/* FF3.6-15 */
+	/* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(
+		to right,
+		#3fd847 0%,
+		#3fd847 18%,
+		#ffffff 18%,
+		#ffffff 20.5%,
+		#3fd847 20.5%,
+		#3fd847 38.5%,
+		#ffffff 38.5%,
+		#ffffff 41%,
+		#3fd847 41%,
+		#3fd847 59%,
+		#ffffff 59%,
+		#ffffff 61.5%,
+		#3fd847 61.5%,
+		#3fd847 79.5%,
+		#ffffff 79.5%,
+		#ffffff 82%,
+		#3fd847 82%,
+		#3fd847 100%
+	);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3fd847', endColorstr='#3fd847',GradientType=1 );
+	/* IE6-9 */
+	padding: 0px 0;
+	margin: 20px 22px 20px 22px;
+	border-top: 10px solid #fff;
+	border-bottom: 10px solid #fff;
+}
+
+.slider__3cExz::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 20%;
+	height: 50px;
+	border-radius: 50%;
+	background: #4caf50;
+	cursor: pointer;
+	transition: 0.1s;
+}
+
+.slider__3cExz::-moz-range-thumb {
+	width: 20%;
+	height: 50px;
+	border-radius: 50%;
+	background: #4caf50;
+	cursor: pointer;
+	transition: 0.1s;
+}
+
+.questAnswer__1CVma {
+	opacity: 0;
 }
 
 /*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzdHlsZS5jc3MiLCJzb3VyY2VSb290IjoiIn0=*/

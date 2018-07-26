@@ -6,16 +6,19 @@ export default class SelectBar extends React.Component {
 		console.log("Привет из конструктора");
 		super(props);
 		this.state = {
-			currentQuestAnswer: 250,
-			percent: 0
+			currentQuestAnswer: 300,
+			percent: 0,
+			allowDoubleClick: true
 		};
 
-		this.answerAccept = this.answerAccept.bind(this);
+		this.answerSelecting = this.answerSelecting.bind(this);
 		this.animate = this.animate.bind(this);
-		this.animateWrapper = this.animateWrapper.bind(this);
+		this.helper = this.helper.bind(this);
 		this.circ = this.circ.bind(this);
 		this.bounce = this.bounce.bind(this);
+		this.newBounce = this.newBounce.bind(this);
 		this.makeEaseOut = this.makeEaseOut.bind(this);
+		this.animateAfterSelect = this.animateAfterSelect.bind(this);
 	}
 
 	animate({ timing, draw, duration }) {
@@ -38,6 +41,15 @@ export default class SelectBar extends React.Component {
 	}
 
 	// обычный вариант
+	bounceORIG(timeFraction) {
+		for (var a = 0, b = 1, result; 1; a += b, b /= 2) {
+			if (timeFraction >= (7 - 4 * a) / 11) {
+				return (
+					-Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2)
+				);
+			}
+		}
+	}
 	bounce(timeFraction) {
 		for (var a = 0, b = 1, result; 1; a += b, b /= 2) {
 			if (timeFraction >= (7 - 4 * a) / 11) {
@@ -47,7 +59,12 @@ export default class SelectBar extends React.Component {
 			}
 		}
 	}
-
+	newBounce(x, timeFraction) {
+		return (
+			Math.pow(2, 15 * (timeFraction - 1)) *
+			Math.cos(((20 * Math.PI * x) / 3) * timeFraction)
+		);
+	}
 	// преобразователь в easeOut
 	makeEaseOut(timing) {
 		return function(timeFraction) {
@@ -59,26 +76,29 @@ export default class SelectBar extends React.Component {
 		return 1 - Math.sin(Math.acos(timeFraction));
 	}
 
-	animateWrapper() {
-		this.animate({
-			duration: 3000,
-			timing: this.makeEaseOut(this.bounce),
-			draw: function(progress) {
-				brick.style.left = progress * 500 + "px";
-				var percent = Math.round(100 * progress) + "%";
-				perc.innerHTML = percent;
-			}
-		});
+	//потом можно удалить
+	helper() {
+		console.log("звали?");
 	}
 
-	answerAccept(e) {
-		//let currentQuest = "id" + this.props.userReducer.currentQuestIDinStore;
-		let tpmVal = e.currentTarget.value;
-		let value;
-		let bigThis = this;
-		console.log(bigThis.state);
+	animateAfterSelect(e) {
+		if (!this.state.allowDoubleClick) {
+			// If it was called from select - disallow double click
+			this.setState({ allowDoubleClick: true });
+			return null;
+		}
 
-		console.log(tpmVal);
+		let tpmVal = e.currentTarget.value;
+		console.log("я запускаюсь во время маусАП, tpmVal=" + tpmVal);
+		let startPoint = this.state.currentQuestAnswer,
+			value,
+			bigThis = this,
+			diff,
+			result,
+			animationStyle = this.makeEaseOut(this.newBounce.bind(null, 1.5)),
+			animateDuration = 500;
+
+		//TODO:refactor to swith?
 		if (tpmVal < 150) {
 			value = 100;
 			console.log("Позиция 1");
@@ -95,29 +115,56 @@ export default class SelectBar extends React.Component {
 			value = 500;
 			console.log("Позиция 5");
 		}
+
+		diff = startPoint - value;
+		if (diff > 50 || diff < -50) {
+			console.log("Большой diff " + diff); //здесь выставляем плавный тайминг
+			let timingDiff = diff;
+			if (timingDiff < 0) timingDiff = -timingDiff;
+			animateDuration = timingDiff * 10;
+			console.log(animateDuration);
+			if (tpmVal < 150 || tpmVal > 450) {
+				animationStyle = this.makeEaseOut(this.bounce);
+				animateDuration = 800;
+			} else animationStyle = this.makeEaseOut(this.newBounce.bind(null, 1.5));
+		}
 		this.animate({
-			duration: 3000,
-			timing: this.makeEaseOut(this.bounce),
+			duration: animateDuration,
+			timing: animationStyle,
 			draw: function(progress) {
-				brick.style.left = progress * 500 + "px";
-				var percent = Math.round(value * progress) + "%";
-				perc.innerHTML = percent;
-				bigThis.setState({ currentQuestAnswer: percent });
+				//console.log(progress);
+				result = startPoint - Math.round(diff * progress);
+				var percent = result + "%";
+				bigThis.setState({ currentQuestAnswer: result });
 			}
 		});
-		//this.setState({ currentQuestAnswer: value });
-	}
-	componentWillReceiveProps() {
-		console.log("componentWillReceiveProps(");
-		let value = 400;
-		//this.setState({ currentQuestAnswer: value });
 	}
 
+	answerSelecting(e) {
+		console.log(
+			"-----------------------Старый ответ" + this.state.currentQuestAnswer
+		);
+		console.log(this.state);
+		this.setState({ allowDoubleClick: true });
+		let value = e.currentTarget.value,
+			diff = this.state.currentQuestAnswer - value;
+		if (diff > 50 || diff < -50) {
+			console.log("большой diff " + diff); //здесь запускаем плавны рендер
+			this.animateAfterSelect(e);
+			this.setState({ allowDoubleClick: false });
+		}
+
+		this.setState({ currentQuestAnswer: value });
+	}
+
+	componentWillReceiveProps() {}
+	componentWillUpdate() {}
+
 	render() {
-		console.log(this.state.currentQuestAnswer);
+		//console.log(this.state);
 		var testStyle = {
 			background: "green",
-			width: "300px"
+			width: "200px"
 		};
 		return (
 			<div>
@@ -130,18 +177,12 @@ export default class SelectBar extends React.Component {
 					value={this.state.currentQuestAnswer}
 					className={styles["slider"]}
 					id="myRange"
-					//onMouseUp={this.props.onChange}
-					//onMouseUp={this.answerAccept}
-					onChange={this.answerAccept}
-					onTouchEnd={this.answerAccept}
+					onMouseUp={this.animateAfterSelect}
+					//onMouseUp={this.answerSelecting}
+					onChange={this.answerSelecting}
+					onTouchEnd={this.answerSelecting}
 				/>
 				<div>Текущий ответ:{this.state.currentQuestAnswer}</div>
-				<div id="perc" style={testStyle}>
-					{this.state.percent}%
-				</div>
-				<div id="path">
-					<div id="brick" onMouseUp={this.animateWrapper} />
-				</div>
 			</div>
 		);
 	}

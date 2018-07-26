@@ -112,3 +112,17 @@ $descTitleColor: #009653;
 		margin-left: -200%;
 	}
 }
+
+@media (max-width: 768px) {
+	.questWrapper {
+		max-width: 460px;
+		width: calc(100% - 44px);
+	}
+}
+
+@media (max-width: 360px) {
+	.questWrapper {
+		max-width: 320px;
+		width: calc(100% - 44px);
+	}
+}
