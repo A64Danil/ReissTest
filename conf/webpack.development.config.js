@@ -30,7 +30,10 @@ export default new Config().extend("conf/webpack.base.config.js").merge({
 							}
 						},
 						{
-							loader: "sass-loader"
+							loader: "sass-loader",
+							options: {
+								sourceMap: true
+							}
 						},
 						{ loader: "postcss-loader" }
 					]
