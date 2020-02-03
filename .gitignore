@@ -9,3 +9,5 @@ out/
 dist/
 node_modules/
 coverage/
+dist
+.cache
