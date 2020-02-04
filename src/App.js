@@ -2,6 +2,9 @@ import React from "react";
 import Menu from "./components/Menu/Menu";
 import Block from "./components/Block/Block";
 
+
+import "./global.scss";
+
 export default () => (
   <>
     <div className="outer-wrp">
