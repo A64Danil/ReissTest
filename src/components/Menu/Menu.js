@@ -1,10 +1,23 @@
 import React from 'react'
-import "./Menu.scss";
+import {NavLink} from 'react-router-dom';
 
-const Menu = ({title}) => {
+import styles from "./Menu.scss";
+
+const Menu = () => {
     return (
-        <div className="block-test">
-            <h1>Menu: {title}</h1>
+        <div className={styles.Menu}>
+            <ul className={styles.MenuList}>
+                <li>
+                    <NavLink to='/' exact activeClassName={styles.active}>
+                        Главная
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to='/quests' activeClassName={styles.active}>
+                        Тест
+                    </NavLink>
+                </li>
+            </ul>
         </div>
     )
 }
