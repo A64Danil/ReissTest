@@ -16,7 +16,6 @@ export default () => (
             <Routes/>
         </Router>
         <Block title={'hii111'}/>
-        <p>Hard to get more minimal than this React app.</p>
     </div>
   </>
 );
