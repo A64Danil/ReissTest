@@ -19,37 +19,6 @@ const Slider = () => {
     const [inMove, setInMove] = useState(true);
 
 
-    const showQuest = () => {
-        let newState = !inMove;
-        setInMove(newState)
-    }
-
-
-
-    const handleSliderControl = (direction) => {
-        if(direction === "next") {
-            setCurrentQuestNum(currentQuestNum+1)
-        }
-        if(direction === "prev") {
-            setCurrentQuestNum(currentQuestNum-1)
-        }
-    }
-
-    useEffect(()=> {
-        console.log("Вопрос " + currentQuestNum);
-        let quest = json[currentQuestNum - 1]
-        // console.log(quest);
-        setQuestInfo(quest);
-
-    }, [currentQuestNum, setCurrentQuestNum])
-
-
-    // useEffect(()=> {
-    //     console.log('questInfo', questInfo)
-    //
-    // }, [questInfo, setQuestInfo])
-
-
     const duration = 1300;
 
     const defaultStyle = {
@@ -63,6 +32,62 @@ const Slider = () => {
         exiting:  { opacity: 0.4 },
         exited:  { background: "red" },
     };
+
+
+
+    const showQuest = () => {
+        let newState = !inMove;
+        setInMove(newState)
+    }
+
+
+
+    const handleSliderControl = (direction) => {
+        setInMove(false);
+        // if(direction === "next") {
+        //     setCurrentQuestNum(currentQuestNum+1)
+        // }
+        // if(direction === "prev") {
+        //     setCurrentQuestNum(currentQuestNum-1)
+        // }
+    }
+
+    useEffect(()=> {
+        console.log("Вопрос " + currentQuestNum);
+        let quest = json[currentQuestNum - 1]
+        // console.log(quest);
+        setQuestInfo(quest);
+
+    }, [currentQuestNum, setCurrentQuestNum])
+
+
+    useEffect(()=> {
+        console.log('inMove', inMove)
+        if (inMove) return;
+        setTimeout(() => {
+            setCurrentQuestNum(currentQuestNum+1);
+        }, duration)
+
+        // console.log('questInfo', questInfo)
+
+    }, [inMove])
+
+    useEffect(() => {
+        if (inMove) return;
+        setInMove(true);
+    }, [currentQuestNum]);
+
+    // useEffect(()=> {
+    //     console.log("Перед сменой inMove")
+    //     setInMove(false)
+    // }, [currentQuestNum])
+
+    // useEffect(()=> {
+    //     console.log('questInfo', questInfo)
+    //
+    // }, [questInfo, setQuestInfo])
+
+
 
     return (
         <div className={styles.Slider}>
