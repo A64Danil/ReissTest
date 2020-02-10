@@ -4,11 +4,19 @@ import styles from "./Slider.scss";
 import Quest from './../Quest/Quest'
 import Button from './../Button/Button'
 
+
+import Transition from "react-transition-group/Transition";
+import TransitionGroup from "react-transition-group/TransitionGroup";
+import CSSTransition from "react-transition-group/CSSTransition";
+import CSSTransitionGroup from "react-transition-group/CSSTransition";
+
 import json from "../../model/quests";
 
 const Slider = () => {
     const [currentQuestNum, setCurrentQuestNum] = useState(1)
     const [questInfo, setQuestInfo] =  useState()
+
+
 
     const handleSliderControl = (direction) => {
         if(direction === "next") {
@@ -22,10 +30,11 @@ const Slider = () => {
     useEffect(()=> {
         console.log("Вопрос " + currentQuestNum);
         let quest = json[currentQuestNum - 1]
-        console.log(quest);
+        // console.log(quest);
         setQuestInfo(quest);
 
     }, [currentQuestNum, setCurrentQuestNum])
+
 
     // useEffect(()=> {
     //     console.log('questInfo', questInfo)
@@ -35,6 +44,8 @@ const Slider = () => {
     return (
         <div className={styles.Slider}>
             <Quest questInfo={questInfo} currentQuestNum={currentQuestNum}/>
+
+
 
             <div className={styles.SliderControl}>
                 <button
@@ -61,6 +72,7 @@ Quest.defaultProps = {
         rdesc: "",
         mdesc: ""
     },
+    test: ""
 
 };
 
