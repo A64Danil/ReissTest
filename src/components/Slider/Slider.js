@@ -16,6 +16,14 @@ const Slider = () => {
     const [currentQuestNum, setCurrentQuestNum] = useState(1)
     const [questInfo, setQuestInfo] =  useState()
 
+    const [inMove, setInMove] = useState(true);
+
+
+    const showQuest = () => {
+        let newState = !inMove;
+        setInMove(newState)
+    }
+
 
 
     const handleSliderControl = (direction) => {
@@ -41,9 +49,38 @@ const Slider = () => {
     //
     // }, [questInfo, setQuestInfo])
 
+
+    const duration = 1300;
+
+    const defaultStyle = {
+        transition: `all ${duration}ms ease-in-out`,
+        opacity: 0.4,
+    }
+
+    const transitionStyles = {
+        entering: { opacity: 0.4 },
+        entered:  { opacity: 1 },
+        exiting:  { opacity: 0.4 },
+        exited:  { background: "red" },
+    };
+
     return (
         <div className={styles.Slider}>
-            <Quest questInfo={questInfo} currentQuestNum={currentQuestNum}/>
+
+
+            <button onClick={e => showQuest(e)}>toggle</button>
+            <Transition in={inMove} timeout={duration} appear={true}>
+                {state => (
+                    <div style={{
+                        ...defaultStyle,
+                        ...transitionStyles[state]
+                    }}>
+                        <h3>{state} </h3>
+                        <Quest questInfo={questInfo} currentQuestNum={currentQuestNum}/>
+                    </div>
+                )}
+            </Transition>
+
 
 
 
