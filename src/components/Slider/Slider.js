@@ -18,21 +18,29 @@ const Slider = () => {
 
     const [inMove, setInMove] = useState(true);
 
-    const [slideDirection, setSlideDirecrtion] = useState();
+    const [slideDirection, setSlideDirecrtion] = useState('next');
 
 
-    const duration = 1300;
+    const duration = 250;
 
     const defaultStyle = {
-        transition: `all ${duration}ms ease-in-out`,
-        opacity: 0.4,
+        transition: `all 250ms ease-in-out`,
+        transform: `translate(0%, 0)`
     }
 
     const transitionStyles = {
-        entering: { opacity: 0.4 },
-        entered:  { opacity: 1 },
-        exiting:  { opacity: 0.4 },
-        exited:  { background: "red" },
+        next: {
+            entering: { transform: `translate(100%, 0)`, opacity: 0 },
+            entered:  { transform: `translate(0%, 0)`, opacity: 1 },
+            exiting:  { transform: `translate(-100%, 0)`, opacity: 0 },
+            exited:  { transform: `translate(-0%, 0)`, opacity: 0  },
+        },
+        prev: {
+            entering: { transform: `translate(-100%, 0)`, opacity: 0 },
+            entered:  { transform: `translate(0%, 0)`, opacity: 1 },
+            exiting:  { transform: `translate(100%, 0)`, opacity: 0 },
+            exited:  { transform: `translate(0%, 0)`, opacity: 0  },
+        }
     };
 
 
@@ -76,11 +84,14 @@ const Slider = () => {
     return (
         <div className={styles.Slider}>
 
-            <Transition in={inMove} timeout={duration} appear={true}>
+            <Transition
+                in={inMove}
+                timeout={125}
+                appear={true}>
                 {state => (
                     <div style={{
                         ...defaultStyle,
-                        ...transitionStyles[state]
+                        ...transitionStyles[slideDirection][state]
                     }}>
                         <h3>{state} </h3>
                         <Quest questInfo={questInfo} currentQuestNum={currentQuestNum}/>
