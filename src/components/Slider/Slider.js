@@ -18,6 +18,8 @@ const Slider = () => {
 
     const [inMove, setInMove] = useState(true);
 
+    const [slideDirection, setSlideDirecrtion] = useState();
+
 
     const duration = 1300;
 
@@ -34,23 +36,12 @@ const Slider = () => {
     };
 
 
-
-    const showQuest = () => {
-        let newState = !inMove;
-        setInMove(newState)
-    }
-
-
-
     const handleSliderControl = (direction) => {
+        setSlideDirecrtion(direction)
         setInMove(false);
-        // if(direction === "next") {
-        //     setCurrentQuestNum(currentQuestNum+1)
-        // }
-        // if(direction === "prev") {
-        //     setCurrentQuestNum(currentQuestNum-1)
-        // }
     }
+
+
 
     useEffect(()=> {
         console.log("Вопрос " + currentQuestNum);
@@ -65,10 +56,14 @@ const Slider = () => {
         console.log('inMove', inMove)
         if (inMove) return;
         setTimeout(() => {
-            setCurrentQuestNum(currentQuestNum+1);
+            if(slideDirection === "next") {
+                setCurrentQuestNum(currentQuestNum+1)
+            }
+            if(slideDirection === "prev") {
+                setCurrentQuestNum(currentQuestNum-1)
+            }
         }, duration)
 
-        // console.log('questInfo', questInfo)
 
     }, [inMove])
 
@@ -77,23 +72,10 @@ const Slider = () => {
         setInMove(true);
     }, [currentQuestNum]);
 
-    // useEffect(()=> {
-    //     console.log("Перед сменой inMove")
-    //     setInMove(false)
-    // }, [currentQuestNum])
-
-    // useEffect(()=> {
-    //     console.log('questInfo', questInfo)
-    //
-    // }, [questInfo, setQuestInfo])
-
-
 
     return (
         <div className={styles.Slider}>
 
-
-            <button onClick={e => showQuest(e)}>toggle</button>
             <Transition in={inMove} timeout={duration} appear={true}>
                 {state => (
                     <div style={{
@@ -120,7 +102,7 @@ const Slider = () => {
                 >
                     Далее
                 </button>
-                <Button text={'Далее'}/>
+                {/*<Button text={'Далее'}/>*/}
             </div>
         </div>
     )
