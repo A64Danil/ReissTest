@@ -2,13 +2,18 @@ body {
     margin: 0;
 }
 
-.outerWrp {
-    max-width: 500px;
-    margin: 0 auto;
-    //border: 1px solid #ccc;
-    //border-radius: 10px;
-    //padding: 20px;
-    box-sizing: border-box;
-    overflow: hidden;
+
+:global {
+    .outerWrp {
+        max-width: 500px;
+        margin: 0 auto;
+        //border: 1px solid #ccc;
+        //border-radius: 10px;
+        //padding: 20px;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
 }
+
+
 

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import styles from "./Quest.scss";
 import 'antd/dist/antd.css';
-import './CustomSliderStyle.css';
+import './CustomSliderStyle.scss';
 
 import { Slider } from 'antd';
 

@@ -10,7 +10,7 @@ import styles from "./global.scss";
 
 export default () => (
   <>
-    <div className={styles.outerWrp}>
+    <div className={"outerWrp"}>
         <Router>
             <Menu />
             <Routes/>
