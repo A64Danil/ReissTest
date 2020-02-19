@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import styles from "./Quest.scss";
 import 'antd/dist/antd.css';
+// import './CustomSliderStyle.css';
 
 import { Slider } from 'antd';
 
@@ -63,8 +64,11 @@ const Quest = ({questInfo, currentQuestNum, transState}) => {
     return (
         <>
             <div className={styles.Quest}>
-                <h3>Вопрос #{currentQuestNum} - {questInfo.title}</h3>
-                <p>{questInfo.description}</p>
+                <div className={styles.QuestText}>
+                    <p className={styles.QuestNumber}>{currentQuestNum}/16 желание</p>
+                    <h3  className={styles.QuestTitle}>{questInfo.title}</h3>
+                    <p className={styles.QuestDescription}>{questInfo.description}</p>
+                </div>
 
                 <ul>
                     <li>1 100 - 130</li>

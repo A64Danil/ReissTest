@@ -93,7 +93,6 @@ const Slider = () => {
                         ...defaultStyle,
                         ...transitionStyles[slideDirection][state]
                     }}>
-                        <h3>{state} </h3>
                         <Quest questInfo={questInfo} currentQuestNum={currentQuestNum}/>
                     </div>
                 )}
@@ -104,16 +103,17 @@ const Slider = () => {
 
             <div className={styles.SliderControl}>
                 <button
+                    className={styles.SliderBtn}
                     onClick={e => handleSliderControl('prev')}
                 >
-                    Назад
+                    &#60;
                 </button>
                 <button
+                    className={`${styles.SliderBtn}  ${styles.SliderBtnNxt}`}
                     onClick={e => handleSliderControl('next')}
                 >
-                    Далее
+                    Далее &#62;
                 </button>
-                {/*<Button text={'Далее'}/>*/}
             </div>
         </div>
     )
