@@ -6,12 +6,11 @@ import Menu from "./components/Menu/Menu";
 import Block from "./components/Block/Block";
 
 import Routes from './routes'
-// import styles from "./global.scss";
-import "./global.scss";
+import styles from "./global.scss";
 
 export default () => (
   <>
-    <div className={"outerWrp"}>
+    <div className={styles.outerWrp}>
         <Router>
             <Menu />
             <Routes/>
