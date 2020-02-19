@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import styles from "./Quest.scss";
 import 'antd/dist/antd.css';
-// import './CustomSliderStyle.css';
+import './CustomSliderStyle.css';
 
 import { Slider } from 'antd';
 
@@ -21,10 +21,6 @@ const Quest = ({questInfo, currentQuestNum, transState}) => {
         // let newState = !inMove;
         // setInMove(newState)
         // setInMove(false)
-        console.log(questInfo);
-        console.log(questInfo.answers);
-        // console.log(questInfo.answers[0]);
-        // console.log(questInfo.answers[1]);
     }, [currentQuestNum])
 
     // console.log(questInfo)
