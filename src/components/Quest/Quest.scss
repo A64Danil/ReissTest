@@ -27,4 +27,20 @@
       margin: 0;
     }
   }
+
+  .QuestAnswers {
+    padding: 20px;
+    min-height: 130px;
+    text-align: center;
+    .QuestAnswerLevel {
+      color: #59C188;
+      font-size: 23px;
+      font-weight: bold;
+      line-height: 28px;
+    }
+    .QuestAnswerDescr {
+      font-size: 15px;
+      line-height: 21px;
+    }
+  }
 }

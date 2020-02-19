@@ -21,21 +21,16 @@ const Quest = ({questInfo, currentQuestNum, transState}) => {
         // let newState = !inMove;
         // setInMove(newState)
         // setInMove(false)
-
+        console.log(questInfo);
+        console.log(questInfo.answers);
+        // console.log(questInfo.answers[0]);
+        // console.log(questInfo.answers[1]);
     }, [currentQuestNum])
 
     // console.log(questInfo)
 
 
     function onChange(value) {
-
-        // if (value < 130) {
-        //     setAnswerPosition(100);
-        // } else if (171 < value && value < 230) {
-        //     setAnswerPosition(200);
-        // } else {
-        //     setAnswerPosition(value);
-        // }
 
         switch (true) {
              case value < 115:
@@ -57,8 +52,6 @@ const Quest = ({questInfo, currentQuestNum, transState}) => {
                 setAnswerPosition(value);
         }
 
-
-        // console.log('answerPosition: ', answerPosition);
     }
 
     return (
@@ -70,14 +63,30 @@ const Quest = ({questInfo, currentQuestNum, transState}) => {
                     <p className={styles.QuestDescription}>{questInfo.description}</p>
                 </div>
 
-                <ul>
-                    <li>1 100 - 130</li>
-                    <li>2 171 - 230</li>
-                    <li>3 271 - 330</li>
-                    <li>4 371 - 430</li>
-                    <li>5 471 - 500</li>
-                </ul>
+                {questInfo.answers && (
+                    <div className={styles.QuestAnswers}>
+                        {answerPosition < 110 && (
+                            <>
+                                <div className={styles.QuestAnswerLevel}>Слабое</div>
+                                <div className={styles.QuestAnswerDescr}>{questInfo.answers[0]}</div>
+                            </>
+                        )}
 
+                        {answerPosition < 310 && answerPosition > 290 && (
+                            <>
+                                <div className={styles.QuestAnswerLevel}>Среднее</div>
+                                <div className={styles.QuestAnswerDescr}>{questInfo.answers[2]}</div>
+                            </>
+                        )}
+
+                        {answerPosition > 490 && (
+                            <>
+                                <div className={styles.QuestAnswerLevel}>Сильное</div>
+                                <div className={styles.QuestAnswerDescr}>{questInfo.answers[4]}</div>
+                            </>
+                        )}
+                    </div>
+                )}
 
                 <Slider
                     min={100}
