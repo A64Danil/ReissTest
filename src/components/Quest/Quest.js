@@ -65,21 +65,35 @@ const Quest = ({questInfo, currentQuestNum, transState}) => {
 
                 {questInfo.answers && (
                     <div className={styles.QuestAnswers}>
-                        {answerPosition < 110 && (
+                        {answerPosition <= 151 && (
                             <>
                                 <div className={styles.QuestAnswerLevel}>Слабое</div>
                                 <div className={styles.QuestAnswerDescr}>{questInfo.answers[0]}</div>
                             </>
                         )}
 
-                        {answerPosition < 310 && answerPosition > 290 && (
+                        {answerPosition < 250 && answerPosition > 151 && (
+                            <>
+                                <div className={styles.QuestAnswerLevel}>Ниже среднего</div>
+                                <div className={styles.QuestAnswerDescr}>{questInfo.answers[1]}</div>
+                            </>
+                        )}
+
+                        {answerPosition < 350 && answerPosition > 251 && (
                             <>
                                 <div className={styles.QuestAnswerLevel}>Среднее</div>
                                 <div className={styles.QuestAnswerDescr}>{questInfo.answers[2]}</div>
                             </>
                         )}
 
-                        {answerPosition > 490 && (
+                        {answerPosition < 450 && answerPosition > 351 && (
+                            <>
+                                <div className={styles.QuestAnswerLevel}>Выше среднего</div>
+                                <div className={styles.QuestAnswerDescr}>{questInfo.answers[3]}</div>
+                            </>
+                        )}
+
+                        {answerPosition >= 451 && (
                             <>
                                 <div className={styles.QuestAnswerLevel}>Сильное</div>
                                 <div className={styles.QuestAnswerDescr}>{questInfo.answers[4]}</div>
@@ -88,15 +102,18 @@ const Quest = ({questInfo, currentQuestNum, transState}) => {
                     </div>
                 )}
 
-                <Slider
-                    min={100}
-                    max={500}
-                    dots={false}
-                    onChange={onChange}
-                    value={answerPosition}
-                    defaultValue={answerPosition}
-                    tooltipVisible={false}
-                />
+                <div className={styles.QuestRangeSliderWrp}>
+                    <Slider
+                        min={100}
+                        max={500}
+                        dots={false}
+                        onChange={onChange}
+                        value={answerPosition}
+                        defaultValue={answerPosition}
+                        tooltipVisible={false}
+                    />
+                </div>
+
             </div>
 
         </>
