@@ -50,7 +50,7 @@
   }
 
   .QuestRangeSliderWrp {
-    padding: 0 20px;
+    padding: 0 20px 20px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -65,5 +65,56 @@
     width: 52px;
     margin-top: -15px;
     background-color: #59C188;
+  }
+
+  .ant-slider-rail {
+    height: 15px;
+    background: linear-gradient(
+                    90deg,
+                    #eee 0,
+                    #eee 18%,
+                    #fff 0,
+                    #fff 20.5%,
+                    #eee 0,
+                    #eee 38.5%,
+                    #fff 0,
+                    #fff 41%,
+                    #eee 0,
+                    #eee 59%,
+                    #fff 0,
+                    #fff 61.5%,
+                    #eee 0,
+                    #eee 79.5%,
+                    #fff 0,
+                    #fff 82%,
+                    #eee 0,
+                    #eee
+    );
+  }
+
+  .ant-slider-track {
+    height: 15px;
+    background-color: #7DD29D;
+    //background: linear-gradient(
+    //                90deg,
+    //                #7DD29D 0,
+    //                #7DD29D 18%,
+    //                #fff 0,
+    //                #fff 20.5%,
+    //                #7DD29D 0,
+    //                #7DD29D 38.5%,
+    //                #fff 0,
+    //                #fff 41%,
+    //                #7DD29D 0,
+    //                #7DD29D 59%,
+    //                #fff 0,
+    //                #fff 61.5%,
+    //                #7DD29D 0,
+    //                #7DD29D 79.5%,
+    //                #fff 0,
+    //                #fff 82%,
+    //                #7DD29D 0,
+    //                #7DD29D
+    //);
   }
 }
