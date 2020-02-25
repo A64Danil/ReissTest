@@ -1,20 +1,25 @@
-import React from "react";
-
+import React, {useEffect} from "react";
 import {BrowserRouter as Router} from 'react-router-dom'
 
 import Menu from "./components/Menu/Menu";
-import Block from "./components/Block/Block";
-
+import StoreProvider from './model/Store'
 import Routes from './routes'
-import styles from "./global.scss";
 
-export default () => (
-  <>
-    <div className={"outerWrp"}>
-        <Router>
-            <Menu />
-            <Routes/>
-        </Router>
-    </div>
-  </>
-);
+import "./global.scss";
+
+
+const App = () => {
+    return (
+        <StoreProvider>
+            <div className={"outerWrp"}>
+                <Router>
+                    <Menu/>
+                    <Routes/>
+                </Router>
+            </div>
+        </StoreProvider>
+    )
+
+}
+
+export default App

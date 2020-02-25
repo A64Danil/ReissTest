@@ -10,7 +10,9 @@ import TransitionGroup from "react-transition-group/TransitionGroup";
 import CSSTransition from "react-transition-group/CSSTransition";
 import CSSTransitionGroup from "react-transition-group/CSSTransition";
 
-import json from "../../model/quests";
+import json from "./../../model/quests";
+
+import {StoreContext} from "./../../model/Store";
 
 const Slider = () => {
     const [currentQuestNum, setCurrentQuestNum] = useState(1)
@@ -20,6 +22,14 @@ const Slider = () => {
 
     const [slideDirection, setSlideDirecrtion] = useState('next');
 
+    // const [store, setStore] = useContext(StoreContext);
+    const store = useContext(StoreContext)
+
+
+    useEffect(()=> {
+        console.log("Render Slider2")
+        console.log(store)
+    })
 
     const duration = 250;
 
@@ -54,6 +64,7 @@ const Slider = () => {
 
     useEffect(()=> {
         console.log("Вопрос " + currentQuestNum);
+        console.log("store.currentQuestNumber", store.currentQuestNumber)
         let quest = json[currentQuestNum - 1]
         // console.log(quest);
         setQuestInfo(quest);
@@ -66,9 +77,11 @@ const Slider = () => {
         if (inMove) return;
         setTimeout(() => {
             if(slideDirection === "next") {
+                store.nextQuest()
                 setCurrentQuestNum(currentQuestNum+1)
             }
             if(slideDirection === "prev") {
+                store.prevQuest()
                 setCurrentQuestNum(currentQuestNum-1)
             }
         }, duration)
@@ -98,9 +111,6 @@ const Slider = () => {
                     </div>
                 )}
             </Transition>
-
-
-
 
             <div className={styles.SliderControl}>
                 <button

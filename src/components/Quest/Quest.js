@@ -7,15 +7,9 @@ import './CustomSliderStyle.scss';
 
 import { Slider } from 'antd';
 
-import Transition from "react-transition-group/Transition";
-
 const Quest = ({questInfo, currentQuestNum, transState}) => {
     const [answerPosition, setAnswerPosition] = useState(300);
 
-    // useEffect(()=> {
-    //     console.log("Render Quest")
-    //     // console.log(showQ)
-    // })
 
     useEffect(()=> {
         console.log("Изменился вопрос")
