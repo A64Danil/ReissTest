@@ -10,11 +10,11 @@ const QuestStore = types
     })
     .actions(self => ({
         nextQuest() {
-            console.log("Нажали следующий вопрос")
+            // console.log("Нажали следующий вопрос")
             self.currentQuestNumber = self.currentQuestNumber + 1;
         },
         prevQuest() {
-            console.log("Нажали предыдущий вопрос")
+            // console.log("Нажали предыдущий вопрос")
             self.currentQuestNumber = self.currentQuestNumber > 1 ? self.currentQuestNumber - 1 : 1;
         }
     }))
@@ -29,7 +29,7 @@ const StoreProvider = ({ children }) => {
 
     console.log("store")
     console.log(store)
-    console.log(store.currentQuestNumber)
+    // console.log(store.currentQuestNumber)
 
     return (
         <StoreContext.Provider value={store}>

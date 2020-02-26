@@ -60,14 +60,21 @@ const Slider = () => {
         }
     };
 
-    const toggler = () => {
-        setInMove(!inMove);
-    }
+    // const toggler = () => {
+    //     setInMove(!inMove);
+    // }
 
     // STEP 1 - задаем направление и включаем анимацию выхода
     const handleSliderControl = (direction) => {
-        setSlideDirecrtion(direction)
-        setInMove(false);
+
+        console.log('handleSliderControl, inMove = '+ inMove)
+        if (!inMove) {
+            console.warn("You already animated")
+            return
+        } else {
+            setSlideDirecrtion(direction)
+            setInMove(false);
+        }
     }
 
     // STEP 2 - записываем ответ и  изменяем текущий номер вопроса
@@ -76,16 +83,15 @@ const Slider = () => {
         if (inMove) return;
         // с задержкой, т.к. до перелистывания нужно анимировать выход и записать ответ
         setTimeout(() => {
-            console.log("Перед изменнеим")
             if(slideDirection === "next") {
                 store.nextQuest()
-                console.log("store.currentQuestNumber", store.currentQuestNumber)
                 // setCurrentQuestNum(currentQuestNum+1)
             }
             if(slideDirection === "prev") {
                 store.prevQuest()
                 // setCurrentQuestNum(currentQuestNum-1)
             }
+            setInMove(true);
         }, duration)
 
 
@@ -94,7 +100,7 @@ const Slider = () => {
     // STEP 3 - вносим новые данные в компонент Quest
     useEffect(()=> {
         // console.log("Вопрос " + currentQuestNum);
-        console.log("store.currentQuestNumber", store.currentQuestNumber)
+        console.log("Поменялся store.currentQuestNumber на ", store.currentQuestNumber)
         let quest = json[store.currentQuestNumber - 1]
         // console.log(quest);
         setQuestInfo(quest);
@@ -103,29 +109,14 @@ const Slider = () => {
 
 
 
-    useEffect(()=> {
-        console.log("#### Зарегистрировано изменение вопроса!");;
-
-    }, [store.currentQuestNumber])
-
-
-
-    // TODO: понять зачем нужно это место
-    useEffect(() => {
-        console.log('last useEffect')
-        if (inMove) return;
-        setInMove(true);
-    }, [store.currentQuestNumber]);
-
-
     return (
         <div className={styles.Slider}>
 
-            <button
-                onClick={e => toggler()}
-            >
-                toggle
-            </button>
+            {/*<button*/}
+            {/*    onClick={e => toggler()}*/}
+            {/*>*/}
+            {/*    toggle*/}
+            {/*</button>*/}
 
             <Transition
                 in={inMove}

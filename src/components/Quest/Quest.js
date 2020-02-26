@@ -12,8 +12,7 @@ const Quest = ({questInfo, currentQuestNum, transState}) => {
 
 
     useEffect(()=> {
-        console.log("Изменился вопрос")
-        console.log(currentQuestNum)
+        console.log("Изменился вопрос, теперь это №"+currentQuestNum)
         // setInMove(true);
         // let newState = !inMove;
         // setInMove(newState)
