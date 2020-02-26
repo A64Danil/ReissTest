@@ -6,7 +6,7 @@ export const StoreContext = React.createContext();
 
 const QuestAnswer = types
     .model("QuestAnswer", {
-        name: types.string,
+        title: types.string,
         value: types.number
     })
     // .model("QuestAnswer", {
@@ -30,7 +30,15 @@ const QuestStore = types
     })
     .actions(self => ({
         addAnswer(quest){
-            self.answers.push(quest)
+            let searchQuest = self.answers.find(qu => quest.title === qu.title);
+            if (typeof searchQuest == "undefined") {
+                console.log("не нашли")
+                self.answers.push(quest)
+            } else {
+                console.log("нашли")
+                searchQuest.value = quest.value;
+                console.log(searchQuest)
+            }
         },
         nextQuest() {
             // console.log("Нажали следующий вопрос")
@@ -51,16 +59,9 @@ const StoreProvider = ({ children }) => {
         answers: []
     })
 
-    const answerStore = QuestAnswer.create({
-        name: "Тестовый вариант",
-        value: 3
-    })
 
     console.log("store")
     console.log(store)
-    // console.log("answ store")
-    // console.log(answerStore)
-    // console.log(store.currentQuestNumber)
 
     return (
         <StoreContext.Provider value={store}>

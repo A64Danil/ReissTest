@@ -21,11 +21,17 @@ const Quest = ({questInfo, currentQuestNum, transState}) => {
 
     useEffect(()=> {
         console.log("Изменился вопрос, теперь это №"+currentQuestNum)
+        console.log(questInfo);
         // console.log(store)
-
-        // store.answers.toJS().map(obj => {
-        //     console.log(obj)
-        // })
+        let searchQuest = store.answers.toJS().find(qu => questInfo.title === qu.title);
+        console.log(searchQuest)
+        if (typeof searchQuest !== "undefined") {
+            console.log("Попали в иф")
+            setAnswerPosition(searchQuest.value);
+        }
+        store.answers.toJS().map(obj => {
+            console.log(obj)
+        })
         // store.addAnswer(testObj)
         // setInMove(true);
         // let newState = !inMove;
@@ -88,7 +94,7 @@ const Quest = ({questInfo, currentQuestNum, transState}) => {
         console.log(questInfo.title);
         // rangeSliderStrongMagnet(value);
         let answer = {
-            name: questInfo.title,
+            title: questInfo.title,
             value: value
         }
         store.addAnswer(answer)
