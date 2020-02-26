@@ -66,8 +66,7 @@ const Slider = () => {
 
     // STEP 1 - задаем направление и включаем анимацию выхода
     const handleSliderControl = (direction) => {
-
-        console.log('handleSliderControl, inMove = '+ inMove)
+        // console.log('handleSliderControl, inMove = '+ inMove)
         if (!inMove) {
             console.warn("You already animated")
             return
@@ -79,9 +78,10 @@ const Slider = () => {
 
     // STEP 2 - записываем ответ и  изменяем текущий номер вопроса
     useEffect(()=> {
-        console.log('inMove изменился', inMove)
+        // console.log('inMove изменился', inMove)
         if (inMove) return;
         // с задержкой, т.к. до перелистывания нужно анимировать выход и записать ответ
+        console.log("Текущий ответ")
         setTimeout(() => {
             if(slideDirection === "next") {
                 store.nextQuest()
@@ -99,7 +99,6 @@ const Slider = () => {
 
     // STEP 3 - вносим новые данные в компонент Quest
     useEffect(()=> {
-        // console.log("Вопрос " + currentQuestNum);
         console.log("Поменялся store.currentQuestNumber на ", store.currentQuestNumber)
         let quest = json[store.currentQuestNumber - 1]
         // console.log(quest);

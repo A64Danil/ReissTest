@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 
 import 'antd/dist/antd.css';
 
@@ -7,43 +7,95 @@ import './CustomSliderStyle.scss';
 
 import { Slider } from 'antd';
 
+import {StoreContext} from "./../../model/Store";
+import {types} from "mobx-state-tree";
+
 const Quest = ({questInfo, currentQuestNum, transState}) => {
     const [answerPosition, setAnswerPosition] = useState(300);
 
+// const testObj = {
+//     name: "Ахаха",
+//     value: 5
+// }
+    const store = useContext(StoreContext)
 
     useEffect(()=> {
         console.log("Изменился вопрос, теперь это №"+currentQuestNum)
+        // console.log(store)
+
+        // store.answers.toJS().map(obj => {
+        //     console.log(obj)
+        // })
+        // store.addAnswer(testObj)
         // setInMove(true);
         // let newState = !inMove;
         // setInMove(newState)
         // setInMove(false)
     }, [currentQuestNum])
 
-    // console.log(questInfo)
-
-
-    function onChange(value) {
-
+    function rangeSliderMagnet(value) {
         switch (true) {
-             case value < 115:
-                 setAnswerPosition(100);
-                 break;
-             case (185 < value && value < 215):
-                 setAnswerPosition(200);
-                 break;
-             case (285 < value && value < 315):
-                 setAnswerPosition(300);
-                 break;
-             case (385 < value && value < 415):
-                 setAnswerPosition(400);
-                 break;
-             case (485 < value):
-                 setAnswerPosition(500);
-                 break;
-             default:
+            case value < 115:
+                setAnswerPosition(100);
+                break;
+            case (185 < value && value < 215):
+                setAnswerPosition(200);
+                break;
+            case (285 < value && value < 315):
+                setAnswerPosition(300);
+                break;
+            case (385 < value && value < 415):
+                setAnswerPosition(400);
+                break;
+            case (485 < value):
+                setAnswerPosition(500);
+                break;
+            default:
+                setAnswerPosition(value);
+        }
+    }
+
+    function rangeSliderStrongMagnet(value) {
+        switch (true) {
+            case value <= 150:
+                setAnswerPosition(100);
+                break;
+            case (151 < value && value < 250):
+                setAnswerPosition(200);
+                break;
+            case (251 < value && value < 350):
+                setAnswerPosition(300);
+                break;
+            case (351 < value && value < 450):
+                setAnswerPosition(400);
+                break;
+            case (450 <= value):
+                setAnswerPosition(500);
+                break;
+            default:
                 setAnswerPosition(value);
         }
 
+        console.log("answerPosition in switch " + answerPosition);
+    }
+
+
+    function onChange(value) {
+        rangeSliderMagnet(value);
+    }
+
+    function onAfterChange(value) {
+        console.log(questInfo.title);
+        // rangeSliderStrongMagnet(value);
+        let answer = {
+            name: questInfo.title,
+            value: value
+        }
+        store.addAnswer(answer)
+        store.answers.toJS().map(obj => {
+            console.log(obj)
+            // console.log(obj.name, obj.value)
+        })
     }
 
     return (
@@ -100,6 +152,7 @@ const Quest = ({questInfo, currentQuestNum, transState}) => {
                         max={500}
                         dots={false}
                         onChange={onChange}
+                        onAfterChange={onAfterChange}
                         value={answerPosition}
                         defaultValue={answerPosition}
                         tooltipVisible={false}
