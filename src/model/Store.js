@@ -10,9 +10,11 @@ const QuestStore = types
     })
     .actions(self => ({
         nextQuest() {
+            console.log("Нажали следующий вопрос")
             self.currentQuestNumber = self.currentQuestNumber + 1;
         },
         prevQuest() {
+            console.log("Нажали предыдущий вопрос")
             self.currentQuestNumber = self.currentQuestNumber > 1 ? self.currentQuestNumber - 1 : 1;
         }
     }))

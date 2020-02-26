@@ -25,11 +25,17 @@ const Slider = () => {
     // const [store, setStore] = useContext(StoreContext);
     const store = useContext(StoreContext)
 
+    // 1. Страница рендерится со стейтом направления - next. Стейт меняет рисунок анимации
+    // 2. Если inMove == true, рисуем анимацию входа. Иначе рисуем анимацию выхода
+    // 3. При изменени вопроса, мы должны "пролистнуть" дальше.
+    // 4. Если будет такакая цепочка изменений: currentQuestNum -> slideDir -> inMove -> questInfo, то не увидим анимацию выхода,
+    // т.к. после смены CurQuestNum сразу произойдёт слайд. Выход - изменить порядок на slideDir -> inMove -> currentQuestNum -> questInfo
+    // После клика на кнопку мы задаём направление, рисуем анимацию, ЗАПОМИНАЕМ текущий ответ, из меняем текущий номер вопроса, прокидываем новую инфу
 
-    useEffect(()=> {
-        console.log("Render Slider2")
-        console.log(store)
-    })
+    // useEffect(()=> {
+    //     console.log("Render Slider2")
+    //     console.log(store)
+    // })
 
     const duration = 250;
 
@@ -54,49 +60,72 @@ const Slider = () => {
         }
     };
 
+    const toggler = () => {
+        setInMove(!inMove);
+    }
 
+    // STEP 1 - задаем направление и включаем анимацию выхода
     const handleSliderControl = (direction) => {
         setSlideDirecrtion(direction)
         setInMove(false);
     }
 
-
-
+    // STEP 2 - записываем ответ и  изменяем текущий номер вопроса
     useEffect(()=> {
-        console.log("Вопрос " + currentQuestNum);
-        console.log("store.currentQuestNumber", store.currentQuestNumber)
-        let quest = json[currentQuestNum - 1]
-        // console.log(quest);
-        setQuestInfo(quest);
-
-    }, [currentQuestNum, setCurrentQuestNum])
-
-
-    useEffect(()=> {
-        console.log('inMove', inMove)
+        console.log('inMove изменился', inMove)
         if (inMove) return;
+        // с задержкой, т.к. до перелистывания нужно анимировать выход и записать ответ
         setTimeout(() => {
+            console.log("Перед изменнеим")
             if(slideDirection === "next") {
                 store.nextQuest()
-                setCurrentQuestNum(currentQuestNum+1)
+                console.log("store.currentQuestNumber", store.currentQuestNumber)
+                // setCurrentQuestNum(currentQuestNum+1)
             }
             if(slideDirection === "prev") {
                 store.prevQuest()
-                setCurrentQuestNum(currentQuestNum-1)
+                // setCurrentQuestNum(currentQuestNum-1)
             }
         }, duration)
 
 
     }, [inMove])
 
+    // STEP 3 - вносим новые данные в компонент Quest
+    useEffect(()=> {
+        // console.log("Вопрос " + currentQuestNum);
+        console.log("store.currentQuestNumber", store.currentQuestNumber)
+        let quest = json[store.currentQuestNumber - 1]
+        // console.log(quest);
+        setQuestInfo(quest);
+
+    }, [store.currentQuestNumber])
+
+
+
+    useEffect(()=> {
+        console.log("#### Зарегистрировано изменение вопроса!");;
+
+    }, [store.currentQuestNumber])
+
+
+
+    // TODO: понять зачем нужно это место
     useEffect(() => {
+        console.log('last useEffect')
         if (inMove) return;
         setInMove(true);
-    }, [currentQuestNum]);
+    }, [store.currentQuestNumber]);
 
 
     return (
         <div className={styles.Slider}>
+
+            <button
+                onClick={e => toggler()}
+            >
+                toggle
+            </button>
 
             <Transition
                 in={inMove}
@@ -107,7 +136,7 @@ const Slider = () => {
                         ...defaultStyle,
                         ...transitionStyles[slideDirection][state]
                     }}>
-                        <Quest questInfo={questInfo} currentQuestNum={currentQuestNum}/>
+                        <Quest questInfo={questInfo} currentQuestNum={store.currentQuestNumber}/>
                     </div>
                 )}
             </Transition>
