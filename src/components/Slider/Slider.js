@@ -63,6 +63,12 @@ const Slider = () => {
     // STEP 1 - задаем направление и включаем анимацию выхода
     const handleSliderControl = (direction) => {
         // console.log('handleSliderControl, inMove = '+ inMove)
+
+        if(direction === "prev" && store.currentQuestNumber === 1) {
+            console.warn("Вопросов до первого не существует")
+            return
+        }
+
         if (!inMove) {
             console.warn("You already animated")
             return

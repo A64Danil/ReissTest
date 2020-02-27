@@ -32,9 +32,8 @@ const StoreProvider = ({ children }) => {
         answers: {}
     })
 
-
-    console.log("store")
-    console.log(store)
+    // console.log("store")
+    // console.log(store)
 
     return (
         <StoreContext.Provider value={store}>
