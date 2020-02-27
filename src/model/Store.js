@@ -4,41 +4,14 @@ import {types} from "mobx-state-tree"
 
 export const StoreContext = React.createContext();
 
-const QuestAnswer = types
-    .model("QuestAnswer", {
-        title: types.string,
-        value: types.number
-    })
-    // .model("QuestAnswer", {
-    //     [key: types.string]: types.string,
-    //     value: types.number
-    // })
-
-// {
-//     name: "Доброжелательность",
-//     value: 3
-// }
-//
-// {
-//     "Доброжелательность": 3
-// }
-
 const QuestStore = types
     .model("QuestStore", {
         currentQuestNumber: types.number,
-        answers: types.array(QuestAnswer)
+        answers: types.map(types.number)
     })
     .actions(self => ({
-        addAnswer(quest){
-            let searchQuest = self.answers.find(qu => quest.title === qu.title);
-            if (typeof searchQuest == "undefined") {
-                console.log("не нашли")
-                self.answers.push(quest)
-            } else {
-                console.log("нашли")
-                searchQuest.value = quest.value;
-                console.log(searchQuest)
-            }
+        addAnswer(quest) {
+            self.answers.set(quest.title, quest.value)
         },
         nextQuest() {
             // console.log("Нажали следующий вопрос")
@@ -56,7 +29,7 @@ const QuestStore = types
 const StoreProvider = ({ children }) => {
     const store = QuestStore.create({
         currentQuestNumber: 1,
-        answers: []
+        answers: {}
     })
 
 

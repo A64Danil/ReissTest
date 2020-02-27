@@ -11,33 +11,20 @@ import {StoreContext} from "./../../model/Store";
 import {types} from "mobx-state-tree";
 
 const Quest = ({questInfo, currentQuestNum, transState}) => {
+    const store = useContext(StoreContext)
+    let currentAnswerPosition = store.answers.get(questInfo.title) || 300;
     const [answerPosition, setAnswerPosition] = useState(300);
 
-// const testObj = {
-//     name: "Ахаха",
-//     value: 5
-// }
-    const store = useContext(StoreContext)
 
     useEffect(()=> {
         console.log("Изменился вопрос, теперь это №"+currentQuestNum)
-        console.log(questInfo);
+        // console.log(questInfo);
         // console.log(store)
-        let searchQuest = store.answers.toJS().find(qu => questInfo.title === qu.title);
-        console.log(searchQuest)
-        if (typeof searchQuest !== "undefined") {
-            console.log("Попали в иф")
-            setAnswerPosition(searchQuest.value);
-        }
-        store.answers.toJS().map(obj => {
-            console.log(obj)
-        })
-        // store.addAnswer(testObj)
-        // setInMove(true);
-        // let newState = !inMove;
-        // setInMove(newState)
-        // setInMove(false)
-    }, [currentQuestNum])
+        // console.log(store.answers.toJS())
+        // console.log(store.answers.get(questInfo.title))
+        setAnswerPosition(currentAnswerPosition);
+
+    }, [questInfo])
 
     function rangeSliderMagnet(value) {
         switch (true) {
@@ -97,11 +84,8 @@ const Quest = ({questInfo, currentQuestNum, transState}) => {
             title: questInfo.title,
             value: value
         }
-        store.addAnswer(answer)
-        store.answers.toJS().map(obj => {
-            console.log(obj)
-            // console.log(obj.name, obj.value)
-        })
+        store.addAnswer(answer);
+        console.log(store.answers.toJS())
     }
 
     return (

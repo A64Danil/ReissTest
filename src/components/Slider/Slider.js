@@ -2,13 +2,9 @@ import React, {useState, useEffect, useContext} from 'react'
 import styles from "./Slider.scss";
 
 import Quest from './../Quest/Quest'
-import Button from './../Button/Button'
 
 
 import Transition from "react-transition-group/Transition";
-import TransitionGroup from "react-transition-group/TransitionGroup";
-import CSSTransition from "react-transition-group/CSSTransition";
-import CSSTransitionGroup from "react-transition-group/CSSTransition";
 
 import json from "./../../model/quests";
 
@@ -101,7 +97,6 @@ const Slider = () => {
     useEffect(()=> {
         console.log("Поменялся store.currentQuestNumber на ", store.currentQuestNumber)
         let quest = json[store.currentQuestNumber - 1]
-        // console.log(quest);
         setQuestInfo(quest);
 
     }, [store.currentQuestNumber])
