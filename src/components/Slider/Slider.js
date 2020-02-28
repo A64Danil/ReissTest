@@ -59,10 +59,6 @@ const Slider = () => {
         }
     };
 
-    // const toggler = () => {
-    //     setInMove(!inMove);
-    // }
-
     // STEP 1 - задаем направление и включаем анимацию выхода
     const handleSliderControl = (direction) => {
         // console.log('handleSliderControl, inMove = '+ inMove)
@@ -73,10 +69,8 @@ const Slider = () => {
         }
 
         if(direction === "next" && store.currentQuestNumber === questsTotal) {
-            console.warn("Вы ответили на все вопросы!00")
-            // useRedirect('/quests','/result');
+            console.warn("Вы ответили на все вопросы!")
             return
-            // return <Redirect to="/result" />
         }
 
         if (!inMove) {
@@ -120,13 +114,6 @@ const Slider = () => {
 
     return (
         <div className={styles.Slider}>
-
-            {/*<button*/}
-            {/*    onClick={e => toggler()}*/}
-            {/*>*/}
-            {/*    toggle*/}
-            {/*</button>*/}
-
             <Transition
                 in={inMove}
                 timeout={125}
@@ -169,7 +156,7 @@ const Slider = () => {
             </div>
         </div>
     )
-}
+};
 
 Quest.defaultProps = {
     questInfo: {

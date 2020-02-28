@@ -76,16 +76,13 @@ const Quest = ({questInfo, currentQuestNum, transState}) => {
     }
 
     function onAfterChange(value) {
-        console.log(questInfo.title);
         let flatValue = rangeSliderStrongMagnet(value);
-        console.log("flatValue", flatValue)
         let answer = {
             title: questInfo.title,
             value: flatValue
         };
         setAnswerPosition(flatValue);
         store.addAnswer(answer);
-        console.log(store.answers.toJS())
     }
 
     return (
