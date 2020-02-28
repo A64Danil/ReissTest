@@ -1,5 +1,5 @@
-import React, {useEffect} from "react";
-import {BrowserRouter as Router} from 'react-router-dom'
+import React, {useEffect} from "react";// import {BrowserRouter as Router} from 'react-router-dom'
+import {BrowserRouter} from 'react-router-dom'
 
 import Menu from "./components/Menu/Menu";
 import StoreProvider from './model/Store'
@@ -12,10 +12,10 @@ const App = () => {
     return (
         <StoreProvider>
             <div className={"outerWrp"}>
-                <Router>
-                    <Menu/>
-                    <Routes/>
-                </Router>
+                <BrowserRouter>
+                        <Menu/>
+                        <Routes/>
+                </BrowserRouter>
             </div>
         </StoreProvider>
     )

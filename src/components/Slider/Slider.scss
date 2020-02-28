@@ -17,7 +17,7 @@
         justify-content: space-between;
         padding: 20px 20px 0;
         .SliderBtn {
-            height: 52px;
+            //height: 52px;
             min-width: 52px;
             border-radius: 26px;
             background-color: #EEEEEE;
@@ -25,13 +25,14 @@
             color: #A0A0A0;
             font-size: 19px;
             letter-spacing: 0.52px;
+            padding: 12px;
 
             cursor: pointer;
 
 
             &.SliderBtnNxt {
                 display: block;
-                padding: 0 20px;
+                padding: 10px 20px 14px;
             }
         }
     }

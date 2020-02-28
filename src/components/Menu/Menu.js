@@ -17,6 +17,11 @@ const Menu = () => {
                         Тест
                     </NavLink>
                 </li>
+                <li>
+                    <NavLink to='/contacts' activeClassName={styles.active}>
+                        Контакты
+                    </NavLink>
+                </li>
             </ul>
         </div>
     )

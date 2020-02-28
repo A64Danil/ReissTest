@@ -9,6 +9,9 @@ import Transition from "react-transition-group/Transition";
 import json from "./../../model/quests";
 
 import {StoreContext} from "./../../model/Store";
+import {NavLink, Link} from "react-router-dom";
+
+const questsTotal = json.length;
 
 const Slider = () => {
     const [currentQuestNum, setCurrentQuestNum] = useState(1)
@@ -69,6 +72,13 @@ const Slider = () => {
             return
         }
 
+        if(direction === "next" && store.currentQuestNumber === questsTotal) {
+            console.warn("Вы ответили на все вопросы!00")
+            // useRedirect('/quests','/result');
+            return
+            // return <Redirect to="/result" />
+        }
+
         if (!inMove) {
             console.warn("You already animated")
             return
@@ -108,7 +118,6 @@ const Slider = () => {
     }, [store.currentQuestNumber])
 
 
-
     return (
         <div className={styles.Slider}>
 
@@ -139,12 +148,24 @@ const Slider = () => {
                 >
                     &#60;
                 </button>
-                <button
-                    className={`${styles.SliderBtn}  ${styles.SliderBtnNxt}`}
-                    onClick={e => handleSliderControl('next')}
-                >
-                    Далее &#62;
-                </button>
+
+                {store.currentQuestNumber === questsTotal && (
+                    <Link to='/result'  className={`${styles.SliderBtn}  ${styles.SliderBtnNxt}`}>
+                        Результат &#62;
+                    </Link>
+                )}
+                {store.currentQuestNumber !== questsTotal && (
+                    <button
+                        className={`${styles.SliderBtn}  ${styles.SliderBtnNxt}`}
+                        onClick={e => handleSliderControl('next')}
+                    >
+                        Далее &#62;
+                    </button>
+                )}
+
+
+
+
             </div>
         </div>
     )
