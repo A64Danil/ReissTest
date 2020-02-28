@@ -3,7 +3,7 @@ import React, {useContext, useEffect, useState} from 'react'
 import 'antd/dist/antd.css';
 
 import styles from "./Quest.scss";
-import './CustomSliderStyle.scss';
+// import './CustomSliderStyle.scss';
 
 import { Slider } from 'antd';
 
