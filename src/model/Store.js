@@ -28,7 +28,7 @@ const QuestStore = types
 
 const StoreProvider = ({ children }) => {
     const store = QuestStore.create({
-        currentQuestNumber: 1,
+        currentQuestNumber: 14,
         answers: {}
     })
 

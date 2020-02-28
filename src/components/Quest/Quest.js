@@ -8,7 +8,6 @@ import './CustomSliderStyle.scss';
 import { Slider } from 'antd';
 
 import {StoreContext} from "./../../model/Store";
-import {types} from "mobx-state-tree";
 
 const Quest = ({questInfo, currentQuestNum, transState}) => {
     const store = useContext(StoreContext)
@@ -28,19 +27,19 @@ const Quest = ({questInfo, currentQuestNum, transState}) => {
 
     function rangeSliderMagnet(value) {
         switch (true) {
-            case value < 115:
+            case value < 120:
                 setAnswerPosition(100);
                 break;
-            case (185 < value && value < 215):
+            case (180 < value && value < 220):
                 setAnswerPosition(200);
                 break;
-            case (285 < value && value < 315):
+            case (280 < value && value < 320):
                 setAnswerPosition(300);
                 break;
-            case (385 < value && value < 415):
+            case (380 < value && value < 420):
                 setAnswerPosition(400);
                 break;
-            case (485 < value):
+            case (480 < value):
                 setAnswerPosition(500);
                 break;
             default:
@@ -51,25 +50,24 @@ const Quest = ({questInfo, currentQuestNum, transState}) => {
     function rangeSliderStrongMagnet(value) {
         switch (true) {
             case value <= 150:
-                setAnswerPosition(100);
+                return(100);
                 break;
-            case (151 < value && value < 250):
-                setAnswerPosition(200);
+            case (151 <= value && value <= 250):
+                return(200);
                 break;
-            case (251 < value && value < 350):
-                setAnswerPosition(300);
+            case (251 <= value && value <= 350):
+                return(300);
                 break;
-            case (351 < value && value < 450):
-                setAnswerPosition(400);
+            case (351 <= value && value < 450):
+                return(400);
                 break;
             case (450 <= value):
-                setAnswerPosition(500);
+                return(500);
                 break;
             default:
-                setAnswerPosition(value);
+                return(value);
         }
 
-        console.log("answerPosition in switch " + answerPosition);
     }
 
 
@@ -79,11 +77,13 @@ const Quest = ({questInfo, currentQuestNum, transState}) => {
 
     function onAfterChange(value) {
         console.log(questInfo.title);
-        // rangeSliderStrongMagnet(value);
+        let flatValue = rangeSliderStrongMagnet(value);
+        console.log("flatValue", flatValue)
         let answer = {
             title: questInfo.title,
-            value: value
-        }
+            value: flatValue
+        };
+        setAnswerPosition(flatValue);
         store.addAnswer(answer);
         console.log(store.answers.toJS())
     }
@@ -99,35 +99,35 @@ const Quest = ({questInfo, currentQuestNum, transState}) => {
 
                 {questInfo.answers && (
                     <div className={styles.QuestAnswers}>
-                        {answerPosition <= 151 && (
+                        {answerPosition <= 150 && (
                             <>
                                 <div className={styles.QuestAnswerLevel}>Слабое</div>
                                 <div className={styles.QuestAnswerDescr}>{questInfo.answers[0]}</div>
                             </>
                         )}
 
-                        {answerPosition < 250 && answerPosition > 151 && (
+                        {  151 <= answerPosition && answerPosition <= 250 && (
                             <>
                                 <div className={styles.QuestAnswerLevel}>Ниже среднего</div>
                                 <div className={styles.QuestAnswerDescr}>{questInfo.answers[1]}</div>
                             </>
                         )}
 
-                        {answerPosition < 350 && answerPosition > 251 && (
+                        { 251 <= answerPosition && answerPosition <= 350 && (
                             <>
                                 <div className={styles.QuestAnswerLevel}>Среднее</div>
                                 <div className={styles.QuestAnswerDescr}>{questInfo.answers[2]}</div>
                             </>
                         )}
 
-                        {answerPosition < 450 && answerPosition > 351 && (
+                        { 351 <= answerPosition && answerPosition < 450 && (
                             <>
                                 <div className={styles.QuestAnswerLevel}>Выше среднего</div>
                                 <div className={styles.QuestAnswerDescr}>{questInfo.answers[3]}</div>
                             </>
                         )}
 
-                        {answerPosition >= 451 && (
+                        { 450 <= answerPosition && (
                             <>
                                 <div className={styles.QuestAnswerLevel}>Сильное</div>
                                 <div className={styles.QuestAnswerDescr}>{questInfo.answers[4]}</div>
