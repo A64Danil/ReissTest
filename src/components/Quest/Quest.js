@@ -13,14 +13,17 @@ const Quest = ({questInfo, currentQuestNum, transState}) => {
     const store = useContext(StoreContext)
     let currentAnswerPosition = store.answers.get(questInfo.title) || 300;
     const [answerPosition, setAnswerPosition] = useState(300);
-
+    const [answerValueForInputBg, setAnswerValueForInputBg] = useState(300);
+    // const [isSliderClicked, setIsSliderClicked] = useState(false);
+    let classForRangeSlider =
 
     useEffect(()=> {
         console.log("Изменился вопрос, теперь это №"+currentQuestNum)
+        // console.log(isSliderClicked)
+
         // console.log(questInfo);
         // console.log(store)
         // console.log(store.answers.toJS())
-        // console.log(store.answers.get(questInfo.title))
         setAnswerPosition(currentAnswerPosition);
 
     }, [questInfo])
@@ -73,6 +76,8 @@ const Quest = ({questInfo, currentQuestNum, transState}) => {
 
     function onChange(value) {
         rangeSliderMagnet(value);
+        let flatValue = rangeSliderStrongMagnet(value);
+        setAnswerValueForInputBg(flatValue)
     }
 
     function onAfterChange(value) {
@@ -133,7 +138,7 @@ const Quest = ({questInfo, currentQuestNum, transState}) => {
                     </div>
                 )}
 
-                <div className={styles.QuestRangeSliderWrp}>
+                <div className={`${styles.QuestRangeSliderWrp}  ${styles["QuestRangeSliderWrp--" + answerValueForInputBg]}`} >
                     <Slider
                         min={100}
                         max={500}
