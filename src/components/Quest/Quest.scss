@@ -74,6 +74,8 @@
 
   .ant-slider-rail {
     height: 15px;
+    margin: 0 -25px;
+    width: calc(100% + 50px);
     background: linear-gradient(
                     90deg,
                     #eee 0,
@@ -100,6 +102,10 @@
   .ant-slider-track {
     height: 15px;
     background-color: #7DD29D;
+    //margin: 0px -25px;
+    box-sizing: unset;
+    padding: 0px 25px;
+    transform: translate(-25px, 0px);
     //background: linear-gradient(
     //                90deg,
     //                #7DD29D 0,
@@ -123,7 +129,13 @@
     //);
   }
 
-  .ant-slider:hover .ant-slider-track {
-    background-color: #7DD29D;
+  .ant-slider {
+    margin: 0 25px;
+
+    &:hover {
+      .ant-slider-track {
+        background-color: #7DD29D;
+      }
+    }
   }
 }
