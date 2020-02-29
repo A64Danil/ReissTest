@@ -4,6 +4,43 @@ body {
 }
 
 
+$baseMargBottom: 32px;
+
+.startScreen {
+    padding: 20px;
+    h1 {
+        color: #474747;
+        font-size: 18px;
+        margin-bottom: $baseMargBottom;
+    }
+    h2 {
+        color: #6590FF;
+        font-size: 38px;
+        line-height: 40px;
+        font-weight: 800;
+        margin-bottom: $baseMargBottom;
+    }
+    p {
+        color: #000000;
+        font-size: 15px;
+        margin-bottom: $baseMargBottom;
+    }
+    .startTestBtn {
+        border-radius: 29px;
+        background-color: #6590FF;
+        color: #fff;
+        padding: 18px 60px 19px 30px;
+        display: inline-block;
+        font-size: 16px;
+        text-transform: uppercase;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3);
+        span {
+            line-height: 16px;
+            font-size: 24px;
+        }
+    }
+}
+
 :global {
     .outerWrp {
         max-width: 500px;
