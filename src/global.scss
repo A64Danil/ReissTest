@@ -1,3 +1,27 @@
+@mixin resultBarBg($st1, $st2, $st3, $st4, $st5) {
+    background: linear-gradient(
+                    90deg,
+                    $st1 0,
+                    $st1 18%,
+                    #fff 0,
+                    #fff 20.5%,
+                    $st2 0,
+                    $st2 38.5%,
+                    #fff 0,
+                    #fff 41%,
+                    $st3 0,
+                    $st3 59%,
+                    #fff 0,
+                    #fff 61.5%,
+                    $st4 0,
+                    $st4 79.5%,
+                    #fff 0,
+                    #fff 82%,
+                    $st5 0,
+                    $st5
+    );
+}
+
 body {
     margin: 0;
     font-family: 'Montserrat';
@@ -41,6 +65,55 @@ $baseMargBottom: 32px;
     }
 }
 
+.resultPage {
+    padding: 15px 20px;
+    
+    h1 {
+        text-transform: uppercase;
+        color: #474747;
+        font-size: 29px;
+        line-height: 32px;
+        font-weight: 800;
+    }
+
+    .resultList {
+        padding: 0;
+        li {
+            list-style: none;
+            padding-bottom: 30px;
+        }
+
+
+        .resultTitle {
+            color: #474747;
+            font-size: 17px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .resultBar {
+            width: 100%;
+            height: 15px;
+            &.resultBar--100 {
+                @include resultBarBg(#7DD7FF, #fff, #fff, #fff, #fff);
+            }
+            &.resultBar--200 {
+                @include resultBarBg(#7DD7FF, #7DB3FD, #fff, #fff, #fff);
+            }
+            &.resultBar--300 {
+                @include resultBarBg(#7DD7FF, #7DB3FD, #7C8EFA, #fff, #fff);
+            }
+            &.resultBar--400 {
+                @include resultBarBg(#7DD7FF, #7DB3FD, #7C8EFA, #7D6FF9, #fff);
+            }
+            &.resultBar--500 {
+                @include resultBarBg(#7DD7FF, #7DB3FD, #7C8EFA, #7D6FF9, #7D45F7);
+            }
+        }
+    }
+
+}
+
 :global {
     .outerWrp {
         max-width: 500px;
@@ -50,7 +123,7 @@ $baseMargBottom: 32px;
         //padding: 20px;
         box-sizing: border-box;
         overflow: hidden;
-        height: 100vh;
+        //height: 100vh; // ломает прокрутку в конце
     }
 }
 

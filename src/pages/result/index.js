@@ -1,5 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react'
 
+import styles from "../../global.scss";
+
 import {StoreContext} from "../../model/Store.js";
 
 const Result = ({}) => {
@@ -17,10 +19,25 @@ const Result = ({}) => {
 
         let newObj = {
             title: key,
-            value: valToText
+            valueNum: val,
+            valuetext: valToText
         }
         newArr.push(newObj)
     })
+
+    newArr.sort(resultCompare)
+
+    function resultCompare(a, b) {
+
+        if (a.valueNum < b.valueNum) {
+            return 1;
+        }
+        if (a.valueNum > b.valueNum) {
+            return -1;
+        }
+        // a должно быть равным b
+        return 0;
+    }
     console.log(newArr)
 
     useEffect(()=> {
@@ -31,19 +48,23 @@ const Result = ({}) => {
     }, [])
 
     return (
-        <>
-            <h1>Результат вашего теста</h1>
+        <div className={styles.resultPage}>
+            <h1>Ваши результаты:</h1>
 
             {newArr.length < 16 && (
                 <h3>Что-то пошло не так. Вы ответили не на все вопросы.</h3>
             )}
 
-            <ul>
+            <ul className={styles.resultList}>
             { newArr.map( (obj) => (
-                <li key={obj.title}>{obj.title} - {obj.value}</li>
+                <li key={obj.title}>
+                    <p className={styles.resultTitle}>{obj.title}</p>
+                    <div className={`${styles.resultBar}  ${styles["resultBar--" + obj.valueNum]}`} >{obj.valuetext}</div>
+
+                </li>
             ))}
             </ul>
-        </>
+        </div>
     )
 }
 
