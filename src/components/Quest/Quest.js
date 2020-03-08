@@ -15,15 +15,18 @@ const Quest = ({questInfo, currentQuestNum, transState}) => {
     const [answerPosition, setAnswerPosition] = useState(300);
     const [answerValueForInputBg, setAnswerValueForInputBg] = useState(300);
     // const [isSliderClicked, setIsSliderClicked] = useState(false);
-    let classForRangeSlider =
+    // let classForRangeSlider =
 
     useEffect(()=> {
         console.log("Изменился вопрос, теперь это №"+currentQuestNum)
         // console.log(isSliderClicked)
 
+        console.log("value for input bg " + answerValueForInputBg)
+        console.log("answerPosition " + answerPosition)
         // console.log(questInfo);
         // console.log(store)
         // console.log(store.answers.toJS())
+        setAnswerValueForInputBg(currentAnswerPosition);
         setAnswerPosition(currentAnswerPosition);
 
     }, [questInfo])
