@@ -16,6 +16,7 @@ const questsTotal = json.length;
 const Slider = () => {
     const [currentQuestNum, setCurrentQuestNum] = useState(1)
     const [questInfo, setQuestInfo] =  useState()
+    const [parsedResults, setParsedResults] =  useState()
 
     const [inMove, setInMove] = useState(true);
 
@@ -137,7 +138,7 @@ const Slider = () => {
                 </button>
 
                 {store.currentQuestNumber === questsTotal && (
-                    <Link to='/result'  className={`${styles.SliderBtn}  ${styles.SliderBtnNxt}`}>
+                    <Link to='/result?res=lu1d2s5ch2df34nbd3f435fd4'  className={`${styles.SliderBtn}  ${styles.SliderBtnNxt}`}>
                         Результат &#62;
                     </Link>
                 )}
