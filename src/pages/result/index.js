@@ -4,6 +4,8 @@ import styles from "../../global.scss";
 
 import {StoreContext} from "../../model/Store.js";
 
+import {Redirect} from "react-router"
+
 const Result = ({props}) => {
     const store = useContext(StoreContext)
     const questResults = store.answers.toJS();
@@ -147,24 +149,28 @@ const Result = ({props}) => {
     }, [])
 
     return (
-        <div className={styles.resultPage}>
-            <h1>Ваши результаты:</h1>
-
-            {newArr.length < 16 && (
-                <h3>Что-то пошло не так. Вы ответили не на все вопросы.</h3>
-            )}
-
-            <ul className={styles.resultList}>
-            { newArr.map( (obj) => (
-                <li key={obj.title}>
-                    <p className={styles.resultTitle}>{obj.title}</p>
-                    <div className={`${styles.resultBar}  ${styles["resultBar--" + obj.valueNum]}`} >{obj.valuetext}</div>
-
-                </li>
-            ))}
-            </ul>
-        </div>
+        <Redirect to={"/"}/>
     )
+    //
+    // return (
+    //     <div className={styles.resultPage}>
+    //         <h1>Ваши результаты:</h1>
+    //
+    //         {newArr.length < 16 && (
+    //             <h3>Что-то пошло не так. Вы ответили не на все вопросы.</h3>
+    //         )}
+    //
+    //         <ul className={styles.resultList}>
+    //         { newArr.map( (obj) => (
+    //             <li key={obj.title}>
+    //                 <p className={styles.resultTitle}>{obj.title}</p>
+    //                 <div className={`${styles.resultBar}  ${styles["resultBar--" + obj.valueNum]}`} >{obj.valuetext}</div>
+    //
+    //             </li>
+    //         ))}
+    //         </ul>
+    //     </div>
+    // )
 }
 
 export default Result;

@@ -113,6 +113,13 @@ const Slider = () => {
     }, [store.currentQuestNumber])
 
 
+    // в этом эффекте мы реагируем на изменение в сторе и изменяем url в соответствии с ответами
+    useEffect(()=> {
+        console.log("Поменялся store.answers ")
+        console.log(store.answers.toJS())
+
+    }, [store.answers])
+
     return (
         <div className={styles.Slider}>
             <Transition
@@ -142,6 +149,7 @@ const Slider = () => {
                         Результат &#62;
                     </Link>
                 )}
+                тут будет тестовый контент -
                 {store.currentQuestNumber !== questsTotal && (
                     <button
                         className={`${styles.SliderBtn}  ${styles.SliderBtnNxt}`}
