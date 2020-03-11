@@ -69,7 +69,7 @@ const Slider = () => {
             return
         }
 
-        if(direction === "next" && store.currentQuestNumber === questsTotal) {
+        if(direction === "next" && store.currentQuestNumber === (questsTotal + 1) ) {
             console.warn("Вы ответили на все вопросы!")
             return
         }
@@ -124,7 +124,7 @@ const Slider = () => {
                         ...defaultStyle,
                         ...transitionStyles[slideDirection][state]
                     }}>
-                        <Quest questInfo={questInfo} currentQuestNum={store.currentQuestNumber}/>
+                        <Quest questInfo={questInfo} currentQuestNum={store.currentQuestNumber} questsTotal={questsTotal}/>
                     </div>
                 )}
             </Transition>
@@ -137,10 +137,18 @@ const Slider = () => {
                     &#60;
                 </button>
 
+                {/*<Link to='/result?res=lu1d2s5ch2df34nbd3f435fd4'  className={`${styles.SliderBtn}  ${styles.SliderBtnNxt}`}>*/}
+                {/*    Результат &#62;*/}
+                {/*</Link>*/}
+
                 {store.currentQuestNumber === questsTotal && (
-                    <Link to='/result?res=lu1d2s5ch2df34nbd3f435fd4'  className={`${styles.SliderBtn}  ${styles.SliderBtnNxt}`}>
+
+                    <button
+                    className={`${styles.SliderBtn}  ${styles.SliderBtnNxt}`}
+                    onClick={e => handleSliderControl('next')}
+                    >
                         Результат &#62;
-                    </Link>
+                    </button>
                 )}
                 {store.currentQuestNumber !== questsTotal && (
                     <button

@@ -109,6 +109,7 @@ const Result = ({props}) => {
     function resultInlineParser(res) {
         console.log("resultInlineParser");
         console.log(res);
+        if (!res) return ;
         let newResultArr = res.split('');
         // console.log(newResultArr);
         let nameBuffer = "";
@@ -158,7 +159,7 @@ const Result = ({props}) => {
             { newArr.map( (obj) => (
                 <li key={obj.title}>
                     <p className={styles.resultTitle}>{obj.title}</p>
-                    <div className={`${styles.resultBar}  ${styles["resultBar--" + obj.valueNum]}`} >{obj.valuetext}</div>
+                    <div className={`${styles.resultBar}  ${styles["resultBar--" + obj.valueNum]}`} ></div>
 
                 </li>
             ))}

@@ -9,7 +9,9 @@ import { Slider } from 'antd';
 
 import {StoreContext} from "./../../model/Store";
 
-const Quest = ({questInfo, currentQuestNum, transState}) => {
+import {Link, Redirect} from 'react-router-dom'
+
+const Quest = ({questInfo, currentQuestNum, questsTotal}) => {
     const store = useContext(StoreContext)
     let currentAnswerPosition = store.answers.get(questInfo.title) || 300;
     const [answerPosition, setAnswerPosition] = useState(300);
@@ -91,6 +93,101 @@ const Quest = ({questInfo, currentQuestNum, transState}) => {
         };
         setAnswerPosition(flatValue);
         store.addAnswer(answer);
+    }
+
+
+    // Формируем финальный УРЛ если отетил на 16 вопрсов
+
+    if (currentQuestNum > questsTotal) {
+        console.log("------------------------ здесь собираем все ответы")
+        // const store2 = useContext(StoreContext)
+        // console.log(store2.answers.toJS())
+        let tempFinalRes = store.answers.toJS();
+        // console.log(tempFinalRes)
+        let newObjUrl = [];
+        tempFinalRes.forEach( (val, key) => {
+            // console.log(key, val)
+            // switch name
+            let shortName;
+            switch (key) {
+                case ("Одобрение"):
+                    shortName = "od";
+                    break;
+                case ("Любопытство"):
+                    shortName = "lu";
+                    break;
+                case ("Порядок"):
+                    shortName = "po";
+                    break;
+                case ("Власть"):
+                    shortName = "vl";
+                    break;
+                case ("Бережливость"):
+                    shortName = "be";
+                    break;
+                case ("Независимость"):
+                    shortName = "ne";
+                    break;
+                case ("Статус"):
+                    shortName = "st";
+                    break;
+                case ("Общение"):
+                    shortName = "ob";
+                    break;
+                case ("Романтические отношения"):
+                    shortName = "ro";
+                    break;
+                case ("Спокойствие"):
+                    shortName = "sp";
+                    break;
+                case ("Честь"):
+                    shortName = "ch";
+                    break;
+                case ("Идеализм"):
+                    shortName = "id";
+                    break;
+                case ("Месть"):
+                    shortName = "me";
+                    break;
+                case ("Еда"):
+                    shortName = "ed";
+                    break;
+                case ("Физическая активность"):
+                    shortName = "fi";
+                    break;
+                case ("Семья"):
+                    shortName = "se";
+                    break;
+
+            }
+            // console.log(shortName)
+            // "Одобрение": 300, // od
+            //     "Любопытство": 300, // lu
+            //     "Порядок": 300, // po
+            //     "Власть": 300, // vl
+            //     "Бережливость": 300, // be
+            //     "Независимость": 300, //ne
+            //     "Статус": 300, // st
+            //     "Общение": 300, // ob
+            //     "Романтические отношения": 300, //ro
+            //     "Спокойствие": 300, // sp
+            //     "Честь": 300, //ch
+            //     "Идеализм": 300, // id
+            //     "Месть": 300, // me
+            //     "Еда": 300, // ed
+            //     "Физическая активность": 300, // fi
+            //     "Семья": 300 // se
+
+             let obj = {};
+             obj[shortName] = val / 100;
+            newObjUrl.push(obj);
+
+        })
+
+        console.log(newObjUrl);
+        // console.log(questsTotal)
+        return <Redirect to="/result" />
+        // return <Redirect to="/result?res=lu1d2s5ch2df34nbd3f435fd4" />
     }
 
     return (
