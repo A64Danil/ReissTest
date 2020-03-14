@@ -8,22 +8,97 @@ const Result = ({props}) => {
     const store = useContext(StoreContext)
     const questResults = store.answers.toJS();
 
-    const newArr = [];
-    questResults.forEach( (val, key) =>  {
-        let valToText = val < 151 ? ("Слабое") :
-            (val < 251) ? ("Ниже среднего") :
-                (val < 351) ? ("Среднее") :
-                    (val < 451) ? ("Выше среднего") : ("Сильное");
+    let finalResultArr = [];
 
-        let newObj = {
-            title: key,
-            valueNum: val,
-            valuetext: valToText
+    (function () {
+        console.log("Вы на финальной странице IIFE")
+        let stringUrlPath = resultInlineParser(getAllUrlParams(window.location.search).res);
+        console.log(stringUrlPath);
+
+        if (stringUrlPath) {
+            console.log("Берем результат из ссылки")
+            let parsedResult = [];
+            for (const keyName in stringUrlPath) {
+                let shortName;
+                switch (keyName) {
+                    case ("od"):
+                        shortName = "Одобрение";
+                        break;
+                    case ("lu"):
+                        shortName = "Любопытство";
+                        break;
+                    case ("po"):
+                        shortName = "Порядок";
+                        break;
+                    case ("vl"):
+                        shortName = "Власть";
+                        break;
+                    case ("be"):
+                        shortName = "Бережливость";
+                        break;
+                    case ("ne"):
+                        shortName = "Независимость";
+                        break;
+                    case ("st"):
+                        shortName = "Статус";
+                        break;
+                    case ("ob"):
+                        shortName = "Общение";
+                        break;
+                    case ("ro"):
+                        shortName = "Романтические отношения";
+                        break;
+                    case ("sp"):
+                        shortName = "Спокойствие";
+                        break;
+                    case ("ch"):
+                        shortName = "Честь";
+                        break;
+                    case ("id"):
+                        shortName = "Идеализм";
+                        break;
+                    case ("me"):
+                        shortName = "Месть";
+                        break;
+                    case ("ed"):
+                        shortName = "Еда";
+                        break;
+                    case ("fi"):
+                        shortName = "Физическая активность";
+                        break;
+                    case ("se"):
+                        shortName = "Семья";
+                        break;
+
+                }
+                parsedResult.push({
+                    title: shortName,
+                    valueNum: stringUrlPath[keyName] * 100
+                })
+
+            }
+            finalResultArr = parsedResult;
+        } else {
+            console.log("Берем результат из стора")
+            questResults.forEach( (val, key) =>  {
+                // Оставить ту часть на всякий случай
+                // let valToText = val < 151 ? ("Слабое") :
+                //     (val < 251) ? ("Ниже среднего") :
+                //         (val < 351) ? ("Среднее") :
+                //             (val < 451) ? ("Выше среднего") : ("Сильное");
+
+                let newObj = {
+                    title: key,
+                    valueNum: val,
+                    // valuetext: valToText
+                }
+                finalResultArr.push(newObj)
+            })
         }
-        newArr.push(newObj)
-    })
+        console.log(finalResultArr)
+        finalResultArr.sort(resultCompare);
+    })();
 
-    newArr.sort(resultCompare)
 
     function isNumber(char) {
         return /\d/.test(char);
@@ -33,7 +108,6 @@ const Result = ({props}) => {
     }
 
     function getAllUrlParams(url) {
-
         // извлекаем строку из URL или объекта window
         var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
 
@@ -141,92 +215,18 @@ const Result = ({props}) => {
         return parsedResult;
 
     }
-    console.log(newArr)
-
-    useEffect(()=> {
-        console.log("Вы на финальной странице")
-        let stringUrlPath = resultInlineParser(getAllUrlParams(window.location.search).res);
-        // TODO: stringUrlPath to OBJ format
-        console.log(stringUrlPath);
-
-        // let tempFinalRes = store.answers.toJS();
-        let parsedResult = [];
-        for (const keyName in stringUrlPath) {
-            // switch name
-            let shortName;
-            switch (keyName) {
-                case ("od"):
-                    shortName = "Одобрение";
-                    break;
-                case ("lu"):
-                    shortName = "Любопытство";
-                    break;
-                case ("po"):
-                    shortName = "Порядок";
-                    break;
-                case ("vl"):
-                    shortName = "Власть";
-                    break;
-                case ("be"):
-                    shortName = "Бережливость";
-                    break;
-                case ("ne"):
-                    shortName = "Независимость";
-                    break;
-                case ("st"):
-                    shortName = "Статус";
-                    break;
-                case ("ob"):
-                    shortName = "Общение";
-                    break;
-                case ("ro"):
-                    shortName = "Романтические отношения";
-                    break;
-                case ("sp"):
-                    shortName = "Спокойствие";
-                    break;
-                case ("ch"):
-                    shortName = "Честь";
-                    break;
-                case ("id"):
-                    shortName = "Идеализм";
-                    break;
-                case ("me"):
-                    shortName = "Месть";
-                    break;
-                case ("ed"):
-                    shortName = "Еда";
-                    break;
-                case ("fi"):
-                    shortName = "Физическая активность";
-                    break;
-                case ("se"):
-                    shortName = "Семья";
-                    break;
-
-            }
-            // tempRes[shortName] = stringUrlPath[keyName] * 100;
-            // title: "Одобрение", valueNum: 300
-            parsedResult.push({
-                title: shortName,
-                valueNum: stringUrlPath[keyName] * 100
-            })
-
-        }
-
-
-    }, [])
+    console.log(finalResultArr)
 
     return (
         <div className={styles.resultPage}>
             <h1>Ваши результаты:</h1>
 
-            {newArr.length < 16 && (
+            {finalResultArr.length < 16 && (
                 <h3>Что-то пошло не так. Вы ответили не на все вопросы.</h3>
             )}
 
             <ul className={styles.resultList}>
-            { newArr.map( (obj) => (
+            { finalResultArr.map( (obj) => (
                 <li key={obj.title}>
                     <p className={styles.resultTitle}>{obj.title}</p>
                     <div className={`${styles.resultBar}  ${styles["resultBar--" + obj.valueNum]}`} ></div>
