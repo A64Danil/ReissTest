@@ -97,14 +97,10 @@ const Quest = ({questInfo, currentQuestNum, questsTotal}) => {
 
 
     // Формируем финальный УРЛ если отетил на 16 вопрсов
-
     if (currentQuestNum > questsTotal) {
         console.log("------------------------ здесь собираем все ответы")
-        // const store2 = useContext(StoreContext)
-        // console.log(store2.answers.toJS())
         let tempFinalRes = store.answers.toJS();
-        // console.log(tempFinalRes)
-        let newObjUrl = [];
+        let newObjUrl = {};
         tempFinalRes.forEach( (val, key) => {
             // console.log(key, val)
             // switch name
@@ -160,34 +156,20 @@ const Quest = ({questInfo, currentQuestNum, questsTotal}) => {
                     break;
 
             }
-            // console.log(shortName)
-            // "Одобрение": 300, // od
-            //     "Любопытство": 300, // lu
-            //     "Порядок": 300, // po
-            //     "Власть": 300, // vl
-            //     "Бережливость": 300, // be
-            //     "Независимость": 300, //ne
-            //     "Статус": 300, // st
-            //     "Общение": 300, // ob
-            //     "Романтические отношения": 300, //ro
-            //     "Спокойствие": 300, // sp
-            //     "Честь": 300, //ch
-            //     "Идеализм": 300, // id
-            //     "Месть": 300, // me
-            //     "Еда": 300, // ed
-            //     "Физическая активность": 300, // fi
-            //     "Семья": 300 // se
-
-             let obj = {};
-             obj[shortName] = val / 100;
-            newObjUrl.push(obj);
+            newObjUrl[shortName] = val / 100;
 
         })
 
         console.log(newObjUrl);
-        // console.log(questsTotal)
-        return <Redirect to="/result" />
-        // return <Redirect to="/result?res=lu1d2s5ch2df34nbd3f435fd4" />
+
+        let urlAnswersString = "";
+        for (name in newObjUrl) {
+            urlAnswersString += name + newObjUrl[name];
+        }
+        console.log(urlAnswersString);
+
+        let urlFullLink = "/result?res=" + urlAnswersString;
+        return <Redirect to={urlFullLink} />
     }
 
     return (

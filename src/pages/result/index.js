@@ -107,9 +107,10 @@ const Result = ({props}) => {
     }
 
     function resultInlineParser(res) {
+        if (!res) return ;
+
         console.log("resultInlineParser");
         console.log(res);
-        if (!res) return ;
         let newResultArr = res.split('');
         // console.log(newResultArr);
         let nameBuffer = "";
@@ -143,6 +144,7 @@ const Result = ({props}) => {
         console.log("Вы на финальной странице")
         // console.log(store.answers.toJS().get("Еда"))
         let parsedResult = resultInlineParser(getAllUrlParams(window.location.search).res);
+        // TODO: newObjUrl(url path) to JSON format
         console.log(parsedResult);
 
     }, [])
