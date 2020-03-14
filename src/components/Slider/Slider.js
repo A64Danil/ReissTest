@@ -42,6 +42,7 @@ const Slider = () => {
     const defaultStyle = {
         // height: `100%`,
         height: `85%`,
+        maxHeight: `480px`,
         // flexGrow: `1`,
         transition: `all 250ms ease-in-out`,
         transform: `translate(0%, 0)`
