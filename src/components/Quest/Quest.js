@@ -163,7 +163,7 @@ const Quest = ({questInfo, currentQuestNum, questsTotal}) => {
         console.log(newObjUrl);
 
         let urlAnswersString = "";
-        for (name in newObjUrl) {
+        for (const name in newObjUrl) {
             urlAnswersString += name + newObjUrl[name];
         }
         console.log(urlAnswersString);

@@ -114,7 +114,8 @@ const Result = ({props}) => {
         let newResultArr = res.split('');
         // console.log(newResultArr);
         let nameBuffer = "";
-        let parsedResult = [];
+        // let parsedResult = [];
+        let parsedResult = {};
 
         newResultArr.forEach((char) => {
             let singleResultValue = {};
@@ -123,10 +124,12 @@ const Result = ({props}) => {
             // console.log("str " + isString(char))
 
             if (isNumber(char)) {
-                singleResultValue[nameBuffer] = char;
+                // singleResultValue[nameBuffer] = char;
                 // console.log(singleResultValue)
+                parsedResult[nameBuffer] = char;
                 nameBuffer = "";
-                parsedResult.push(singleResultValue)
+                // parsedResult.push(singleResultValue)
+
             } else if (isString(char)) {
                 nameBuffer += char;
                 // console.log(nameBuffer)
@@ -142,10 +145,75 @@ const Result = ({props}) => {
 
     useEffect(()=> {
         console.log("Вы на финальной странице")
-        // console.log(store.answers.toJS().get("Еда"))
-        let parsedResult = resultInlineParser(getAllUrlParams(window.location.search).res);
-        // TODO: newObjUrl(url path) to JSON format
-        console.log(parsedResult);
+        let stringUrlPath = resultInlineParser(getAllUrlParams(window.location.search).res);
+        // TODO: stringUrlPath to OBJ format
+        console.log(stringUrlPath);
+
+        // let tempFinalRes = store.answers.toJS();
+        let parsedResult = [];
+        for (const keyName in stringUrlPath) {
+            // switch name
+            let shortName;
+            switch (keyName) {
+                case ("od"):
+                    shortName = "Одобрение";
+                    break;
+                case ("lu"):
+                    shortName = "Любопытство";
+                    break;
+                case ("po"):
+                    shortName = "Порядок";
+                    break;
+                case ("vl"):
+                    shortName = "Власть";
+                    break;
+                case ("be"):
+                    shortName = "Бережливость";
+                    break;
+                case ("ne"):
+                    shortName = "Независимость";
+                    break;
+                case ("st"):
+                    shortName = "Статус";
+                    break;
+                case ("ob"):
+                    shortName = "Общение";
+                    break;
+                case ("ro"):
+                    shortName = "Романтические отношения";
+                    break;
+                case ("sp"):
+                    shortName = "Спокойствие";
+                    break;
+                case ("ch"):
+                    shortName = "Честь";
+                    break;
+                case ("id"):
+                    shortName = "Идеализм";
+                    break;
+                case ("me"):
+                    shortName = "Месть";
+                    break;
+                case ("ed"):
+                    shortName = "Еда";
+                    break;
+                case ("fi"):
+                    shortName = "Физическая активность";
+                    break;
+                case ("se"):
+                    shortName = "Семья";
+                    break;
+
+            }
+            // tempRes[shortName] = stringUrlPath[keyName] * 100;
+            // title: "Одобрение", valueNum: 300
+            parsedResult.push({
+                title: shortName,
+                valueNum: stringUrlPath[keyName] * 100
+            })
+
+        }
+
 
     }, [])
 
