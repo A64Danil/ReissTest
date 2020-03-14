@@ -28,8 +28,8 @@ const QuestStore = types
 
 const StoreProvider = ({ children }) => {
     const store = QuestStore.create({
-        // currentQuestNumber: 1,
-        currentQuestNumber: 14,
+        currentQuestNumber: 1,
+        // currentQuestNumber: 14, // тестовый вариант
         answers: {
             "Одобрение": 300, // od
             "Любопытство": 300, // lu

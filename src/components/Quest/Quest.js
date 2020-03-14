@@ -175,14 +175,14 @@ const Quest = ({questInfo, currentQuestNum, questsTotal}) => {
     return (
         <>
             <div className={styles.Quest}>
-                <div className={styles.QuestText}>
+                <div className={styles.QuestText} style={{display: "none1"}}>
                     <p className={styles.QuestNumber}>{currentQuestNum}/16 желание</p>
                     <h3  className={styles.QuestTitle}>{questInfo.title}</h3>
                     <p className={styles.QuestDescription}>{questInfo.description}</p>
                 </div>
 
                 {questInfo.answers && (
-                    <div className={styles.QuestAnswers}>
+                    <div className={styles.QuestAnswers} style={{display: "none1"}}>
                         {answerPosition <= 150 && (
                             <>
                                 <div className={styles.QuestAnswerLevel}>Слабое</div>
