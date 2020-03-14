@@ -35,19 +35,19 @@ const Quest = ({questInfo, currentQuestNum, questsTotal}) => {
 
     function rangeSliderMagnet(value) {
         switch (true) {
-            case value < 120:
+            case value < 105:
                 setAnswerPosition(100);
                 break;
-            case (180 < value && value < 220):
+            case (195 < value && value < 205):
                 setAnswerPosition(200);
                 break;
-            case (280 < value && value < 320):
+            case (295 < value && value < 305):
                 setAnswerPosition(300);
                 break;
-            case (380 < value && value < 420):
+            case (395 < value && value < 405):
                 setAnswerPosition(400);
                 break;
-            case (480 < value):
+            case (495 < value):
                 setAnswerPosition(500);
                 break;
             default:
@@ -142,8 +142,8 @@ const Quest = ({questInfo, currentQuestNum, questsTotal}) => {
                 case ("Идеализм"):
                     shortName = "id";
                     break;
-                case ("Месть"):
-                    shortName = "me";
+                case ("Соревновательность"):
+                    shortName = "so";
                     break;
                 case ("Еда"):
                     shortName = "ed";

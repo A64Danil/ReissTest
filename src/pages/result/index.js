@@ -9,6 +9,7 @@ const Result = ({props}) => {
     const questResults = store.answers.toJS();
 
     let finalResultArr = [];
+    let urlLink = "";
 
     (function () {
         console.log("Вы на финальной странице IIFE")
@@ -57,8 +58,8 @@ const Result = ({props}) => {
                     case ("id"):
                         shortName = "Идеализм";
                         break;
-                    case ("me"):
-                        shortName = "Месть";
+                    case ("so"):
+                        shortName = "Соревновательность";
                         break;
                     case ("ed"):
                         shortName = "Еда";
@@ -185,6 +186,8 @@ const Result = ({props}) => {
 
         console.log("resultInlineParser");
         console.log(res);
+        urlLink = res;
+
         let newResultArr = res.split('');
         // console.log(newResultArr);
         let nameBuffer = "";
@@ -216,6 +219,8 @@ const Result = ({props}) => {
 
     }
     console.log(finalResultArr)
+    console.log(urlLink)
+
 
     return (
         <div className={styles.resultPage}>
@@ -228,12 +233,14 @@ const Result = ({props}) => {
             <ul className={styles.resultList}>
             { finalResultArr.map( (obj) => (
                 <li key={obj.title}>
-                    <p className={styles.resultTitle}>{obj.title}</p>
-                    <div className={`${styles.resultBar}  ${styles["resultBar--" + obj.valueNum]}`} ></div>
-
+                    <p key={obj.title + "_descr"} className={styles.resultTitle}>{obj.title}</p>
+                    <div key={obj.title + "_val"}  className={`${styles.resultBar}  ${styles["resultBar--" + obj.valueNum]}`} ></div>
                 </li>
             ))}
             </ul>
+
+            <h3>Ваш код для сравнения <sub>(заработает в будущем)</sub></h3>
+            <p>{urlLink}</p>
         </div>
     )
 }
