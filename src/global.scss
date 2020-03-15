@@ -29,6 +29,11 @@ $second-color: #FFF128;
 $white-color: #FFF;
 
 
+$inputRange-c1: #77AFA7;
+$inputRange-c2: #94BD8B;
+$inputRange-c3: #BCD063;
+$inputRange-c4: #E0DF34;
+$inputRange-c5: #F7E91B;
 
 .startScreen {
 
@@ -99,19 +104,19 @@ $white-color: #FFF;
             width: 100%;
             height: 15px;
             &.resultBar--100 {
-                @include resultBarBg(#7DD7FF, #fff, #fff, #fff, #fff);
+                @include resultBarBg($inputRange-c1,#eee,#eee,#eee,#eee);
             }
             &.resultBar--200 {
-                @include resultBarBg(#7DD7FF, #7DB3FD, #fff, #fff, #fff);
+                @include resultBarBg($inputRange-c1, $inputRange-c2,#eee,#eee,#eee);
             }
             &.resultBar--300 {
-                @include resultBarBg(#7DD7FF, #7DB3FD, #7C8EFA, #fff, #fff);
+                @include resultBarBg($inputRange-c1, $inputRange-c2, $inputRange-c3,#eee,#eee);
             }
             &.resultBar--400 {
-                @include resultBarBg(#7DD7FF, #7DB3FD, #7C8EFA, #7D6FF9, #fff);
+                @include resultBarBg($inputRange-c1, $inputRange-c2, $inputRange-c3, $inputRange-c4, #eee);
             }
             &.resultBar--500 {
-                @include resultBarBg(#7DD7FF, #7DB3FD, #7C8EFA, #7D6FF9, #7D45F7);
+                @include resultBarBg($inputRange-c1, $inputRange-c2, $inputRange-c3, $inputRange-c4, $inputRange-c5);
             }
         }
     }

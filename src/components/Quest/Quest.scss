@@ -1,4 +1,4 @@
-@mixin inputRangeBg($st1, $st2, $st3, $st4) {
+@mixin inputRangeBg($st1, $st2, $st3, $st4, $st5) {
   background: linear-gradient(
                   90deg,
                   $st1 0,
@@ -17,10 +17,17 @@
                   $st4 79.5%,
                   #fff 0,
                   #fff 82%,
-                  #eee 0,
-                  #eee
+                  $st5 0,
+                  $st5
   );
 }
+$inputRange-c1: #77AFA7;
+$inputRange-c2: #94BD8B;
+$inputRange-c3: #BCD063;
+$inputRange-c4: #E0DF34;
+$inputRange-c5: #F7E91B;
+
+
 
 .QuestWrp {
 
@@ -85,35 +92,35 @@
     &.QuestRangeSliderWrp--100 {
       :global {
         .ant-slider-rail {
-          @include inputRangeBg(#A0E2B1, #eee, #eee, #eee);
+          @include inputRangeBg($inputRange-c1, #eee, #eee, #eee, #eee);
         }
       }
     }
     &.QuestRangeSliderWrp--200 {
       :global {
         .ant-slider-rail {
-          @include inputRangeBg(#A0E2B1, #eee, #eee, #eee);
+          @include inputRangeBg($inputRange-c1, $inputRange-c2, #eee, #eee, #eee);
         }
       }
     }
     &.QuestRangeSliderWrp--300 {
       :global {
         .ant-slider-rail {
-          @include inputRangeBg(#A0E2B1, #7DD29D, #eee, #eee);
+          @include inputRangeBg($inputRange-c1, $inputRange-c2, $inputRange-c3, #eee, #eee);
         }
       }
     }
     &.QuestRangeSliderWrp--400 {
       :global {
         .ant-slider-rail {
-          @include inputRangeBg(#A0E2B1, #7DD29D, #59C188, #eee);
+          @include inputRangeBg($inputRange-c1, $inputRange-c2, $inputRange-c3, $inputRange-c4, #eee);
         }
       }
     }
     &.QuestRangeSliderWrp--500 {
       :global {
         .ant-slider-rail {
-          @include inputRangeBg(#A0E2B1, #7DD29D, #59C188, #36B073);
+          @include inputRangeBg($inputRange-c1, $inputRange-c2, $inputRange-c3, $inputRange-c4, $inputRange-c5);
         }
       }
 
