@@ -22,7 +22,7 @@
     );
 }
 
-$baseMargBottom: 32px;
+$baseMargBottom: 30px;
 
 $base-color: #77AFA7;
 $second-color: #FFF128;
@@ -36,9 +36,9 @@ $inputRange-c4: #E0DF34;
 $inputRange-c5: #F7E91B;
 
 .startScreen {
-
+    min-height: 100vh;
     background-color: $base-color !important;
-    padding: 20px;
+    padding: 35px 20px 0;
     h1 {
         color: $white-color;
         font-size: 18px;
