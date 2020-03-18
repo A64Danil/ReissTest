@@ -40,9 +40,10 @@ const Slider = () => {
     const duration = 250;
 
     const defaultStyle = {
-        // height: `100%`,
-        height: `85%`,
-        maxHeight: `380px`,
+        height: `100%`,
+        // height: `85%`,
+        // maxHeight: `380px`,
+        maxHeight: `calc(100% - 80px)`,
         // flexGrow: `1`,
         transition: `all 250ms ease-in-out`,
         transform: `translate(0%, 0)`
@@ -118,52 +119,57 @@ const Slider = () => {
 
     return (
         <div className={styles.Slider}>
-            <Transition
-                in={inMove}
-                timeout={125}
-                appear={true}>
-                {state => (
-                    <div style={{
-                        ...defaultStyle,
-                        ...transitionStyles[slideDirection][state]
-                    }}>
-                        <Quest questInfo={questInfo} currentQuestNum={store.currentQuestNumber} questsTotal={questsTotal}/>
-                    </div>
-                )}
-            </Transition>
 
-            <div className={styles.SliderControl}>
-                <button
-                    className={styles.SliderBtn}
-                    onClick={e => handleSliderControl('prev')}
-                >
-                    &#60;
-                </button>
+            <div className={styles.Slider__Container}>
 
-                {/*<Link to='/result?res=lu1d2s5ch2df34nbd3f435fd4'  className={`${styles.SliderBtn}  ${styles.SliderBtnNxt}`}>*/}
-                {/*    Результат &#62;*/}
-                {/*</Link>*/}
+                <Transition
+                    in={inMove}
+                    timeout={125}
+                    appear={true}>
+                    {state => (
+                        <div style={{
+                            ...defaultStyle,
+                            ...transitionStyles[slideDirection][state]
+                        }}>
+                            <Quest questInfo={questInfo} currentQuestNum={store.currentQuestNumber} questsTotal={questsTotal}/>
+                        </div>
+                    )}
+                </Transition>
 
-                {store.currentQuestNumber === questsTotal && (
-
+                <div className={styles.SliderControl}>
                     <button
-                    className={`${styles.SliderBtn}  ${styles.SliderBtnNxt}`}
-                    onClick={e => handleSliderControl('next')}
+                        className={styles.SliderBtn}
+                        onClick={e => handleSliderControl('prev')}
                     >
-                        Результат &#62;
+                        &#60;
                     </button>
-                )}
-                {store.currentQuestNumber !== questsTotal && (
-                    <button
+
+                    {/*<Link to='/result?res=lu1d2s5ch2df34nbd3f435fd4'  className={`${styles.SliderBtn}  ${styles.SliderBtnNxt}`}>*/}
+                    {/*    Результат &#62;*/}
+                    {/*</Link>*/}
+
+                    {store.currentQuestNumber === questsTotal && (
+
+                        <button
                         className={`${styles.SliderBtn}  ${styles.SliderBtnNxt}`}
                         onClick={e => handleSliderControl('next')}
-                    >
-                        Далее &#62;
-                    </button>
-                )}
+                        >
+                            Результат &#62;
+                        </button>
+                    )}
+                    {store.currentQuestNumber !== questsTotal && (
+                        <button
+                            className={`${styles.SliderBtn}  ${styles.SliderBtnNxt}`}
+                            onClick={e => handleSliderControl('next')}
+                        >
+                            Далее &#62;
+                        </button>
+                    )}
 
 
 
+
+                </div>
 
             </div>
         </div>

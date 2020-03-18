@@ -62,71 +62,82 @@ $inputRange-c5: #F7E91B;
     }
   }
 
-  .QuestAnswers {
-    padding: 20px;
-    min-height: 120px;
-    max-height: 130px;
-    text-align: center;
-    //margin-bottom: 40px;
-    .QuestAnswerLevel {
-      color: #59C188;
-      font-size: 23px;
-      font-weight: bold;
-      line-height: 28px;
-      margin-bottom: 10px;
-      text-transform: uppercase;
-    }
-    .QuestAnswerDescr {
-      font-size: 15px;
-      line-height: 21px;
-    }
-  }
+  .QuestAnswerWrp {
 
-  .QuestRangeSliderWrp {
-    padding: 40px 20px 20px;
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
+    margin-bottom: 20px;
 
-    &.QuestRangeSliderWrp--100 {
-      :global {
-        .ant-slider-rail {
-          @include inputRangeBg($inputRange-c1, #eee, #eee, #eee, #eee);
-        }
+    .QuestAnswers {
+      padding: 20px;
+      //min-height: 120px;
+      height: 130px;
+      text-align: center;
+      //margin-bottom: 40px;
+      .QuestAnswerLevel {
+        color: #59C188;
+        font-size: 23px;
+        font-weight: bold;
+        line-height: 28px;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+      }
+      .QuestAnswerDescr {
+        font-size: 15px;
+        line-height: 21px;
       }
     }
-    &.QuestRangeSliderWrp--200 {
-      :global {
-        .ant-slider-rail {
-          @include inputRangeBg($inputRange-c1, $inputRange-c2, #eee, #eee, #eee);
+
+    .QuestRangeSliderWrp {
+      padding: 40px 20px 20px;
+      //height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      &.QuestRangeSliderWrp--100 {
+        :global {
+          .ant-slider-rail {
+            @include inputRangeBg($inputRange-c1, #eee, #eee, #eee, #eee);
+          }
         }
       }
-    }
-    &.QuestRangeSliderWrp--300 {
-      :global {
-        .ant-slider-rail {
-          @include inputRangeBg($inputRange-c1, $inputRange-c2, $inputRange-c3, #eee, #eee);
+      &.QuestRangeSliderWrp--200 {
+        :global {
+          .ant-slider-rail {
+            @include inputRangeBg($inputRange-c1, $inputRange-c2, #eee, #eee, #eee);
+          }
         }
       }
-    }
-    &.QuestRangeSliderWrp--400 {
-      :global {
-        .ant-slider-rail {
-          @include inputRangeBg($inputRange-c1, $inputRange-c2, $inputRange-c3, $inputRange-c4, #eee);
+      &.QuestRangeSliderWrp--300 {
+        :global {
+          .ant-slider-rail {
+            @include inputRangeBg($inputRange-c1, $inputRange-c2, $inputRange-c3, #eee, #eee);
+          }
         }
       }
-    }
-    &.QuestRangeSliderWrp--500 {
-      :global {
-        .ant-slider-rail {
-          @include inputRangeBg($inputRange-c1, $inputRange-c2, $inputRange-c3, $inputRange-c4, $inputRange-c5);
+      &.QuestRangeSliderWrp--400 {
+        :global {
+          .ant-slider-rail {
+            @include inputRangeBg($inputRange-c1, $inputRange-c2, $inputRange-c3, $inputRange-c4, #eee);
+          }
         }
       }
+      &.QuestRangeSliderWrp--500 {
+        :global {
+          .ant-slider-rail {
+            @include inputRangeBg($inputRange-c1, $inputRange-c2, $inputRange-c3, $inputRange-c4, $inputRange-c5);
+          }
+        }
 
 
+      }
     }
   }
+
+
 }
 
 
