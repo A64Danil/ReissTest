@@ -11,17 +11,25 @@ import Arrow from "./../../assets/svg/arrow_normal";
 
 const Namepage = ({props}) => {
     const store = useContext(StoreContext)
-    const questResults = store.answers.toJS();
+    const [username, setUsername] = useState('')
 
-    let finalResultArr = [];
-    let urlLink = "";
+    useEffect(()=> {
+        // console.log('username изменился', username);
+        store.setUsername(username);
+    }, [username])
 
 
     return (
         <div className={styles.namePage}>
             <div className={styles.namePage__Container} >
                 <h1>Как вас зовут?</h1>
-                <input className={styles.namePageInput} type="text" value=""/>
+                <input
+                    className={styles.namePageInput}
+                    type="text"
+                    placeholder='Username'
+                    value={username}
+                    onChange={e => setUsername(e.target.value)}
+                />
                 <Link to='/quests'  className={styles.namePageBtn}>
                     Продолжить 
                     <span>
