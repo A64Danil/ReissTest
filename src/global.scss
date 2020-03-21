@@ -144,17 +144,28 @@ $inputRange-c5: #F7E91B;
             background-color: $base-color;
             color: #fff;
             font-weight: 500;
-            padding: 18px 50px 19px 50px;
+            padding: 18px 35px 19px 30px;
             display: inline-block;
             font-size: 16px;
             text-transform: uppercase;
             box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3);
             width: 100%;
             max-width: 230px;
+            text-align: center;
             span {
-                line-height: 16px;
-                font-size: 24px;
+                padding-left: 15px;
+                :global {
+                    #arrow_thin,#arrow_normal {
+                        width: 11px;
+                        heigh: 15px;
+                        path {
+                            fill: #fff;
+                        }
+                    }
+                }
             }
+
+
         }
     }
 }
