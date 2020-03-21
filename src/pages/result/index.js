@@ -224,7 +224,7 @@ const Result = ({props}) => {
 
     return (
         <div className={styles.resultPage}>
-            <h1>Ваши результаты:</h1>
+            <h1>{store.userName}, ваши результаты:</h1>
 
             {finalResultArr.length < 16 && (
                 <h3>Что-то пошло не так. Вы ответили не на все вопросы.</h3>

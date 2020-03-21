@@ -11,7 +11,8 @@ import Arrow from "./../../assets/svg/arrow_normal";
 
 const Namepage = ({props}) => {
     const store = useContext(StoreContext)
-    const [username, setUsername] = useState('')
+    let currentUserName = store.userName || '';
+    const [username, setUsername] = useState(currentUserName)
 
     useEffect(()=> {
         // console.log('username изменился', username);
