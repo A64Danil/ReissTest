@@ -13,13 +13,15 @@ const Namepage = ({props}) => {
 
 
     return (
-        <>
-            <h1>Как вас зовут?</h1>
-            <input type="text" value=""/>
-            <Link to='/quests'  className={styles.startTestBtn}>
-                Дальше
-            </Link>
-        </>
+        <div className={styles.namePage}>
+            <div className={styles.namePage__Container} >
+                <h1>Как вас зовут?</h1>
+                <input className={styles.namePageInput} type="text" value=""/>
+                <Link to='/quests'  className={styles.namePageBtn}>
+                    Продолжить
+                </Link>
+            </div>
+        </div>
     )
 }
 

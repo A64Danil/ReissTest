@@ -38,6 +38,12 @@ $breakpoints: (
     width: 100%;
 }
 
+@mixin button($width) {
+    max-width: $width;
+    margin: 0 auto;
+    width: 100%;
+}
+
 $baseMargBottom: 30px;
 
 $base-color: #77AFA7;
@@ -102,6 +108,56 @@ $inputRange-c5: #F7E91B;
 
 }
 
+.namePage {
+    background-color: #eeeeee;
+    .namePage__Container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 50px;
+
+        @media (min-width: 992px) {
+            padding: 100px 200px;
+            @include container(1140px);
+        }
+
+
+        h1 {
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 25px;
+        }
+
+        .namePageInput {
+            height: 47px;
+            border-radius: 29px;
+            border: none;
+            width: 100%;
+            max-width: 270px;
+            margin-bottom: 25px;
+        }
+
+        .namePageBtn {
+            border-radius: 29px;
+            background-color: $base-color;
+            color: #fff;
+            font-weight: 500;
+            padding: 18px 50px 19px 50px;
+            display: inline-block;
+            font-size: 16px;
+            text-transform: uppercase;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 230px;
+            span {
+                line-height: 16px;
+                font-size: 24px;
+            }
+        }
+    }
+}
 .resultPage {
     padding: 15px 20px;
 
