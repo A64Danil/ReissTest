@@ -4,9 +4,12 @@ import styles from "../../global.scss";
 
 import {StoreContext} from "../../model/Store.js";
 
+import {db} from "../../firebase";
+
 const Result = ({props}) => {
     const store = useContext(StoreContext)
     const questResults = store.answers.toJS();
+    let USER_NAME = store.userName;
 
     let finalResultArr = [];
     let urlLink = "";
@@ -79,7 +82,8 @@ const Result = ({props}) => {
 
             }
             finalResultArr = parsedResult;
-        } else {
+        }
+        else {
             console.log("Берем результат из стора")
             questResults.forEach( (val, key) =>  {
                 // Оставить ту часть на всякий случай
@@ -96,8 +100,28 @@ const Result = ({props}) => {
                 finalResultArr.push(newObj)
             })
         }
-        console.log(finalResultArr)
+        console.log(finalResultArr);
         finalResultArr.sort(resultCompare);
+
+        // Отправляем данные в БД
+        // Add a new document in collection "test"
+        console.log("Сейчас отправим в бд...")
+        let preparedAnswers = {};
+        finalResultArr.forEach( value => preparedAnswers[value.title] = value.valueNum );
+        console.log(preparedAnswers);
+        if(!!!USER_NAME) USER_NAME = "tester"
+        console.log("USER_NAME");
+        console.log(USER_NAME);
+        db.collection("test").add({
+            name: USER_NAME,
+            answers: preparedAnswers
+        })
+            .then(function() {
+                console.log("Document successfully written!");
+            })
+            .catch(function(error) {
+                console.error("Error writing document: ", error);
+            });
     })();
 
 
