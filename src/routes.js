@@ -11,7 +11,7 @@ export default (props) => {
     return (
         <Switch>
             <Route path='/' component={StartPage} exact />
-            <Route path='/name' component={Namepage} />
+            <Route path='/name' component={Namepage} history={props.history} />
             <Route path='/quests' component={Quests} history={props.history} />
             <Route path='/result' component={Result} />
             <Route path='/contacts' component={Contacts} />

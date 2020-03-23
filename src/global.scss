@@ -143,6 +143,7 @@ $inputRange-c5: #F7E91B;
 
         .namePageBtn {
             border-radius: 29px;
+            border: none;
             background-color: $base-color;
             color: #fff;
             font-weight: 500;
@@ -154,6 +155,18 @@ $inputRange-c5: #F7E91B;
             width: 100%;
             max-width: 230px;
             text-align: center;
+
+            position: relative;
+            top: 2px;
+
+            //transition: 0.5s all ease-in-out;
+            //position: relative;
+            //left: 0px;
+
+            &.namePageBtnAnimated {
+                animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+            }
+
             span {
                 padding-left: 15px;
                 :global {
@@ -169,6 +182,8 @@ $inputRange-c5: #F7E91B;
 
 
         }
+
+
     }
 }
 .resultPage {
@@ -240,6 +255,24 @@ $inputRange-c5: #F7E91B;
         //@include respond-to('md') {
         //
         //}
+    }
+}
+
+@keyframes shake {
+    10%, 90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+
+    20%, 80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%, 50%, 70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+
+    40%, 60% {
+        transform: translate3d(4px, 0, 0);
     }
 }
 

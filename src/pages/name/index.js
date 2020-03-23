@@ -9,7 +9,7 @@ import ArrowThin from "./../../assets/svg/arrow_thin";
 import Arrow from "./../../assets/svg/arrow_normal";
 
 
-const Namepage = ({props}) => {
+const Namepage = ({history}) => {
     const store = useContext(StoreContext)
     let currentUserName = store.userName || '';
     const [username, setUsername] = useState(currentUserName)
@@ -19,6 +19,20 @@ const Namepage = ({props}) => {
         store.setUsername(username);
     }, [username])
 
+
+    function onNextBtnClick(e) {
+        e.persist();
+
+        if (username) {
+            e.target.classList.remove(styles.namePageBtnAnimated)
+            history.push('/quests');
+        } else {
+            e.target.classList.add(styles.namePageBtnAnimated)
+            setTimeout( () => {
+                e.target.classList.remove(styles.namePageBtnAnimated)
+            }, 820);
+        }
+    }
 
     return (
         <div className={styles.namePage}>
@@ -31,12 +45,15 @@ const Namepage = ({props}) => {
                     value={username}
                     onChange={e => setUsername(e.target.value)}
                 />
-                <Link to='/quests'  className={styles.namePageBtn}>
+                <button
+                    className={`${styles.namePageBtn}`}
+                    onClick={e => onNextBtnClick(e)}
+                >
                     Продолжить 
                     <span>
                         <Arrow />
                     </span>
-                </Link>
+                </button>
             </div>
         </div>
     )

@@ -13,9 +13,9 @@ import {Link, Redirect} from 'react-router-dom'
 
 const Quest = ({questInfo, currentQuestNum, questsTotal}) => {
     const store = useContext(StoreContext)
-    let currentAnswerPosition = store.answers.get(questInfo.title) || 300;
-    const [answerPosition, setAnswerPosition] = useState(300);
-    const [answerValueForInputBg, setAnswerValueForInputBg] = useState(300);
+    let currentAnswerPosition = store.answers.get(questInfo.title) || 500;
+    const [answerPosition, setAnswerPosition] = useState(500);
+    const [answerValueForInputBg, setAnswerValueForInputBg] = useState(500);
     // const [isSliderClicked, setIsSliderClicked] = useState(false);
     // let classForRangeSlider =
 
