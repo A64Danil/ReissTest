@@ -156,9 +156,6 @@ $inputRange-c5: #F7E91B;
             max-width: 230px;
             text-align: center;
 
-            position: relative;
-            top: 2px;
-
             //transition: 0.5s all ease-in-out;
             //position: relative;
             //left: 0px;
@@ -169,6 +166,9 @@ $inputRange-c5: #F7E91B;
 
             span {
                 padding-left: 15px;
+                position: relative;
+                top: 2px;
+
                 :global {
                     #arrow_thin,#arrow_normal {
                         width: 11px;
