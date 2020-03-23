@@ -13,7 +13,7 @@ import {NavLink, Link} from "react-router-dom";
 
 const questsTotal = json.length;
 
-const Slider = () => {
+const Slider = ({history}) => {
     const [currentQuestNum, setCurrentQuestNum] = useState(1)
     const [questInfo, setQuestInfo] =  useState()
     const [parsedResults, setParsedResults] =  useState()
@@ -69,7 +69,8 @@ const Slider = () => {
         // console.log('handleSliderControl, inMove = '+ inMove)
 
         if(direction === "prev" && store.currentQuestNumber === 1) {
-            console.warn("Вопросов до первого не существует")
+            console.warn("Вопросов до первого не существует");
+            history.push('/name');
             return
         }
 

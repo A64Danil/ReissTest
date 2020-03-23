@@ -2,9 +2,9 @@ import React from 'react';
 
 import Slider from "./../../components/Slider/Slider";
 
-const Quests = ({location, match}) => {
+const Quests = ({history}) => {
     return (
-            <Slider />
+            <Slider history={history}/>
     )
 }
 

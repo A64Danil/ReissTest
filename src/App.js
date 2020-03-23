@@ -1,4 +1,6 @@
 import React, {useEffect} from "react";// import {BrowserRouter as Router} from 'react-router-dom'
+
+import { createBrowserHistory } from "history";
 import {BrowserRouter} from 'react-router-dom'
 
 import Menu from "./components/Menu/Menu";
@@ -9,12 +11,13 @@ import "./global.scss";
 
 
 const App = () => {
+    const testHistory = createBrowserHistory();
     return (
         <StoreProvider>
             <div className={"outerWrp"}>
-                <BrowserRouter>
+                <BrowserRouter >
                         <Menu/>
-                        <Routes/>
+                        <Routes history={testHistory}/>
                 </BrowserRouter>
             </div>
         </StoreProvider>
