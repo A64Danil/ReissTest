@@ -30,8 +30,6 @@ const Slider = ({history}) => {
     // const [store, setStore] = useContext(StoreContext);
     const store = useContext(StoreContext)
 
-
-
     let currentAnswerPosition;
     // 1. Страница рендерится со стейтом направления - next. Стейт меняет рисунок анимации
     // 2. Если inMove == true, рисуем анимацию входа. Иначе рисуем анимацию выхода
@@ -124,11 +122,13 @@ const Slider = ({history}) => {
 
     // STEP 3 - вносим новые данные в компонент Quest
     useEffect(()=> {
-        console.log("Поменялся store.currentQuestNumber на ", store.currentQuestNumber)
-        let quest = json[store.currentQuestNumber - 1]
-        setQuestInfo(quest);
-        setCurrentAnswerIsChosen(false);
-
+        if (store.currentQuestNumber <= questsTotal) {
+            console.log("Поменялся store.currentQuestNumber на ", store.currentQuestNumber)
+            let quest = json[store.currentQuestNumber - 1]
+            setQuestInfo(quest);
+            setCurrentAnswerIsChosen(store.isChosenAnswers.get(quest.title))
+            console.log("currentAnswerIsChosen", currentAnswerIsChosen);
+        }
     }, [store.currentQuestNumber])
 
 
@@ -203,6 +203,7 @@ const Slider = ({history}) => {
         };
         setAnswerPosition(flatValue);
         store.addAnswer(answer);
+        store.setIsChosenAnswer(questInfo.title, true);
         setCurrentAnswerIsChosen(true);
     }
 
