@@ -82,6 +82,11 @@ const Slider = ({history}) => {
             return
         }
 
+        if(direction === "next" && currentAnswerIsChoosen === false ) {
+            alert("Сначала выберите ответ")
+            return
+        }
+
         if(direction === "next" && store.currentQuestNumber === (questsTotal + 1) ) {
             console.warn("Вы ответили на все вопросы!")
             return
@@ -122,6 +127,7 @@ const Slider = ({history}) => {
         console.log("Поменялся store.currentQuestNumber на ", store.currentQuestNumber)
         let quest = json[store.currentQuestNumber - 1]
         setQuestInfo(quest);
+        setCurrentAnswerIsChoosen(false);
 
     }, [store.currentQuestNumber])
 
@@ -190,7 +196,6 @@ const Slider = ({history}) => {
     }
 
     function onAfterChange(value) {
-        console.log("Я из слайдера")
         let flatValue = rangeSliderStrongMagnet(value);
         let answer = {
             title: questInfo.title,
@@ -198,6 +203,7 @@ const Slider = ({history}) => {
         };
         setAnswerPosition(flatValue);
         store.addAnswer(answer);
+        setCurrentAnswerIsChoosen(true);
     }
 
     return (
