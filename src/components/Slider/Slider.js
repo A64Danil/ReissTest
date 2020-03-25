@@ -13,6 +13,7 @@ import {NavLink, Link} from "react-router-dom";
 
 const questsTotal = json.length;
 
+
 const Slider = ({history}) => {
 
     const [currentQuestNum, setCurrentQuestNum] = useState(1)

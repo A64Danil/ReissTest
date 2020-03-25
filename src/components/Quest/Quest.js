@@ -9,104 +9,21 @@ import { Slider } from 'antd';
 
 import {StoreContext} from "./../../model/Store";
 
-import {Link, Redirect} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
+
+import {db} from "../../firebase";
 
 const Quest = ({questInfo, currentQuestNum, questsTotal, onAfterChange, onChange, answerPosition, answerValueForInputBg}) => {
     const store = useContext(StoreContext)
-
-    //TODO: Удалить лишний код, перенесенный в Slider
-
-    // let currentAnswerPosition = store.answers.get(questInfo.title) || 500;
-    // const [answerPosition, setAnswerPosition] = useState(500);
-    // const [innerAnswerPosition, setInnerAnswerPosition] = useState(500);
-    // const [answerValueForInputBg, setAnswerValueForInputBg] = useState(500);
-    // const [isSliderClicked, setIsSliderClicked] = useState(false);
-    // let classForRangeSlider =
-
-    /*
-    useEffect(()=> {
-        console.log("Изменился вопрос, теперь это №"+currentQuestNum)
-        // console.log(isSliderClicked)
-
-        console.log("value for input bg " + answerValueForInputBg)
-        console.log("answerPosition " + answerPosition)
-        // console.log(questInfo);
-        // console.log(store)
-        console.log(store.answers.toJS())
-        // setAnswerValueForInputBg(currentAnswerPosition);
-        // setAnswerPosition(currentAnswerPosition);
-
-    }, [questInfo])
-
-
-
-    function rangeSliderMagnetOIG(value) {
-        switch (true) {
-            case value < 105:
-                setAnswerPosition(100);
-                break;
-            case (195 < value && value < 205):
-                setAnswerPosition(200);
-                break;
-            case (295 < value && value < 305):
-                setAnswerPosition(300);
-                break;
-            case (395 < value && value < 405):
-                setAnswerPosition(400);
-                break;
-            case (495 < value):
-                setAnswerPosition(500);
-                break;
-            default:
-                setAnswerPosition(value);
-        }
-    }
-
-    function rangeSliderStrongMagnetORIG(value) {
-        switch (true) {
-            case value <= 150:
-                return(100);
-                break;
-            case (151 <= value && value <= 250):
-                return(200);
-                break;
-            case (251 <= value && value <= 350):
-                return(300);
-                break;
-            case (351 <= value && value < 450):
-                return(400);
-                break;
-            case (450 <= value):
-                return(500);
-                break;
-            default:
-                return(value);
-        }
-
-    }
-
-
-    function onChangeORIG(value) {
-        rangeSliderMagnet(value);
-        let flatValue = rangeSliderStrongMagnet(value);
-        setAnswerValueForInputBg(flatValue)
-    }
-
-    function onAfterChangeORIG(value) {
-        let flatValue = rangeSliderStrongMagnet(value);
-        let answer = {
-            title: questInfo.title,
-            value: flatValue
-        };
-        setAnswerPosition(flatValue);
-        store.addAnswer(answer);
-    }
-     */
+    let USER_NAME = store.userName;
 
     // Формируем финальный УРЛ если отетил на 16 вопрсов
     if (currentQuestNum > questsTotal) {
         console.log("------------------------ здесь собираем все ответы")
         let tempFinalRes = store.answers.toJS();
+
+        console.log("tempFinalRes")
+        console.log(tempFinalRes)
         let newObjUrl = {};
         tempFinalRes.forEach( (val, key) => {
             // console.log(key, val)
@@ -176,6 +93,30 @@ const Quest = ({questInfo, currentQuestNum, questsTotal, onAfterChange, onChange
         console.log(urlAnswersString);
 
         let urlFullLink = "/result?res=" + urlAnswersString;
+
+
+        console.log("Сейчас отправим в бд...")
+        let preparedAnswers = {};
+        tempFinalRes.forEach( (value, keyName) => {
+            preparedAnswers[keyName] = value;
+        });
+        // console.log(preparedAnswers);
+        if(!!!USER_NAME) USER_NAME = "Без имени =("
+        // console.log("USER_NAME");
+        // console.log(USER_NAME);
+        db.collection("test").add({
+            name: USER_NAME,
+            answers: preparedAnswers
+        })
+            .then(function() {
+                console.log("Document successfully written!");
+            })
+            .catch(function(error) {
+                console.error("Error writing document: ", error);
+            });
+
+
+
         return <Redirect to={urlFullLink} />
     }
 
