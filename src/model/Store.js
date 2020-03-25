@@ -34,6 +34,11 @@ const StoreProvider = ({ children }) => {
         userName: "",
         currentQuestNumber: 1,
         // currentQuestNumber: 14, // тестовый вариант
+
+        // {
+        //     value: 500,
+        //     isChosen: false
+        // }
         answers: {
             "Одобрение": 500, // od
             "Любопытство": 500, // lu

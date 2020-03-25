@@ -18,7 +18,7 @@ const Slider = ({history}) => {
     const [currentQuestNum, setCurrentQuestNum] = useState(1)
     const [questInfo, setQuestInfo] =  useState()
     const [parsedResults, setParsedResults] =  useState()
-    const [currentAnswerIsChoosen, setCurrentAnswerIsChoosen] =  useState(false)
+    const [currentAnswerIsChosen, setCurrentAnswerIsChosen] =  useState(false)
 
     const [answerPosition, setAnswerPosition] = useState(500);
     const [answerValueForInputBg, setAnswerValueForInputBg] = useState(500);
@@ -82,7 +82,7 @@ const Slider = ({history}) => {
             return
         }
 
-        if(direction === "next" && currentAnswerIsChoosen === false ) {
+        if(direction === "next" && currentAnswerIsChosen === false ) {
             alert("Сначала выберите ответ")
             return
         }
@@ -127,7 +127,7 @@ const Slider = ({history}) => {
         console.log("Поменялся store.currentQuestNumber на ", store.currentQuestNumber)
         let quest = json[store.currentQuestNumber - 1]
         setQuestInfo(quest);
-        setCurrentAnswerIsChoosen(false);
+        setCurrentAnswerIsChosen(false);
 
     }, [store.currentQuestNumber])
 
@@ -203,13 +203,13 @@ const Slider = ({history}) => {
         };
         setAnswerPosition(flatValue);
         store.addAnswer(answer);
-        setCurrentAnswerIsChoosen(true);
+        setCurrentAnswerIsChosen(true);
     }
 
     return (
         <div className={styles.Slider}>
 
-            <div className={styles.Slider__Container}>
+            <div className={`${styles.Slider__Container}  ${styles["Slider__Container--IsChosen-" + currentAnswerIsChosen]}`}>
 
                 <Transition
                     in={inMove}
@@ -240,10 +240,6 @@ const Slider = ({history}) => {
                     >
                         &#60;
                     </button>
-
-                    {/*<Link to='/result?res=lu1d2s5ch2df34nbd3f435fd4'  className={`${styles.SliderBtn}  ${styles.SliderBtnNxt}`}>*/}
-                    {/*    Результат &#62;*/}
-                    {/*</Link>*/}
 
                     {store.currentQuestNumber === questsTotal && (
 

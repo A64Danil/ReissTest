@@ -19,6 +19,27 @@
             @include container(1140px);
         }
 
+        &.Slider__Container--IsChosen-true {
+            :global {
+                .ant-slider-handle {
+                    &:after {
+                        content: "\2714";
+                        font-weight: 400;
+                    }
+                }
+
+            }
+        }
+        &.Slider__Container--IsChosen-false {
+            :global {
+                .ant-slider-handle {
+                    &:after {
+                        content: "?";
+                    }
+                }
+
+            }
+        }
     }
 
 
