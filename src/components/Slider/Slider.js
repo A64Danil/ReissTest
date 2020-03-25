@@ -14,9 +14,14 @@ import {NavLink, Link} from "react-router-dom";
 const questsTotal = json.length;
 
 const Slider = ({history}) => {
+
     const [currentQuestNum, setCurrentQuestNum] = useState(1)
     const [questInfo, setQuestInfo] =  useState()
     const [parsedResults, setParsedResults] =  useState()
+    const [currentAnswerIsChoosen, setCurrentAnswerIsChoosen] =  useState(false)
+
+    const [answerPosition, setAnswerPosition] = useState(500);
+    const [answerValueForInputBg, setAnswerValueForInputBg] = useState(500);
 
     const [inMove, setInMove] = useState(true);
 
@@ -25,6 +30,9 @@ const Slider = ({history}) => {
     // const [store, setStore] = useContext(StoreContext);
     const store = useContext(StoreContext)
 
+
+
+    let currentAnswerPosition;
     // 1. Страница рендерится со стейтом направления - next. Стейт меняет рисунок анимации
     // 2. Если inMove == true, рисуем анимацию входа. Иначе рисуем анимацию выхода
     // 3. При изменени вопроса, мы должны "пролистнуть" дальше.
@@ -118,6 +126,80 @@ const Slider = ({history}) => {
     }, [store.currentQuestNumber])
 
 
+    // STEP 4 - передаём в inputRage нужное знаечние
+    useEffect(()=> {
+        // В этом месте пробрасываем в inputRange новое значение
+        if (!questInfo) return;
+        console.log("questInfo - step4")
+        currentAnswerPosition = store.answers.get(questInfo.title) || 500;
+        setAnswerPosition(currentAnswerPosition);
+        setAnswerValueForInputBg(currentAnswerPosition);
+    }, [questInfo])
+
+    // Для управления состоянием inpurRange в компоненте Quest
+
+    function rangeSliderMagnet(value) {
+        switch (true) {
+            case value < 105:
+                setAnswerPosition(100);
+                break;
+            case (195 < value && value < 205):
+                setAnswerPosition(200);
+                break;
+            case (295 < value && value < 305):
+                setAnswerPosition(300);
+                break;
+            case (395 < value && value < 405):
+                setAnswerPosition(400);
+                break;
+            case (495 < value):
+                setAnswerPosition(500);
+                break;
+            default:
+                setAnswerPosition(value);
+        }
+    }
+
+    function rangeSliderStrongMagnet(value) {
+        switch (true) {
+            case value <= 150:
+                return(100);
+                break;
+            case (151 <= value && value <= 250):
+                return(200);
+                break;
+            case (251 <= value && value <= 350):
+                return(300);
+                break;
+            case (351 <= value && value < 450):
+                return(400);
+                break;
+            case (450 <= value):
+                return(500);
+                break;
+            default:
+                return(value);
+        }
+
+    }
+
+    function onChange(value) {
+        rangeSliderMagnet(value);
+        let flatValue = rangeSliderStrongMagnet(value);
+        setAnswerValueForInputBg(flatValue)
+    }
+
+    function onAfterChange(value) {
+        console.log("Я из слайдера")
+        let flatValue = rangeSliderStrongMagnet(value);
+        let answer = {
+            title: questInfo.title,
+            value: flatValue
+        };
+        setAnswerPosition(flatValue);
+        store.addAnswer(answer);
+    }
+
     return (
         <div className={styles.Slider}>
 
@@ -132,7 +214,15 @@ const Slider = ({history}) => {
                             ...defaultStyle,
                             ...transitionStyles[slideDirection][state]
                         }}>
-                            <Quest questInfo={questInfo} currentQuestNum={store.currentQuestNumber} questsTotal={questsTotal}/>
+                            <Quest
+                                questInfo={questInfo}
+                                currentQuestNum={store.currentQuestNumber}
+                                questsTotal={questsTotal}
+                                onChange={onChange}
+                                onAfterChange={onAfterChange}
+                                answerPosition={answerPosition}
+                                answerValueForInputBg={answerValueForInputBg}
+                            />
                         </div>
                     )}
                 </Transition>

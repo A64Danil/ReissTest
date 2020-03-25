@@ -11,14 +11,19 @@ import {StoreContext} from "./../../model/Store";
 
 import {Link, Redirect} from 'react-router-dom'
 
-const Quest = ({questInfo, currentQuestNum, questsTotal}) => {
+const Quest = ({questInfo, currentQuestNum, questsTotal, onAfterChange, onChange, answerPosition, answerValueForInputBg}) => {
     const store = useContext(StoreContext)
-    let currentAnswerPosition = store.answers.get(questInfo.title) || 500;
-    const [answerPosition, setAnswerPosition] = useState(500);
-    const [answerValueForInputBg, setAnswerValueForInputBg] = useState(500);
+
+    //TODO: Удалить лишний код, перенесенный в Slider
+
+    // let currentAnswerPosition = store.answers.get(questInfo.title) || 500;
+    // const [answerPosition, setAnswerPosition] = useState(500);
+    // const [innerAnswerPosition, setInnerAnswerPosition] = useState(500);
+    // const [answerValueForInputBg, setAnswerValueForInputBg] = useState(500);
     // const [isSliderClicked, setIsSliderClicked] = useState(false);
     // let classForRangeSlider =
 
+    /*
     useEffect(()=> {
         console.log("Изменился вопрос, теперь это №"+currentQuestNum)
         // console.log(isSliderClicked)
@@ -27,13 +32,15 @@ const Quest = ({questInfo, currentQuestNum, questsTotal}) => {
         console.log("answerPosition " + answerPosition)
         // console.log(questInfo);
         // console.log(store)
-        // console.log(store.answers.toJS())
-        setAnswerValueForInputBg(currentAnswerPosition);
-        setAnswerPosition(currentAnswerPosition);
+        console.log(store.answers.toJS())
+        // setAnswerValueForInputBg(currentAnswerPosition);
+        // setAnswerPosition(currentAnswerPosition);
 
     }, [questInfo])
 
-    function rangeSliderMagnet(value) {
+
+
+    function rangeSliderMagnetOIG(value) {
         switch (true) {
             case value < 105:
                 setAnswerPosition(100);
@@ -55,7 +62,7 @@ const Quest = ({questInfo, currentQuestNum, questsTotal}) => {
         }
     }
 
-    function rangeSliderStrongMagnet(value) {
+    function rangeSliderStrongMagnetORIG(value) {
         switch (true) {
             case value <= 150:
                 return(100);
@@ -79,13 +86,13 @@ const Quest = ({questInfo, currentQuestNum, questsTotal}) => {
     }
 
 
-    function onChange(value) {
+    function onChangeORIG(value) {
         rangeSliderMagnet(value);
         let flatValue = rangeSliderStrongMagnet(value);
         setAnswerValueForInputBg(flatValue)
     }
 
-    function onAfterChange(value) {
+    function onAfterChangeORIG(value) {
         let flatValue = rangeSliderStrongMagnet(value);
         let answer = {
             title: questInfo.title,
@@ -94,7 +101,7 @@ const Quest = ({questInfo, currentQuestNum, questsTotal}) => {
         setAnswerPosition(flatValue);
         store.addAnswer(answer);
     }
-
+     */
 
     // Формируем финальный УРЛ если отетил на 16 вопрсов
     if (currentQuestNum > questsTotal) {
