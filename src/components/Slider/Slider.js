@@ -86,7 +86,7 @@ const Slider = ({history}) => {
         }
 
         if(direction === "next" && currentAnswerIsChosen === false ) {
-            alert("Сначала выберите ответ")
+            alert("Пожалуйста, посмотрите все ответы перед выбором")
             return
         }
 
