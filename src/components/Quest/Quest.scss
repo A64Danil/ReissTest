@@ -165,16 +165,16 @@ $inputRange-c5: #F7E91B;
     background-color: #59C188;
     position: relative;
     border: none;
-    
+
     &:focus {
       box-shadow: none;
       border: none;
     }
 
     &:after {
-      //content: "?";
-      //content: url('data:image/svg+xml;base64, PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyOSAyMiI+PGRlZnM+PHN0eWxlPi5he2ZpbGw6I2ZmZjt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPtCc0L7QvdGC0LDQttC90LDRjyDQvtCx0LvQsNGB0YLRjCAxPC90aXRsZT48cG9seWdvbiBjbGFzcz0iYSIgcG9pbnRzPSIxMC4xNiAyMS42OSAwLjA5IDkuNzUgMy45MSA2LjUyIDEwLjQ3IDE0LjMxIDI0LjUyIDAuMjMgMjguMDYgMy43NyAxMC4xNiAyMS42OSIvPjwvc3ZnPg==');
-      content: "\2714";
+      //content: "\2714";
+      background-image: url("../../assets/svg/check.svg");
+      content: " ";
       position: absolute;
       font-size: 33px;
       color: white;

@@ -24,8 +24,12 @@
             :global {
                 .ant-slider-handle {
                     &:after {
-                        content: "\2714";
-                        font-weight: 400;
+                        content: " ";
+                        background-image: url("../../assets/svg/check.svg");
+                        background-repeat: no-repeat;
+                        background-position: 1px 2px;
+                        width: 30px;
+                        height: 25px;
                     }
                 }
 
@@ -101,6 +105,8 @@
     }
 
 }
+
+
 
 
 /*  -= Default =- */
