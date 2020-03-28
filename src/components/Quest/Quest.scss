@@ -172,11 +172,12 @@ $inputRange-c5: #F7E91B;
     }
 
     &:after {
-      //content: "\2714";
+      content: "?";
       background-image: url("../../assets/svg/check.svg");
+      width: 0;
+      height: 0;
       background-repeat: no-repeat;
       background-position: 1px 2px;
-      content: " ";
       position: absolute;
       font-size: 33px;
       color: white;
