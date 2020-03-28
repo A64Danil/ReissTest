@@ -60,16 +60,42 @@
             border: none;
             color: #A0A0A0;
             font-size: 19px;
-            letter-spacing: 0.52px;
+            letter-spacing: 0.5px;
             padding: 12px;
-
+            text-transform: uppercase;
             cursor: pointer;
 
-
+                span {
+                    position: relative;
+                    :global {
+                        #arrow_thin, #arrow_normal {
+                            path {
+                                fill: #A0A0A0;
+                            }
+                        }
+                    }
+                }
+            &.SliderBtnPrev {
+                span {
+                    right: 1px;
+                    :global {
+                        #arrow_thin, #arrow_normal {
+                            transform: rotate(180deg);
+                        }
+                    }
+                }
+            }
             &.SliderBtnNxt {
                 display: block;
-                padding: 12px 20px;
+                padding: 12px 35px;
+
+                span {
+                    padding-left: 15px;
+                    top: 1px;
+                }
             }
+
+
         }
     }
 

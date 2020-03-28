@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from "../../global.scss";
 import {Link} from "react-router-dom";
+import Arrow from "./../../assets/svg/arrow_normal";
 
 
 const StartPage = ({location, match}) => {
@@ -11,7 +12,10 @@ const StartPage = ({location, match}) => {
                 <h2>ЧТО ДЕЛАЕТ ВАС СЧАСТ&shy;ЛИВЫМ?</h2>
                 <p>Эти характеристики остаются практически неизменными на протяжении всей вашей жизни</p>
                 <Link to='/name'  className={styles.startTestBtn}>
-                    Начать тест <span>&#62;</span>
+                    Начать тест
+                    <span>
+                        <Arrow />
+                    </span>
                 </Link>
             </div>
         </div>

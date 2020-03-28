@@ -57,6 +57,25 @@ $inputRange-c3: #BCD063;
 $inputRange-c4: #E0DF34;
 $inputRange-c5: #F7E91B;
 
+button, a {
+    letter-spacing: 0.5px;
+
+    span {
+        :global {
+            #arrow_thin, #arrow_normal {
+                width: 11px;
+                height: 16px;
+            }
+        }
+    }
+
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 2px 1px $base-color;
+    }
+}
+
 .startScreen {
     min-height: 100vh;
     background-color: $base-color !important;
@@ -100,8 +119,15 @@ $inputRange-c5: #F7E91B;
             text-transform: uppercase;
             box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3);
             span {
-                line-height: 16px;
-                font-size: 24px;
+                padding-left: 15px;
+                position: relative;
+                top: 2px;
+                :global {
+                    #arrow_thin, #arrow_normal {
+                        width: 13px;
+                        height: 17px;
+                    }
+                }
             }
         }
     }
@@ -172,7 +198,7 @@ $inputRange-c5: #F7E91B;
                 :global {
                     #arrow_thin,#arrow_normal {
                         width: 11px;
-                        heigh: 15px;
+                        height: 15px;
                         path {
                             fill: #fff;
                         }
@@ -186,6 +212,7 @@ $inputRange-c5: #F7E91B;
 
     }
 }
+
 .resultPage {
     padding: 15px 20px;
 
@@ -196,6 +223,7 @@ $inputRange-c5: #F7E91B;
         font-size: 29px;
         line-height: 32px;
         font-weight: 800;
+        margin-bottom: 40px;
     }
 
     .resultList {

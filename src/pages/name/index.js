@@ -1,11 +1,8 @@
 import React, {useContext, useEffect, useState} from 'react'
 import {StoreContext} from "../../model/Store.js";
-import {Link} from "react-router-dom";
 
 import styles from "../../global.scss";
 
-// import Arrow from "./../../assets/svg/arrow_thin.svg";
-import ArrowThin from "./../../assets/svg/arrow_thin";
 import Arrow from "./../../assets/svg/arrow_normal";
 
 

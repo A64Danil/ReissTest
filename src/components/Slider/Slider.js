@@ -11,6 +11,10 @@ import json from "./../../model/quests";
 import {StoreContext} from "./../../model/Store";
 import {NavLink, Link} from "react-router-dom";
 
+
+import ArrowThin from "./../../assets/svg/arrow_thin";
+import Arrow from "../../assets/svg/arrow_normal";
+
 const questsTotal = json.length;
 
 
@@ -237,10 +241,13 @@ const Slider = ({history}) => {
 
                 <div className={styles.SliderControl}>
                     <button
-                        className={styles.SliderBtn}
+                        className={`${styles.SliderBtn}  ${styles.SliderBtnPrev}`}
                         onClick={e => handleSliderControl('prev')}
                     >
-                        &#60;
+
+                        <span>
+                            <ArrowThin />
+                        </span>
                     </button>
 
                     {store.currentQuestNumber === questsTotal && (
@@ -249,7 +256,10 @@ const Slider = ({history}) => {
                         className={`${styles.SliderBtn}  ${styles.SliderBtnNxt}`}
                         onClick={e => handleSliderControl('next')}
                         >
-                            Результат &#62;
+                            Результат
+                            <span>
+                                <ArrowThin />
+                            </span>
                         </button>
                     )}
                     {store.currentQuestNumber !== questsTotal && (
@@ -257,7 +267,10 @@ const Slider = ({history}) => {
                             className={`${styles.SliderBtn}  ${styles.SliderBtnNxt}`}
                             onClick={e => handleSliderControl('next')}
                         >
-                            Далее &#62;
+                            Далее
+                            <span>
+                                <ArrowThin />
+                            </span>
                         </button>
                     )}
 

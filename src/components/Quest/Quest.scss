@@ -103,12 +103,18 @@ $inputRange-c5: #F7E91B;
           .ant-slider-rail {
             @include inputRangeBg($inputRange-c1, #eee, #eee, #eee, #eee);
           }
+          .ant-slider-handle {
+            background-color: $inputRange-c1;
+          }
         }
       }
       &.QuestRangeSliderWrp--200 {
         :global {
           .ant-slider-rail {
             @include inputRangeBg($inputRange-c1, $inputRange-c2, #eee, #eee, #eee);
+          }
+          .ant-slider-handle {
+            background-color: $inputRange-c2;
           }
         }
       }
@@ -117,6 +123,9 @@ $inputRange-c5: #F7E91B;
           .ant-slider-rail {
             @include inputRangeBg($inputRange-c1, $inputRange-c2, $inputRange-c3, #eee, #eee);
           }
+          .ant-slider-handle {
+            background-color: $inputRange-c3;
+          }
         }
       }
       &.QuestRangeSliderWrp--400 {
@@ -124,12 +133,18 @@ $inputRange-c5: #F7E91B;
           .ant-slider-rail {
             @include inputRangeBg($inputRange-c1, $inputRange-c2, $inputRange-c3, $inputRange-c4, #eee);
           }
+          .ant-slider-handle {
+            background-color: $inputRange-c4;
+          }
         }
       }
       &.QuestRangeSliderWrp--500 {
         :global {
           .ant-slider-rail {
             @include inputRangeBg($inputRange-c1, $inputRange-c2, $inputRange-c3, $inputRange-c4, $inputRange-c5);
+          }
+          .ant-slider-handle {
+            background-color: $inputRange-c5;
           }
         }
 
@@ -149,9 +164,11 @@ $inputRange-c5: #F7E91B;
     margin-top: -15px;
     background-color: #59C188;
     position: relative;
+    border: none;
     
     &:focus {
       box-shadow: none;
+      border: none;
     }
 
     &:after {
