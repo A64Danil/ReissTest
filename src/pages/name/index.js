@@ -6,7 +6,7 @@ import styles from "../../global.scss";
 import Arrow from "./../../assets/svg/arrow_normal";
 
 
-const Namepage = ({history}) => {
+const NamePage = ({history}) => {
     const store = useContext(StoreContext)
     let currentUserName = store.userName || '';
     const [username, setUsername] = useState(currentUserName)
@@ -22,7 +22,8 @@ const Namepage = ({history}) => {
 
         if (username) {
             e.target.classList.remove(styles.namePageBtnAnimated)
-            history.push('/quests');
+            history.push('/guide');
+            // history.push('/quests');
         } else {
             e.target.classList.add(styles.namePageBtnAnimated)
             setTimeout( () => {
@@ -56,4 +57,4 @@ const Namepage = ({history}) => {
     )
 }
 
-export default Namepage;
+export default NamePage;

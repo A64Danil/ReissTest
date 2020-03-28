@@ -54,7 +54,7 @@ const Slider = ({history}) => {
         height: `100%`,
         // height: `85%`,
         // maxHeight: `380px`,
-        maxHeight: `calc(100% - 80px)`,
+        maxHeight: `calc(100% - 85px)`,
         // flexGrow: `1`,
         transition: `all 250ms ease-in-out`,
         transform: `translate(0%, 0)`
