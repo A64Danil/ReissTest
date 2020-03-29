@@ -131,7 +131,12 @@ const Slider = ({history}) => {
             console.log("Поменялся store.currentQuestNumber на ", store.currentQuestNumber)
             let quest = json[store.currentQuestNumber - 1]
             setQuestInfo(quest);
-            setCurrentAnswerIsChosen(store.isChosenAnswers.get(quest.title))
+            // TODO isChosenAnswers
+            // console.log(quest)
+            // console.log(store.isChosenAnswersNew.toJS())
+
+            // setCurrentAnswerIsChosen(store.isChosenAnswers.get(quest.title))
+            setCurrentAnswerIsChosen(store.isChosenAnswersNew.get(quest.keyTitle))
             console.log("currentAnswerIsChosen", currentAnswerIsChosen);
         }
     }, [store.currentQuestNumber])
@@ -142,7 +147,9 @@ const Slider = ({history}) => {
         // В этом месте пробрасываем в inputRange новое значение
         if (!questInfo) return;
         console.log("questInfo - step4")
-        currentAnswerPosition = store.answers.get(questInfo.title) || 500;
+        // TODO answers
+        // currentAnswerPosition = store.answers.get(questInfo.title) || 500;
+        currentAnswerPosition = store.answersNew.get(questInfo.keyTitle) || 500;
         setAnswerPosition(currentAnswerPosition);
         setAnswerValueForInputBg(currentAnswerPosition);
     }, [questInfo])
@@ -202,13 +209,14 @@ const Slider = ({history}) => {
 
     function onAfterChange(value) {
         let flatValue = rangeSliderStrongMagnet(value);
+        console.log(questInfo)
         let answer = {
-            title: questInfo.title,
+            keyTitle: questInfo.keyTitle,
             value: flatValue
         };
         setAnswerPosition(flatValue);
         store.addAnswer(answer);
-        store.setIsChosenAnswer(questInfo.title, true);
+        store.setIsChosenAnswer(questInfo.keyTitle, true);
         setCurrentAnswerIsChosen(true);
     }
 

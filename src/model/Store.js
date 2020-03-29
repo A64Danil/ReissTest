@@ -8,14 +8,16 @@ const QuestStore = types
     .model("QuestStore", {
         currentQuestNumber: types.number,
         answers: types.map(types.number),
-        isChosenAnswers: types.map(types.boolean)
+        answersNew: types.map(types.number),
+        isChosenAnswers: types.map(types.boolean),
+        isChosenAnswersNew: types.map(types.boolean)
     })
     .actions(self => ({
         addAnswer(quest) {
-            self.answers.set(quest.title, quest.value)
+            self.answersNew.set(quest.keyTitle, quest.value)
         },
-        setIsChosenAnswer(title, value) {
-            self.isChosenAnswers.set(title, value)
+        setIsChosenAnswer(keyTitle, value) {
+            self.isChosenAnswersNew.set(keyTitle, value)
         },
         setUsername(name) {
             self.userName = name;
@@ -36,8 +38,8 @@ const QuestStore = types
 const StoreProvider = ({ children }) => {
     const store = QuestStore.create({
         userName: "",
-        currentQuestNumber: 1,
-        // currentQuestNumber: 15, // тестовый вариант
+        // currentQuestNumber: 1,
+        currentQuestNumber: 15, // тестовый вариант
         answers: {
             "Одобрение": 500, // od - acc - Acceptance
             "Любопытство": 500, // lu - cur - Curiosity
@@ -91,6 +93,24 @@ const StoreProvider = ({ children }) => {
             "Еда": false, // ed
             "Физическая активность": false, // fi
             "Семья": false // se
+        },
+        isChosenAnswersNew: {
+            "Acceptance": false,
+            "Curiosity": false,
+            "Order": false,
+            "Power": false,
+            "Saving": false,
+            "Independence": false,
+            "Status": false,
+            "SocialContact": false,
+            "Romance": false,
+            "Tranquility": false,
+            "Honor": false,
+            "Idealism": false,
+            "Vengeance": false,
+            "Eating": false,
+            "PhysicalActivity": false,
+            "Family": false
         }
         
     })

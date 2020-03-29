@@ -4,9 +4,14 @@ import styles from "../../global.scss";
 
 import {StoreContext} from "../../model/Store.js";
 
+import json from "./../../model/quests";
+
 const Result = ({props}) => {
     const store = useContext(StoreContext)
-    const questResults = store.answers.toJS();
+
+    // TODO answers
+    // const questResults = store.answers.toJS();
+    const questResults = store.answersNew.toJS();
 
     let finalResultArr = [];
     let urlLink = "";
@@ -19,8 +24,19 @@ const Result = ({props}) => {
         if (stringUrlPath) {
             console.log("Берем результат из ссылки")
             let parsedResult = [];
+            // TODO urlName
             for (const keyName in stringUrlPath) {
-                let shortName;
+                let fullName;
+
+                json.forEach((quest)=> {
+                    if(quest.urlName == keyName) {
+                        fullName = quest.htmlTitle;
+                    }
+
+                })
+
+
+                /*
                 switch (keyName) {
                     case ("od"):
                         shortName = "Одобрение";
@@ -72,25 +88,33 @@ const Result = ({props}) => {
                         break;
 
                 }
+                */
                 parsedResult.push({
-                    title: shortName,
+                    title: fullName,
                     valueNum: stringUrlPath[keyName] * 100
                 })
 
             }
+            console.log(parsedResult)
             finalResultArr = parsedResult;
         }
         else {
             console.log("Берем результат из стора")
             questResults.forEach( (val, key) =>  {
+                let fullName;
                 // Оставить ту часть на всякий случай
                 // let valToText = val < 151 ? ("Слабое") :
                 //     (val < 251) ? ("Ниже среднего") :
                 //         (val < 351) ? ("Среднее") :
                 //             (val < 451) ? ("Выше среднего") : ("Сильное");
+                json.forEach((quest)=> {
+                    if(quest.keyTitle == key) {
+                        fullName = quest.title;
+                    }
 
+                })
                 let newObj = {
-                    title: key,
+                    title: fullName,
                     valueNum: val,
                     // valuetext: valToText
                 }

@@ -5,6 +5,8 @@ import 'antd/dist/antd.css';
 import styles from "./Quest.scss";
 // import './CustomSliderStyle.scss';
 
+import json from "./../../model/quests";
+
 import { Slider } from 'antd';
 
 import {StoreContext} from "./../../model/Store";
@@ -20,15 +22,28 @@ const Quest = ({questInfo, currentQuestNum, questsTotal, onAfterChange, onChange
     // Формируем финальный УРЛ если отетил на 16 вопрсов
     if (currentQuestNum > questsTotal) {
         console.log("------------------------ здесь собираем все ответы")
-        let tempFinalRes = store.answers.toJS();
+        // TODO answers
+        // let tempFinalRes = store.answers.toJS();
+        let tempFinalRes = store.answersNew.toJS();
 
         console.log("tempFinalRes")
         console.log(tempFinalRes)
         let newObjUrl = {};
+
+        console.log(json)
+        // TODO urlName
         tempFinalRes.forEach( (val, key) => {
+            let shortName;
+            json.forEach((quest)=> {
+                if(quest.keyTitle == key) {
+                    shortName = quest.urlName;
+                }
+
+            })
             // console.log(key, val)
             // switch name
-            let shortName;
+            // let shortName = quest.urlName;
+            /*
             switch (key) {
                 case ("Одобрение"):
                     shortName = "od";
@@ -80,6 +95,8 @@ const Quest = ({questInfo, currentQuestNum, questsTotal, onAfterChange, onChange
                     break;
 
             }
+
+            */
             newObjUrl[shortName] = val / 100;
 
         })
