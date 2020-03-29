@@ -125,7 +125,7 @@ const Quest = ({questInfo, currentQuestNum, questsTotal, onAfterChange, onChange
             <div className={styles.Quest}>
                 <div className={styles.QuestText}>
                     <p className={styles.QuestNumber}>{currentQuestNum}/16 желание</p>
-                    <h3  className={styles.QuestTitle}>{questInfo.title}</h3>
+                    <h3  className={styles.QuestTitle}>{questInfo.htmlTitle}</h3>
                     <p className={styles.QuestDescription}>{questInfo.description}</p>
                 </div>
 
