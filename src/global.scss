@@ -107,13 +107,38 @@ button, a {
     }
 }
 
+
+:global {
+    .outerWrp {
+        //max-width: 500px;
+        margin: 0 auto;
+        //border: 1px solid #ccc;
+        //border-radius: 10px;
+
+        box-sizing: border-box;
+        overflow: hidden;
+        //min-height: 100vh; // ломает прокрутку в конце
+        font-family: 'Montserrat', sans-serif !important;
+
+        //@media (min-width: 992px) {
+        //    max-width: 1140px;
+        //}
+
+        //@include respond-to('md') {
+        //
+        //}
+    }
+}
+
+
 .startScreen {
-    min-height: 100vh;
     background-color: $base-color !important;
     padding: 35px 20px 0;
 
 
     .startScreen__Container {
+
+        min-height: 100%;
         @media (min-width: 992px) {
             padding: 100px 200px;
             @include container(1140px);
@@ -299,28 +324,6 @@ button, a {
         }
     }
 
-}
-
-:global {
-    .outerWrp {
-        //max-width: 500px;
-        margin: 0 auto;
-        //border: 1px solid #ccc;
-        //border-radius: 10px;
-
-        box-sizing: border-box;
-        overflow: hidden;
-        min-height: 100vh; // ломает прокрутку в конце
-        font-family: 'Montserrat', sans-serif !important;
-
-        //@media (min-width: 992px) {
-        //    max-width: 1140px;
-        //}
-
-        //@include respond-to('md') {
-        //
-        //}
-    }
 }
 
 @keyframes shake {
