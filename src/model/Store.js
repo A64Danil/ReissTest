@@ -39,22 +39,40 @@ const StoreProvider = ({ children }) => {
         currentQuestNumber: 1,
         // currentQuestNumber: 15, // тестовый вариант
         answers: {
-            "Одобрение": 500, // od
-            "Любопытство": 500, // lu
-            "Порядок": 500, // po
-            "Власть": 500, // vl
-            "Бережливость": 500, // be
-            "Независимость": 500, //ne
-            "Статус": 500, // st
-            "Общение": 500, // ob
-            "Романтические отношения": 500, //ro
-            "Спокойствие": 500, // sp
-            "Честь": 500, //ch
-            "Идеализм": 500, // id
-            "Соревновательность": 500, // so
-            "Еда": 500, // ed
-            "Физическая активность": 500, // fi
-            "Семья": 500 // se
+            "Одобрение": 500, // od - acc - Acceptance
+            "Любопытство": 500, // lu - cur - Curiosity
+            "Порядок": 500, // po - ord - Order
+            "Власть": 500, // vl - pow - Power
+            "Бережливость": 500, // be - sav - Saving
+            "Независимость": 500, //ne - ind - Independence
+            "Статус": 500, // st - sta - Status
+            "Общение": 500, // ob - soc - SocialContact
+            "Романтические отношения": 500, //ro - rom - Romance
+            "Спокойствие": 500, // sp - tra - Tranquility
+            "Честь": 500, //ch - hon - Honor
+            "Идеализм": 500, // id - ide - Idealism
+            "Соревновательность": 500, // so - ven - Vengeance
+            "Еда": 500, // ed - eat - Eating
+            "Физическая активность": 500, // fi - phy - PhysicalActivity
+            "Семья": 500 // se - fam - Family
+        },
+        answersNew: {
+            "Acceptance": 500, // od - acc - Acceptance
+            "Curiosity": 500, // lu - cur - Curiosity
+            "Order": 500, // po - ord - Order
+            "Power": 500, // vl - pow - Power
+            "Saving": 500, // be - sav - Saving
+            "Independence": 500, //ne - ind - Independence
+            "Status": 500, // st - sta - Status
+            "SocialContact": 500, // ob - soc - SocialContact
+            "Romance": 500, //ro - rom - Romance
+            "Tranquility": 500, // sp - tra - Tranquility
+            "Honor": 500, //ch - hon - Honor
+            "Idealism": 500, // id - ide - Idealism
+            "Vengeance": 500, // so - ven - Vengeance
+            "Eating": 500, // ed - eat - Eating
+            "PhysicalActivity": 500, // fi - phy - PhysicalActivity
+            "Family": 500 // se - fam - Family
         },
         isChosenAnswers: {
             "Одобрение": false, // od
