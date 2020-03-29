@@ -1,5 +1,6 @@
 .Menu {
     position: absolute;
+    z-index: 1;
     .MenuList {
         display: flex;
         margin: 0;

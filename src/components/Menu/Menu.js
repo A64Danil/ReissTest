@@ -22,6 +22,11 @@ const Menu = () => {
                         Контакты
                     </NavLink>
                 </li>
+                <li>
+                    <span>
+                        V-0.61
+                    </span>
+                </li>
             </ul>
         </div>
     )
