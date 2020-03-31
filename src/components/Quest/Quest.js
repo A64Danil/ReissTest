@@ -23,8 +23,8 @@ const Quest = ({questInfo, currentQuestNum, questsTotal, onAfterChange, onChange
     if (currentQuestNum > questsTotal) {
         console.log("------------------------ здесь собираем все ответы")
         // TODO answers
-        // let tempFinalRes = store.answers.toJS();
-        let tempFinalRes = store.answersNew.toJS();
+        let tempFinalRes = store.answers.toJS();
+        // let tempFinalRes = store.answersNew.toJS();
 
         console.log("tempFinalRes")
         console.log(tempFinalRes)

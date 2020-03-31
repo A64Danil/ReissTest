@@ -135,8 +135,8 @@ const Slider = ({history}) => {
             // console.log(quest)
             // console.log(store.isChosenAnswersNew.toJS())
 
-            // setCurrentAnswerIsChosen(store.isChosenAnswers.get(quest.title))
-            setCurrentAnswerIsChosen(store.isChosenAnswersNew.get(quest.keyTitle))
+            setCurrentAnswerIsChosen(store.isChosenAnswers.get(quest.keyTitle));
+            // setCurrentAnswerIsChosen(store.isChosenAnswersNew.get(quest.keyTitle))
             console.log("currentAnswerIsChosen", currentAnswerIsChosen);
         }
     }, [store.currentQuestNumber])
@@ -148,8 +148,8 @@ const Slider = ({history}) => {
         if (!questInfo) return;
         console.log("questInfo - step4")
         // TODO answers
-        // currentAnswerPosition = store.answers.get(questInfo.title) || 500;
-        currentAnswerPosition = store.answersNew.get(questInfo.keyTitle) || 500;
+        currentAnswerPosition = store.answers.get(questInfo.keyTitle) || 500;
+        // currentAnswerPosition = store.answersNew.get(questInfo.keyTitle) || 500;
         setAnswerPosition(currentAnswerPosition);
         setAnswerValueForInputBg(currentAnswerPosition);
     }, [questInfo])

@@ -24,7 +24,7 @@ const Menu = () => {
                 </li>
                 <li>
                     <span>
-                        V-0.6112
+                        V-0.6113
                     </span>
                 </li>
             </ul>

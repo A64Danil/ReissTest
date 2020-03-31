@@ -8,16 +8,14 @@ const QuestStore = types
     .model("QuestStore", {
         currentQuestNumber: types.number,
         answers: types.map(types.number),
-        answersNew: types.map(types.number),
-        isChosenAnswers: types.map(types.boolean),
-        isChosenAnswersNew: types.map(types.boolean)
+        isChosenAnswers: types.map(types.boolean)
     })
     .actions(self => ({
         addAnswer(quest) {
-            self.answersNew.set(quest.keyTitle, quest.value)
+            self.answers.set(quest.keyTitle, quest.value)
         },
         setIsChosenAnswer(keyTitle, value) {
-            self.isChosenAnswersNew.set(keyTitle, value)
+            self.isChosenAnswers.set(keyTitle, value)
         },
         setUsername(name) {
             self.userName = name;
@@ -38,27 +36,9 @@ const QuestStore = types
 const StoreProvider = ({ children }) => {
     const store = QuestStore.create({
         userName: "",
-        // currentQuestNumber: 1,
-        currentQuestNumber: 15, // тестовый вариант
+        currentQuestNumber: 1,
+        // currentQuestNumber: 15, // тестовый вариант
         answers: {
-            "Одобрение": 500, // od - acc - Acceptance
-            "Любопытство": 500, // lu - cur - Curiosity
-            "Порядок": 500, // po - ord - Order
-            "Власть": 500, // vl - pow - Power
-            "Бережливость": 500, // be - sav - Saving
-            "Независимость": 500, //ne - ind - Independence
-            "Статус": 500, // st - sta - Status
-            "Общение": 500, // ob - soc - SocialContact
-            "Романтические отношения": 500, //ro - rom - Romance
-            "Спокойствие": 500, // sp - tra - Tranquility
-            "Честь": 500, //ch - hon - Honor
-            "Идеализм": 500, // id - ide - Idealism
-            "Соревновательность": 500, // so - ven - Vengeance
-            "Еда": 500, // ed - eat - Eating
-            "Физическая активность": 500, // fi - phy - PhysicalActivity
-            "Семья": 500 // se - fam - Family
-        },
-        answersNew: {
             "Acceptance": 500, // od - acc - Acceptance
             "Curiosity": 500, // lu - cur - Curiosity
             "Order": 500, // po - ord - Order
@@ -77,24 +57,6 @@ const StoreProvider = ({ children }) => {
             "Family": 500 // se - fam - Family
         },
         isChosenAnswers: {
-            "Одобрение": false, // od
-            "Любопытство": false, // lu
-            "Порядок": false, // po
-            "Власть": false, // vl
-            "Бережливость": false, // be
-            "Независимость": false, //ne
-            "Статус": false, // st
-            "Общение": false, // ob
-            "Романтические отношения": false, //ro
-            "Спокойствие": false, // sp
-            "Честь": false, //ch
-            "Идеализм": false, // id
-            "Соревновательность": false, // so
-            "Еда": false, // ed
-            "Физическая активность": false, // fi
-            "Семья": false // se
-        },
-        isChosenAnswersNew: {
             "Acceptance": false,
             "Curiosity": false,
             "Order": false,

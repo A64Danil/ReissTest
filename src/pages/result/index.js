@@ -10,8 +10,8 @@ const Result = ({props}) => {
     const store = useContext(StoreContext)
 
     // TODO answers
-    // const questResults = store.answers.toJS();
-    const questResults = store.answersNew.toJS();
+    const questResults = store.answers.toJS();
+    // const questResults = store.answersNew.toJS();
 
     let finalResultArr = [];
     let urlLink = "";
