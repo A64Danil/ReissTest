@@ -22,16 +22,13 @@ const Quest = ({questInfo, currentQuestNum, questsTotal, onAfterChange, onChange
     // Формируем финальный УРЛ если отетил на 16 вопрсов
     if (currentQuestNum > questsTotal) {
         console.log("------------------------ здесь собираем все ответы")
-        // TODO answers
         let tempFinalRes = store.answers.toJS();
-        // let tempFinalRes = store.answersNew.toJS();
 
         console.log("tempFinalRes")
         console.log(tempFinalRes)
         let newObjUrl = {};
 
         console.log(json)
-        // TODO urlName
         tempFinalRes.forEach( (val, key) => {
             let shortName;
             json.forEach((quest)=> {
@@ -40,63 +37,7 @@ const Quest = ({questInfo, currentQuestNum, questsTotal, onAfterChange, onChange
                 }
 
             })
-            // console.log(key, val)
-            // switch name
-            // let shortName = quest.urlName;
-            /*
-            switch (key) {
-                case ("Одобрение"):
-                    shortName = "od";
-                    break;
-                case ("Любопытство"):
-                    shortName = "lu";
-                    break;
-                case ("Порядок"):
-                    shortName = "po";
-                    break;
-                case ("Власть"):
-                    shortName = "vl";
-                    break;
-                case ("Бережливость"):
-                    shortName = "be";
-                    break;
-                case ("Независимость"):
-                    shortName = "ne";
-                    break;
-                case ("Статус"):
-                    shortName = "st";
-                    break;
-                case ("Общение"):
-                    shortName = "ob";
-                    break;
-                case ("Романтические отношения"):
-                    shortName = "ro";
-                    break;
-                case ("Спокойствие"):
-                    shortName = "sp";
-                    break;
-                case ("Честь"):
-                    shortName = "ch";
-                    break;
-                case ("Идеализм"):
-                    shortName = "id";
-                    break;
-                case ("Соревновательность"):
-                    shortName = "so";
-                    break;
-                case ("Еда"):
-                    shortName = "ed";
-                    break;
-                case ("Физическая активность"):
-                    shortName = "fi";
-                    break;
-                case ("Семья"):
-                    shortName = "se";
-                    break;
 
-            }
-
-            */
             newObjUrl[shortName] = val / 100;
 
         })
@@ -117,10 +58,7 @@ const Quest = ({questInfo, currentQuestNum, questsTotal, onAfterChange, onChange
         tempFinalRes.forEach( (value, keyName) => {
             preparedAnswers[keyName] = value;
         });
-        // console.log(preparedAnswers);
         if(!!!USER_NAME) USER_NAME = "Без имени =("
-        // console.log("USER_NAME");
-        // console.log(USER_NAME);
         db.collection("test").add({
             name: USER_NAME,
             answers: preparedAnswers

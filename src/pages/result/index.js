@@ -9,9 +9,7 @@ import json from "./../../model/quests";
 const Result = ({props}) => {
     const store = useContext(StoreContext)
 
-    // TODO answers
     const questResults = store.answers.toJS();
-    // const questResults = store.answersNew.toJS();
 
     let finalResultArr = [];
     let urlLink = "";
@@ -24,7 +22,6 @@ const Result = ({props}) => {
         if (stringUrlPath) {
             console.log("Берем результат из ссылки")
             let parsedResult = [];
-            // TODO urlName
             for (const keyName in stringUrlPath) {
                 let fullName;
 
@@ -36,59 +33,6 @@ const Result = ({props}) => {
                 })
 
 
-                /*
-                switch (keyName) {
-                    case ("od"):
-                        shortName = "Одобрение";
-                        break;
-                    case ("lu"):
-                        shortName = "Любопытство";
-                        break;
-                    case ("po"):
-                        shortName = "Порядок";
-                        break;
-                    case ("vl"):
-                        shortName = "Власть";
-                        break;
-                    case ("be"):
-                        shortName = "Бережливость";
-                        break;
-                    case ("ne"):
-                        shortName = "Независимость";
-                        break;
-                    case ("st"):
-                        shortName = "Статус";
-                        break;
-                    case ("ob"):
-                        shortName = "Общение";
-                        break;
-                    case ("ro"):
-                        shortName = "Романтические отношения";
-                        break;
-                    case ("sp"):
-                        shortName = "Спокойствие";
-                        break;
-                    case ("ch"):
-                        shortName = "Честь";
-                        break;
-                    case ("id"):
-                        shortName = "Идеализм";
-                        break;
-                    case ("so"):
-                        shortName = "Соревновательность";
-                        break;
-                    case ("ed"):
-                        shortName = "Еда";
-                        break;
-                    case ("fi"):
-                        shortName = "Физическая активность";
-                        break;
-                    case ("se"):
-                        shortName = "Семья";
-                        break;
-
-                }
-                */
                 parsedResult.push({
                     title: fullName,
                     valueNum: stringUrlPath[keyName] * 100

@@ -131,12 +131,7 @@ const Slider = ({history}) => {
             console.log("Поменялся store.currentQuestNumber на ", store.currentQuestNumber)
             let quest = json[store.currentQuestNumber - 1]
             setQuestInfo(quest);
-            // TODO isChosenAnswers
-            // console.log(quest)
-            // console.log(store.isChosenAnswersNew.toJS())
-
             setCurrentAnswerIsChosen(store.isChosenAnswers.get(quest.keyTitle));
-            // setCurrentAnswerIsChosen(store.isChosenAnswersNew.get(quest.keyTitle))
             console.log("currentAnswerIsChosen", currentAnswerIsChosen);
         }
     }, [store.currentQuestNumber])
@@ -147,9 +142,7 @@ const Slider = ({history}) => {
         // В этом месте пробрасываем в inputRange новое значение
         if (!questInfo) return;
         console.log("questInfo - step4")
-        // TODO answers
         currentAnswerPosition = store.answers.get(questInfo.keyTitle) || 500;
-        // currentAnswerPosition = store.answersNew.get(questInfo.keyTitle) || 500;
         setAnswerPosition(currentAnswerPosition);
         setAnswerValueForInputBg(currentAnswerPosition);
     }, [questInfo])
