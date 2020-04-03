@@ -10,11 +10,9 @@ import {db} from "../../firebase";
 
 const AllResults = ({props}) => {
     const store = useContext(StoreContext)
-    const [AllResultsArr, setAllResultsArr] = useState([]);
     const [isDbLoaded, setIsDbLoaded] = useState(false);
 
     const [fireBaseData, setFireBaseData] = useState([]);
-    // const fireBaseData = []
 
     useEffect(()=> {
         console.log("Start AllResult useEffect");
@@ -22,11 +20,25 @@ const AllResults = ({props}) => {
         db.collection("test").get().then(function(querySnapshot) {
             console.log(querySnapshot)
             querySnapshot.forEach(function(doc) {
-                // doc.data() is never undefined for query doc snapshots
-                console.log(doc.id, " => ", doc.data());
-                // setAllResultsArr(AllResultsArr => [...AllResultsArr, doc.data()]);
-                // fireBaseData.push( doc.data());
-                tempArr.push( doc.data());
+                let origData = doc.data();
+                let newData = {
+                    name: origData.name,
+                    answers: []
+                }
+                let tempAnswers = {};
+
+                // Настраиваем перевод
+                for (const keyName in origData.answers) {
+                    json.forEach((quest)=> {
+                        if(quest.keyTitle == keyName) {
+                            tempAnswers[quest.title] = origData.answers[keyName];
+
+                        }
+
+                    })
+                }
+                newData.answers = tempAnswers;
+                tempArr.push( newData);
             });
 
             // console.log(AllResultsArr);
@@ -35,9 +47,6 @@ const AllResults = ({props}) => {
             console.log(fireBaseData);
             setIsDbLoaded(true);
             setFireBaseData(tempArr);
-            // fireBaseData.map((record) => (
-            //     console.log(record)
-            // ))
         });
 
 
@@ -52,48 +61,40 @@ const AllResults = ({props}) => {
 
 
     return (
-        <div className={styles.resultPage}>
+        <div className={styles.allResultsPage}>
             <h1>Все результаты:</h1>
 
-            {isDbLoaded && (
+            {isDbLoaded ? (
+
+
+
+
                 <div>
                     <p>Всё загрузилось!</p>
                     <b>Всего результатов: {fireBaseData.length}</b>
-                    <ul>
-                    {fireBaseData.map((record) => (
-                        <li key={record.name}>
-                            <p key={record.name + "_descr"} >Имя: {record.name}</p>
+                        <div  className={styles.allResultsListWrp}>
+                            {fireBaseData.map((record) => (
+                                <details className={styles.details} key={record.name}>
+                                    <summary>
+                                        <b key={record.name + "_descr"} >{record.name}</b>
+                                    </summary>
 
-                            <ul>
-                                {Object.keys(record.answers).map((key, index) => (
-                                    <li key={record.name + key}>
-                                        {index+1}) {key} => {record.answers[key]}
-                                    </li>
-                                ))}
-                            </ul>
-                        </li>
-                    ))}
-                    </ul>
+                                    <ul>
+                                        {Object.keys(record.answers).map((key, index) => (
+                                            <li key={record.name + key}>
+                                                {index+1}) {key} => {record.answers[key]}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </details>
+                            ))}
+                        </div>
                 </div>
-            )}
-
-
-            <h3>Варианта 2</h3>
-            {isDbLoaded ? (
-                <div>Loading ...</div>
             ) : (
-                <p>Loadded!</p>
+                <p>Идёт загрузка результатов...</p>
             )}
 
 
-            {/*<ul className={styles.resultList}>*/}
-            {/*{ AllResultsArr.map( (obj) => (*/}
-            {/*    <li key={obj.name}>*/}
-            {/*        <p key={obj.name + "_descr"} className={styles.resultTitle}>{obj.name}</p>*/}
-            {/*        <div key={obj.name + "_val"}  className={`${styles.resultBar}  ${styles["resultBar--" + obj.valueNum]}`} ></div>*/}
-            {/*    </li>*/}
-            {/*))}*/}
-            {/*</ul>*/}
 
         </div>
     )
