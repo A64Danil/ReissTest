@@ -13,7 +13,7 @@ import {StoreContext} from "./../../model/Store";
 
 import {Redirect} from 'react-router-dom'
 
-import {db} from "../../firebase";
+import {db, dbFirestore} from "../../firebase";
 
 const Quest = ({questInfo, currentQuestNum, questsTotal, onAfterChange, onChange, answerPosition, answerValueForInputBg}) => {
     const store = useContext(StoreContext)
@@ -61,7 +61,8 @@ const Quest = ({questInfo, currentQuestNum, questsTotal, onAfterChange, onChange
         if(!!!USER_NAME) USER_NAME = "Без имени =("
         db.collection("test").add({
             name: USER_NAME,
-            answers: preparedAnswers
+            answers: preparedAnswers,
+            timeStamp: dbFirestore.FieldValue.serverTimestamp()
         })
             .then(function() {
                 console.log("Document successfully written!");

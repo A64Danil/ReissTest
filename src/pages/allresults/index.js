@@ -17,7 +17,7 @@ const AllResults = ({props}) => {
     useEffect(()=> {
         console.log("Start AllResult useEffect");
         let tempArr = []
-        db.collection("test").get().then(function(querySnapshot) {
+        db.collection("test").orderBy("timeStamp").get().then(function(querySnapshot) {
             console.log(querySnapshot)
             querySnapshot.forEach(function(doc) {
                 let origData = doc.data();
