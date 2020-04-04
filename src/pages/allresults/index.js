@@ -65,10 +65,6 @@ const AllResults = ({props}) => {
             <h1>Все результаты:</h1>
 
             {isDbLoaded ? (
-
-
-
-
                 <div>
                     <p>Всё загрузилось!</p>
                     <b>Всего результатов: {fireBaseData.length}</b>

@@ -7,6 +7,7 @@ export const StoreContext = React.createContext();
 const QuestStore = types
     .model("QuestStore", {
         currentQuestNumber: types.number,
+        isResultSent: types.boolean,
         answers: types.map(types.number),
         isChosenAnswers: types.map(types.boolean)
     })
@@ -37,6 +38,7 @@ const StoreProvider = ({ children }) => {
     const store = QuestStore.create({
         userName: "",
         currentQuestNumber: 1,
+        isResultSent: false,
         // currentQuestNumber: 15, // тестовый вариант
         answers: {
             "Acceptance": 500, // od - acc - Acceptance
