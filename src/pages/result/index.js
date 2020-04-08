@@ -8,16 +8,21 @@ import json from "./../../model/quests";
 
 const Result = ({props}) => {
     const store = useContext(StoreContext)
-
     const questResults = store.answers.toJS();
+    const [finalResultArr, setFinalResultArr] = useState([]);
+    const [urlLink, setUrlLink] = useState("");
 
-    let finalResultArr = [];
-    let urlLink = "";
+    // let finalResultArr = [];
+    // let urlLink = "";
 
-    (function () {
-        console.log("Вы на финальной странице IIFE")
-        let stringUrlPath = resultInlineParser(getAllUrlParams(window.location.search).res);
+    useEffect(()=> {
+        console.log("Вы на финальной странице UseEffect")
+        let allUrlParams = getAllUrlParams(window.location.search);
+        let stringUrlPath = urlInlineParser(allUrlParams.res);
+        let userNameUrl = allUrlParams.username;
         console.log(stringUrlPath);
+        console.log(userNameUrl);
+        store.setUsername(userNameUrl);
 
         if (stringUrlPath) {
             console.log("Берем результат из ссылки")
@@ -40,10 +45,12 @@ const Result = ({props}) => {
 
             }
             console.log(parsedResult)
-            finalResultArr = parsedResult;
+            // finalResultArr = parsedResult;
+            setFinalResultArr(parsedResult)
         }
         else {
             console.log("Берем результат из стора")
+            let parsedResult = [];
             questResults.forEach( (val, key) =>  {
                 let fullName;
                 // Оставить ту часть на всякий случай
@@ -62,12 +69,15 @@ const Result = ({props}) => {
                     valueNum: val,
                     // valuetext: valToText
                 }
-                finalResultArr.push(newObj)
+                parsedResult.push(newObj)
             })
+            console.log(parsedResult)
+            setFinalResultArr(parsedResult);
         }
         console.log(finalResultArr);
-        finalResultArr.sort(resultCompare);
-    })();
+        // TODO: починить, ломает систему
+        // setFinalResultArr(finalResultArr.sort(resultCompare));
+    }, [])
 
 
     function isNumber(char) {
@@ -150,14 +160,16 @@ const Result = ({props}) => {
         return 0;
     }
 
-    function resultInlineParser(res) {
-        if (!res) return ;
+    function urlInlineParser(urlString) {
+        if (!urlString) return ;
 
-        console.log("resultInlineParser");
-        console.log(res);
-        urlLink = res;
+        console.log("urlInlineParser");
+        console.log(urlString);
+        let tempLink = urlLink + urlString;
+        setUrlLink(tempLink)
 
-        let newResultArr = res.split('');
+
+        let newResultArr = urlString.split('');
         // console.log(newResultArr);
         let nameBuffer = "";
         // let parsedResult = [];
