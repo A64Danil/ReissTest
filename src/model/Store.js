@@ -21,6 +21,9 @@ const QuestStore = types
         setUsername(name) {
             self.userName = name;
         },
+        setUsername2(name) {
+            self.userName2 = name;
+        },
         nextQuest() {
             // console.log("Нажали следующий вопрос")
             self.currentQuestNumber = self.currentQuestNumber + 1;
@@ -37,6 +40,7 @@ const QuestStore = types
 const StoreProvider = ({ children }) => {
     const store = QuestStore.create({
         userName: "",
+        userName2: "",
         currentQuestNumber: 1,
         isResultSent: false,
         // currentQuestNumber: 15, // тестовый вариант
