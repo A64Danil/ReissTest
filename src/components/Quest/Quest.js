@@ -50,7 +50,7 @@ const Quest = ({questInfo, currentQuestNum, questsTotal, onAfterChange, onChange
         }
         console.log(urlAnswersString);
 
-        let urlFullLink = "/result?res=" + urlAnswersString + "&username=testName";
+        let urlFullLink = "/result?res=" + urlAnswersString + "&username=" + USER_NAME;
 
 
         console.log("Сейчас отправим в бд...")

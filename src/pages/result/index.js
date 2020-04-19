@@ -19,7 +19,7 @@ const Result = ({props}) => {
         console.log("Вы на финальной странице UseEffect")
         let allUrlParams = getAllUrlParams(window.location.search);
         let stringUrlPath = urlInlineParser(allUrlParams.res);
-        let userNameUrl = allUrlParams.username;
+        let userNameUrl = decodeURIComponent(allUrlParams.username);
         console.log(stringUrlPath);
         console.log(userNameUrl);
         store.setUsername(userNameUrl);
