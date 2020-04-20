@@ -31,15 +31,11 @@ const Compare = ({props}) => {
             let parsedResult = [];
             for (const keyName in res1Url) {
                 let fullName;
-
                 json.forEach((quest)=> {
                     if(quest.urlName == keyName) {
                         fullName = quest.htmlTitle;
                     }
-
                 })
-
-
                 parsedResult.push({
                     title: fullName,
                     valueNum: res1Url[keyName] * 100
@@ -128,7 +124,6 @@ const Compare = ({props}) => {
     }
 
     function resultCompare(a, b) {
-
         if (a.valueNum < b.valueNum) {
             return 1;
         }
