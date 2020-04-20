@@ -62,6 +62,17 @@ const Compare = ({props}) => {
         return /\w/.test(char);
     }
 
+    function resultCompare(a, b) {
+        if (a.valueNum < b.valueNum) {
+            return 1;
+        }
+        if (a.valueNum > b.valueNum) {
+            return -1;
+        }
+        // a должно быть равным b
+        return 0;
+    }
+
     function getAllUrlParams(url) {
         // извлекаем строку из URL или объекта window
         var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
@@ -123,16 +134,7 @@ const Compare = ({props}) => {
         return obj;
     }
 
-    function resultCompare(a, b) {
-        if (a.valueNum < b.valueNum) {
-            return 1;
-        }
-        if (a.valueNum > b.valueNum) {
-            return -1;
-        }
-        // a должно быть равным b
-        return 0;
-    }
+
 
     function urlInlineParser(urlString) {
         if (!urlString) return ;

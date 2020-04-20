@@ -1,3 +1,5 @@
+import {isNumber,isString} from "./compare"
+
 export const urlInlineParser = (urlString) =>  {
     if (!urlString) return ;
     console.log("urlInlineParser");
