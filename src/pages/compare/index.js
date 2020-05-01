@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
-
+import {urlInlineParser} from "../../helpers/parsers"
 import styles from "../../global.scss";
 
 import {StoreContext} from "../../model/Store.js";
@@ -10,6 +10,7 @@ const Compare = ({props}) => {
     const store = useContext(StoreContext)
     const questResults = store.answers.toJS();
     const [finalResultArr, setFinalResultArr] = useState([]);
+    const [finalResultArr2, setFinalResultArr2] = useState([]);
     const [urlLink, setUrlLink] = useState("");
 
     useEffect(()=> {
@@ -19,16 +20,21 @@ const Compare = ({props}) => {
         let userName1Url = decodeURIComponent(allUrlParams.username);
         let res2Url = urlInlineParser(allUrlParams.res2);
         let userName2Url = decodeURIComponent(allUrlParams.username2);
-        console.log(res1Url);
         console.log(userName1Url);
+        console.log(res1Url);
         store.setUsername(userName1Url);
-        console.log(res2Url);
         console.log(userName2Url);
+        console.log(res2Url);
         store.setUsername2(userName2Url);
 
-        if (res1Url) {
+        let tempLink = urlLink + allUrlParams.res;
+        setUrlLink(tempLink)
+
+        if (res1Url && res2Url) {
             console.log("Берем результат из ссылки")
-            let parsedResult = [];
+            let parsedResult1 = [];
+            let parsedResult2 = [];
+            // TODO: сделать рефакторинг - свести два цикла в один
             for (const keyName in res1Url) {
                 let fullName;
                 json.forEach((quest)=> {
@@ -36,15 +42,30 @@ const Compare = ({props}) => {
                         fullName = quest.htmlTitle;
                     }
                 })
-                parsedResult.push({
+                parsedResult1.push({
                     title: fullName,
                     valueNum: res1Url[keyName] * 100
                 })
 
             }
-            console.log(parsedResult)
+            for (const keyName in res2Url) {
+                let fullName;
+                json.forEach((quest)=> {
+                    if(quest.urlName == keyName) {
+                        fullName = quest.htmlTitle;
+                    }
+                })
+                parsedResult2.push({
+                    title: fullName,
+                    valueNum: res2Url[keyName] * 100
+                })
+
+            }
+            console.log(parsedResult1)
+            console.log(parsedResult2)
             // finalResultArr = parsedResult;
-            setFinalResultArr(parsedResult)
+            setFinalResultArr(parsedResult1)
+            setFinalResultArr2(parsedResult2)
         }
         else {
             alert("Неправильная ссылка для сравнения результатов")
@@ -54,13 +75,6 @@ const Compare = ({props}) => {
         // setFinalResultArr(finalResultArr.sort(resultCompare));
     }, [])
 
-
-    function isNumber(char) {
-        return /\d/.test(char);
-    }
-    function isString(char) {
-        return /\w/.test(char);
-    }
 
     function resultCompare(a, b) {
         if (a.valueNum < b.valueNum) {
@@ -135,48 +149,9 @@ const Compare = ({props}) => {
     }
 
 
-
-    function urlInlineParser(urlString) {
-        if (!urlString) return ;
-
-        console.log("urlInlineParser");
-        console.log(urlString);
-        let tempLink = urlLink + urlString;
-        setUrlLink(tempLink)
-
-
-        let newResultArr = urlString.split('');
-        // console.log(newResultArr);
-        let nameBuffer = "";
-        // let parsedResult = [];
-        let parsedResult = {};
-
-        newResultArr.forEach((char) => {
-            let singleResultValue = {};
-            // console.log("char " + char)
-            // console.log("num " + isNumber(char))
-            // console.log("str " + isString(char))
-
-            if (isNumber(char)) {
-                // singleResultValue[nameBuffer] = char;
-                // console.log(singleResultValue)
-                parsedResult[nameBuffer] = char;
-                nameBuffer = "";
-                // parsedResult.push(singleResultValue)
-
-            } else if (isString(char)) {
-                nameBuffer += char;
-                // console.log(nameBuffer)
-            }
-        })
-        // создаём буффер
-        // если встретили букву - добавляем в имя буффероа
-        // если встретили цифру - добавляем в значение объкта буффера, добавлЯем объект в фин результат и чистим буффер
-        return parsedResult;
-
-    }
     console.log(finalResultArr)
-    console.log(urlLink)
+    console.log(finalResultArr2)
+    // console.log(urlLink)
 
 
     return (
@@ -190,6 +165,20 @@ const Compare = ({props}) => {
 
             <ul className={styles.resultList}>
             { finalResultArr.map( (obj) => (
+                <li key={obj.title}>
+                    <p key={obj.title + "_descr"} className={styles.resultTitle}>{obj.title}</p>
+                    <div key={obj.title + "_val"}  className={`${styles.resultBar}  ${styles["resultBar--" + obj.valueNum]}`} ></div>
+                </li>
+            ))}
+            </ul>
+
+            <h2>Ваш друг:</h2>
+            {finalResultArr2.length < 16 && (
+                <h3>Что-то пошло не так. Вы ответили не на все вопросы.</h3>
+            )}
+
+            <ul className={styles.resultList}>
+            { finalResultArr2.map( (obj) => (
                 <li key={obj.title}>
                     <p key={obj.title + "_descr"} className={styles.resultTitle}>{obj.title}</p>
                     <div key={obj.title + "_val"}  className={`${styles.resultBar}  ${styles["resultBar--" + obj.valueNum]}`} ></div>

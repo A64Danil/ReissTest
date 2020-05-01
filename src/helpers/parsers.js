@@ -2,10 +2,10 @@ import {isNumber,isString} from "./compare"
 
 export const urlInlineParser = (urlString) =>  {
     if (!urlString) return ;
-    console.log("urlInlineParser");
+    console.log("urlInlineParser from helpers/parsers");
     console.log(urlString);
-    let tempLink = urlLink + urlString;
-    setUrlLink(tempLink)
+    // let tempLink = urlLink + urlString;
+    // setUrlLink(tempLink)
 
 
     let newResultArr = urlString.split('');
