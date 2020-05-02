@@ -30,6 +30,29 @@ $breakpoints: (
                     $st5
     );
 }
+@mixin compareResultBarBg($st1, $st2, $st3, $st4, $st5) {
+    background: linear-gradient(
+                    90deg,
+                    $st1 0,
+                    $st1 16%, // 16
+                    #fff 0,
+                    #fff 20.5%,
+                    $st2 0,
+                    $st2 36.5%, // 36.5
+                    #fff 0,
+                    #fff 41%,
+                    $st3 0,
+                    $st3 57%, // 57
+                    #fff 0,
+                    #fff 61.5%,
+                    $st4 0,
+                    $st4 77.5%, // 77.5
+                    #fff 0,
+                    #fff 82%,
+                    $st5 0,
+                    $st5
+    );
+}
 
 @mixin container($width) {
     max-width: $width;
@@ -107,6 +130,41 @@ button, a {
     }
 }
 
+.resultList {
+    padding: 0;
+    li {
+        list-style: none;
+        padding-bottom: 30px;
+    }
+
+
+    .resultTitle {
+        color: #474747;
+        font-size: 17px;
+        font-weight: 800;
+        margin-bottom: 10px;
+    }
+
+    .resultBar {
+        width: 100%;
+        height: 15px;
+        &.resultBar--100 {
+            @include resultBarBg($inputRange-c1,#eee,#eee,#eee,#eee);
+        }
+        &.resultBar--200 {
+            @include resultBarBg($inputRange-c1, $inputRange-c2,#eee,#eee,#eee);
+        }
+        &.resultBar--300 {
+            @include resultBarBg($inputRange-c1, $inputRange-c2, $inputRange-c3,#eee,#eee);
+        }
+        &.resultBar--400 {
+            @include resultBarBg($inputRange-c1, $inputRange-c2, $inputRange-c3, $inputRange-c4, #eee);
+        }
+        &.resultBar--500 {
+            @include resultBarBg($inputRange-c1, $inputRange-c2, $inputRange-c3, $inputRange-c4, $inputRange-c5);
+        }
+    }
+}
 
 :global {
     .outerWrp {
@@ -285,43 +343,84 @@ button, a {
         margin-bottom: 40px;
     }
 
-    .resultList {
-        padding: 0;
-        li {
-            list-style: none;
-            padding-bottom: 30px;
-        }
+}
 
+.compareResultsPage {
+    .compareResultsBlock {
+        display: flex;
+        .resultListWrp {
+            width: 50%;
+            padding: 0 10px;
 
-        .resultTitle {
-            color: #474747;
-            font-size: 17px;
-            font-weight: 800;
-            margin-bottom: 10px;
-        }
+            h2 {
+                text-align: right;
+            }
+            .resultList {
+                li {
+                    position: relative;
+                    .resultTitle {
+                        visibility: hidden;
+                        max-height: 1em;
+                        margin-bottom: 20px;
+                    }
+                    .resultBar {
+                        height: 65px;
+                        &.resultBar--100 {
+                            @include compareResultBarBg($inputRange-c1,#eee,#eee,#eee,#eee);
+                        }
+                        &.resultBar--200 {
+                            @include compareResultBarBg($inputRange-c1, $inputRange-c2,#eee,#eee,#eee);
+                        }
+                        &.resultBar--300 {
+                            @include compareResultBarBg($inputRange-c1, $inputRange-c2, $inputRange-c3,#eee,#eee);
+                        }
+                        &.resultBar--400 {
+                            @include compareResultBarBg($inputRange-c1, $inputRange-c2, $inputRange-c3, $inputRange-c4, #eee);
+                        }
+                        &.resultBar--500 {
+                            @include compareResultBarBg($inputRange-c1, $inputRange-c2, $inputRange-c3, $inputRange-c4, $inputRange-c5);
+                        }
+                    }
 
-        .resultBar {
-            width: 100%;
-            height: 15px;
-            &.resultBar--100 {
-                @include resultBarBg($inputRange-c1,#eee,#eee,#eee,#eee);
+                }
+                
             }
-            &.resultBar--200 {
-                @include resultBarBg($inputRange-c1, $inputRange-c2,#eee,#eee,#eee);
-            }
-            &.resultBar--300 {
-                @include resultBarBg($inputRange-c1, $inputRange-c2, $inputRange-c3,#eee,#eee);
-            }
-            &.resultBar--400 {
-                @include resultBarBg($inputRange-c1, $inputRange-c2, $inputRange-c3, $inputRange-c4, #eee);
-            }
-            &.resultBar--500 {
-                @include resultBarBg($inputRange-c1, $inputRange-c2, $inputRange-c3, $inputRange-c4, $inputRange-c5);
+            
+            &.rotated {
+
+                h2 {
+                    text-align: left;
+                }
+                .resultList {
+                    li {
+
+                        &:after {
+                            content: "";
+                            height: calc(100% - 50px);
+                            margin: 30px 0;
+                            position: absolute;
+                            width: 2px;
+                            background-color: #ccc;
+                            top: 0;
+                            right: -10px;
+                            transform: translate(50%, 0px);
+                        }
+                        .resultTitle {
+                            visibility: visible;
+                            text-align: center;
+                            width: calc(200% + 20px);
+                        }
+                        .resultBar {
+                            transform: rotateY(180deg);
+                        }
+                    }
+
+                }
             }
         }
     }
-
 }
+
 
 .allResultsPage {
     padding: 15px 20px;

@@ -155,36 +155,44 @@ const Compare = ({props}) => {
 
 
     return (
-        <div className={styles.resultPage}>
-            {/*<h1>{store.userName}, ваши результаты:</h1>*/}
+        <div className={styles.compareResultsPage}>
             <h1>Сравнение результатов:</h1>
 
-            {finalResultArr.length < 16 && (
-                <h3>Что-то пошло не так. Вы ответили не на все вопросы.</h3>
-            )}
+            <div className={styles.compareResultsBlock}>
+                <div className={`${styles.resultListWrp} ${styles.rotated}`}>
+                    <h2>{store.userName}</h2>
+                    {finalResultArr.length < 16 && (
+                        <h3>Что-то пошло не так. Вы ответили не на все вопросы.</h3>
+                    )}
+                    <ul className={styles.resultList}>
+                        { finalResultArr.map( (obj) => (
+                            <li key={obj.title}>
+                                <p key={obj.title + "_descr"} className={styles.resultTitle}>{obj.title}</p>
+                                <div key={obj.title + "_val"}  className={`${styles.resultBar}  ${styles["resultBar--" + obj.valueNum]}`} ></div>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
 
-            <ul className={styles.resultList}>
-            { finalResultArr.map( (obj) => (
-                <li key={obj.title}>
-                    <p key={obj.title + "_descr"} className={styles.resultTitle}>{obj.title}</p>
-                    <div key={obj.title + "_val"}  className={`${styles.resultBar}  ${styles["resultBar--" + obj.valueNum]}`} ></div>
-                </li>
-            ))}
-            </ul>
+                <div className={styles.resultListWrp}>
+                    <h2>{store.userName2}</h2>
+                    {finalResultArr2.length < 16 && (
+                        <h3>Что-то пошло не так. Вы ответили не на все вопросы.</h3>
+                    )}
 
-            <h2>Ваш друг:</h2>
-            {finalResultArr2.length < 16 && (
-                <h3>Что-то пошло не так. Вы ответили не на все вопросы.</h3>
-            )}
+                    <ul className={styles.resultList}>
+                        { finalResultArr2.map( (obj) => (
+                            <li key={obj.title}>
+                                <p key={obj.title + "_descr"} className={styles.resultTitle}>{obj.title}</p>
+                                <div key={obj.title + "_val"}  className={`${styles.resultBar}  ${styles["resultBar--" + obj.valueNum]}`} ></div>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
 
-            <ul className={styles.resultList}>
-            { finalResultArr2.map( (obj) => (
-                <li key={obj.title}>
-                    <p key={obj.title + "_descr"} className={styles.resultTitle}>{obj.title}</p>
-                    <div key={obj.title + "_val"}  className={`${styles.resultBar}  ${styles["resultBar--" + obj.valueNum]}`} ></div>
-                </li>
-            ))}
-            </ul>
+
+
 
             <h3>Ваш код для сравнения <sub>(заработает в будущем)</sub></h3>
             <p>{urlLink}</p>
