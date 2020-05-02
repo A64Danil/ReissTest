@@ -158,9 +158,14 @@ const Compare = ({props}) => {
         <div className={styles.compareResultsPage}>
             <h1>Сравнение результатов:</h1>
 
+
+
+            <div className={styles.compareResultsNames}>
+                <h2>{store.userName}</h2>
+                <h2>{store.userName2}</h2>
+            </div>
             <div className={styles.compareResultsBlock}>
                 <div className={`${styles.resultListWrp} ${styles.rotated}`}>
-                    <h2>{store.userName}</h2>
                     {finalResultArr.length < 16 && (
                         <h3>Что-то пошло не так. Вы ответили не на все вопросы.</h3>
                     )}
@@ -175,7 +180,6 @@ const Compare = ({props}) => {
                 </div>
 
                 <div className={styles.resultListWrp}>
-                    <h2>{store.userName2}</h2>
                     {finalResultArr2.length < 16 && (
                         <h3>Что-то пошло не так. Вы ответили не на все вопросы.</h3>
                     )}
@@ -191,11 +195,6 @@ const Compare = ({props}) => {
                 </div>
             </div>
 
-
-
-
-            <h3>Ваш код для сравнения <sub>(заработает в будущем)</sub></h3>
-            <p>{urlLink}</p>
         </div>
     )
 }
