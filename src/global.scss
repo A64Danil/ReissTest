@@ -1,11 +1,20 @@
 $breakpoints: (
-        'xs': ('(min-width: 576px)'),
-        'sm': ('(min-width: 768px)'),
-        'md': ('(min-width: 992px)'),
-        'lg': ('(min-width: 1200px)'),
-        'xl': ('(min-width: 1600px)'),
+        'xs': (min-width: 576px),
+        'sm': (min-width: 768px),
+        'md': (min-width: 992px),
+        'lg': (min-width: 1200px),
+        'xl': (min-width: 1600px),
 );
 
+@mixin respond-to($breakpoint) {
+    @if map-has-key($breakpoints, $breakpoint) {
+        @media #{inspect(map-get($breakpoints, $breakpoint))} {
+            @content;
+        }
+    } @else {
+        @error 'Не указано значение для `#{$breakpoint}`';
+    }
+}
 
 @mixin resultBarBg($st1, $st2, $st3, $st4, $st5) {
     background: linear-gradient(
@@ -130,6 +139,44 @@ button, a {
     }
 }
 
+.longString {
+    word-break: break-all;
+}
+
+.stringToCopy {
+    background-color: #eee;
+    border: 1px dotted #ccc;
+    padding: 10px;
+    margin: 5px 0 20px;
+    color: $base-color;
+    position: relative;
+    text-align: left;
+    * {
+        color: $base-color;
+    }
+
+    &:after {
+        content: "Скопировать текст";
+        font-size: 18px;
+        display: block;
+        text-align: center;
+        color: #555;
+    }
+
+
+    &:before {
+        content: "Кликните на серую область выше";
+        font-size: 14px;
+        display: block;
+        text-align: center;
+        color: #555;
+        position: absolute;
+        top: calc(100% + 5px);
+        left: 0;
+        width: 100%;
+    }
+}
+
 .resultList {
     padding: 0;
     li {
@@ -175,12 +222,8 @@ button, a {
         //min-height: 100vh; // ломает прокрутку в конце
         font-family: 'Montserrat', sans-serif !important;
 
-        //@media (min-width: 992px) {
-        //    max-width: 1140px;
-        //}
-
         //@include respond-to('md') {
-        //
+        //    max-width: 750px;
         //}
     }
 }
@@ -333,30 +376,49 @@ button, a {
 .resultPage {
     padding: 15px 20px;
 
+    .resultPage__Container {
 
-    h1 {
-        text-transform: uppercase;
-        color: #474747;
-        font-size: 29px;
-        line-height: 32px;
-        font-weight: 800;
-        margin-bottom: 40px;
+        @include respond-to('xs') {
+            @include container(768px);
+        }
+
+        h1 {
+            text-transform: uppercase;
+            color: #474747;
+            font-size: 29px;
+            line-height: 32px;
+            font-weight: 800;
+            margin-bottom: 40px;
+        }
+
+        .resultShare {
+            margin-bottom: 40px;
+
+            h3 {
+                font-weight: bold
+            }
+
+            .guidePageBtnlongString {
+                word-break: break-all;
+            }
+
+            input {
+                height: 47px;
+                border-radius: 29px;
+                border: 1px solid #ccc;
+                width: 100%;
+                max-width: 500px;
+                margin-bottom: 10px;
+                padding: 4px 10px;
+                font-size: 20px;
+                display: block;
+            }
+
+            .compareBtn {
+                @include baseColorBtn();
+            }
+        }
     }
-
-    .resultShare {
-        margin-bottom: 20px;
-        h3 {
-            font-weight: bold
-        }
-
-        .guidePageBtnlongString {
-            word-break: break-all;
-        }
-        .compareBtn {
-            @include baseColorBtn();
-        }
-    }
-
 }
 
 .compareResultsPage {

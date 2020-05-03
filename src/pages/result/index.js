@@ -220,54 +220,78 @@ const Result = ({props}) => {
     // console.log(finalResultArr)
     // console.log(urlLink)
 
+    const copyToClipboard = (e) => {
+        const bufferedText = e.currentTarget.textContent;
+        navigator.clipboard.writeText(bufferedText)
+            .then(() => {
+                // Получилось!
+                alert("Текст скопирован в буффер обмена");
+            })
+            .catch(err => {
+                alert("Не удалось скопировать. Что-то пошло не так =(" + err);
+                // console.log('Something went wrong', err);
+            });
+    }
 
     return (
         <div className={styles.resultPage}>
-            <h1>{store.userName}, ваши результаты:</h1>
+            <div className={styles.resultPage__Container} >
+                <h1>{store.userName}, ваши результаты:</h1>
 
-            {finalResultArr.length < 16 && (
-                <h3>Что-то пошло не так. Вы ответили не на все вопросы.</h3>
-            )}
+                {finalResultArr.length < 16 && (
+                    <h3>Что-то пошло не так. Вы ответили не на все вопросы.</h3>
+                )}
 
-            <ul className={styles.resultList}>
-            { finalResultArr.map( (obj) => (
-                <li key={obj.title}>
-                    <p key={obj.title + "_descr"} className={styles.resultTitle}>{obj.title}</p>
-                    <div key={obj.title + "_val"}  className={`${styles.resultBar}  ${styles["resultBar--" + obj.valueNum]}`} ></div>
-                </li>
-            ))}
-            </ul>
-
-
-            <div className={styles.resultShare}>
-                <h3>Отправьте эту ссылку другу, если хотите показать ему ваш результат</h3>
-                <p className={styles.longString}>
-                    <a href={window.location.href} target="_blanc">{window.location.href}</a>
-                </p>
-            </div>
+                <ul className={styles.resultList}>
+                { finalResultArr.map( (obj) => (
+                    <li key={obj.title}>
+                        <p key={obj.title + "_descr"} className={styles.resultTitle}>{obj.title}</p>
+                        <div key={obj.title + "_val"}  className={`${styles.resultBar}  ${styles["resultBar--" + obj.valueNum]}`} ></div>
+                    </li>
+                ))}
+                </ul>
 
 
-            <div className={styles.resultShare}>
-                <h3>Вставьте в поле ниже код от вашего друга, чтобы сравнить ваши результаты</h3>
-                <input
-                    type="text"
-                    value={paramsToComparePage}
-                    onChange={e => {
-                        setParamsToComparePage(e.target.value);
-                    }}
-                    placeholder="Вставьте код для сравнения"
-                />
-                <Link to={urlToComparePage}  className={styles.compareBtn}>
-                    Сравнить
-                    <span>
-                            <Arrow />
-                        </span>
-                </Link>
-            </div>
+                <div className={styles.resultShare}>
+                    <h3>Отправьте эту ссылку другу, если хотите показать ему ваш результат</h3>
+                    <button
+                        className={styles.stringToCopy}
+                        onClick={copyToClipboard}
+                    >
+                        <p className={styles.longString}>
+                            {window.location.href}
+                        </p>
+                    </button>
+                </div>
 
-            <div className={styles.resultShare}>
-                <h3>Отправьте этот код другу, чтобы он мог сравнить свои результаты с вашими</h3>
-                <p className={styles.longString}>{linkToCompare}</p>
+
+                <div className={styles.resultShare}>
+                    <h3>Вставьте в поле ниже код от вашего друга, чтобы сравнить ваши результаты</h3>
+                    <input
+                        type="text"
+                        value={paramsToComparePage}
+                        onChange={e => {
+                            setParamsToComparePage(e.target.value);
+                        }}
+                        placeholder="Вставьте код для сравнения"
+                    />
+                    <Link to={urlToComparePage}  className={styles.compareBtn}>
+                        Сравнить
+                        <span>
+                                <Arrow />
+                            </span>
+                    </Link>
+                </div>
+
+                <div className={styles.resultShare}>
+                    <h3>Отправьте этот код другу, чтобы он мог сравнить свои результаты с вашими</h3>
+                    <button
+                        className={styles.stringToCopy}
+                        onClick={copyToClipboard}
+                    >
+                        <p className={styles.longString}>{linkToCompare}</p>
+                    </button>
+                </div>
             </div>
         </div>
     )
