@@ -1,5 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react'
 import {urlInlineParser, getAllUrlParams} from "../../helpers/parsers"
+import {copyToClipboard} from "../../helpers/base"
 
 import styles from "../../global.scss";
 
@@ -113,17 +114,12 @@ const Result = ({props}) => {
         return 0;
     }
 
-    const copyToClipboard = (e) => {
+
+
+    const copyToOnClick = (e) => {
         const bufferedText = e.currentTarget.textContent;
-        navigator.clipboard.writeText(bufferedText)
-            .then(() => {
-                // Получилось!
-                alert("Текст скопирован в буффер обмена");
-            })
-            .catch(err => {
-                alert("Не удалось скопировать. Что-то пошло не так =(" + err);
-                // console.log('Something went wrong', err);
-            });
+        copyToClipboard(bufferedText);
+        alert("Текст скопирован");
     }
 
     return (
@@ -149,7 +145,7 @@ const Result = ({props}) => {
                     <h3>Отправьте эту ссылку другу, если хотите показать ему ваш результат</h3>
                     <button
                         className={styles.stringToCopy}
-                        onClick={copyToClipboard}
+                        onClick={copyToOnClick}
                     >
                         <p className={styles.longString}>
                             {window.location.href}
@@ -180,7 +176,7 @@ const Result = ({props}) => {
                     <h3>Отправьте этот код другу, чтобы он мог сравнить свои результаты с вашими</h3>
                     <button
                         className={styles.stringToCopy}
-                        onClick={copyToClipboard}
+                        onClick={copyToOnClick}
                     >
                         <p className={styles.longString}>{linkToCompare}</p>
                     </button>

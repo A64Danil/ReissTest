@@ -1,4 +1,4 @@
-import {isNumber,isString} from "./compare"
+import {isNumber,isString} from "./base"
 
 export const urlInlineParser = (urlString) =>  {
     if (!urlString) return ;
