@@ -5,12 +5,17 @@ import styles from "../../global.scss";
 import {StoreContext} from "../../model/Store.js";
 
 import json from "./../../model/quests";
+import Arrow from "../../assets/svg/arrow_normal";
+import {Link} from "react-router-dom";
 
 const Result = ({props}) => {
     const store = useContext(StoreContext)
     const questResults = store.answers.toJS();
     const [finalResultArr, setFinalResultArr] = useState([]);
     const [urlLink, setUrlLink] = useState("");
+    const [linkToCompare, setLinkToCompare] = useState("");
+    const [paramsToComparePage, setParamsToComparePage] = useState("");
+    const [urlToComparePage, setUrlToComparePage] = useState("");
 
     // let finalResultArr = [];
     // let urlLink = "";
@@ -23,6 +28,11 @@ const Result = ({props}) => {
         console.log(stringUrlPath);
         console.log(userNameUrl);
         store.setUsername(userNameUrl);
+        setUrlLink(allUrlParams.res)
+
+        let compareLink = 'res2=' + allUrlParams.res + '&username2=' + userNameUrl;
+        setLinkToCompare(compareLink);
+
 
         if (stringUrlPath) {
             console.log("Берем результат из ссылки")
@@ -79,6 +89,16 @@ const Result = ({props}) => {
         // setFinalResultArr(finalResultArr.sort(resultCompare));
     }, [])
 
+    useEffect(() => {
+        let allUrlParams = getAllUrlParams(window.location.search);
+        let userNameUrl = decodeURIComponent(allUrlParams.username);
+        // http://localhost:1234/compare?res=acc1cur1ord1pow1sav1ind1sta1soc1rom5tra1hon1ide1ven1eat1phy1fam1&username=%D0%A1%D0%B5%D1%80%D0%B6&
+        // res2=acc4cur2ord2pow2sav2ind1sta1soc1rom5tra1hon1ide1ven1eat1phy1fam1&username2=%D0%90%D1%84%D0%BE%D0%BD%D1%8F
+        let originUserLink = 'res=' + allUrlParams.res + '&username=' + userNameUrl;
+        const newCompareLink = '/compare?' + originUserLink + '&' + paramsToComparePage;
+        console.log(newCompareLink);
+        setUrlToComparePage(newCompareLink);
+    }, [paramsToComparePage, setParamsToComparePage])
 
     function isNumber(char) {
         return /\d/.test(char);
@@ -165,8 +185,6 @@ const Result = ({props}) => {
 
         console.log("urlInlineParser");
         console.log(urlString);
-        let tempLink = urlLink + urlString;
-        setUrlLink(tempLink)
 
 
         let newResultArr = urlString.split('');
@@ -199,8 +217,8 @@ const Result = ({props}) => {
         return parsedResult;
 
     }
-    console.log(finalResultArr)
-    console.log(urlLink)
+    // console.log(finalResultArr)
+    // console.log(urlLink)
 
 
     return (
@@ -220,8 +238,37 @@ const Result = ({props}) => {
             ))}
             </ul>
 
-            <h3>Ваш код для сравнения <sub>(заработает в будущем)</sub></h3>
-            <p>{urlLink}</p>
+
+            <div className={styles.resultShare}>
+                <h3>Отправьте эту ссылку другу, если хотите показать ему ваш результат</h3>
+                <p className={styles.longString}>
+                    <a href={window.location.href} target="_blanc">{window.location.href}</a>
+                </p>
+            </div>
+
+
+            <div className={styles.resultShare}>
+                <h3>Вставьте в поле ниже код от вашего друга, чтобы сравнить ваши результаты</h3>
+                <input
+                    type="text"
+                    value={paramsToComparePage}
+                    onChange={e => {
+                        setParamsToComparePage(e.target.value);
+                    }}
+                    placeholder="Вставьте код для сравнения"
+                />
+                <Link to={urlToComparePage}  className={styles.compareBtn}>
+                    Сравнить
+                    <span>
+                            <Arrow />
+                        </span>
+                </Link>
+            </div>
+
+            <div className={styles.resultShare}>
+                <h3>Отправьте этот код другу, чтобы он мог сравнить свои результаты с вашими</h3>
+                <p className={styles.longString}>{linkToCompare}</p>
+            </div>
         </div>
     )
 }

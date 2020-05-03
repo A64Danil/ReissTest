@@ -343,6 +343,20 @@ button, a {
         margin-bottom: 40px;
     }
 
+    .resultShare {
+        margin-bottom: 20px;
+        h3 {
+            font-weight: bold
+        }
+
+        .guidePageBtnlongString {
+            word-break: break-all;
+        }
+        .compareBtn {
+            @include baseColorBtn();
+        }
+    }
+
 }
 
 .compareResultsPage {

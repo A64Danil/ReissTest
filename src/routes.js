@@ -17,7 +17,7 @@ export default (props) => {
             <Route path='/name' component={NamePage} history={props.history} />
             <Route path='/guide' component={GuidePage} history={props.history} />
             <Route path='/quests' component={Quests} history={props.history} />
-            <Route path='/result' component={Result} />
+            <Route path='/result' component={Result} history={props.history} />
             <Route path='/compare' component={Compare} />
             <Route path='/allresults' component={AllResults} />
             <Route path='/contacts' component={Contacts} />
