@@ -24,6 +24,9 @@ const QuestStore = types
         setUsername2(name) {
             self.userName2 = name;
         },
+        setIsResultSent(boolean) {
+            self.isResultSent = boolean;
+        },
         nextQuest() {
             // console.log("Нажали следующий вопрос")
             self.currentQuestNumber = self.currentQuestNumber + 1;

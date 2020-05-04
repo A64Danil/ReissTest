@@ -52,26 +52,30 @@ const Quest = ({questInfo, currentQuestNum, questsTotal, onAfterChange, onChange
 
         let urlFullLink = "/result?res=" + urlAnswersString + "&username=" + USER_NAME;
 
+        console.log("store.isResultSent?")
+        console.log(store.isResultSent)
 
-        console.log("Сейчас отправим в бд...")
-        let preparedAnswers = {};
-        tempFinalRes.forEach( (value, keyName) => {
-            preparedAnswers[keyName] = value;
-        });
-        if(!!!USER_NAME) USER_NAME = "Без имени =("
-        db.collection("test").add({
-            name: USER_NAME,
-            answers: preparedAnswers,
-            timeStamp: dbFirestore.FieldValue.serverTimestamp()
-        })
-            .then(function() {
-                console.log("Document successfully written!");
-            })
-            .catch(function(error) {
-                console.error("Error writing document: ", error);
+        if (!store.isResultSent) {
+            console.log("Сейчас отправим в бд...")
+            let preparedAnswers = {};
+            tempFinalRes.forEach((value, keyName) => {
+                preparedAnswers[keyName] = value;
             });
+            if (!!!USER_NAME) USER_NAME = "Без имени =("
+            db.collection("test").add({
+                name: USER_NAME,
+                answers: preparedAnswers,
+                timeStamp: dbFirestore.FieldValue.serverTimestamp()
+            })
+                .then(function () {
+                    console.log("Document successfully written!");
+                    store.setIsResultSent(true)
+                })
+                .catch(function (error) {
+                    console.error("Error writing document: ", error);
+                });
 
-
+        }
 
         return <Redirect to={urlFullLink} />
     }
