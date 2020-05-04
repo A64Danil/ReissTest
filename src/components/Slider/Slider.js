@@ -265,7 +265,7 @@ const Slider = ({history}) => {
                     )}
                     {store.currentQuestNumber !== questsTotal && (
                         <button
-                            className={`${styles.SliderBtn}  ${styles.SliderBtnNxt}`}
+                            className={`${styles.SliderBtn}  ${styles.SliderBtnNxt} ${styles["SliderBtnNxt--IsChosen-" + currentAnswerIsChosen]}`}
                             onClick={e => handleSliderControl('next')}
                         >
                             Далее
