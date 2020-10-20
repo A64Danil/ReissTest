@@ -34,6 +34,7 @@ const Compare = ({props}) => {
             console.log("Берем результат из ссылки")
             let parsedResult1 = [];
             let parsedResult2 = [];
+            let parsedResult2sorted = [];
             // TODO: сделать рефакторинг - свести два цикла в один
             for (const keyName in res1Url) {
                 let fullName;
@@ -61,20 +62,22 @@ const Compare = ({props}) => {
                 })
 
             }
-            console.log(parsedResult1)
+            console.log(parsedResult1.sort(resultCompare))
+            console.log(parsedResult2)
+            parsedResult1.forEach((answer)=> {
+                console.log(answer.title);
+                console.log(
+                    parsedResult2sorted.push(parsedResult2.find( el => el.title === answer.title)));
+            });
             console.log(parsedResult2)
             // finalResultArr = parsedResult;
-            setFinalResultArr(parsedResult1.sort(resultCompare))
-            setFinalResultArr2(parsedResult2.sort(resultCompare))
+            setFinalResultArr(parsedResult1)
+            setFinalResultArr2(parsedResult2sorted)
         }
         else {
             alert("Неправильная ссылка для сравнения результатов")
         }
 
-        console.log(finalResultArr);
-        // TODO: доделать так, чтобы результат второго юзера был отсортирован в соответствии с первым
-        console.log(finalResultArr.sort(resultCompare));
-        // setFinalResultArr(finalResultArr.sort(resultCompare));
     }, [])
 
 
