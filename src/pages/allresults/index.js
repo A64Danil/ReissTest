@@ -17,7 +17,7 @@ const AllResults = ({props}) => {
     useEffect(()=> {
         console.log("Start AllResult useEffect");
         let tempArr = []
-        db.collection("test").orderBy("timeStamp").get().then(function(querySnapshot) {
+        db.collection("testArr").orderBy("timeStamp").get().then(function(querySnapshot) {
             console.log(querySnapshot)
             querySnapshot.forEach(function(doc) {
                 let origData = doc.data();
@@ -28,15 +28,14 @@ const AllResults = ({props}) => {
                 let tempAnswers = {};
 
                 // Настраиваем перевод
-                for (const keyName in origData.answers) {
+                origData.answers.forEach((answer) => {
                     json.forEach((quest)=> {
-                        if(quest.keyTitle == keyName) {
-                            tempAnswers[quest.title] = origData.answers[keyName];
-
+                        if(quest.keyTitle == answer.keyName) {
+                            tempAnswers[quest.title] = answer.value;
                         }
 
                     })
-                }
+                });
                 newData.answers = tempAnswers;
                 tempArr.push( newData);
             });

@@ -52,19 +52,27 @@ const Quest = ({questInfo, currentQuestNum, questsTotal, onAfterChange, onChange
 
         let urlFullLink = "/result?res=" + urlAnswersString + "&username=" + USER_NAME;
 
-        console.log("store.isResultSent?")
-        console.log(store.isResultSent)
-
         if (!store.isResultSent) {
             console.log("Сейчас отправим в бд...")
             let preparedAnswers = {};
+            let preparedAnswersArr = [];
             tempFinalRes.forEach((value, keyName) => {
-                preparedAnswers[keyName] = value;
+                // TODO: превратить оюъект в сортированый массив, удалить объект после тестов
+                // preparedAnswers[keyName] = value;
+                preparedAnswersArr.push({ keyName, value });
+                preparedAnswersArr.sort((prev, next) => next.value - prev.value);
+                    // [keyName] = value;
             });
+            console.log("preparedAnswers");
+            console.log(preparedAnswers);
+            console.log("preparedAnswersArr");
+            console.log(preparedAnswersArr);
+
+
             if (!!!USER_NAME) USER_NAME = "Без имени =("
-            db.collection("test").add({
+            db.collection("testArr").add({
                 name: USER_NAME,
-                answers: preparedAnswers,
+                answers: preparedAnswersArr,
                 timeStamp: dbFirestore.FieldValue.serverTimestamp()
             })
                 .then(function () {

@@ -64,14 +64,16 @@ const Compare = ({props}) => {
             console.log(parsedResult1)
             console.log(parsedResult2)
             // finalResultArr = parsedResult;
-            setFinalResultArr(parsedResult1)
-            setFinalResultArr2(parsedResult2)
+            setFinalResultArr(parsedResult1.sort(resultCompare))
+            setFinalResultArr2(parsedResult2.sort(resultCompare))
         }
         else {
             alert("Неправильная ссылка для сравнения результатов")
         }
+
         console.log(finalResultArr);
-        // TODO: починить, ломает систему
+        // TODO: доделать так, чтобы результат второго юзера был отсортирован в соответствии с первым
+        console.log(finalResultArr.sort(resultCompare));
         // setFinalResultArr(finalResultArr.sort(resultCompare));
     }, [])
 
