@@ -54,17 +54,11 @@ const Quest = ({questInfo, currentQuestNum, questsTotal, onAfterChange, onChange
 
         if (!store.isResultSent) {
             console.log("Сейчас отправим в бд...")
-            let preparedAnswers = {};
             let preparedAnswersArr = [];
             tempFinalRes.forEach((value, keyName) => {
-                // TODO: превратить оюъект в сортированый массив, удалить объект после тестов
-                // preparedAnswers[keyName] = value;
                 preparedAnswersArr.push({ keyName, value });
-                preparedAnswersArr.sort((prev, next) => next.value - prev.value);
-                    // [keyName] = value;
             });
-            console.log("preparedAnswers");
-            console.log(preparedAnswers);
+            preparedAnswersArr.sort((prev, next) => next.value - prev.value);
             console.log("preparedAnswersArr");
             console.log(preparedAnswersArr);
 

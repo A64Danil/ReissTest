@@ -17,12 +17,13 @@ const AllResults = ({props}) => {
     useEffect(()=> {
         console.log("Start AllResult useEffect");
         let tempArr = []
-        db.collection("testArr").orderBy("timeStamp").get().then(function(querySnapshot) {
-            console.log(querySnapshot)
+        db.collection("testArr").orderBy('timeStamp', 'desc').get().then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
                 let origData = doc.data();
                 let newData = {
                     name: origData.name,
+                    timeStamp: origData.timeStamp,
+                    date: new Date(origData.timeStamp.seconds * 1000).toLocaleDateString(),
                     answers: []
                 }
                 let tempAnswers = {};
@@ -40,10 +41,7 @@ const AllResults = ({props}) => {
                 tempArr.push( newData);
             });
 
-            // console.log(AllResultsArr);
         }).then(()=>{
-            console.log("здесь будем триггерить хук");
-            console.log(fireBaseData);
             setIsDbLoaded(true);
             setFireBaseData(tempArr);
         });
@@ -69,14 +67,14 @@ const AllResults = ({props}) => {
                     <b>Всего результатов: {fireBaseData.length}</b>
                         <div  className={styles.allResultsListWrp}>
                             {fireBaseData.map((record) => (
-                                <details className={styles.details} key={record.name}>
+                                <details className={styles.details} key={record.timeStamp}>
                                     <summary>
-                                        <b key={record.name + "_descr"} >{record.name}</b>
+                                        <b key={record.timeStamp} >{record.name} </b><sub>({record.date})</sub>
                                     </summary>
 
                                     <ul>
                                         {Object.keys(record.answers).map((key, index) => (
-                                            <li key={record.name + key}>
+                                            <li key={record.timeStamp + key}>
                                                 {index+1}) {key} => {record.answers[key]}
                                             </li>
                                         ))}
