@@ -1,25 +1,10 @@
 @mixin inputRangeBg($st1, $st2, $st3, $st4, $st5) {
-  background: linear-gradient(
-                  90deg,
-                  $st1 0,
-                  $st1 18%,
-                  #fff 0,
-                  #fff 20.5%,
-                  $st2 0,
-                  $st2 38.5%,
-                  #fff 0,
-                  #fff 41%,
-                  $st3 0,
-                  $st3 59%,
-                  #fff 0,
-                  #fff 61.5%,
-                  $st4 0,
-                  $st4 79.5%,
-                  #fff 0,
-                  #fff 82%,
-                  $st5 0,
-                  $st5
-  );
+  background:
+          linear-gradient(90deg, $st1 0%, $st1 18%, #fff 18%, #fff 20.5%, transparent 20.5%, transparent 100%),
+          linear-gradient(90deg, $st2 20.5%, $st2 38.5%, #fff 38.5%, #fff 41%, transparent 41%, transparent 100%),
+          linear-gradient(90deg, $st3 41%, $st3 59%, #fff 59%, #fff 61.5%, transparent 61.5%, transparent 100%),
+          linear-gradient(90deg, $st4 61.5%, $st4 79.5%, #fff 79.5%, #fff 82%, transparent 82%, transparent 100%),
+          linear-gradient(90deg, $st5 82%, $st5 100%);
 }
 $inputRange-c1: #77AFA7;
 $inputRange-c2: #94BD8B;

@@ -44,9 +44,9 @@ const StoreProvider = ({ children }) => {
     const store = QuestStore.create({
         userName: "",
         userName2: "",
-        // currentQuestNumber: 1,
+        currentQuestNumber: 1,
         isResultSent: false,
-        currentQuestNumber: 15, // тестовый вариант
+        // currentQuestNumber: 15, // тестовый вариант
         answers: {
             "Acceptance": 500, // od - acc - Acceptance
             "Curiosity": 500, // lu - cur - Curiosity
