@@ -77,6 +77,13 @@ $breakpoints: (
     }
 }
 
+@mixin placeholder {
+    &::-webkit-input-placeholder {@content}
+    &:-moz-placeholder           {@content}
+    &::-moz-placeholder          {@content}
+    &:-ms-input-placeholder      {@content}
+}
+
 $baseMargBottom: 30px;
 
 $base-color: #77AFA7;
@@ -265,8 +272,9 @@ button, a {
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         padding-bottom: 35px;
+        padding-top: 110px;
 
         @media (min-width: 992px) {
             padding: 100px 200px;
@@ -287,8 +295,15 @@ button, a {
             width: 100%;
             max-width: 270px;
             margin-bottom: 25px;
-            padding: 4px 10px;
+            padding: 4px 20px;
             font-size: 20px;
+
+            @include placeholder {
+                font-size: 17px;
+                color: #A9A9A9;
+                font-weight:400;
+            }
+
         }
 
         .namePageBtn {
@@ -319,8 +334,9 @@ button, a {
             padding: 40px 20px;
 
             p {
-                text-align: center;
+                text-align: left;
                 font-weight: 500;
+                color: #474747;
             }
         }
         .guidePage__manual {
@@ -332,6 +348,7 @@ button, a {
             p {
                 text-align: center;
                 font-weight: 700;
+                margin-bottom: 50px;
             }
 
             .guidePageBtn {

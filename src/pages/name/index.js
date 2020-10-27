@@ -39,7 +39,7 @@ const NamePage = ({history}) => {
                 <input
                     className={styles.namePageInput}
                     type="text"
-                    placeholder='Username'
+                    placeholder='Ваше имя'
                     value={username}
                     onChange={e => setUsername(e.target.value)}
                 />

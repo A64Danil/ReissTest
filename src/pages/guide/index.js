@@ -12,8 +12,8 @@ const GuidePage = ({history}) => {
         <div className={styles.guidePage}>
             <div className={styles.guidePage__Container} >
                 <div className={styles.guidePage__description}>
-                    <p>Вас ждёт 16 характеристик (желаний), каждое из которых имеет разную ценность для разных людей</p>
-                    <p>Тест Рисса поможет осознать свои приоритеты и ценности</p>
+                    <p>Вас ждёт 16 характеристик (желаний), каждое из&nbsp;которых имеет разную ценность для&nbsp;разных людей</p>
+                    <p>Тест Рисса поможет осознать свои приоритеты и&nbsp;ценности</p>
 
                 </div>
                 <div className={styles.guidePage__manual}>
