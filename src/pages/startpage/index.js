@@ -9,8 +9,8 @@ const StartPage = ({location, match}) => {
         <div className={styles.startScreen}>
             <div className={styles.startScreen__Container} >
                 <h1>Теория мотивации Рисса</h1>
-                <h2>ЧТО ДЕЛАЕТ ВАС СЧАСТ&shy;ЛИВЫМ?</h2>
-                <p>Эти характеристики остаются практически неизменными на протяжении всей вашей жизни</p>
+                <h2>ЧТО<br/>ДЕЛАЕТ ВАС СЧАСТЛИВЫМ?</h2>
+                <p>В процессе тестирования вы сможете осознать, что важно для вашего счастья</p>
                 <Link to='/name'  className={styles.startTestBtn}>
                     Начать тест
                     <span>

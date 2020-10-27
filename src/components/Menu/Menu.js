@@ -9,7 +9,7 @@ const Menu = () => {
             <ul className={styles.MenuList}>
                 <li>
                     <NavLink to='/' exact activeClassName={styles.active}>
-                        Главная
+                        Home
                     </NavLink>
                 </li>
                 <li>
@@ -24,7 +24,7 @@ const Menu = () => {
                 </li>
                 <li>
                     <span>
-                        V-0.671
+                        v0.671
                     </span>
                 </li>
             </ul>
