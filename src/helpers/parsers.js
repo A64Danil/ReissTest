@@ -41,8 +41,10 @@ export const urlInlineParser = (urlString) =>  {
 
 export const getAllUrlParams = (url) => {
     console.log("getAllUrlParams from helpers/parsers");
+    console.log(url);
     // извлекаем строку из URL или объекта window
     var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
+    console.log(queryString);
 
     // объект для хранения параметров
     var obj = {};

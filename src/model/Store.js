@@ -45,8 +45,8 @@ const StoreProvider = ({ children }) => {
         userName: "",
         userName2: "",
         currentQuestNumber: 1,
-        isResultSent: false,
         // currentQuestNumber: 15, // тестовый вариант
+        isResultSent: false,
         answers: {
             "Acceptance": 500, // od - acc - Acceptance
             "Curiosity": 500, // lu - cur - Curiosity
