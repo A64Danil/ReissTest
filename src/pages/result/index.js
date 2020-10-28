@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
-import {urlInlineParser, getAllUrlParams} from "../../helpers/parsers"
+import {urlInlineParser, getAllUrlParams, checkUrlRes} from "../../helpers/parsers"
 import {copyToClipboard} from "../../helpers/base"
 
 import styles from "../../global.scss";
@@ -39,6 +39,7 @@ const Result = ({props}) => {
         if (stringUrlPath) {
             console.log("Берем результат из ссылки")
             let parsedResult = [];
+            // TODO: сделать рефакторинг - свести два цикла в один (тут та же фигня что и в compare page)
             for (const keyName in stringUrlPath) {
                 let fullName;
 
@@ -92,18 +93,20 @@ const Result = ({props}) => {
     }, [])
 
     useEffect(() => {
+        if (paramsToComparePage.indexOf("http") === -1) return;
         let allUrlParams = getAllUrlParams(window.location.search);
         let userNameUrl = decodeURIComponent(allUrlParams.username);
-        if (paramsToComparePage.indexOf("http") == -1) return
         let newParamsToComparePage = getAllUrlParams(paramsToComparePage);
         let secondUserNameUrl = decodeURIComponent(newParamsToComparePage.username);
+        //TODO: доделать чекУрл функцию в этом месте
+        console.log(checkUrlRes(urlInlineParser(newParamsToComparePage.res)));
         // http://localhost:1234/compare?res=acc1cur1ord1pow1sav1ind1sta1soc1rom5tra1hon1ide1ven1eat1phy1fam1&username=%D0%A1%D0%B5%D1%80%D0%B6&
         // res2=acc4cur2ord2pow2sav2ind1sta1soc1rom5tra1hon1ide1ven1eat1phy1fam1&username2=%D0%90%D1%84%D0%BE%D0%BD%D1%8F
         let originUserLink = 'res=' + allUrlParams.res + '&username=' + userNameUrl;
         let secondUserLink = 'res2=' + newParamsToComparePage.res + '&username2=' + secondUserNameUrl;
-        console.log(newParamsToComparePage);
+
         const newCompareLink = '/compare?' + originUserLink + '&' + secondUserLink;
-        console.log(newCompareLink);
+
         setUrlToComparePage(newCompareLink);
     }, [paramsToComparePage, setParamsToComparePage])
 

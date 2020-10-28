@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
-import {urlInlineParser, getAllUrlParams} from "../../helpers/parsers"
+import {urlInlineParser, getAllUrlParams, urlResParse} from "../../helpers/parsers"
 import styles from "../../global.scss";
 
 import {StoreContext} from "../../model/Store.js";
@@ -62,6 +62,8 @@ const Compare = ({props}) => {
                 })
 
             }
+
+            console.log(urlResParse(res1Url))
             console.log(parsedResult1.sort(resultCompare))
             console.log(parsedResult2)
             parsedResult1.forEach((answer)=> {

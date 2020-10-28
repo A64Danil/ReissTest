@@ -1,4 +1,5 @@
 import {isNumber,isString} from "./base"
+import json from "../model/quests";
 
 export const urlInlineParser = (urlString) =>  {
     if (!urlString) return ;
@@ -101,4 +102,41 @@ export const getAllUrlParams = (url) => {
     }
 
     return obj;
+}
+
+export const checkUrlRes = (urlRes) => {
+    let counter = 0;
+    for (const keyName in urlRes) {
+        let fullName;
+        json.forEach((quest)=> {
+            if(quest.urlName == keyName) {
+                fullName = quest.htmlTitle;
+                counter++;
+            }
+        })
+        if (!fullName) return "bad name for " + keyName;
+        if ( urlRes[keyName] < 1 ||  5 < urlRes[keyName]) {
+            return "bad value for " + fullName;
+        }
+    }
+    if (counter !== json.length) return "invalind answers number"
+    return "successful"
+
+}
+export const urlResParse = (urlRes) => {
+    let parsedResult = [];
+    for (const keyName in urlRes) {
+        let fullName;
+        json.forEach((quest)=> {
+            if(quest.urlName == keyName) {
+                fullName = quest.htmlTitle;
+            }
+        })
+        parsedResult.push({
+            title: fullName,
+            valueNum: urlRes[keyName] * 100
+        })
+
+    }
+    return parsedResult;
 }
