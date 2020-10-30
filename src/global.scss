@@ -403,6 +403,12 @@ button, a {
 
             .compareBtn {
                 @include baseColorBtn();
+                &.badUrl {
+                    background-color: #ccc;
+                    color: #999;
+                    border-color: #777;
+                }
+
             }
         }
     }

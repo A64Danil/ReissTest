@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react'
 import {urlInlineParser, getAllUrlParams, checkUrlRes} from "../../helpers/parsers"
-import {copyToClipboard} from "../../helpers/base"
+import {copyToClipboard, validURL} from "../../helpers/base"
 
 import styles from "../../global.scss";
 
@@ -18,6 +18,8 @@ const Result = ({props}) => {
     const [linkToCompare, setLinkToCompare] = useState("");
     const [paramsToComparePage, setParamsToComparePage] = useState("");
     const [urlToComparePage, setUrlToComparePage] = useState("");
+    const [isCompareUrlBad, setIsCompareUrlBad] = useState(false);
+    const [compareBtnClass, setСompareBtnClass] = useState('');
 
     // let finalResultArr = [];
     // let urlLink = "";
@@ -92,14 +94,29 @@ const Result = ({props}) => {
         // setFinalResultArr(finalResultArr.sort(resultCompare));
     }, [])
 
+
+
     useEffect(() => {
-        if (paramsToComparePage.indexOf("http") === -1) return;
+        if (!validURL(paramsToComparePage) && paramsToComparePage !== '') {
+            setIsCompareUrlBad(true);
+            alert('Вы вводите неправильный формат ссылки.')
+            return
+        };
+
         let allUrlParams = getAllUrlParams(window.location.search);
         let userNameUrl = decodeURIComponent(allUrlParams.username);
         let newParamsToComparePage = getAllUrlParams(paramsToComparePage);
         let secondUserNameUrl = decodeURIComponent(newParamsToComparePage.username);
         //TODO: доделать чекУрл функцию в этом месте
-        console.log(checkUrlRes(urlInlineParser(newParamsToComparePage.res)));
+        console.log(isCompareUrlBad);
+
+        if (checkUrlRes(urlInlineParser(newParamsToComparePage.res)) !== "successful") {
+            setIsCompareUrlBad(true);
+            alert(checkUrlRes(urlInlineParser(newParamsToComparePage.res)));
+            return;
+        } else {
+            setIsCompareUrlBad(false);
+        }
         // http://localhost:1234/compare?res=acc1cur1ord1pow1sav1ind1sta1soc1rom5tra1hon1ide1ven1eat1phy1fam1&username=%D0%A1%D0%B5%D1%80%D0%B6&
         // res2=acc4cur2ord2pow2sav2ind1sta1soc1rom5tra1hon1ide1ven1eat1phy1fam1&username2=%D0%90%D1%84%D0%BE%D0%BD%D1%8F
         let originUserLink = 'res=' + allUrlParams.res + '&username=' + userNameUrl;
@@ -109,6 +126,23 @@ const Result = ({props}) => {
 
         setUrlToComparePage(newCompareLink);
     }, [paramsToComparePage, setParamsToComparePage])
+
+    useEffect(() => {
+        if (isCompareUrlBad) {
+            setСompareBtnClass(styles.badUrl);
+        } else {
+            setСompareBtnClass("");
+        }
+
+    }, [isCompareUrlBad, setIsCompareUrlBad])
+
+
+    function onCompareBtnClick(e) {
+        if(paramsToComparePage === '') {
+            alert('Вы ничего не ввели в поле для сравнения');
+            e.preventDefault();
+        }
+    }
 
     function resultCompare(a, b) {
 
@@ -167,12 +201,14 @@ const Result = ({props}) => {
                     <input
                         type="text"
                         value={paramsToComparePage}
-                        onChange={e => {
-                            setParamsToComparePage(e.target.value);
-                        }}
+                        onChange={e => setParamsToComparePage(e.target.value)}
                         placeholder="Вставьте код для сравнения"
                     />
-                    <Link to={urlToComparePage}  className={styles.compareBtn}>
+                    <Link to={urlToComparePage}
+                          disabled={isCompareUrlBad}
+                          onClick={onCompareBtnClick}
+                          className={`${styles.compareBtn} ${compareBtnClass}`}
+                    >
                         Сравнить
                         <span>
                                 <Arrow />

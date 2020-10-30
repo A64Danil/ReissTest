@@ -41,8 +41,6 @@ export const urlInlineParser = (urlString) =>  {
 }
 
 export const getAllUrlParams = (url) => {
-    console.log("getAllUrlParams from helpers/parsers");
-    console.log(url);
     // извлекаем строку из URL или объекта window
     var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
     console.log(queryString);
@@ -114,12 +112,12 @@ export const checkUrlRes = (urlRes) => {
                 counter++;
             }
         })
-        if (!fullName) return "bad name for " + keyName;
+        if (!fullName) return `Указано неверное имя у ${keyName}`;
         if ( urlRes[keyName] < 1 ||  5 < urlRes[keyName]) {
-            return "bad value for " + fullName;
+            return `Указано неверное значение для ${fullName} (${urlRes[keyName]})`;
         }
     }
-    if (counter !== json.length) return "invalind answers number"
+    if (counter !== json.length) return "Неверное количество ответов";
     return "successful"
 
 }
