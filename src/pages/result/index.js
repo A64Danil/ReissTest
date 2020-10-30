@@ -21,6 +21,8 @@ const Result = ({props}) => {
     const [isCompareUrlBad, setIsCompareUrlBad] = useState(false);
     const [compareBtnClass, setСompareBtnClass] = useState('');
 
+    const [urlErrorMsg, setUrlErrorMsg] = useState('');
+
     // let finalResultArr = [];
     // let urlLink = "";
 
@@ -99,9 +101,10 @@ const Result = ({props}) => {
     useEffect(() => {
         if (!validURL(paramsToComparePage) && paramsToComparePage !== '') {
             setIsCompareUrlBad(true);
-            alert('Вы вводите неправильный формат ссылки.')
+            setUrlErrorMsg('Вы вводите неправильный формат ссылки.');
             return
         };
+        if (paramsToComparePage === '') setUrlErrorMsg('');
 
         let allUrlParams = getAllUrlParams(window.location.search);
         let userNameUrl = decodeURIComponent(allUrlParams.username);
@@ -112,10 +115,11 @@ const Result = ({props}) => {
 
         if (checkUrlRes(urlInlineParser(newParamsToComparePage.res)) !== "successful") {
             setIsCompareUrlBad(true);
-            alert(checkUrlRes(urlInlineParser(newParamsToComparePage.res)));
+            setUrlErrorMsg(checkUrlRes(urlInlineParser(newParamsToComparePage.res)));
             return;
         } else {
             setIsCompareUrlBad(false);
+            setUrlErrorMsg('');
         }
         // http://localhost:1234/compare?res=acc1cur1ord1pow1sav1ind1sta1soc1rom5tra1hon1ide1ven1eat1phy1fam1&username=%D0%A1%D0%B5%D1%80%D0%B6&
         // res2=acc4cur2ord2pow2sav2ind1sta1soc1rom5tra1hon1ide1ven1eat1phy1fam1&username2=%D0%90%D1%84%D0%BE%D0%BD%D1%8F
@@ -184,7 +188,7 @@ const Result = ({props}) => {
 
 
                 <div className={styles.resultShare}>
-                    <h3>Отправьте эту ссылку другу, если хотите показать ему ваш результат</h3>
+                    <h3>Отправьте эту ссылку другу, если хотите показать ему ваш результат или чтобы он мог сравнить свои результаты с вашими</h3>
                     <button
                         className={styles.stringToCopy}
                         onClick={copyToOnClick}
@@ -197,13 +201,16 @@ const Result = ({props}) => {
 
 
                 <div className={styles.resultShare}>
-                    <h3>Вставьте в поле ниже код от вашего друга, чтобы сравнить ваши результаты</h3>
+                    <h3>Вставьте в поле ниже ссылку от вашего друга, чтобы сравнить ваши результаты</h3>
                     <input
                         type="text"
                         value={paramsToComparePage}
                         onChange={e => setParamsToComparePage(e.target.value)}
                         placeholder="Вставьте код для сравнения"
                     />
+                    {urlErrorMsg && (
+                        <p className={styles.errorMsg}>{urlErrorMsg}</p>
+                        )}
                     <Link to={urlToComparePage}
                           disabled={isCompareUrlBad}
                           onClick={onCompareBtnClick}
@@ -217,7 +224,7 @@ const Result = ({props}) => {
                 </div>
 
                 <div className={styles.resultShare}>
-                    <h3>Отправьте этот код другу, чтобы он мог сравнить свои результаты с вашими</h3>
+                    <h3>(НЕ РАБОТАЕТ) Отправьте этот код другу, чтобы он мог сравнить свои результаты с вашими</h3>
                     <button
                         className={styles.stringToCopy}
                         onClick={copyToOnClick}

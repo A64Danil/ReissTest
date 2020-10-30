@@ -190,6 +190,12 @@ button, a {
     }
 }
 
+.errorMsg {
+    color: tomato;
+    font-weight: 500;
+    font-size: 16px;
+}
+
 :global {
     .outerWrp {
         //max-width: 500px;

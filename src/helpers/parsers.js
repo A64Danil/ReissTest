@@ -112,7 +112,7 @@ export const checkUrlRes = (urlRes) => {
                 counter++;
             }
         })
-        if (!fullName) return `Указано неверное имя у ${keyName}`;
+        if (!fullName) return `Указано неверное имя у '${keyName}' (${urlRes[keyName]})`;
         if ( urlRes[keyName] < 1 ||  5 < urlRes[keyName]) {
             return `Указано неверное значение для ${fullName} (${urlRes[keyName]})`;
         }
