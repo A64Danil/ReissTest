@@ -14,8 +14,8 @@ const Result = ({props}) => {
     const store = useContext(StoreContext)
     const questResults = store.answers.toJS();
     const [finalResultArr, setFinalResultArr] = useState([]);
-    const [urlLink, setUrlLink] = useState("");
-    const [linkToCompare, setLinkToCompare] = useState("");
+    // const [urlLink, setUrlLink] = useState("");
+    // const [linkToCompare, setLinkToCompare] = useState("");
     const [paramsToComparePage, setParamsToComparePage] = useState("");
     const [urlToComparePage, setUrlToComparePage] = useState("");
     const [isCompareUrlBad, setIsCompareUrlBad] = useState(false);
@@ -29,13 +29,7 @@ const Result = ({props}) => {
         let allUrlParams = getAllUrlParams(window.location.search);
         let stringUrlPath = urlInlineParser(allUrlParams.res);
         let userNameUrl = decodeURIComponent(allUrlParams.username);
-        console.log(stringUrlPath);
-        console.log(userNameUrl);
         store.setUsername(userNameUrl);
-        setUrlLink(allUrlParams.res)
-
-        let compareLink = 'res2=' + allUrlParams.res + '&username2=' + userNameUrl;
-        setLinkToCompare(compareLink);
 
         store.setResultUrl('result' + window.location.search);
 
@@ -224,15 +218,6 @@ const Result = ({props}) => {
                     </Link>
                 </div>
 
-                <div className={styles.resultShare}>
-                    <h3>(НЕ РАБОТАЕТ) Отправьте этот код другу, чтобы он мог сравнить свои результаты с вашими</h3>
-                    <button
-                        className={styles.stringToCopy}
-                        onClick={copyToOnClick}
-                    >
-                        <p className={styles.longString}>{linkToCompare}</p>
-                    </button>
-                </div>
             </div>
         </div>
     )
