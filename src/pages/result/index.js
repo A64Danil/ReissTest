@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
-import {urlInlineParser, getAllUrlParams, checkUrlRes} from "../../helpers/parsers"
+import {urlInlineParser, getAllUrlParams, checkUrlRes, urlResParse, sortResultDesc} from "../../helpers/parsers"
 import {copyToClipboard, validURL} from "../../helpers/base"
 
 import styles from "../../global.scss";
@@ -14,8 +14,6 @@ const Result = ({props}) => {
     const store = useContext(StoreContext)
     const questResults = store.answers.toJS();
     const [finalResultArr, setFinalResultArr] = useState([]);
-    // const [urlLink, setUrlLink] = useState("");
-    // const [linkToCompare, setLinkToCompare] = useState("");
     const [paramsToComparePage, setParamsToComparePage] = useState("");
     const [urlToComparePage, setUrlToComparePage] = useState("");
     const [isCompareUrlBad, setIsCompareUrlBad] = useState(false);
@@ -26,37 +24,17 @@ const Result = ({props}) => {
 
     useEffect(()=> {
         console.log("Вы на финальной странице UseEffect")
-        let allUrlParams = getAllUrlParams(window.location.search);
-        let stringUrlPath = urlInlineParser(allUrlParams.res);
-        let userNameUrl = decodeURIComponent(allUrlParams.username);
+        const allUrlParams = getAllUrlParams(window.location.search);
+        const stringUrlPath = urlInlineParser(allUrlParams.res);
+        const userNameUrl = decodeURIComponent(allUrlParams.username);
         store.setUsername(userNameUrl);
 
         store.setResultUrl('result' + window.location.search);
 
         if (stringUrlPath) {
             console.log("Берем результат из ссылки")
-            let parsedResult = [];
-            // TODO: сделать рефакторинг - свести два цикла в один (тут та же фигня что и в compare page)
-            for (const keyName in stringUrlPath) {
-                let fullName;
-
-                json.forEach((quest)=> {
-                    if(quest.urlName == keyName) {
-                        fullName = quest.htmlTitle;
-                    }
-
-                })
-
-
-                parsedResult.push({
-                    title: fullName,
-                    valueNum: stringUrlPath[keyName] * 100
-                })
-
-            }
-            console.log(parsedResult)
-            // finalResultArr = parsedResult;
-            setFinalResultArr(parsedResult)
+            let parsedResult = urlResParse(stringUrlPath).sort(sortResultDesc);
+            setFinalResultArr(parsedResult);
         }
         else {
             console.log("Берем результат из стора")
@@ -85,8 +63,6 @@ const Result = ({props}) => {
             setFinalResultArr(parsedResult);
         }
         console.log(finalResultArr);
-        // TODO: починить, ломает систему
-        // setFinalResultArr(finalResultArr.sort(resultCompare));
     }, [])
 
 
@@ -99,16 +75,16 @@ const Result = ({props}) => {
         };
         if (paramsToComparePage === '') setUrlErrorMsg('');
 
-        let allUrlParams = getAllUrlParams(window.location.search);
-        let userNameUrl = decodeURIComponent(allUrlParams.username);
-        let newParamsToComparePage = getAllUrlParams(paramsToComparePage);
-        let secondUserNameUrl = decodeURIComponent(newParamsToComparePage.username);
-        //TODO: доделать чекУрл функцию в этом месте
-        console.log(isCompareUrlBad);
+        const allUrlParams = getAllUrlParams(window.location.search);
+        const userNameUrl = decodeURIComponent(allUrlParams.username);
+        const newParamsToComparePage = getAllUrlParams(paramsToComparePage);
+        const secondUserNameUrl = decodeURIComponent(newParamsToComparePage.username);
 
-        if (checkUrlRes(urlInlineParser(newParamsToComparePage.res)) !== "successful") {
+        const urlCheker = checkUrlRes(urlInlineParser(newParamsToComparePage.res));
+
+        if (urlCheker !== "successful") {
             setIsCompareUrlBad(true);
-            setUrlErrorMsg(checkUrlRes(urlInlineParser(newParamsToComparePage.res)));
+            setUrlErrorMsg(urlCheker);
             return;
         } else {
             setIsCompareUrlBad(false);
@@ -116,13 +92,13 @@ const Result = ({props}) => {
 
             // http://localhost:1234/compare?res=acc1cur1ord1pow1sav1ind1sta1soc1rom5tra1hon1ide1ven1eat1phy1fam1&username=%D0%A1%D0%B5%D1%80%D0%B6&
             // res2=acc4cur2ord2pow2sav2ind1sta1soc1rom5tra1hon1ide1ven1eat1phy1fam1&username2=%D0%90%D1%84%D0%BE%D0%BD%D1%8F
-            let originUserLink = 'res=' + allUrlParams.res + '&username=' + userNameUrl;
-            let secondUserLink = 'res2=' + newParamsToComparePage.res + '&username2=' + secondUserNameUrl;
+            const originUserLink = 'res=' + allUrlParams.res + '&username=' + userNameUrl;
+            const secondUserLink = 'res2=' + newParamsToComparePage.res + '&username2=' + secondUserNameUrl;
 
             const newCompareLink = '/compare?' + originUserLink + '&' + secondUserLink;
-
             setUrlToComparePage(newCompareLink);
         }
+        console.log(isCompareUrlBad);
 
     }, [paramsToComparePage, setParamsToComparePage])
 
@@ -143,17 +119,6 @@ const Result = ({props}) => {
         }
     }
 
-    function resultCompare(a, b) {
-
-        if (a.valueNum < b.valueNum) {
-            return 1;
-        }
-        if (a.valueNum > b.valueNum) {
-            return -1;
-        }
-        // a должно быть равным b
-        return 0;
-    }
 
 
 

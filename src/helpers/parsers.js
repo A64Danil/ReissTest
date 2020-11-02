@@ -139,3 +139,15 @@ export const urlResParse = (urlRes) => {
     }
     return parsedResult;
 }
+
+export const sortResultDesc = (a, b) => {
+
+    if (a.valueNum < b.valueNum) {
+        return 1;
+    }
+    if (a.valueNum > b.valueNum) {
+        return -1;
+    }
+    // a должно быть равным b
+    return 0;
+}

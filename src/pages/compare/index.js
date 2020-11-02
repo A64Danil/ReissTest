@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
-import {urlInlineParser, getAllUrlParams, urlResParse, checkUrlRes} from "../../helpers/parsers"
+import {urlInlineParser, getAllUrlParams, urlResParse, checkUrlRes, sortResultDesc} from "../../helpers/parsers"
 import styles from "../../global.scss";
 
 import {StoreContext} from "../../model/Store.js";
@@ -20,11 +20,7 @@ const Compare = ({history}) => {
         let userName1Url = decodeURIComponent(allUrlParams.username);
         let res2Url = urlInlineParser(allUrlParams.res2);
         let userName2Url = decodeURIComponent(allUrlParams.username2);
-        // console.log(userName1Url);
-        // console.log(res1Url);
         store.setUsername(userName1Url);
-        // console.log(userName2Url);
-        // console.log(res2Url);
         store.setUsername2(userName2Url);
 
         let tempLink = urlLink + allUrlParams.res;
@@ -46,7 +42,7 @@ const Compare = ({history}) => {
                 store.resultUrl !== '' ? history.push(store.resultUrl) : history.push(store.resultUrl);
             }
 
-            let parsedResult1 = urlResParse(res1Url).sort(resultCompare);
+            let parsedResult1 = urlResParse(res1Url).sort(sortResultDesc);
             let parsedResult2 = urlResParse(res2Url);
 
             let parsedResult2sorted = [];
@@ -63,19 +59,6 @@ const Compare = ({history}) => {
         }
 
     }, [])
-
-
-    function resultCompare(a, b) {
-        if (a.valueNum < b.valueNum) {
-            return 1;
-        }
-        if (a.valueNum > b.valueNum) {
-            return -1;
-        }
-        // a должно быть равным b
-        return 0;
-    }
-
 
 
     console.log(finalResultArr)
