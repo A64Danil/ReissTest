@@ -1,6 +1,35 @@
 import React, {useState,useEffect} from "react";
+import cookie from "react-cookies";
 
 import {types} from "mobx-state-tree"
+
+const userCookie = cookie.loadAll();
+let initialState;
+
+
+
+
+console.log(userCookie);
+(function () {
+    const expires = new Date();
+    expires.setDate(100000 + 14);
+    cookie.save(
+        "userAnswers",
+        JSON.stringify({
+            heh: 'test',
+        }),
+        {
+            path: "/",
+            expires,
+            maxAge: 1000,
+            domain: "",
+            secure: false,
+            httpOnly: false
+        }
+    );
+})();
+console.log(cookie.loadAll());
+console.log(userCookie);
 
 export const StoreContext = React.createContext();
 
