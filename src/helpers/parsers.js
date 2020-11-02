@@ -121,6 +121,7 @@ export const checkUrlRes = (urlRes) => {
     return "successful"
 
 }
+
 export const urlResParse = (urlRes) => {
     let parsedResult = [];
     for (const keyName in urlRes) {

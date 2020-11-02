@@ -23,8 +23,6 @@ const Result = ({props}) => {
 
     const [urlErrorMsg, setUrlErrorMsg] = useState('');
 
-    // let finalResultArr = [];
-    // let urlLink = "";
 
     useEffect(()=> {
         console.log("Вы на финальной странице UseEffect")
@@ -39,6 +37,7 @@ const Result = ({props}) => {
         let compareLink = 'res2=' + allUrlParams.res + '&username2=' + userNameUrl;
         setLinkToCompare(compareLink);
 
+        store.setResultUrl('result' + window.location.search);
 
         if (stringUrlPath) {
             console.log("Берем результат из ссылки")
@@ -120,15 +119,17 @@ const Result = ({props}) => {
         } else {
             setIsCompareUrlBad(false);
             setUrlErrorMsg('');
+
+            // http://localhost:1234/compare?res=acc1cur1ord1pow1sav1ind1sta1soc1rom5tra1hon1ide1ven1eat1phy1fam1&username=%D0%A1%D0%B5%D1%80%D0%B6&
+            // res2=acc4cur2ord2pow2sav2ind1sta1soc1rom5tra1hon1ide1ven1eat1phy1fam1&username2=%D0%90%D1%84%D0%BE%D0%BD%D1%8F
+            let originUserLink = 'res=' + allUrlParams.res + '&username=' + userNameUrl;
+            let secondUserLink = 'res2=' + newParamsToComparePage.res + '&username2=' + secondUserNameUrl;
+
+            const newCompareLink = '/compare?' + originUserLink + '&' + secondUserLink;
+
+            setUrlToComparePage(newCompareLink);
         }
-        // http://localhost:1234/compare?res=acc1cur1ord1pow1sav1ind1sta1soc1rom5tra1hon1ide1ven1eat1phy1fam1&username=%D0%A1%D0%B5%D1%80%D0%B6&
-        // res2=acc4cur2ord2pow2sav2ind1sta1soc1rom5tra1hon1ide1ven1eat1phy1fam1&username2=%D0%90%D1%84%D0%BE%D0%BD%D1%8F
-        let originUserLink = 'res=' + allUrlParams.res + '&username=' + userNameUrl;
-        let secondUserLink = 'res2=' + newParamsToComparePage.res + '&username2=' + secondUserNameUrl;
 
-        const newCompareLink = '/compare?' + originUserLink + '&' + secondUserLink;
-
-        setUrlToComparePage(newCompareLink);
     }, [paramsToComparePage, setParamsToComparePage])
 
     useEffect(() => {

@@ -6,8 +6,11 @@ export const StoreContext = React.createContext();
 
 const QuestStore = types
     .model("QuestStore", {
+        userName: types.string,
+        userName2: types.string,
         currentQuestNumber: types.number,
         isResultSent: types.boolean,
+        resultUrl: types.string,
         answers: types.map(types.number),
         isChosenAnswers: types.map(types.boolean)
     })
@@ -27,6 +30,9 @@ const QuestStore = types
         setIsResultSent(boolean) {
             self.isResultSent = boolean;
         },
+        setResultUrl(url) {
+            self.resultUrl = url;
+        },
         nextQuest() {
             // console.log("Нажали следующий вопрос")
             self.currentQuestNumber = self.currentQuestNumber + 1;
@@ -42,11 +48,12 @@ const QuestStore = types
 
 const StoreProvider = ({ children }) => {
     const store = QuestStore.create({
-        userName: "",
-        userName2: "",
-        currentQuestNumber: 1,
-        // currentQuestNumber: 15, // тестовый вариант
+        userName: '',
+        userName2: '',
+        // currentQuestNumber: 1,
+        currentQuestNumber: 15, // тестовый вариант
         isResultSent: false,
+        resultUrl: '',
         answers: {
             "Acceptance": 500, // od - acc - Acceptance
             "Curiosity": 500, // lu - cur - Curiosity

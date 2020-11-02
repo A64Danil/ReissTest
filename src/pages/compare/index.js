@@ -1,12 +1,12 @@
 import React, {useContext, useEffect, useState} from 'react'
-import {urlInlineParser, getAllUrlParams, urlResParse} from "../../helpers/parsers"
+import {urlInlineParser, getAllUrlParams, urlResParse, checkUrlRes} from "../../helpers/parsers"
 import styles from "../../global.scss";
 
 import {StoreContext} from "../../model/Store.js";
 
 import json from "./../../model/quests";
 
-const Compare = ({props}) => {
+const Compare = ({history}) => {
     const store = useContext(StoreContext)
     const questResults = store.answers.toJS();
     const [finalResultArr, setFinalResultArr] = useState([]);
@@ -20,59 +20,41 @@ const Compare = ({props}) => {
         let userName1Url = decodeURIComponent(allUrlParams.username);
         let res2Url = urlInlineParser(allUrlParams.res2);
         let userName2Url = decodeURIComponent(allUrlParams.username2);
-        console.log(userName1Url);
-        console.log(res1Url);
+        // console.log(userName1Url);
+        // console.log(res1Url);
         store.setUsername(userName1Url);
-        console.log(userName2Url);
-        console.log(res2Url);
+        // console.log(userName2Url);
+        // console.log(res2Url);
         store.setUsername2(userName2Url);
 
         let tempLink = urlLink + allUrlParams.res;
         setUrlLink(tempLink)
 
         if (res1Url && res2Url) {
-            console.log("Берем результат из ссылки")
-            let parsedResult1 = [];
-            let parsedResult2 = [];
+            console.log("Берем результат из ссылки");
+            let url1Cheker = checkUrlRes(res1Url);
+            let url2Cheker = checkUrlRes(res2Url);
+
+
+            if (url1Cheker !== "successful") {
+                alert("Неправильный адрес ссылки. В первой части ссылки какая-то ошибка: " + url1Cheker);
+                // if (store.resultUrl !== '')  history.push(store.resultUrl);
+                store.resultUrl !== '' ? history.push(store.resultUrl) : history.push(store.resultUrl);
+            }
+            if (url2Cheker !== "successful") {
+                alert("Неправильный адрес ссылки. Во второй части ссылки какая-то ошибка: " + url2Cheker);
+                store.resultUrl !== '' ? history.push(store.resultUrl) : history.push(store.resultUrl);
+            }
+
+            let parsedResult1 = urlResParse(res1Url).sort(resultCompare);
+            let parsedResult2 = urlResParse(res2Url);
+
             let parsedResult2sorted = [];
-            // TODO: сделать рефакторинг - свести два цикла в один
-            for (const keyName in res1Url) {
-                let fullName;
-                json.forEach((quest)=> {
-                    if(quest.urlName == keyName) {
-                        fullName = quest.htmlTitle;
-                    }
-                })
-                parsedResult1.push({
-                    title: fullName,
-                    valueNum: res1Url[keyName] * 100
-                })
 
-            }
-            for (const keyName in res2Url) {
-                let fullName;
-                json.forEach((quest)=> {
-                    if(quest.urlName == keyName) {
-                        fullName = quest.htmlTitle;
-                    }
-                })
-                parsedResult2.push({
-                    title: fullName,
-                    valueNum: res2Url[keyName] * 100
-                })
-
-            }
-
-            console.log(urlResParse(res1Url))
-            console.log(parsedResult1.sort(resultCompare))
-            console.log(parsedResult2)
             parsedResult1.forEach((answer)=> {
-                console.log(answer.title);
-                console.log(
-                    parsedResult2sorted.push(parsedResult2.find( el => el.title === answer.title)));
+                const newAnswer = parsedResult2.find( el => el.title === answer.title);
+                parsedResult2sorted.push(newAnswer);
             });
-            console.log(parsedResult2)
-            // finalResultArr = parsedResult;
             setFinalResultArr(parsedResult1)
             setFinalResultArr2(parsedResult2sorted)
         }
@@ -98,14 +80,11 @@ const Compare = ({props}) => {
 
     console.log(finalResultArr)
     console.log(finalResultArr2)
-    // console.log(urlLink)
 
 
     return (
         <div className={styles.compareResultsPage}>
             <h1>Сравнение результатов:</h1>
-
-
 
             <div className={styles.compareResultsNames}>
                 <h2>{store.userName}</h2>
