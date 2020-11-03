@@ -3,33 +3,22 @@ import cookie from "react-cookies";
 
 import {types} from "mobx-state-tree"
 
-const userCookie = cookie.loadAll();
-let initialState;
-
-
-
-
-console.log(userCookie);
-(function () {
+const saveFastCookie = (cookieName, cookieValue) => {
     const expires = new Date();
-    expires.setDate(100000 + 14);
+    expires.setDate(14);
     cookie.save(
-        "userAnswers",
-        JSON.stringify({
-            heh: 'test',
-        }),
+        cookieName,
+        cookieValue,
         {
             path: "/",
             expires,
-            maxAge: 1000,
+            maxAge: 172800,
             domain: "",
             secure: false,
             httpOnly: false
         }
     );
-})();
-console.log(cookie.loadAll());
-console.log(userCookie);
+};
 
 export const StoreContext = React.createContext();
 
@@ -45,13 +34,23 @@ const QuestStore = types
     })
     .actions(self => ({
         addAnswer(quest) {
-            self.answers.set(quest.keyTitle, quest.value)
+            self.answers.set(quest.keyTitle, quest.value);
+            const newAnswers = cookie.load('userAnswers') || {};
+            newAnswers[quest.keyTitle] = quest.value;
+            saveFastCookie('userAnswers', newAnswers);
+            console.log(cookie.loadAll());
+
+
         },
         setIsChosenAnswer(keyTitle, value) {
-            self.isChosenAnswers.set(keyTitle, value)
+            self.isChosenAnswers.set(keyTitle, value);
+            const newIsChosenAnswers = cookie.load('isChosenAnswers') || {};
+            newIsChosenAnswers[keyTitle] = value;
+            saveFastCookie('isChosenAnswers', newIsChosenAnswers);
         },
         setUsername(name) {
             self.userName = name;
+            saveFastCookie('userName',name);
         },
         setUsername2(name) {
             self.userName2 = name;
@@ -65,10 +64,12 @@ const QuestStore = types
         nextQuest() {
             // console.log("Нажали следующий вопрос")
             self.currentQuestNumber = self.currentQuestNumber + 1;
+            saveFastCookie('currentQuestNumber', self.currentQuestNumber);
         },
         prevQuest() {
             // console.log("Нажали предыдущий вопрос")
             self.currentQuestNumber = self.currentQuestNumber > 1 ? self.currentQuestNumber - 1 : 1;
+            saveFastCookie('currentQuestNumber', self.currentQuestNumber);
         }
     }))
     // .views(self => {})
@@ -77,13 +78,13 @@ const QuestStore = types
 
 const StoreProvider = ({ children }) => {
     const store = QuestStore.create({
-        userName: '',
+        userName: cookie.load("userName") || '',
         userName2: '',
-        // currentQuestNumber: 1,
-        currentQuestNumber: 15, // тестовый вариант
+        currentQuestNumber:  parseInt(cookie.load("currentQuestNumber")) || 1,
+        // currentQuestNumber: 15, // тестовый вариант
         isResultSent: false,
         resultUrl: '',
-        answers: {
+        answers: Object.assign({
             "Acceptance": 500, // od - acc - Acceptance
             "Curiosity": 500, // lu - cur - Curiosity
             "Order": 500, // po - ord - Order
@@ -100,8 +101,8 @@ const StoreProvider = ({ children }) => {
             "Eating": 500, // ed - eat - Eating
             "PhysicalActivity": 500, // fi - phy - PhysicalActivity
             "Family": 500 // se - fam - Family
-        },
-        isChosenAnswers: {
+        }, cookie.load('userAnswers')),
+        isChosenAnswers: Object.assign({
             "Acceptance": false,
             "Curiosity": false,
             "Order": false,
@@ -118,7 +119,7 @@ const StoreProvider = ({ children }) => {
             "Eating": false,
             "PhysicalActivity": false,
             "Family": false
-        }
+        }, cookie.load('isChosenAnswers'))
         
     })
     //"od", "lu", "po", "vl", "be", "ne", "st", "ob", "ro", "sp", "ch", "id", "me", "ed", "fi", "se",
