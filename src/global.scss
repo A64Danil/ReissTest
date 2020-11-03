@@ -77,6 +77,21 @@ $breakpoints: (
     }
 }
 
+@mixin transparentBtn($color) {
+    border-radius: 29px;
+    border: 2px solid $color;
+    background-color: transparent;
+    color: $color;
+    font-weight: 600;
+    padding: 15px 22px;
+    display: inline-block;
+    font-size: 16px;
+    text-transform: uppercase;
+    //width: 100%;
+    text-align: center;
+
+}
+
 @mixin placeholder {
     &::-webkit-input-placeholder {@content}
     &:-moz-placeholder           {@content}
@@ -415,6 +430,13 @@ button, a {
                     border-color: #777;
                 }
 
+            }
+
+            .refreshBtn {
+                @include  transparentBtn($base-color);
+            }
+            .grayBtn {
+                @include  transparentBtn(#A2A2A2);
             }
         }
     }

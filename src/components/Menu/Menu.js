@@ -5,7 +5,7 @@ import styles from "./Menu.scss";
 import {StoreContext} from "../../model/Store";
 
 const Menu = () => {
-    const store = useContext(StoreContext)
+    const store = useContext(StoreContext);
     return (
         <div className={styles.Menu}>
             <ul className={styles.MenuList}>

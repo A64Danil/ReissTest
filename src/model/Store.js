@@ -50,7 +50,7 @@ const QuestStore = types
         },
         setUsername(name) {
             self.userName = name;
-            saveFastCookie('userName',name);
+            saveFastCookie('userName', name);
         },
         setUsername2(name) {
             self.userName2 = name;

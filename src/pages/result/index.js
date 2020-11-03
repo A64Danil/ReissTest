@@ -121,6 +121,11 @@ const Result = ({props}) => {
 
 
 
+    const onRefreshBtnClick = (e) => {
+        //TODO: обновлять стейт до начального
+        console.log("refresh cookie and store here");
+    }
+
 
     const copyToOnClick = (e) => {
         const bufferedText = e.currentTarget.textContent;
@@ -180,6 +185,24 @@ const Result = ({props}) => {
                         <span>
                                 <Arrow />
                             </span>
+                    </Link>
+                </div>
+
+
+                <div className={styles.resultShare}>
+                    <Link to={'/'}
+                          onClick={onRefreshBtnClick}
+                          className={styles.refreshBtn}
+                    >
+                        Пройти заново
+                    </Link>
+                </div>
+
+                <div className={styles.resultShare}>
+                    <Link to={'/contacts'}
+                          className={styles.grayBtn}
+                    >
+                        Написать разработчикам
                     </Link>
                 </div>
 
