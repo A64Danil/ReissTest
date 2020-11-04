@@ -63,6 +63,7 @@ const Result = ({props}) => {
             setFinalResultArr(parsedResult);
         }
         console.log(finalResultArr);
+        console.log(store);
     }, [])
 
 
@@ -124,6 +125,7 @@ const Result = ({props}) => {
     const onRefreshBtnClick = (e) => {
         //TODO: обновлять стейт до начального
         console.log("refresh cookie and store here");
+        store.resetState();
     }
 
 

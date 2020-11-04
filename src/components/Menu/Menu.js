@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {NavLink} from 'react-router-dom';
 
 import styles from "./Menu.scss";
@@ -6,6 +6,14 @@ import {StoreContext} from "../../model/Store";
 
 const Menu = () => {
     const store = useContext(StoreContext);
+    let currentUserName = store.userName || '';
+    const [userName, setUserName] = useState(currentUserName);
+
+    useEffect(()=> {
+        console.log('store.userName', store.userName);
+        // store.setUsername(username);
+    }, [store.userName])
+
     return (
         <div className={styles.Menu}>
             <ul className={styles.MenuList}>
@@ -19,17 +27,12 @@ const Menu = () => {
                         Тест
                     </NavLink>
                 </li>
-                {/*<li>*/}
-                {/*    <NavLink to='/contacts' activeClassName={styles.active}>*/}
-                {/*        Контакты*/}
-                {/*    </NavLink>*/}
-                {/*</li>*/}
                 <li>
                     <span>
-                        {store.userName && (
-                            <>Привет, {store.userName}!</>
+                        {userName && (
+                            <>Привет, {userName}!</>
                         )}
-                        {!store.userName && (
+                        {!userName && (
                             <>Привет!</>
                         )}
                     </span>

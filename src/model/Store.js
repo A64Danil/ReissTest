@@ -20,6 +20,58 @@ const saveFastCookie = (cookieName, cookieValue) => {
     );
 };
 
+const initialState = {
+    userName: '',
+    userName2: '',
+    currentQuestNumber:  1,
+    isResultSent: false,
+    resultUrl: '',
+    answers: {
+        "Acceptance": 500,
+        "Curiosity": 500,
+        "Order": 500,
+        "Power": 500,
+        "Saving": 500,
+        "Independence": 500,
+        "Status": 500,
+        "SocialContact": 500,
+        "Romance": 500,
+        "Tranquility": 500,
+        "Honor": 500,
+        "Idealism": 500,
+        "Vengeance": 500,
+        "Eating": 500,
+        "PhysicalActivity": 500,
+        "Family": 500
+    },
+    isChosenAnswers: {
+        "Acceptance": false,
+        "Curiosity": false,
+        "Order": false,
+        "Power": false,
+        "Saving": false,
+        "Independence": false,
+        "Status": false,
+        "SocialContact": false,
+        "Romance": false,
+        "Tranquility": false,
+        "Honor": false,
+        "Idealism": false,
+        "Vengeance": false,
+        "Eating": false,
+        "PhysicalActivity": false,
+        "Family": false
+    }
+
+}
+
+// 1) Есть "начальный" стейт
+// 2) Есть стейт из куки
+// 3) При входе на сайт, ТЕКУЩИЙ стейт обновляется стейтом из куки (заменяется/дополняется)
+// 4) При нажатии кнопки "снова" - затереть куки, ТЕКУЩИЙ стейт сделать НАЧАЛЬНЫМ
+// (начальный стейт, текущий стейт, куки)
+
+
 export const StoreContext = React.createContext();
 
 const QuestStore = types
@@ -35,9 +87,9 @@ const QuestStore = types
     .actions(self => ({
         addAnswer(quest) {
             self.answers.set(quest.keyTitle, quest.value);
-            const newAnswers = cookie.load('userAnswers') || {};
+            const newAnswers = cookie.load('answers') || {};
             newAnswers[quest.keyTitle] = quest.value;
-            saveFastCookie('userAnswers', newAnswers);
+            saveFastCookie('answers', newAnswers);
             console.log(cookie.loadAll());
 
 
@@ -70,6 +122,17 @@ const QuestStore = types
             // console.log("Нажали предыдущий вопрос")
             self.currentQuestNumber = self.currentQuestNumber > 1 ? self.currentQuestNumber - 1 : 1;
             saveFastCookie('currentQuestNumber', self.currentQuestNumber);
+        },
+        resetState() {
+            console.log("TRY resetState");
+            Object.keys(initialState).forEach(keyName => {
+                cookie.remove(keyName, { path: '/' })
+            });
+            // self = initialState;
+            // self.userName = 'test';
+            self.userName = initialState.userName;
+            console.log(self);
+            console.log(Object.keys(initialState));
         }
     }))
     // .views(self => {})
@@ -101,7 +164,7 @@ const StoreProvider = ({ children }) => {
             "Eating": 500, // ed - eat - Eating
             "PhysicalActivity": 500, // fi - phy - PhysicalActivity
             "Family": 500 // se - fam - Family
-        }, cookie.load('userAnswers')),
+        }, cookie.load('answers')),
         isChosenAnswers: Object.assign({
             "Acceptance": false,
             "Curiosity": false,

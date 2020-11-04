@@ -1,10 +1,14 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styles from "../../global.scss";
 import {Link} from "react-router-dom";
 import Arrow from "./../../assets/svg/arrow_normal";
+import {StoreContext} from "../../model/Store";
 
 
 const StartPage = ({location, match}) => {
+    const store = useContext(StoreContext);
+    store.resetState();
+    console.log(store);
     return (
         <div className={styles.startScreen}>
             <div className={styles.startScreen__Container} >

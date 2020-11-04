@@ -202,7 +202,6 @@ const Slider = ({history}) => {
 
     function onAfterChange(value) {
         let flatValue = rangeSliderStrongMagnet(value);
-        console.log(questInfo)
         let answer = {
             keyTitle: questInfo.keyTitle,
             value: flatValue
