@@ -431,9 +431,9 @@ button, a {
         }
 
         h1 {
-            text-transform: uppercase;
+            //text-transform: uppercase;
             color: #474747;
-            font-size: 29px;
+            font-size: 21px;
             line-height: 32px;
             font-weight: 800;
             margin-bottom: 40px;
@@ -493,9 +493,9 @@ button, a {
 
 
     h1 {
-        text-transform: uppercase;
+        //text-transform: uppercase;
         color: #474747;
-        font-size: 29px;
+        font-size: 21px;
         line-height: 32px;
         font-weight: 800;
         margin-bottom: 40px;
@@ -590,6 +590,35 @@ button, a {
     }
 }
 
+.contactsPage {
+    background-color: #eeeeee;
+    .contactsPage__Container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;hi
+        align-items: center;
+        justify-content: flex-start;
+        padding-bottom: 35px;
+        padding-top: 80px;
+
+        @media (min-width: 992px) {
+            padding: 100px 200px;
+            @include container(1140px);
+        }
+
+
+        h1 {
+            //text-transform: uppercase;
+            color: #474747;
+            font-size: 21px;
+            line-height: 32px;
+            font-weight: 800;
+            margin-bottom: 40px;
+        }
+
+
+    }
+}
 
 .allResultsPage {
     padding: 15px 20px;
@@ -597,7 +626,7 @@ button, a {
     h1 {
         text-transform: uppercase;
         color: #474747;
-        font-size: 29px;
+        font-size: 21px;
         line-height: 32px;
         font-weight: 800;
         margin-bottom: 40px;

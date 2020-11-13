@@ -161,18 +161,16 @@ const Result = ({props}) => {
 
 
                 <div className={styles.resultShare}>
-                    <Link to={urlToComparePage}
-                          disabled={isCompareUrlBad}
-                          onClick={onCompareBtnClick}
+                    <Link to={'/'}
+                          // onClick={onCompareBtnClick}
                           className={styles.againBtn}
                     >
                         Пройти заново
                     </Link>
                 </div>
                 <div className={styles.resultShare}>
-                    <Link to={urlToComparePage}
-                          disabled={isCompareUrlBad}
-                          onClick={onCompareBtnClick}
+                    <Link to={'/contacts'}
+                          // onClick={onCompareBtnClick}
                           className={styles.toWriteDevBtn}
                     >
                         Написать разработчикам
