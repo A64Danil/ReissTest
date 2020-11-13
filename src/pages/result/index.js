@@ -161,6 +161,25 @@ const Result = ({props}) => {
 
 
                 <div className={styles.resultShare}>
+                    <Link to={urlToComparePage}
+                          disabled={isCompareUrlBad}
+                          onClick={onCompareBtnClick}
+                          className={styles.againBtn}
+                    >
+                        Пройти заново
+                    </Link>
+                </div>
+                <div className={styles.resultShare}>
+                    <Link to={urlToComparePage}
+                          disabled={isCompareUrlBad}
+                          onClick={onCompareBtnClick}
+                          className={styles.toWriteDevBtn}
+                    >
+                        Написать разработчикам
+                    </Link>
+                </div>
+
+                <div className={styles.resultShare}>
                     <h3>Вставьте в поле ниже ссылку от вашего друга, чтобы сравнить ваши результаты</h3>
                     <input
                         type="text"

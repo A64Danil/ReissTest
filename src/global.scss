@@ -45,36 +45,91 @@ $breakpoints: (
     width: 100%;
 }
 
-@mixin baseColorBtn() {
-    border-radius: 29px;
-    border: none;
-    background-color: $base-color;
-    color: #fff;
-    font-weight: 500;
-    padding: 18px 35px 19px 30px;
-    display: inline-block;
-    font-size: 16px;
-    text-transform: uppercase;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3);
-    width: 100%;
-    max-width: 230px;
-    text-align: center;
-
+@mixin baseBtnIcoColor($color: $base-color) {
     span {
         padding-left: 15px;
         position: relative;
         top: 2px;
-
         :global {
             #arrow_thin,#arrow_normal {
                 width: 11px;
                 height: 15px;
                 path {
-                    fill: #fff;
+                    fill: $color;
                 }
             }
         }
     }
+}
+
+@mixin baseBtnColors() {
+    border: 2px solid $base-color;
+    background-color: transparent;
+    color: $base-color;
+
+    @include baseBtnIcoColor();
+}
+
+@mixin baseColorBtnColors() {
+    border-color: transparent;
+    background-color: $base-color;
+    color: #fff;
+
+    @include baseBtnIcoColor(#fff);
+}
+
+@mixin setBtnColors($color) {
+    border-color: $color;
+    background-color: transparent;
+    color: $color;
+
+    @include baseBtnIcoColor($color);
+}
+
+@mixin setBtnHoverColors($bgColor, $color: #fff) {
+    border: 2px solid $bgColor;
+    background-color: $bgColor;
+    color: $color;
+
+    @include baseBtnIcoColor($color);
+}
+
+@mixin baseBtn($width: 100%) {
+    @include baseBtnColors();
+    border-radius: 29px;
+    font-weight: 500;
+    padding: 18px 35px 19px 30px;
+    display: inline-block;
+    font-size: 16px;
+    text-transform: uppercase;
+    width: $width;
+    max-width: 100%;
+    text-align: center;
+
+    &:hover {
+        @include baseColorBtnColors();
+    }
+
+
+}
+
+@mixin grayColorBtn() {
+    @include baseBtn();
+    @include setBtnColors(#A2A2A2);
+    &:hover {
+        @include setBtnHoverColors(#A2A2A2);
+    }
+
+}
+@mixin baseColorBtn() {
+    @include baseBtn();
+    @include baseColorBtnColors();
+    &:hover {
+        @include baseBtnColors();
+    }
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3);
+    max-width: 230px;
+
 }
 
 @mixin placeholder {
@@ -407,6 +462,18 @@ button, a {
                 display: block;
             }
 
+            .againBtn {
+                @include baseBtn(100%);
+                max-width: 200px;
+                padding: 18px 15px 19px;
+
+            }
+            .toWriteDevBtn {
+                @include grayColorBtn();
+                max-width: 300px;
+                padding: 18px 15px 19px;
+
+            }
             .compareBtn {
                 @include baseColorBtn();
                 &.badUrl {
