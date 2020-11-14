@@ -29,6 +29,7 @@ const Menu = () => {
                 </li>
                 <li>
                     <span>
+                        1 - {store.userName} - 2
                         {userName && (
                             <>Привет, {userName}!</>
                         )}
