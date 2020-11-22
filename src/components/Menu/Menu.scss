@@ -55,6 +55,7 @@
 
 
 /* MY STYLES */
+
 .Menu {
     width: 100%;
     background: #000;
@@ -62,49 +63,61 @@
     position: sticky;
     top: 0;
 
-    .hamburgerLabel, .hamburgerCheker {
-        display: none;
-    }
+    .Menu__Container {
+        padding: 0 20px;
+        @media (min-width: 992px) {
+            //padding: 100px 200px;
+            margin: 0 auto;
+            width: 100%;
+        }
 
-    .hamburgerItems {
-        display: flex;
-        a {
-            width: 20%; /* 100% / 5 tabs = 20% */
-            padding: 10px;
-            color: white;
-            text-decoration: none;
-            text-align: center;
+        .hamburgerLabel, .hamburgerCheker {
+            display: none;
+        }
 
-            &:hover {
-                background: #401408;
+        .hamburgerItems {
+            display: flex;
+            a {
+                width: 20%; /* 100% / 5 tabs = 20% */
+                padding: 10px;
+                color: white;
+                text-decoration: none;
+                text-align: center;
+
+                &:hover {
+                    background: #401408;
+                }
             }
         }
     }
+
 }
 
 @media screen and (max-width: 768px){
     /* Show Hamburger Icon */
     .Menu {
-        .hamburgerLabel {
-            display: inline-block;
-            color: white;
-            background: #a02620;
-            font-style: normal;
-            font-size: 1.2em;
-            padding: 10px;
-        }
-
-        .hamburgerItems {
-            display: none;
-            a {
-                box-sizing: border-box;
-                display: block;
-                width: 100%;
-                border-top: 1px solid #333;
+        .Menu__Container {
+            .hamburgerLabel {
+                display: inline-block;
+                color: white;
+                background: #a02620;
+                font-style: normal;
+                font-size: 1.2em;
+                padding: 10px;
             }
-        }
 
-        input:checked ~ .hamburgerItems { display: block; }
+            .hamburgerItems {
+                display: none;
+                a {
+                    box-sizing: border-box;
+                    display: block;
+                    width: 100%;
+                    border-top: 1px solid #333;
+                }
+            }
+
+            input:checked ~ .hamburgerItems { display: block; }
+        }
     }
 
     /* Break down menu items into vertical */

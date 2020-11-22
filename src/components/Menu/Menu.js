@@ -7,17 +7,18 @@ const Menu = () => {
     return (
         <>
             <nav  className={styles.Menu} id="hamnav">
+                <div className={styles.Menu__Container}>
+                    <label htmlFor="hamburger" className={styles.hamburgerLabel}>&#9776;</label>
+                    <input type="checkbox" className={styles.hamburgerCheker} id="hamburger"/>
 
-                <label htmlFor="hamburger" className={styles.hamburgerLabel}>&#9776;</label>
-                <input type="checkbox" className={styles.hamburgerCheker} id="hamburger"/>
 
-
-                <div id="hamitems" className={styles.hamburgerItems}>
-                    <a href="index.html">Home</a>
-                    <a href="about.html">About</a>
-                    <a href="tech.html">Tech</a>
-                    <a href="games.html">Games</a>
-                    <a href="reviews.html">Reviews</a>
+                    <div id="hamitems" className={styles.hamburgerItems}>
+                        <a href="index.html">Home</a>
+                        <a href="about.html">About</a>
+                        <a href="tech.html">Tech</a>
+                        <a href="/contacts">Контакты</a>
+                        <a href="reviews.html">Reviews</a>
+                    </div>
                 </div>
             </nav>
             <div className={styles.MenuOLD}>
