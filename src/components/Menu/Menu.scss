@@ -1,37 +1,8 @@
-.MenuOLD {
-    position: absolute;
-    z-index: 1;
-    .MenuList {
-        display: flex;
-        margin: 0;
-        padding: 0 20px;
-
-        li {
-            list-style: none;
-            padding-right: 20px;
-            a {
-                color: black;
-
-                &.active {
-                    text-decoration: none;
-                    pointer-events: none;
-                    font-weight: bold;
-                }
-            }
-
-
-        }
-    }
-
-
-}
-
-
 /* MY STYLES */
 
 .Menu {
     width: 100%;
-    background: #000;
+    background: #ccc;
     /* Optional */
     position: sticky;
     top: 0;
@@ -50,15 +21,27 @@
 
         .hamburgerItems {
             display: flex;
-            a {
+
+            margin: 0;
+            li {
                 width: 20%; /* 100% / 5 tabs = 20% */
                 padding: 10px;
                 color: white;
                 text-decoration: none;
                 text-align: center;
+                list-style-type: none;
 
                 &:hover {
                     background: #401408;
+                }
+                a {
+                    color: black;
+
+                    &.active {
+                        text-decoration: none;
+                        pointer-events: none;
+                        font-weight: bold;
+                    }
                 }
             }
         }
@@ -81,7 +64,7 @@
 
             .hamburgerItems {
                 display: none;
-                a {
+                li {
                     box-sizing: border-box;
                     display: block;
                     width: 100%;
