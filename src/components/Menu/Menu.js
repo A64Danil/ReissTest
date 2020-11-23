@@ -6,13 +6,13 @@ import styles from "./Menu.scss";
 const Menu = () => {
     return (
         <>
-            <nav  className={styles.Menu} id="hamnav">
+            <nav  className={styles.Menu} >
                 <div className={styles.Menu__Container}>
-                    <label htmlFor="hamburger" className={styles.hamburgerLabel}>&#9776;</label>
-                    <input type="checkbox" className={styles.hamburgerCheker} id="hamburger"/>
+                    <label htmlFor="hamburgerMenuIcon" className={styles.hamburgerLabel}>&#9776;</label>
+                    <input type="checkbox" className={styles.hamburgerCheker} id="hamburgerMenuIcon"/>
 
 
-                    <div id="hamitems" className={styles.hamburgerItems}>
+                    <div className={styles.hamburgerItems}>
                         <a href="index.html">Home</a>
                         <a href="about.html">About</a>
                         <a href="tech.html">Tech</a>
