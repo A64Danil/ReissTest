@@ -4,6 +4,9 @@ import {useLocation} from "react-router-dom";
 import styles from "./Menu.scss";
 import {StoreContext} from "../../model/Store";
 
+// вроде пока не нужен
+// import { observer } from "mobx-react"
+
 const themesByPath = {
     '/':  "defaultTheme",
     '/name':  "grayTheme",
@@ -19,8 +22,6 @@ const Menu = () => {
     const menuClassName = themesByPath[pathname] || themesByPath.default;
 
     const store = useContext(StoreContext);
-    // let currentUserName = store.userName || '';
-    // const [userName, setUserName] = useState(currentUserName);
 
     useEffect(()=> {
         console.log('store.userName', store.userName);
@@ -33,6 +34,15 @@ const Menu = () => {
                 <input type="checkbox" className={styles.hamburgerCheker} id="hamburgerMenuFlag"/>
                 <div className={styles.Menu__Container}>
                     <label htmlFor="hamburgerMenuFlag" className={styles.hamburgerLabel}>
+                            <span>
+                                1 - {store.userName} - 2
+                                {store.userName && (
+                                    <>Привет, {store.userName}!</>
+                                )}
+                                {!store.userName && (
+                                    <>Привет!</>
+                                )}
+                            </span>
                         <span className={styles.icoHamburger}>&#9776;</span>
                         <span className={styles.icoCross}>&#215;</span>
                     </label>
@@ -53,17 +63,6 @@ const Menu = () => {
                                 Контакты
                             </NavLink>
                         </li>
-                        <li>
-                            <span>
-                                1 - {store.userName} - 2
-                                {store.userName && (
-                                    <>Привет, {store.userName}!</>
-                                )}
-                                {!store.userName && (
-                                    <>Привет!</>
-                                )}
-                            </span>
-                        </li>
                     </ul>
                 </div>
             </nav>
@@ -71,4 +70,6 @@ const Menu = () => {
     )
 }
 
-export default Menu
+
+export default Menu;
+// export default observer(Menu);

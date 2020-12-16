@@ -9,8 +9,6 @@ import Routes from './routes'
 
 import "./global.scss";
 
-import { observer } from "mobx-react"
-
 const App = () => {
     const testHistory = createBrowserHistory();
     return (
@@ -26,4 +24,4 @@ const App = () => {
 
 }
 
-export default observer(App);
+export default App;
