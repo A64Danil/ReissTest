@@ -254,7 +254,7 @@ button, a {
 :global {
     .outerWrp {
         //max-width: 500px;
-        margin: 0 auto;
+        margin: 65px auto 0 ;
         box-sizing: border-box;
         overflow: hidden;
         //min-height: 100vh; // ломает прокрутку в конце
@@ -263,6 +263,9 @@ button, a {
         //@include respond-to('md') {
         //    max-width: 750px;
         //}
+        @media (min-width: 754px) {
+            margin: 0 auto 0 ;
+        }
     }
 }
 

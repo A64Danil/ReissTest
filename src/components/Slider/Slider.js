@@ -9,7 +9,6 @@ import Transition from "react-transition-group/Transition";
 import json from "./../../model/quests";
 
 import {StoreContext} from "./../../model/Store";
-import {NavLink, Link} from "react-router-dom";
 
 
 import ArrowThin from "./../../assets/svg/arrow_thin";
