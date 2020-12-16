@@ -130,6 +130,10 @@ const QuestStore = types
             });
             // self = initialState;
             // self.userName = 'test';
+            self.answers = initialState.answers;
+            self.currentQuestNumber = initialState.currentQuestNumber;
+            self.isChosenAnswers = initialState.isChosenAnswers;
+            self.isResultSent = initialState.isResultSent;
             self.userName = initialState.userName;
             console.log(self);
             console.log(Object.keys(initialState));
@@ -143,8 +147,8 @@ const StoreProvider = ({ children }) => {
     const store = QuestStore.create({
         userName: cookie.load("userName") || '',
         userName2: '',
-        currentQuestNumber:  parseInt(cookie.load("currentQuestNumber")) || 1,
-        // currentQuestNumber: 15, // тестовый вариант
+        // currentQuestNumber:  parseInt(cookie.load("currentQuestNumber")) || 1,
+        currentQuestNumber: parseInt(cookie.load("currentQuestNumber")) || 15, // тестовый вариант
         isResultSent: false,
         resultUrl: '',
         answers: Object.assign({

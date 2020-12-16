@@ -34,15 +34,6 @@ const Menu = () => {
                 <input type="checkbox" className={styles.hamburgerCheker} id="hamburgerMenuFlag"/>
                 <div className={styles.Menu__Container}>
                     <label htmlFor="hamburgerMenuFlag" className={styles.hamburgerLabel}>
-                            <span>
-                                1 - {store.userName} - 2
-                                {store.userName && (
-                                    <>Привет, {store.userName}!</>
-                                )}
-                                {!store.userName && (
-                                    <>Привет!</>
-                                )}
-                            </span>
                         <span className={styles.icoHamburger}>&#9776;</span>
                         <span className={styles.icoCross}>&#215;</span>
                     </label>
@@ -50,7 +41,7 @@ const Menu = () => {
                     <ul className={styles.hamburgerItems}>
                         <li>
                             <NavLink to='/' exact activeClassName={styles.active}>
-                                Home <span>(v0.683)</span>
+                                Home <span>(v0.684)</span>
                             </NavLink>
                         </li>
                         <li>
