@@ -45,36 +45,93 @@ $breakpoints: (
     width: 100%;
 }
 
-@mixin baseColorBtn() {
-    border-radius: 29px;
-    border: none;
-    background-color: $base-color;
-    color: #fff;
-    font-weight: 500;
-    padding: 18px 35px 19px 30px;
-    display: inline-block;
-    font-size: 16px;
-    text-transform: uppercase;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3);
-    width: 100%;
-    max-width: 230px;
-    text-align: center;
-
+@mixin baseBtnIcoColor($color: $base-color) {
     span {
         padding-left: 15px;
         position: relative;
         top: 2px;
-
         :global {
             #arrow_thin,#arrow_normal {
                 width: 11px;
                 height: 15px;
                 path {
-                    fill: #fff;
+                    fill: $color;
                 }
             }
         }
     }
+}
+
+@mixin baseBtnColors() {
+    border: 2px solid $base-color;
+    background-color: transparent;
+    color: $base-color;
+
+    @include baseBtnIcoColor();
+}
+
+@mixin baseColorBtnColors() {
+    border-color: transparent;
+    background-color: $base-color;
+    color: #fff;
+
+    @include baseBtnIcoColor(#fff);
+}
+
+@mixin setBtnColors($color) {
+    border-color: $color;
+    background-color: transparent;
+    color: $color;
+
+    @include baseBtnIcoColor($color);
+}
+
+@mixin setBtnHoverColors($bgColor, $color: #fff) {
+    border: 2px solid $bgColor;
+    background-color: $bgColor;
+    color: $color;
+
+    @include baseBtnIcoColor($color);
+}
+
+@mixin baseBtn($width: 100%) {
+    @include baseBtnColors();
+    border-radius: 29px;
+    font-weight: 500;
+    padding: 18px 35px 19px 30px;
+    display: inline-block;
+    font-size: 16px;
+    text-transform: uppercase;
+    width: $width;
+    max-width: 100%;
+    text-align: center;
+
+    &:hover {
+        @include baseColorBtnColors();
+    }
+
+
+}
+
+@mixin grayColorBtn() {
+    @include baseBtn();
+    @include setBtnColors(#A2A2A2);
+    &:hover {
+        @include setBtnHoverColors(#A2A2A2);
+    }
+
+}
+@mixin baseColorBtn() {
+    @include baseBtn();
+    @include baseColorBtnColors();
+    &:hover {
+        @include baseBtnColors();
+    }
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 230px;
+    text-align: center;
+
 }
 
 @mixin transparentBtn($color) {
@@ -214,7 +271,7 @@ button, a {
 :global {
     .outerWrp {
         //max-width: 500px;
-        margin: 0 auto;
+        margin: 65px auto 0 ;
         box-sizing: border-box;
         overflow: hidden;
         //min-height: 100vh; // ломает прокрутку в конце
@@ -223,6 +280,9 @@ button, a {
         //@include respond-to('md') {
         //    max-width: 750px;
         //}
+        @media (min-width: 754px) {
+            margin: 0 auto 0 ;
+        }
     }
 }
 
@@ -391,9 +451,9 @@ button, a {
         }
 
         h1 {
-            text-transform: uppercase;
+            //text-transform: uppercase;
             color: #474747;
-            font-size: 29px;
+            font-size: 21px;
             line-height: 32px;
             font-weight: 800;
             margin-bottom: 40px;
@@ -422,6 +482,18 @@ button, a {
                 display: block;
             }
 
+            .againBtn {
+                @include baseBtn(100%);
+                max-width: 200px;
+                padding: 18px 15px 19px;
+
+            }
+            .toWriteDevBtn {
+                @include grayColorBtn();
+                max-width: 300px;
+                padding: 18px 15px 19px;
+
+            }
             .compareBtn {
                 @include baseColorBtn();
                 &.badUrl {
@@ -448,9 +520,9 @@ button, a {
 
 
     h1 {
-        text-transform: uppercase;
+        //text-transform: uppercase;
         color: #474747;
-        font-size: 29px;
+        font-size: 21px;
         line-height: 32px;
         font-weight: 800;
         margin-bottom: 40px;
@@ -545,6 +617,35 @@ button, a {
     }
 }
 
+.contactsPage {
+    background-color: #eeeeee;
+    .contactsPage__Container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-bottom: 35px;
+        padding-top: 80px;
+
+        @media (min-width: 992px) {
+            padding: 100px 200px;
+            @include container(1140px);
+        }
+
+
+        h1 {
+            //text-transform: uppercase;
+            color: #474747;
+            font-size: 21px;
+            line-height: 32px;
+            font-weight: 800;
+            margin-bottom: 40px;
+        }
+
+
+    }
+}
 
 .allResultsPage {
     padding: 15px 20px;
@@ -552,7 +653,7 @@ button, a {
     h1 {
         text-transform: uppercase;
         color: #474747;
-        font-size: 29px;
+        font-size: 21px;
         line-height: 32px;
         font-weight: 800;
         margin-bottom: 40px;

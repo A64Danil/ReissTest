@@ -1,27 +1,192 @@
+/* MY STYLES */
+
 .Menu {
-    position: absolute;
+    width: 100%;
+    background: #ccc;
+    /* Optional */
+    position: fixed;
+    top: 0;
     z-index: 1;
-    .MenuList {
-        display: flex;
-        margin: 0;
-        padding: 0 20px;
 
-        li {
-            list-style: none;
-            padding-right: 20px;
-            a {
-                color: black;
+    &.defaultTheme {
+        background-color: #77AFA7;
 
-                &.active {
-                    text-decoration: none;
-                    pointer-events: none;
-                    font-weight: bold;
-                }
+
+        input.hamburgerCheker:checked ~ .Menu__Container {
+            .hamburgerLabel {
+                color: #C0C0C0;
             }
-
-
         }
+    }
+    &.grayTheme {
+        background-color: #EEE;
+
+
+        .Menu__Container {
+            .hamburgerLabel {
+                color: #C0C0C0;
+            }
+        }
+
     }
 
 
+    .hamburgerCheker {
+        display: none;
+    }
+
+
+    .Menu__Container {
+        padding: 0 20px;
+
+
+
+        // new style
+        .hamburgerLabel {
+            display: inline-block;
+            color: white;
+            //background: #a02620;
+            font-style: normal;
+            font-size: 2.2em;
+            padding: 10px;
+            position: relative;
+            z-index: 1;
+
+
+            .icoHamburger {
+                display:  flex;
+            }
+            .icoCross {
+                display: none;
+                font-size: 54px;
+                height: 46px;
+            }
+            span {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+        }
+
+        // new style
+        .hamburgerItems {
+            padding: 0 20px 0 80px;
+            margin: 0;
+            display: none;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 0;
+            z-index: 0;
+            box-shadow: 0px 4px 28px rgba(0, 0, 0, 0.25);
+            border-radius: 0 0 30px 0;
+            li {
+                text-decoration: none;
+                //text-align: center;
+                list-style-type: none;
+                box-sizing: border-box;
+                display: block;
+                width: 100%;
+                border-top: 1px solid #E0E0E0;
+
+                a {
+                    color: #474747;
+                    font-size: 18px;
+                    font-weight: 600;
+                    //line-height: 67px;
+                    padding: 30px 0;
+                    display: inline-block;
+                    width: 100%;
+                    &:link, &:visited {
+                        color: #474747;
+                    }
+
+
+
+                    &.active {
+                        text-decoration: none;
+                        pointer-events: none;
+                        font-weight: bold;
+                    }
+                    &:hover {
+                        @media (min-width: 754px) {
+                            text-decoration: underline;
+                        }
+                    }
+
+                    &:focus {
+                        box-shadow: 0 0 0 0 rgba(0,123,255,0);
+                        @media (min-width: 754px) {
+                            box-shadow:initial;
+                        }
+                    }
+                    span {
+                        color: #ccc;
+                    }
+                }
+            }
+        }
+
+
+    }
+
+    input.hamburgerCheker:checked ~ .Menu__Container {
+        background-color: #fff;
+
+
+        .icoHamburger {
+            display: none;
+        }
+        .icoCross {
+            display: flex;
+        }
+
+        .hamburgerItems {
+            background-color: #fff;
+            display: block;
+            li:first-of-type {
+                border-top: none;
+            }
+        }
+    }
+    
+    //input.hamburgerCheker:checked ~ .Menu__Container .hamburgerItems { }
+
+}
+
+
+@media screen and (min-width: 768px) {
+    .Menu {
+        position: static;
+        .Menu__Container {
+            .hamburgerLabel {
+                display: none;
+            }
+            .hamburgerItems {
+                display: flex;
+                position: static;
+                li {
+                    //width: 20%; /* 100% / 5 tabs = 20% */
+                    padding: 0;
+                    color: white;
+                    text-decoration: none;
+                    //text-align: center;
+                    text-align: left;
+                    list-style-type: none;
+                }
+            }
+        }
+    }
+}
+
+
+@media screen and (min-width: 992px) {
+    .Menu {
+        .Menu__Container {
+            //padding: 100px 200px;
+            margin: 0 auto;
+            width: 100%;
+
+        }
+    }
 }

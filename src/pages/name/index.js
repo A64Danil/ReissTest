@@ -8,6 +8,7 @@ import Arrow from "./../../assets/svg/arrow_normal";
 
 const NamePage = ({history}) => {
     const store = useContext(StoreContext)
+    console.log("name/index.js");
     console.log(store);
     let currentUserName = store.userName || '';
     const [username, setUsername] = useState(currentUserName)

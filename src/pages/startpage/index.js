@@ -7,7 +7,8 @@ import {StoreContext} from "../../model/Store";
 
 const StartPage = ({location, match}) => {
     const store = useContext(StoreContext);
-    store.resetState();
+    // console.log("Резетим стейт");
+    // store.resetState();
     console.log(store);
     return (
         <div className={styles.startScreen}>
