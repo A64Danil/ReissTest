@@ -2,7 +2,7 @@ import React, {useState, useEffect, useContext} from 'react'
 import {NavLink} from 'react-router-dom';
 import {useLocation} from "react-router-dom";
 import styles from "./Menu.scss";
-import {StoreContext} from "../../model/Store";
+// import {StoreContext} from "../../model/Store";
 
 // вроде пока не нужен
 // import { observer } from "mobx-react"
@@ -21,13 +21,9 @@ const Menu = () => {
     const {pathname} = useLocation();
     const menuClassName = themesByPath[pathname] || themesByPath.default;
 
-    const store = useContext(StoreContext);
+    // const store = useContext(StoreContext);
 
-    useEffect(()=> {
-        console.log('store.userName', store.userName);
-        // store.setUsername(username);
-    }, [store.userName])
-
+    // TODO: доделать правильные иконки меню, исправить z-index
     return (
         <>
             <nav  className={`${styles.Menu} ${styles[menuClassName]}`}  >
