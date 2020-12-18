@@ -41,7 +41,7 @@ const Menu = () => {
                     <ul className={styles.hamburgerItems}>
                         <li>
                             <NavLink to='/' exact activeClassName={styles.active}>
-                                Home <span>(v0.684)</span>
+                                Home <span>(v0.685)</span>
                             </NavLink>
                         </li>
                         <li>

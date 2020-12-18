@@ -179,6 +179,7 @@
             .hamburgerItems {
                 display: flex;
                 position: static;
+                opacity: 0.4;
                 li {
                     //width: 20%; /* 100% / 5 tabs = 20% */
                     padding: 0;
