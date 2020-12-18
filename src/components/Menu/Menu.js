@@ -7,6 +7,8 @@ import styles from "./Menu.scss";
 // вроде пока не нужен
 // import { observer } from "mobx-react"
 
+import CrossIco from "./../../assets/svg/cross";
+
 const themesByPath = {
     '/':  "defaultTheme",
     '/name':  "grayTheme",
@@ -31,7 +33,9 @@ const Menu = () => {
                 <div className={styles.Menu__Container}>
                     <label htmlFor="hamburgerMenuFlag" className={styles.hamburgerLabel}>
                         <span className={styles.icoHamburger}>&#9776;</span>
-                        <span className={styles.icoCross}>&#215;</span>
+                        <span className={styles.icoCross}>
+                            <CrossIco />
+                        </span>
                     </label>
 
                     <ul className={styles.hamburgerItems}>
