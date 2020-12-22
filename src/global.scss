@@ -111,6 +111,7 @@ $breakpoints: (
     }
 
 
+
 }
 
 @mixin grayColorBtn() {
@@ -156,7 +157,8 @@ $breakpoints: (
     &:-ms-input-placeholder      {@content}
 }
 
-$baseMargBottom: 30px;
+$baseMargBottom: 32px;
+$basePadTop: 75px;
 
 $base-color: #77AFA7;
 $second-color: #FFF128;
@@ -271,7 +273,7 @@ button, a {
 :global {
     .outerWrp {
         //max-width: 500px;
-        margin: 50px auto 0 ;
+        margin: 0px auto 0 ;
         box-sizing: border-box;
         overflow: hidden;
         //min-height: 100vh; // ломает прокрутку в конце
@@ -292,15 +294,17 @@ button, a {
 
 .startScreen {
     background-color: $base-color !important;
-    padding: 35px 20px 0;
+    padding: 75px 20px 0;
 
+    @media (min-width: 768px) {
+        padding: 0px 20px 0;
+    }
 
     .startScreen__Container {
-
         min-height: 100%;
-        @media (min-width: 992px) {
-            padding: 100px 200px;
-            @include container(1140px);
+        @media (min-width: 768px) {
+            padding-top: 14%;
+            @include container(992px);
         }
 
 
@@ -309,6 +313,11 @@ button, a {
             font-size: 18px;
             margin-bottom: $baseMargBottom;
             font-weight: 700;
+
+            @media (min-width: 768px) {
+                font-size: 27px;
+                line-height: 28px;
+            }
         }
         h2 {
             color: $second-color;
@@ -316,23 +325,63 @@ button, a {
             line-height: 36px;
             font-weight: 800;
             margin-bottom: $baseMargBottom;
+
+            @media (min-width: 768px) {
+                //padding-right: 30%;
+                font-weight: 800;
+                font-size: 66px;
+                line-height: 78px;
+            }
+            @media (min-width: 992px) {
+                //padding-right: 30%;
+                font-size: 78px;
+                line-height: 92px;
+            }
+
+            span {
+                &.whatWord {
+                    display: block;
+                    @media (min-width: 480px) {
+                        display: inline;
+                    }
+                }
+            }
+
         }
         p {
             color: $white-color;
             font-size: 15px;
             margin-bottom: $baseMargBottom;
+            @media (min-width: 480px) {
+                padding-right: 40px;
+                //padding-right: 0;
+            }
+            @media (min-width: 540px) {
+                padding-right: 40%;
+            }
+            @media (min-width: 768px) {
+                font-weight: 500;
+                font-size: 19px;
+                line-height: 27px;
+            }
         }
         .startTestBtn {
             border-radius: 29px;
             background-color: $second-color;
             color: #000;
             font-weight: 600;
-            padding: 18px 50px 19px 50px;
+            padding: 18px 35px 19px 35px;
             display: inline-block;
             font-size: 16px;
             text-transform: uppercase;
             box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3);
             margin-bottom: 30px;
+
+
+            @media (min-width: 768px) {
+                font-size: 18px;
+            }
+
             span {
                 padding-left: 15px;
                 position: relative;
@@ -445,7 +494,8 @@ button, a {
 }
 
 .resultPage {
-    padding: 15px 20px;
+    //padding: 15px 20px 15px;
+    padding: $basePadTop 20px 15px;
 
     .resultPage__Container {
 
@@ -465,8 +515,26 @@ button, a {
         .resultShare {
             margin-bottom: 40px;
 
+
+            &.resultShareWide {
+                margin: 0 -20px;
+                padding: 32px 0px 48px;
+                //text-align: center;
+
+                h3 {
+                    max-width: 280px;
+                    margin: 0 auto 16px;
+                }
+            }
+
+            &.grayBg {
+                background-color: #EEEEEE;
+            }
+
+
             h3 {
-                font-weight: bold
+                font-weight: bold;
+                font-size: 17px;
             }
 
             .guidePageBtnlongString {
@@ -514,6 +582,19 @@ button, a {
                 @include  transparentBtn(#A2A2A2);
             }
         }
+
+        .copyLinkPageBtn {
+            @include baseColorBtn();
+            max-width: 280px;
+            display: block;
+            padding: 15px 20px 16px;
+            font-size: 15px;
+            line-height: 18px;
+            letter-spacing: 0.4px;
+            margin: 0 auto;
+
+
+        }
     }
 }
 
@@ -521,7 +602,7 @@ button, a {
 
     padding: 15px 20px;
 
-
+t
     h1 {
         //text-transform: uppercase;
         color: #474747;

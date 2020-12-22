@@ -85,67 +85,70 @@ const Quest = ({questInfo, currentQuestNum, questsTotal, onAfterChange, onChange
     return (
         <>
             <div className={styles.Quest}>
-                <div className={styles.QuestText}>
-                    <p className={styles.QuestNumber}>{currentQuestNum}/16 желание</p>
-                    <h3  className={styles.QuestTitle}>{questInfo.htmlTitle}</h3>
-                    <p className={styles.QuestDescription}>{questInfo.description}</p>
-                </div>
 
-                <div className={styles.QuestAnswerWrp}>
-
-                    {questInfo.answers && (
-                        <div className={styles.QuestAnswers} style={{display: "none1"}}>
-                            {answerPosition <= 150 && (
-                                <>
-                                    <div className={styles.QuestAnswerLevel}>Слабое</div>
-                                    <div className={styles.QuestAnswerDescr}>{questInfo.answers[0]}</div>
-                                </>
-                            )}
-
-                            {  151 <= answerPosition && answerPosition <= 250 && (
-                                <>
-                                    <div className={styles.QuestAnswerLevel}>Ниже среднего</div>
-                                    <div className={styles.QuestAnswerDescr}>{questInfo.answers[1]}</div>
-                                </>
-                            )}
-
-                            { 251 <= answerPosition && answerPosition <= 350 && (
-                                <>
-                                    <div className={styles.QuestAnswerLevel}>Среднее</div>
-                                    <div className={styles.QuestAnswerDescr}>{questInfo.answers[2]}</div>
-                                </>
-                            )}
-
-                            { 351 <= answerPosition && answerPosition < 450 && (
-                                <>
-                                    <div className={styles.QuestAnswerLevel}>Выше среднего</div>
-                                    <div className={styles.QuestAnswerDescr}>{questInfo.answers[3]}</div>
-                                </>
-                            )}
-
-                            { 450 <= answerPosition && (
-                                <>
-                                    <div className={styles.QuestAnswerLevel}>Сильное</div>
-                                    <div className={styles.QuestAnswerDescr}>{questInfo.answers[4]}</div>
-                                </>
-                            )}
+                    <div className={styles.QuestText}>
+                        <div className={styles.QuestText__Container} >
+                            <p className={styles.QuestNumber}>{currentQuestNum}/16 желание</p>
+                            <h3  className={styles.QuestTitle}>{questInfo.htmlTitle}</h3>
+                            <p className={styles.QuestDescription}>{questInfo.description}</p>
                         </div>
-                    )}
-
-                    <div className={`${styles.QuestRangeSliderWrp}  ${styles["QuestRangeSliderWrp--" + answerValueForInputBg]}`} >
-                        <Slider
-                            min={100}
-                            max={500}
-                            dots={false}
-                            onChange={onChange}
-                            onAfterChange={onAfterChange}
-                            value={answerPosition}
-                            defaultValue={answerPosition}
-                            tooltipVisible={false}
-                        />
                     </div>
 
-                </div>
+                    <div className={styles.QuestAnswerWrp}>
+
+                        {questInfo.answers && (
+                            <div className={styles.QuestAnswers} >
+                                { answerPosition <= 150 && (
+                                    <>
+                                        <div className={styles.QuestAnswerLevel}>Слабое</div>
+                                        <div className={styles.QuestAnswerDescr}>{questInfo.answers[0]}</div>
+                                    </>
+                                )}
+
+                                { 151 <= answerPosition && answerPosition <= 250 && (
+                                    <>
+                                        <div className={styles.QuestAnswerLevel}>Ниже среднего</div>
+                                        <div className={styles.QuestAnswerDescr}>{questInfo.answers[1]}</div>
+                                    </>
+                                )}
+
+                                { 251 <= answerPosition && answerPosition <= 350 && (
+                                    <>
+                                        <div className={styles.QuestAnswerLevel}>Среднее</div>
+                                        <div className={styles.QuestAnswerDescr}>{questInfo.answers[2]}</div>
+                                    </>
+                                )}
+
+                                { 351 <= answerPosition && answerPosition < 450 && (
+                                    <>
+                                        <div className={styles.QuestAnswerLevel}>Выше среднего</div>
+                                        <div className={styles.QuestAnswerDescr}>{questInfo.answers[3]}</div>
+                                    </>
+                                )}
+
+                                { 450 <= answerPosition && (
+                                    <>
+                                        <div className={styles.QuestAnswerLevel}>Сильное</div>
+                                        <div className={styles.QuestAnswerDescr}>{questInfo.answers[4]}</div>
+                                    </>
+                                )}
+                            </div>
+                        )}
+
+                        <div className={`${styles.QuestRangeSliderWrp}  ${styles["QuestRangeSliderWrp--" + answerValueForInputBg]}`} >
+                            <Slider
+                                min={100}
+                                max={500}
+                                dots={false}
+                                onChange={onChange}
+                                onAfterChange={onAfterChange}
+                                value={answerPosition}
+                                defaultValue={answerPosition}
+                                tooltipVisible={false}
+                            />
+                        </div>
+
+                    </div>
 
             </div>
 

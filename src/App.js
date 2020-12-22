@@ -1,7 +1,7 @@
-import React, {useEffect} from "react";// import {BrowserRouter as Router} from 'react-router-dom'
+import React from "react";
 
 import { createBrowserHistory } from "history";
-import {BrowserRouter} from 'react-router-dom'
+import {BrowserRouter } from 'react-router-dom'
 
 import Menu from "./components/Menu/Menu";
 import StoreProvider from './model/Store'

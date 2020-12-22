@@ -155,6 +155,20 @@ const Result = ({props}) => {
                 </ul>
 
 
+                <div className={`${styles.resultShare} ${styles.resultShareWide} ${styles.grayBg}`}>
+                    <h3>Поделиться результатом:</h3>
+                    <button
+                        className={styles.copyLinkPageBtn}
+                        onClick={copyToOnClick}
+                    >
+                        СКОПИРОВАТЬ ССЫЛКУ
+
+                        <span>
+                            <Arrow />
+                        </span>
+                    </button>
+                </div>
+
                 <div className={styles.resultShare}>
                     <h3>Отправьте эту ссылку другу, если хотите показать ему ваш результат или чтобы он мог сравнить свои результаты с вашими</h3>
                     <button

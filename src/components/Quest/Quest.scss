@@ -13,6 +13,11 @@ $inputRange-c4: #E0DF34;
 $inputRange-c5: #F7E91B;
 
 
+@mixin container($width) {
+  max-width: $width;
+  margin: 0 auto;
+  width: 100%;
+}
 
 .QuestWrp {
 
@@ -22,39 +27,48 @@ $inputRange-c5: #F7E91B;
   display: flex;
   flex-direction: column;
     //background-color: green;
+
+
+
   .QuestText {
     background-color: #EEEEEE;
     padding: 20px;
-    .QuestNumber {
-      color: #474747;
-      font-weight: bold;
-      font-size: 14px;
-      margin: 0 0 5px;
-    }
-    .QuestTitle {
-      color: #474747;
-      font-size: 29px;
-      font-weight: bold;
-      line-height: 35px;
-      text-transform: uppercase;
-      //word-break: break-all;
-    }
-    .QuestDescription {
-      opacity: 0.7;
-      color: #000000;
-      font-size: 16px;
-      line-height: 22px;
-      margin: 0;
+
+    .QuestText__Container {
+      @include container(768px);
+
+      .QuestNumber {
+        color: #474747;
+        font-weight: bold;
+        font-size: 14px;
+        margin: 0 0 5px;
+      }
+      .QuestTitle {
+        color: #474747;
+        font-size: 29px;
+        font-weight: bold;
+        line-height: 35px;
+        text-transform: uppercase;
+        //word-break: break-all;
+      }
+      .QuestDescription {
+        opacity: 0.7;
+        color: #000000;
+        font-size: 16px;
+        line-height: 22px;
+        margin: 0;
+      }
     }
   }
 
   .QuestAnswerWrp {
-
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-bottom: 20px;
+
+    @include container(768px);
 
     .QuestAnswers {
       padding: 20px;

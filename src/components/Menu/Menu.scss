@@ -18,6 +18,9 @@
             }
         }
     }
+    &.hiddenTheme {
+        display: none;
+    }
     &.grayTheme {
         background-color: #EEE;
 
@@ -92,6 +95,7 @@
             @media (min-width: 768px) {
                 box-shadow: none;
                 border-radius: 0;
+                padding: 0;
             }
 
             li {
@@ -171,7 +175,13 @@
 
 @media screen and (min-width: 768px) {
     .Menu {
-        position: static;
+        //position: static;
+        opacity: 0.05;
+
+         &:hover {
+            opacity: 0.75;
+         }
+
         .Menu__Container {
             .hamburgerLabel {
                 display: none;
@@ -179,7 +189,6 @@
             .hamburgerItems {
                 display: flex;
                 position: static;
-                opacity: 0.4;
                 li {
                     //width: 20%; /* 100% / 5 tabs = 20% */
                     padding: 0;
@@ -198,9 +207,10 @@
 @media screen and (min-width: 992px) {
     .Menu {
         .Menu__Container {
-            //padding: 100px 200px;
+            padding: 0 100px;
             margin: 0 auto;
             width: 100%;
+            max-width: 1140px;
 
         }
     }

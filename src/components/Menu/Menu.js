@@ -14,22 +14,38 @@ const themesByPath = {
     '/name':  "grayTheme",
     '/contacts':  "grayTheme",
     '/guide':  "grayTheme",
-    '/quests':  "grayTheme",
+    '/quests':  "hiddenTheme",
     default: "defaultTheme"
 }
 
 const Menu = () => {
-
     const {pathname} = useLocation();
     const menuClassName = themesByPath[pathname] || themesByPath.default;
-
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
     // const store = useContext(StoreContext);
 
-    // TODO: доделать правильные иконки меню, исправить z-index
-    return (
+    let resultRender;
+
+
+    useEffect(()=> {
+        setIsMenuOpen(false);
+        if (themesByPath[pathname] === 'hiddenTheme') {
+            console.log('Будем скрывать меню');
+            resultRender = null;
+        }
+    }, [pathname])
+
+
+    resultRender =  (
         <>
             <nav  className={`${styles.Menu} ${styles[menuClassName]}`}  >
-                <input type="checkbox" className={styles.hamburgerCheker} id="hamburgerMenuFlag"/>
+                <input
+                    type="checkbox"
+                    className={styles.hamburgerCheker}
+                    id="hamburgerMenuFlag"
+                    checked={isMenuOpen}
+                    onChange={e=>setIsMenuOpen(!isMenuOpen)}
+                />
                 <div className={styles.Menu__Container}>
                     <label htmlFor="hamburgerMenuFlag" className={styles.hamburgerLabel}>
                         <span className={styles.icoHamburger}>&#9776;</span>
@@ -41,7 +57,7 @@ const Menu = () => {
                     <ul className={styles.hamburgerItems}>
                         <li>
                             <NavLink to='/' exact activeClassName={styles.active}>
-                                Home <span>(v0.685)</span>
+                                Home <span>(v0.688)</span>
                             </NavLink>
                         </li>
                         <li>
@@ -58,7 +74,10 @@ const Menu = () => {
                 </div>
             </nav>
         </>
-    )
+    );
+
+    return resultRender;
+
 }
 
 

@@ -16,10 +16,6 @@
 
     .Slider__Container {
         height: 100%;
-        @media (min-width: 992px) {
-            @include container(1140px);
-        }
-
         &.Slider__Container--IsChosen-true {
             :global {
                 .ant-slider-handle {
@@ -59,6 +55,9 @@
         flex-wrap: wrap;
         justify-content: space-between;
         padding: 20px 20px 5px;
+
+        @include container(768px);
+
         .SliderBtn {
             //height: 52px;
             min-width: 52px;
