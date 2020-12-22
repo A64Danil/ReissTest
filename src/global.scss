@@ -107,6 +107,7 @@ $breakpoints: (
     text-align: center;
 
     &:hover {
+        cursor: pointer;
         @include baseColorBtnColors();
     }
 
@@ -702,18 +703,17 @@ t
 }
 
 .contactsPage {
-    background-color: #eeeeee;
+    //background-color: #eeeeee;
     .contactsPage__Container {
         height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
+        //display: flex;
+        //flex-direction: column;
+        //align-items: center;
+        //justify-content: flex-start;
         padding-bottom: 35px;
         padding-top: 80px;
 
         @media (min-width: 992px) {
-            padding: 100px 200px;
             @include container(1140px);
         }
 
@@ -721,10 +721,97 @@ t
         h1 {
             //text-transform: uppercase;
             color: #474747;
-            font-size: 21px;
-            line-height: 32px;
+            font-size: 36px;
+            line-height: 44px;
             font-weight: 800;
             margin-bottom: 40px;
+            margin-left: 8.3%;
+        }
+        
+        .mainContent {
+            @media (min-width: 768px) {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+
+            .contacts {
+
+                @media (min-width: 768px) {
+                    width: 38%;
+                    border: 3px solid #E2E2E2;
+                    box-sizing: border-box;
+                    border-radius: 27px;
+                    padding: 50px 90px;
+                }
+
+                .authorDescript {
+                    font-size: 15px;
+                    line-height: 22px;
+                    color: #999;
+                }
+                .authorName {
+                    color: #474747;
+                    font-weight: 600;
+                    font-size: 21px;
+                }
+                .authorLinks {
+                    font-weight: normal;
+                    font-size: 18px;
+                    line-height: 30px;
+                }
+            }
+            .questForm {
+                background-color: #EEE;
+
+                @media (min-width: 768px) {
+                    width: 60%;
+                    border-radius: 27px;
+                    padding: 50px 80px 90px;
+                }
+
+                .boldText {
+                    font-weight: bold;
+                    font-size: 20px;
+                    line-height: 35px;
+                    color: #474747;
+                }
+                .regularText {
+                    font-size: 18px;
+                    line-height: 30px;
+                }
+                textarea {
+                    font-size: 17px;
+                    line-height: 22px;
+                    padding: 20px 25px;
+                    //color: #A9A9A9;
+                    margin-bottom: 12px;
+                    border: none;
+                    @include placeholder {
+                        color: #A9A9A9;
+                    }
+                }
+
+                .flex {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-between;
+                    input[type='email'] {
+                        padding: 12px 25px 16px;
+                        font-size: 17px;
+                        line-height: 22px;
+                        border: none;
+
+                        @include placeholder {
+                            color: #A9A9A9;
+                        }
+
+                    }
+                    .sendBtn {
+                        @include baseColorBtn();
+                    }
+                }
+            }
         }
 
 
