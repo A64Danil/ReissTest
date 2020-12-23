@@ -147,8 +147,8 @@ const StoreProvider = ({ children }) => {
     const store = QuestStore.create({
         userName: cookie.load("userName") || '',
         userName2: '',
-        // currentQuestNumber:  parseInt(cookie.load("currentQuestNumber")) || 1,
-        currentQuestNumber: parseInt(cookie.load("currentQuestNumber")) || 15, // тестовый вариант
+        currentQuestNumber:  parseInt(cookie.load("currentQuestNumber")) || 1,
+        // currentQuestNumber: parseInt(cookie.load("currentQuestNumber")) || 15, // тестовый вариант
         isResultSent: false,
         resultUrl: '',
         answers: Object.assign({

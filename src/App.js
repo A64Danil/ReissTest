@@ -9,8 +9,9 @@ import Routes from './routes'
 
 import "./global.scss";
 
+const testHistory = createBrowserHistory();
+
 const App = () => {
-    const testHistory = createBrowserHistory();
     return (
         <StoreProvider>
             <div className={"outerWrp"}>

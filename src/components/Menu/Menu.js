@@ -11,9 +11,9 @@ import CrossIco from "./../../assets/svg/cross";
 
 const themesByPath = {
     '/':  "defaultTheme",
-    '/name':  "grayTheme",
+    '/name':  "hiddenTheme",
     '/contacts':  "grayTheme",
-    '/guide':  "grayTheme",
+    '/guide':  "hiddenTheme",
     '/quests':  "hiddenTheme",
     default: "defaultTheme"
 }
@@ -28,9 +28,9 @@ const Menu = () => {
 
 
     useEffect(()=> {
+        window.scrollTo(0, 0);
         setIsMenuOpen(false);
         if (themesByPath[pathname] === 'hiddenTheme') {
-            console.log('Будем скрывать меню');
             resultRender = null;
         }
     }, [pathname])
@@ -57,7 +57,7 @@ const Menu = () => {
                     <ul className={styles.hamburgerItems}>
                         <li>
                             <NavLink to='/' exact activeClassName={styles.active}>
-                                Home <span>(v0.69)</span>
+                                Home <span>(v0.691)</span>
                             </NavLink>
                         </li>
                         <li>

@@ -3,9 +3,9 @@ import React from 'react';
 
 import styles from "../../global.scss";
 import Arrow from "../../assets/svg/arrow_normal";
-import {Link} from "react-router-dom";
+// import {Link} from "react-router-dom";
 
-// TODO: добаить инфу и верстку
+// TODO: добаить отправку письма на почту
 const Contacts = ({location, match}) => {
 
 
@@ -16,12 +16,10 @@ const Contacts = ({location, match}) => {
         rows: 6
     }
 
-    console.log(innerWidth);
-    console.log(textAreaSize.cols);
     return (
         <div className={styles.contactsPage}>
             <div className={styles.contactsPage__Container}>
-                <h1>Контакты разработчиков</h1>
+                <h1>Контакты<br /> разработчиков</h1>
 
                 <div className={styles.mainContent}>
                     <div className={styles.contacts}>
@@ -32,11 +30,12 @@ const Contacts = ({location, match}) => {
                             ann.po.work@gmail.com<br />
                             +7 (917) 571-21-50
                         </p>
+                        <hr/>
                         <p className={styles.authorDescript}>Разработка на React</p>
                         <p className={styles.authorName}>Даниил</p>
                         <p className={styles.authorLinks}>
                             a64danil@mail.ru<br />
-                            https://github.com/A64Danil/ReissTest
+                            <a href="https://github.com/A64Danil/ReissTest" target="_blank">github.com/A64Danil</a>
                         </p>
                     </div>
                     <div className={styles.questForm}>
