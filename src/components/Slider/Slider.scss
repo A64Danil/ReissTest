@@ -54,7 +54,11 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-        padding: 20px 20px 5px;
+        padding: 20px 15px 5px;
+
+        @media (min-width: 360px) {
+            padding: 20px 20px 5px;
+        }
 
         @include container(768px);
 

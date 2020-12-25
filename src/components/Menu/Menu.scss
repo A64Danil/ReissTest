@@ -2,14 +2,13 @@
 
 .Menu {
     width: 100%;
-    background: #ccc;
     /* Optional */
     position: fixed;
     top: 0;
     z-index: 1;
 
     &.defaultTheme {
-        background-color: #77AFA7;
+        //background-color: #77AFA7;
 
 
         input.hamburgerCheker:checked ~ .Menu__Container {
@@ -22,7 +21,7 @@
         display: none;
     }
     &.grayTheme {
-        background-color: #EEE;
+        //background-color: #EEE;
 
 
         .Menu__Container {

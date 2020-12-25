@@ -105,7 +105,7 @@ $breakpoints: (
     width: $width;
     max-width: 100%;
     text-align: center;
-
+    line-height: 100%;
     &:hover {
         cursor: pointer;
         @include baseColorBtnColors();
@@ -301,6 +301,10 @@ a {
     }
 }
 
+.h100 {
+    height: 100%;
+    //height: calc(100% - #{$basePadTop});
+}
 
 .startScreen {
     background-color: $base-color !important;
@@ -416,8 +420,13 @@ a {
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
-        padding-bottom: 35px;
-        padding-top: 110px;
+        padding-bottom: 15px;
+        padding-top: 40px;
+
+        @media (min-width: 360px) {
+            padding-bottom: 35px;
+            padding-top: 110px;
+        }
 
         @media (min-width: 992px) {
             padding: 100px 200px;
@@ -473,9 +482,10 @@ a {
         line-height: 22px;
 
         .guidePage__description {
-
-            padding: 40px 20px;
-
+            padding: 30px 20px;
+            @media (min-width: 360px) {
+                padding: 40px 20px;
+            }
             p {
                 text-align: left;
                 font-weight: 500;
@@ -491,7 +501,10 @@ a {
             p {
                 text-align: center;
                 font-weight: 700;
-                margin-bottom: 50px;
+                margin-bottom: 25px;
+                @media (min-width: 360px) {
+                    margin-bottom: 50px;
+                }
             }
 
             .guidePageBtn {

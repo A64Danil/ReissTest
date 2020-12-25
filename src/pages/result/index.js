@@ -136,7 +136,6 @@ const Result = ({props}) => {
         alert("Текст скопирован");
     }
 
-    //TODO : доделать верстку "сравнения" и поделиться результатом
     return (
         <div className={styles.resultPage}>
             <div className={styles.resultPage__Container} >

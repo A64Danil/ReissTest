@@ -15,6 +15,7 @@ const themesByPath = {
     '/contacts':  "grayTheme",
     '/guide':  "hiddenTheme",
     '/quests':  "hiddenTheme",
+    '/result':  "grayTheme",
     default: "defaultTheme"
 }
 
@@ -57,7 +58,7 @@ const Menu = () => {
                     <ul className={styles.hamburgerItems}>
                         <li>
                             <NavLink to='/' exact activeClassName={styles.active}>
-                                Главная <span>(v0.693)</span>
+                                Главная <span>(v0.697)</span>
                             </NavLink>
                         </li>
                         <li>
