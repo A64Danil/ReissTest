@@ -8,7 +8,6 @@ import Arrow from "../../assets/svg/arrow_normal";
 // TODO: добаить отправку письма на почту
 const Contacts = ({location, match}) => {
 
-
     const { innerWidth: width, innerHeight: height } = window;
 
     const textAreaSize = {

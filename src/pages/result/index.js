@@ -123,15 +123,16 @@ const Result = ({props}) => {
 
 
     const onRefreshBtnClick = (e) => {
-        //TODO: обновлять стейт до начального
-        console.log("refresh cookie and store here");
         store.resetState();
     }
 
 
     const copyToOnClick = (e) => {
-        const bufferedText = e.currentTarget.textContent;
-        copyToClipboard(bufferedText);
+        // const bufferedText = e.currentTarget.textContent;
+        // const bufferedText = urlToComparePage;
+        const linkToPage = window.location.href;
+        console.log(linkToPage);
+        copyToClipboard(linkToPage);
         alert("Текст скопирован");
     }
 
@@ -156,33 +157,20 @@ const Result = ({props}) => {
 
 
                 <div className={`${styles.resultShare} ${styles.resultShareWide} ${styles.grayBg}`}>
-                    <h3>Поделиться результатом:</h3>
+                    <h3>Поделиться результатом</h3>
                     <button
                         className={styles.copyLinkPageBtn}
                         onClick={copyToOnClick}
                     >
                         СКОПИРОВАТЬ ССЫЛКУ
-
                         <span>
                             <Arrow />
                         </span>
                     </button>
                 </div>
 
-                <div className={styles.resultShare}>
-                    <h3>Отправьте эту ссылку другу, если хотите показать ему ваш результат или чтобы он мог сравнить свои результаты с вашими</h3>
-                    <button
-                        className={styles.stringToCopy}
-                        onClick={copyToOnClick}
-                    >
-                        <p className={styles.longString}>
-                            {window.location.href}
-                        </p>
-                    </button>
-                </div>
 
-
-                <div className={styles.resultShare}>
+                <div className={`${styles.resultShare} ${styles.resultCompare} ${styles.resultShareWide} ${styles.grayBg}`}>
                     <h3>Вставьте в поле ниже ссылку от вашего друга, чтобы сравнить ваши результаты</h3>
                     <input
                         type="text"
