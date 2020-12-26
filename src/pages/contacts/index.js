@@ -15,6 +15,31 @@ const Contacts = ({location, match}) => {
         rows: 6
     }
 
+    const sendEmail = (event) => {
+        event.preventDefault();
+
+        const mail = {
+            email: event.target.email.value,
+            message: event.target.message.value
+        }
+        fetch("http://rt.qoobeo.ru/core/send.php", {
+                method: 'post',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    "Content-Type":"application/x-form-urlencoded"
+                },
+                body: JSON.stringify(mail)
+            })
+            .then(res => res.text())
+            .then(res => {
+                if (res === '"Письмо отправлено. Через 5 секунд мы вернем вас назад!"') {
+                    alert("Письмо отправлено!");
+                } else {
+                    alert("Что-то пошло не так. Отправить сообщение не удалось.")
+                }
+            })
+    }
+
     return (
         <div className={styles.contactsPage}>
             <div className={styles.contactsPage__Container}>
@@ -38,7 +63,7 @@ const Contacts = ({location, match}) => {
                         </p>
                     </div>
                     <div className={styles.questForm}>
-                        <form action="">
+                        <form action="core/send.php" method="POST" onSubmit={sendEmail}>
                             <p className={styles.boldText}>
                                 <strong>
                                 Хотите поделиться впечатлениями?<br/>
@@ -48,9 +73,9 @@ const Contacts = ({location, match}) => {
 
                             <p className={styles.regularText}>Будем рады обратной связи :)</p>
 
-                            <textarea name="" id="" cols={textAreaSize.cols} rows="6" placeholder="Ваше сообщение"/>
+                            <textarea name="message" id="" cols={textAreaSize.cols} rows="6" placeholder="Ваше сообщение"/>
                             <div className={styles.flex}>
-                                <input type="email" placeholder="Ваш email"/>
+                                <input name="email" type="email" placeholder="Ваш email"/>
                                 <button type="submit" value="Отправить" className={styles.sendBtn}>
                                     Отправить
                                     <span>

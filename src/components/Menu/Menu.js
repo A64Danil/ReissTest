@@ -58,7 +58,7 @@ const Menu = () => {
                     <ul className={styles.hamburgerItems}>
                         <li>
                             <NavLink to='/' exact activeClassName={styles.active}>
-                                Главная <span>(v0.6981)</span>
+                                Главная <span>(v0.7)</span>
                             </NavLink>
                         </li>
                         <li>
