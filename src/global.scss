@@ -1,3 +1,11 @@
+//@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,700,800&display=swap&subset=cyrillic');
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('https://fonts.googleapis.com/css?family=Montserrat:400,500,700,800&display=swap&subset=cyrillic');
+}
+
+
 $breakpoints: (
         'xs': (min-width: 576px),
         'sm': (min-width: 768px),
@@ -171,6 +179,8 @@ $inputRange-c2: #94BD8B;
 $inputRange-c3: #BCD063;
 $inputRange-c4: #E0DF34;
 $inputRange-c5: #F7E91B;
+
+
 
 button, a {
     letter-spacing: 0.5px;

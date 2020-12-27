@@ -1,5 +1,7 @@
-import React from 'react';
+// import React from 'react';
+import React, {useState, useEffect} from 'react';
 
+import Swal from 'sweetalert2';
 
 import styles from "../../global.scss";
 import Arrow from "../../assets/svg/arrow_normal";
@@ -9,14 +11,34 @@ import Arrow from "../../assets/svg/arrow_normal";
 const Contacts = ({location, match}) => {
 
     const { innerWidth: width, innerHeight: height } = window;
+    const [ textAreaValue, setTextAreaValue ] = useState('');
+    const [ emailInputValue, setEmailInputValue ] = useState('');
 
     const textAreaSize = {
         cols: innerWidth < 480 ? 25 : 50,
         rows: 6
     }
 
+    // useEffect(() => {
+    //     console.log("Введен текст");
+    //     console.log(textAreaValue);
+    //     console.log(emailInputValue);
+    // }, [textAreaValue, emailInputValue])
+
     const sendEmail = (event) => {
         event.preventDefault();
+
+        if(textAreaValue.trim().length === 0) {
+            // alert('Вы не ввели текст сообщения');
+            Swal.fire('Ооххх...', 'Вы не ввели текст сообщения!', 'error');
+            return;
+        }
+
+        if(emailInputValue.trim().length === 0) {
+            // alert('Вы не ввели свою почту');
+            Swal.fire('Ооххх...', 'Вы не ввели свою почту!', 'error');
+            return;
+        }
 
         const mail = {
             email: event.target.email.value,
@@ -73,9 +95,23 @@ const Contacts = ({location, match}) => {
 
                             <p className={styles.regularText}>Будем рады обратной связи :)</p>
 
-                            <textarea name="message" id="" cols={textAreaSize.cols} rows="6" placeholder="Ваше сообщение"/>
+                            <textarea
+                                name="message"
+                                id=""
+                                cols={textAreaSize.cols}
+                                rows="6"
+                                placeholder="Ваше сообщение"
+                                value={textAreaValue}
+                                onChange={e => setTextAreaValue(e.target.value)}
+                            />
                             <div className={styles.flex}>
-                                <input name="email" type="email" placeholder="Ваш email"/>
+                                <input
+                                    name="email"
+                                    type="email"
+                                    placeholder="Ваш email"
+                                    value={emailInputValue}
+                                    onChange={e => setEmailInputValue(e.target.value)}
+                                />
                                 <button type="submit" value="Отправить" className={styles.sendBtn}>
                                     Отправить
                                     <span>
