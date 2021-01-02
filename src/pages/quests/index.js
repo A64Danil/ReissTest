@@ -2,6 +2,8 @@ import React, {useState, useEffect, useContext} from 'react'
 
 import Slider from "./../../components/Slider/Slider";
 
+import Swal from 'sweetalert2'
+
 import {StoreContext} from "./../../model/Store";
 
 const Quests = ({history}) => {
@@ -9,7 +11,7 @@ const Quests = ({history}) => {
 
     useEffect(()=> {
         if (!store.userName) {
-            alert("Для прохождения теста вы должны указать имя");
+            Swal.fire('Ооххх...', 'Для прохождения теста вы должны указать имя', 'error');
             history.push('/name');
         }
     })

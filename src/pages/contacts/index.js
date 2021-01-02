@@ -7,38 +7,73 @@ import styles from "../../global.scss";
 import Arrow from "../../assets/svg/arrow_normal";
 // import {Link} from "react-router-dom";
 
-// TODO: добаить отправку письма на почту
 const Contacts = ({location, match}) => {
 
     const { innerWidth: width, innerHeight: height } = window;
     const [ textAreaValue, setTextAreaValue ] = useState('');
+    const [ errorTextArea, setErrorTextArea ] = useState('');
     const [ emailInputValue, setEmailInputValue ] = useState('');
+    const [ errorEmail, setErrorEmail ] = useState('');
+    const [ errorSendBtn, setErrorSendBtn ] = useState('');
+
+    const [ errorList, setErrorList ] = useState([]);
 
     const textAreaSize = {
         cols: innerWidth < 480 ? 25 : 50,
         rows: 6
     }
 
-    // useEffect(() => {
-    //     console.log("Введен текст");
-    //     console.log(textAreaValue);
-    //     console.log(emailInputValue);
-    // }, [textAreaValue, emailInputValue])
+    const errorMessages = {
+        'mail': 'Вы не указали почту для ответа',
+        'message': 'Вы не ввели текст сообщения',
+    };
+
+    useEffect(() => {
+        if(errorSendBtn && (textAreaValue.trim().length !== 0 && emailInputValue.trim().length !== 0)) setErrorSendBtn('')
+    }, [errorList, textAreaValue, emailInputValue])
 
     const sendEmail = (event) => {
         event.preventDefault();
+        const errors = [];
 
-        if(textAreaValue.trim().length === 0) {
-            // alert('Вы не ввели текст сообщения');
-            Swal.fire('Ооххх...', 'Вы не ввели текст сообщения!', 'error');
+        if(textAreaValue.trim().length === 0 || emailInputValue.trim().length === 0) {
+            setErrorSendBtn('error')
+        } else {
+            setErrorSendBtn('')
+        }
+
+        if(textAreaValue.trim().length === 0 && emailInputValue.trim().length === 0) {
+            Swal.fire('Ооххх...', 'Вы ничего не ввели!', 'error');
+            setErrorTextArea('error');
+            setErrorEmail('error');
+            errors.push('mail');
+            errors.push('message');
+        } else {
+
+            if(textAreaValue.trim().length === 0) {
+                Swal.fire('Ооххх...', 'Вы не ввели текст сообщения!', 'error');
+                setErrorTextArea('error');
+                errors.push('message');
+            } else {
+                setErrorTextArea('');
+            }
+
+            if(emailInputValue.trim().length === 0) {
+                Swal.fire('Ооххх...', 'Вы не ввели свою почту!', 'error');
+                setErrorEmail('error');
+                errors.push('mail');
+            } else {
+                setErrorEmail('');
+            }
+
+        }
+
+        if(errors.length > 0) {
+            setErrorList(errors);
+            console.log(errors)
             return;
         }
 
-        if(emailInputValue.trim().length === 0) {
-            // alert('Вы не ввели свою почту');
-            Swal.fire('Ооххх...', 'Вы не ввели свою почту!', 'error');
-            return;
-        }
 
         const mail = {
             email: event.target.email.value,
@@ -55,9 +90,12 @@ const Contacts = ({location, match}) => {
             .then(res => res.text())
             .then(res => {
                 if (res === '"Письмо отправлено. Через 5 секунд мы вернем вас назад!"') {
-                    alert("Письмо отправлено!");
+                    Swal.fire('Готово', 'Ваше сообщение отправлено!', 'success');
+                    setTextAreaValue('');
+                    setEmailInputValue('');
+                    setErrorList([]);
                 } else {
-                    alert("Что-то пошло не так. Отправить сообщение не удалось.")
+                    Swal.fire('Ооххх...', 'Что-то пошло не так. Отправить сообщение не удалось.', 'error');
                 }
             })
     }
@@ -103,6 +141,9 @@ const Contacts = ({location, match}) => {
                                 placeholder="Ваше сообщение"
                                 value={textAreaValue}
                                 onChange={e => setTextAreaValue(e.target.value)}
+                                className={styles[errorTextArea]}
+                                // TODO: разблокировать в версии 0.9
+                                // required
                             />
                             <div className={styles.flex}>
                                 <input
@@ -111,14 +152,29 @@ const Contacts = ({location, match}) => {
                                     placeholder="Ваш email"
                                     value={emailInputValue}
                                     onChange={e => setEmailInputValue(e.target.value)}
+                                    className={styles[errorEmail]}
+                                    // required
                                 />
-                                <button type="submit" value="Отправить" className={styles.sendBtn}>
+                                <button
+                                    type="submit"
+                                    value="Отправить"
+                                    className={`${styles.sendBtn} ${errorSendBtn && styles[errorSendBtn]}`}
+                                >
                                     Отправить
                                     <span>
                                         <Arrow />
                                     </span>
                                 </button>
                             </div>
+                            {errorList.length>0 && (
+                                <ul className={styles.errorList}>
+                                    {errorList.map(el => {
+                                        return (
+                                            <li>{errorMessages[el]}</li>
+                                        )
+                                    })}
+                                </ul>
+                            )}
                         </form>
                     </div>
                 </div>

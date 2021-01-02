@@ -1,9 +1,4 @@
-//@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,700,800&display=swap&subset=cyrillic');
-
-@font-face {
-    font-family: 'Montserrat';
-    src: url('https://fonts.googleapis.com/css?family=Montserrat:400,500,700,800&display=swap&subset=cyrillic');
-}
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,700,800&display=swap&subset=cyrillic');
 
 
 $breakpoints: (
@@ -873,6 +868,9 @@ t
                         width: auto;
                         max-width: none;
                     }
+                    &.error {
+                        box-shadow: inset 0 0 0px 2px red;
+                    }
                 }
 
                 .flex {
@@ -897,6 +895,10 @@ t
                             max-width: none;
                         }
 
+                        &.error {
+                            box-shadow: inset 0 0 0px 2px red;
+                        }
+
                     }
                     .sendBtn {
                         @include baseColorBtn();
@@ -906,6 +908,25 @@ t
                             width: auto;
                             max-width: none;
                         }
+                        &.error {
+                            background-color: #eee;
+                            border-color: #ccc;
+                            color: #aaa;
+                            span svg path {
+                                fill: #aaa !important;
+                            }
+                        }
+                    }
+                }
+
+                ul.errorList {
+                    margin: 20px 0 -30px;
+                    padding: 0 0 0 16px;
+                    li {
+                        font-size: 18px;
+                        line-height: 30px;
+                        font-weight: bold;
+                        color: red;
                     }
                 }
             }

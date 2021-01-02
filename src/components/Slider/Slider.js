@@ -10,6 +10,7 @@ import json from "./../../model/quests";
 
 import {StoreContext} from "./../../model/Store";
 
+import Swal from 'sweetalert2';
 
 import ArrowThin from "./../../assets/svg/arrow_thin";
 import Arrow from "../../assets/svg/arrow_normal";
@@ -79,18 +80,17 @@ const Slider = ({history}) => {
         // console.log('handleSliderControl, inMove = '+ inMove)
 
         if(direction === "prev" && store.currentQuestNumber === 1) {
-            console.warn("Вопросов до первого не существует");
             history.push('/name');
             return
         }
 
         if(direction === "next" && currentAnswerIsChosen === false ) {
-            alert("Пожалуйста, посмотрите все ответы перед выбором")
+            Swal.fire('Ой..', 'Пожалуйста, посмотрите все ответы перед выбором!', 'error');
             return
         }
 
         if(direction === "next" && store.currentQuestNumber === (questsTotal + 1) ) {
-            console.warn("Вы ответили на все вопросы!")
+            console.warn("Вы ответили на все вопросы!");
             return
         }
 

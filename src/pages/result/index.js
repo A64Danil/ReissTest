@@ -6,6 +6,8 @@ import styles from "../../global.scss";
 
 import {StoreContext} from "../../model/Store.js";
 
+import Swal from 'sweetalert2';
+
 import json from "./../../model/quests";
 import Arrow from "../../assets/svg/arrow_normal";
 import {Link} from "react-router-dom";
@@ -91,8 +93,6 @@ const Result = ({props}) => {
             setIsCompareUrlBad(false);
             setUrlErrorMsg('');
 
-            // http://localhost:1234/compare?res=acc1cur1ord1pow1sav1ind1sta1soc1rom5tra1hon1ide1ven1eat1phy1fam1&username=%D0%A1%D0%B5%D1%80%D0%B6&
-            // res2=acc4cur2ord2pow2sav2ind1sta1soc1rom5tra1hon1ide1ven1eat1phy1fam1&username2=%D0%90%D1%84%D0%BE%D0%BD%D1%8F
             const originUserLink = 'res=' + allUrlParams.res + '&username=' + userNameUrl;
             const secondUserLink = 'res2=' + newParamsToComparePage.res + '&username2=' + secondUserNameUrl;
 
@@ -115,7 +115,7 @@ const Result = ({props}) => {
 
     function onCompareBtnClick(e) {
         if(paramsToComparePage === '') {
-            alert('Вы ничего не ввели в поле для сравнения');
+            Swal.fire('Ооххх...', 'Вы ничего не ввели в поле для сравнения', 'error');
             e.preventDefault();
         }
     }
@@ -133,7 +133,7 @@ const Result = ({props}) => {
         const linkToPage = window.location.href;
         console.log(linkToPage);
         copyToClipboard(linkToPage);
-        alert("Текст скопирован");
+        Swal.fire('Готово', 'Текст скопирован!', 'success');
     }
 
     return (
