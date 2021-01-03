@@ -24,6 +24,7 @@ const AllResults = ({props}) => {
                     name: origData.name,
                     timeStamp: origData.timeStamp,
                     date: new Date(origData.timeStamp.seconds * 1000).toLocaleDateString(),
+                    resultUrl: origData.resultUrl,
                     answers: []
                 }
                 let tempAnswers = {};
@@ -69,7 +70,7 @@ const AllResults = ({props}) => {
                             {fireBaseData.map((record) => (
                                 <details className={styles.details} key={record.timeStamp}>
                                     <summary>
-                                        <b key={record.timeStamp} >{record.name} </b><sub>({record.date})</sub>
+                                        <b key={record.timeStamp} >{record.name} </b><sub>({record.date})</sub> <a href={record.resultUrl} target="_blank" >#</a>
                                     </summary>
 
                                     <ul>

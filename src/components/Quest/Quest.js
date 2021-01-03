@@ -67,6 +67,7 @@ const Quest = ({questInfo, currentQuestNum, questsTotal, onAfterChange, onChange
             db.collection("testArr").add({
                 name: USER_NAME,
                 answers: preparedAnswersArr,
+                resultUrl: urlFullLink, // TODO: доделать ссылку
                 timeStamp: dbFirestore.FieldValue.serverTimestamp()
             })
                 .then(function () {
