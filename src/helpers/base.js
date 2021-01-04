@@ -5,13 +5,16 @@ export const isString = (char) => {
     return /\w/.test(char);
 }
 
-export const copyToClipboard = (textToCopy) => {
-    const copytext = document.createElement('input')
+export const copyToClipboard = (textToCopy, el = document.body) => {
+    const copytext = document.createElement('input');
+    copytext.classList.add('clipboard');
     copytext.value = textToCopy;
-    document.body.appendChild(copytext)
-    copytext.select()
-    document.execCommand('copy')
-    document.body.removeChild(copytext)
+    el.appendChild(copytext)
+    copytext.select();
+    copytext.focus();
+    copytext.setSelectionRange(0, 999);
+    document.execCommand('copy');
+    el.removeChild(copytext);
 };
 
 export const validURL = (str) => {

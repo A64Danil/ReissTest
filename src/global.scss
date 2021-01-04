@@ -177,33 +177,8 @@ $inputRange-c5: #F7E91B;
 
 
 
-button, a {
-    letter-spacing: 0.5px;
-
-    span {
-        :global {
-            #arrow_thin, #arrow_normal {
-                width: 11px;
-                height: 16px;
-            }
-        }
-    }
 
 
-    &:focus {
-        outline: none;
-        box-shadow: 0 0 2px 1px $base-color;
-    }
-}
-
-a {
-    &:link, &:visited {
-        color: $base-color;
-    }
-    &:hover {
-        color: #eee;
-    }
-}
 
 .longString {
     word-break: break-all;
@@ -297,6 +272,48 @@ a {
         //@include respond-to('md') {
         //    max-width: 750px;
         //}
+
+
+        button, a {
+            letter-spacing: 0.5px;
+
+            span {
+                :global {
+                    #arrow_thin, #arrow_normal {
+                        width: 11px;
+                        height: 16px;
+                    }
+                }
+            }
+
+
+            &:focus {
+                outline: none;
+                box-shadow: 0 0 2px 1px $base-color;
+            }
+        }
+
+        a {
+            &:link, &:visited {
+                color: $base-color;
+            }
+            &:hover {
+                color: #eee;
+            }
+        }
+
+        .clipboard {
+            position: absolute;
+            font-size: 22px;
+            height: 2px;
+            opacity: 0.1;
+            max-width: 10px;
+            overflow: hidden;
+            border: 0;
+            padding: 0;
+            margin: 0;
+        }
+
         @media (min-width: 768px) {
             margin: 0 auto 0 ;
         }
@@ -582,7 +599,7 @@ a {
                 word-break: break-all;
             }
 
-            input {
+            input.toCompare {
                 height: 47px;
                 border-radius: 29px;
                 border: 1px solid #ccc;

@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useState} from 'react'
 import {urlInlineParser, getAllUrlParams, checkUrlRes, urlResParse, sortResultDesc} from "../../helpers/parsers"
 import {copyToClipboard, validURL} from "../../helpers/base"
 
+
 import styles from "../../global.scss";
 
 import {StoreContext} from "../../model/Store.js";
@@ -128,11 +129,10 @@ const Result = ({props}) => {
 
 
     const copyToOnClick = (e) => {
-        // const bufferedText = e.currentTarget.textContent;
-        // const bufferedText = urlToComparePage;
+        console.log(e.target.parentElement)
+        const parentElem = e.target.parentElement;
         const linkToPage = window.location.href;
-        console.log(linkToPage);
-        copyToClipboard(linkToPage);
+        copyToClipboard(linkToPage, parentElem);
         Swal.fire('Готово', 'Текст скопирован!', 'success');
     }
 
@@ -176,6 +176,7 @@ const Result = ({props}) => {
                         value={paramsToComparePage}
                         onChange={e => setParamsToComparePage(e.target.value)}
                         placeholder="Вставьте код для сравнения"
+                        className={styles.toCompare}
                     />
                     {urlErrorMsg && (
                         <p className={styles.errorMsg}>{urlErrorMsg}</p>

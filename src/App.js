@@ -14,8 +14,6 @@ import "./global.scss";
 const testHistory = createBrowserHistory();
 
 const App = () => {
-    // console.log(console);
-    console.log(YMInitializer);
     return (
         <StoreProvider>
             <div className={"outerWrp"}>
