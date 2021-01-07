@@ -1,8 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
 
-import 'antd/dist/antd.css';
-// import './CustomSliderStyle.scss';
-
 import styles from "./Quest.scss";
 
 import json from "./../../model/quests";
