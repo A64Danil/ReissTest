@@ -37,6 +37,9 @@ $inputRange-c5: #F7E91B;
     @media (min-width: 360px) {
       padding: 20px;
     }
+    @media (min-width: 400px) {
+      padding: 20px 20px 30px;
+    }
 
     .QuestText__Container {
       @include container(768px);
@@ -46,6 +49,18 @@ $inputRange-c5: #F7E91B;
         font-weight: bold;
         font-size: 14px;
         margin: 0 0 5px;
+        @media (min-width: 360px) {
+          font-size: 16px;
+          margin: 0 0 6px;
+        }
+        @media (min-width: 480px) {
+          font-size: 18px;
+          margin: 0 0 8px;
+        }
+        @media (min-width: 768px) {
+          font-size: 20px;
+          margin: 0 0 10px;
+        }
       }
       .QuestTitle {
         color: #474747;
@@ -56,6 +71,15 @@ $inputRange-c5: #F7E91B;
         @media (min-width: 360px) {
           font-size: 29px;
         }
+        @media (min-width: 400px) {
+          font-size: 30px;
+        }
+        @media (min-width: 480px) {
+          font-size: 32px;
+        }
+        @media (min-width: 768px) {
+          font-size: 36px;
+        }
       }
       .QuestDescription {
         opacity: 0.7;
@@ -63,6 +87,17 @@ $inputRange-c5: #F7E91B;
         font-size: 16px;
         line-height: 22px;
         margin: 0;
+
+        @media (min-width: 400px) {
+          font-size: 18px;
+        }
+        @media (min-width: 480px) {
+          font-size: 20px;
+          line-height: 1.2em;
+        }
+        @media (min-width: 768px) {
+          font-size: 22px;
+        }
       }
     }
   }
@@ -76,6 +111,13 @@ $inputRange-c5: #F7E91B;
 
     @include container(768px);
 
+    @media (min-width: 480px) {
+      margin-bottom: 40px;
+    }
+    @media (min-width: 768px) {
+      margin-bottom: 80px;
+    }
+
     .QuestAnswers {
       padding: 20px 15px;
       height: 130px;
@@ -83,6 +125,19 @@ $inputRange-c5: #F7E91B;
 
       @media (min-width: 360px) {
         padding: 20px;
+        height: 150px;
+      }
+      @media (min-width: 400px) {
+        height: 160px;
+      }
+      @media (min-width: 480px) {
+        max-width: 500px;
+        height: 180px;
+        margin: 0 auto;
+      }
+      @media (min-width: 768px) {
+        max-width: 550px;
+        height: 200px;
       }
 
 
@@ -93,10 +148,41 @@ $inputRange-c5: #F7E91B;
         line-height: 28px;
         margin-bottom: 10px;
         text-transform: uppercase;
+        // TODO: увеличить шрифты для 360+
+        @media (min-width: 360px) {
+          font-size: 26px;
+          margin-bottom: 12px;
+        }
+        @media (min-width: 400px) {
+          font-size: 28px;
+          margin-bottom: 14px;
+        }
+        @media (min-width: 480px) {
+          font-size: 32px;
+          margin-bottom: 18px;
+        }
+        @media (min-width: 768px) {
+          font-size: 36px;
+          margin-bottom: 22px;
+        }
       }
       .QuestAnswerDescr {
         font-size: 15px;
         line-height: 21px;
+        // TODO: увеличить шрифты для 360+
+        @media (min-width: 360px) {
+          font-size: 16px;
+          line-height: 1.4em;
+        }
+        @media (min-width: 400px) {
+          font-size: 18px;
+        }
+        @media (min-width: 480px) {
+          font-size: 20px;
+        }
+        @media (min-width: 768px) {
+          font-size: 22px;
+        }
       }
     }
 
@@ -180,8 +266,6 @@ $inputRange-c5: #F7E91B;
   .ant-slider {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
     color: rgba(0, 0, 0, 0.65);
     font-size: 14px;
     font-variant: tabular-nums;
@@ -309,8 +393,8 @@ $inputRange-c5: #F7E91B;
     }
 
     @media (min-width: 400px) {
-      height: 82px;
-      width: 84px;
+      height: 80px;
+      width: 80px;
       margin-top: -32px;
     }
 
