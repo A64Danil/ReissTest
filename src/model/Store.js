@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from "react";
+import React from "react";
 import cookie from "react-cookies";
 
 import {types} from "mobx-state-tree"
@@ -91,8 +91,6 @@ const QuestStore = types
             newAnswers[quest.keyTitle] = quest.value;
             saveFastCookie('answers', newAnswers);
             console.log(cookie.loadAll());
-
-
         },
         setIsChosenAnswer(keyTitle, value) {
             self.isChosenAnswers.set(keyTitle, value);

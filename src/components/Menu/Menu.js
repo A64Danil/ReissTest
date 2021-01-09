@@ -11,22 +11,31 @@ import CrossIco from "./../../assets/svg/cross";
 
 const themesByPath = {
     '/':  "defaultTheme",
-    '/name':  "hiddenTheme",
+    '/name':  "grayTheme",
     '/contacts':  "grayTheme",
-    '/guide':  "hiddenTheme",
+    '/guide':  "grayTheme",
     '/quests':  "hiddenTheme",
     '/result':  "grayTheme",
     default: "defaultTheme"
 }
+const menuThemesByPath = {
+    '/contacts':  "wideMenu",
+    '/result':  "narrowMenu",
+}
 
 const Menu = () => {
     const {pathname} = useLocation();
-    const menuClassName = themesByPath[pathname] || themesByPath.default;
+    const menuTheme = themesByPath[pathname] || themesByPath.default;
     const [isMenuOpen, setIsMenuOpen] = useState(false)
-    // const store = useContext(StoreContext);
+    const [openedMenuCLass, setOpenedMenuCLass] = useState('')
+    const specialMenuCLass = menuThemesByPath[pathname];
 
     let resultRender;
 
+
+    useEffect(()=> {
+        setOpenedMenuCLass(isMenuOpen ? 'opened' : '');
+    }, [isMenuOpen])
 
     useEffect(()=> {
         window.scrollTo(0, 0);
@@ -39,7 +48,7 @@ const Menu = () => {
 
     resultRender =  (
         <>
-            <nav  className={`${styles.Menu} ${styles[menuClassName]}`}  >
+            <nav  className={`${styles.Menu} ${styles[menuTheme]} ${styles[openedMenuCLass]} ${styles[specialMenuCLass]}`}  >
                 <input
                     type="checkbox"
                     className={styles.hamburgerCheker}
@@ -58,7 +67,7 @@ const Menu = () => {
                     <ul className={styles.hamburgerItems}>
                         <li>
                             <NavLink to='/' exact activeClassName={styles.active}>
-                                Главная <span>(v0.765)</span>
+                                Главная <span>(v0.77)</span>
                             </NavLink>
                         </li>
                         <li>

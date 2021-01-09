@@ -302,7 +302,8 @@ $inputRange-c5: #F7E91B;
   body {
     margin: 0;
     font-variant: tabular-nums;
-    line-height: 1.5;
+    line-height: 1.4em;
+    font-family: 'Montserrat', sans-serif !important;
   }
   [tabindex='-1']:focus {
     outline: none !important;
@@ -534,8 +535,11 @@ $inputRange-c5: #F7E91B;
 
     .startScreen__Container {
         min-height: 100%;
+        @media (min-width: 480px) {
+            padding-top: 100px;
+        }
         @media (min-width: 768px) {
-            padding-top: 14%;
+            padding-top: 22vh;
             @include container(992px);
         }
 
@@ -546,9 +550,14 @@ $inputRange-c5: #F7E91B;
             margin-bottom: $baseMargBottom;
             font-weight: 700;
 
+            @media (min-width: 480px) {
+              font-size: 25px;
+              line-height: 27px;
+            }
             @media (min-width: 768px) {
                 font-size: 27px;
                 line-height: 28px;
+                margin-bottom: 40px;
             }
         }
         h2 {
@@ -557,7 +566,10 @@ $inputRange-c5: #F7E91B;
             line-height: 36px;
             font-weight: 800;
             margin-bottom: $baseMargBottom;
-
+            @media (min-width: 480px) {
+              font-size: 42px;
+              line-height: 1.4em;
+            }
             @media (min-width: 768px) {
                 //padding-right: 30%;
                 font-weight: 800;
@@ -586,10 +598,11 @@ $inputRange-c5: #F7E91B;
             margin-bottom: $baseMargBottom;
             @media (min-width: 480px) {
                 padding-right: 40px;
-                //padding-right: 0;
+                font-size: 16px;
             }
             @media (min-width: 540px) {
                 padding-right: 40%;
+                font-size: 18px;
             }
             @media (min-width: 768px) {
                 font-weight: 500;
@@ -700,18 +713,42 @@ $inputRange-c5: #F7E91B;
         font-size: 17px;
         line-height: 22px;
 
+      @media (min-width: 360px) {
+        font-size: 18px;
+        line-height: 1.3em;
+      }
+      @media (min-width: 480px) {
+        font-size: 20px;
+      }
+      @media (min-width: 768px) {
+        font-size: 22px;
+        text-align: center;
+        line-height: 1.5em;
+      }
         .guidePage__description {
-            padding: 30px 20px;
+            padding: 65px 20px 25px;
+
             @media (min-width: 360px) {
-                padding: 40px 20px;
+                padding: 80px 20px 40px;
+            }
+
+            @media (min-width: 768px) {
+              max-width: 992px;
+            }
+            @media (min-width: 992px) {
+              text-align: center;
+              padding: 100px 0 50px;
             }
             p {
-                text-align: left;
                 font-weight: 500;
                 color: #474747;
+                @media (min-width: 768px) {
+                  max-width: 650px;
+                }
             }
         }
         .guidePage__manual {
+            width: 100%;
             padding: 30px 20px 0;
             background-color: #fff;
             text-align: center;
@@ -723,6 +760,10 @@ $inputRange-c5: #F7E91B;
                 margin-bottom: 25px;
                 @media (min-width: 360px) {
                     margin-bottom: 50px;
+                }
+                @media (min-width: 768px) {
+                  max-width: 650px;
+                  margin: 0 auto 60px;
                 }
             }
 

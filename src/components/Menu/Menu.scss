@@ -9,8 +9,6 @@
 
     &.defaultTheme {
         //background-color: #77AFA7;
-
-
         input.hamburgerCheker:checked ~ .Menu__Container {
             .hamburgerLabel {
                 color: #C0C0C0;
@@ -171,46 +169,45 @@
 
 }
 
-
 @media screen and (min-width: 768px) {
     .Menu {
-        //position: static;
-        opacity: 0.05;
 
-         &:hover {
-            opacity: 0.75;
-         }
+        &.opened {
+            background-color: #fff;
+        }
+
+        &.narrowMenu {
+            .Menu__Container {max-width: 768px;}
+        }
+        &.wideMenu {
+            .Menu__Container {max-width: 1140px;}
+        }
 
         .Menu__Container {
-            .hamburgerLabel {
-                display: none;
-            }
+            max-width: 992px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+        }
+
+        input.hamburgerCheker:checked ~ .Menu__Container {;
+
             .hamburgerItems {
                 display: flex;
-                position: static;
+                margin-left: 80px;
+                background-color: transparent;
                 li {
-                    //width: 20%; /* 100% / 5 tabs = 20% */
-                    padding: 0;
-                    color: white;
-                    text-decoration: none;
-                    //text-align: center;
-                    text-align: left;
-                    list-style-type: none;
+                    border-top: none;
                 }
             }
         }
     }
 }
 
-
 @media screen and (min-width: 992px) {
     .Menu {
         .Menu__Container {
-            padding: 0 100px;
-            margin: 0 auto;
-            width: 100%;
-            max-width: 1140px;
-
+            padding: 0;
         }
     }
 }
