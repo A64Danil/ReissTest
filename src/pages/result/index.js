@@ -20,7 +20,9 @@ const Result = ({props}) => {
     const [paramsToComparePage, setParamsToComparePage] = useState("");
     const [urlToComparePage, setUrlToComparePage] = useState("");
     const [isCompareUrlBad, setIsCompareUrlBad] = useState(false);
+    const [errorUrlInput, setErrorUrlInput] = useState('');
     const [compareBtnClass, setСompareBtnClass] = useState('');
+    const [shakeCompareBtn, setShakeCompareBtn] = useState('');
 
     const [urlErrorMsg, setUrlErrorMsg] = useState('');
 
@@ -74,6 +76,8 @@ const Result = ({props}) => {
     useEffect(() => {
         if (!validURL(paramsToComparePage) && paramsToComparePage !== '') {
             setIsCompareUrlBad(true);
+            setСompareBtnClass(styles.badUrl);
+            setErrorUrlInput(styles.error);
             setUrlErrorMsg('Вы вводите неправильный формат ссылки.');
             return
         };
@@ -93,6 +97,8 @@ const Result = ({props}) => {
         } else {
             setIsCompareUrlBad(false);
             setUrlErrorMsg('');
+            setСompareBtnClass('');
+            setErrorUrlInput('');
 
             const originUserLink = 'res=' + allUrlParams.res + '&username=' + userNameUrl;
             const secondUserLink = 'res2=' + newParamsToComparePage.res + '&username2=' + secondUserNameUrl;
@@ -100,24 +106,20 @@ const Result = ({props}) => {
             const newCompareLink = '/compare?' + originUserLink + '&' + secondUserLink;
             setUrlToComparePage(newCompareLink);
         }
-        console.log(isCompareUrlBad);
+        // console.log(isCompareUrlBad);
 
     }, [paramsToComparePage, setParamsToComparePage])
-
-    useEffect(() => {
-        if (isCompareUrlBad) {
-            setСompareBtnClass(styles.badUrl);
-        } else {
-            setСompareBtnClass("");
-        }
-
-    }, [isCompareUrlBad, setIsCompareUrlBad])
 
 
     function onCompareBtnClick(e) {
         if(paramsToComparePage === '') {
-            Swal.fire('Ооххх...', 'Вы ничего не ввели в поле для сравнения', 'error');
             e.preventDefault();
+            Swal.fire('Ооххх...', 'Вы ничего не ввели в поле для сравнения', 'error');
+            setErrorUrlInput(styles.error);
+            setShakeCompareBtn(styles.resultPageBtnAnimated);
+            setTimeout( () => {
+                setShakeCompareBtn('');
+            }, 820);
         }
     }
 
@@ -129,7 +131,6 @@ const Result = ({props}) => {
 
 
     const copyToOnClick = (e) => {
-        console.log(e.target.parentElement)
         const parentElem = e.target.parentElement;
         const linkToPage = window.location.href;
         copyToClipboard(linkToPage, parentElem);
@@ -176,7 +177,7 @@ const Result = ({props}) => {
                         value={paramsToComparePage}
                         onChange={e => setParamsToComparePage(e.target.value)}
                         placeholder="Вставьте код для сравнения"
-                        className={styles.toCompare}
+                        className={`${styles.toCompare} ${errorUrlInput}`}
                     />
                     {urlErrorMsg && (
                         <p className={styles.errorMsg}>{urlErrorMsg}</p>
@@ -184,7 +185,7 @@ const Result = ({props}) => {
                     <Link to={urlToComparePage}
                           disabled={isCompareUrlBad}
                           onClick={onCompareBtnClick}
-                          className={`${styles.compareBtn} ${compareBtnClass}`}
+                          className={`${styles.compareBtn} ${compareBtnClass} ${shakeCompareBtn}`}
                     >
                         Сравнить
                         <span>

@@ -1,11 +1,9 @@
-// import React from 'react';
 import React, {useState, useEffect} from 'react';
 
 import Swal from 'sweetalert2';
 
 import styles from "../../global.scss";
 import Arrow from "../../assets/svg/arrow_normal";
-// import {Link} from "react-router-dom";
 
 const Contacts = ({location, match}) => {
 
@@ -15,7 +13,7 @@ const Contacts = ({location, match}) => {
     const [ emailInputValue, setEmailInputValue ] = useState('');
     const [ errorEmail, setErrorEmail ] = useState('');
     const [ errorSendBtn, setErrorSendBtn ] = useState('');
-
+    const [ shakeSendBtn, setShakeSendBtn ] = useState('');
     const [ errorList, setErrorList ] = useState([]);
 
     const textAreaSize = {
@@ -37,22 +35,22 @@ const Contacts = ({location, match}) => {
         const errors = [];
 
         if(textAreaValue.trim().length === 0 || emailInputValue.trim().length === 0) {
-            setErrorSendBtn('error')
+            setErrorSendBtn(styles.error)
         } else {
             setErrorSendBtn('')
         }
 
         if(textAreaValue.trim().length === 0 && emailInputValue.trim().length === 0) {
             Swal.fire('Ооххх...', 'Вы ничего не ввели!', 'error');
-            setErrorTextArea('error');
-            setErrorEmail('error');
+            setErrorTextArea(styles.error);
+            setErrorEmail(styles.error);
             errors.push('mail');
             errors.push('message');
         } else {
 
             if(textAreaValue.trim().length === 0) {
                 Swal.fire('Ооххх...', 'Вы не ввели текст сообщения!', 'error');
-                setErrorTextArea('error');
+                setErrorTextArea(styles.error);
                 errors.push('message');
             } else {
                 setErrorTextArea('');
@@ -60,7 +58,7 @@ const Contacts = ({location, match}) => {
 
             if(emailInputValue.trim().length === 0) {
                 Swal.fire('Ооххх...', 'Вы не ввели свою почту!', 'error');
-                setErrorEmail('error');
+                setErrorEmail(styles.error);
                 errors.push('mail');
             } else {
                 setErrorEmail('');
@@ -70,6 +68,10 @@ const Contacts = ({location, match}) => {
 
         if(errors.length > 0) {
             setErrorList(errors);
+            setShakeSendBtn(styles.sendBtnAnimated);
+            setTimeout( () => {
+                setShakeSendBtn('');
+            }, 820);
             console.log(errors)
             return;
         }
@@ -141,7 +143,7 @@ const Contacts = ({location, match}) => {
                                 placeholder="Ваше сообщение"
                                 value={textAreaValue}
                                 onChange={e => setTextAreaValue(e.target.value)}
-                                className={styles[errorTextArea]}
+                                className={errorTextArea}
                                 // TODO: разблокировать в версии 0.9
                                 // required
                             />
@@ -152,13 +154,13 @@ const Contacts = ({location, match}) => {
                                     placeholder="Ваш email"
                                     value={emailInputValue}
                                     onChange={e => setEmailInputValue(e.target.value)}
-                                    className={styles[errorEmail]}
+                                    className={errorEmail}
                                     // required
                                 />
                                 <button
                                     type="submit"
                                     value="Отправить"
-                                    className={`${styles.sendBtn} ${errorSendBtn && styles[errorSendBtn]}`}
+                                    className={`${styles.sendBtn} ${errorSendBtn} ${shakeSendBtn}`}
                                 >
                                     Отправить
                                     <span>
@@ -168,9 +170,9 @@ const Contacts = ({location, match}) => {
                             </div>
                             {errorList.length>0 && (
                                 <ul className={styles.errorList}>
-                                    {errorList.map(el => {
+                                    {errorList.map((el, i) => {
                                         return (
-                                            <li>{errorMessages[el]}</li>
+                                            <li key={`item${i}`}>{errorMessages[el]}</li>
                                         )
                                     })}
                                 </ul>

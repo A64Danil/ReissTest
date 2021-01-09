@@ -7,29 +7,27 @@ import Arrow from "./../../assets/svg/arrow_normal";
 
 
 const NamePage = ({history}) => {
-    const store = useContext(StoreContext)
-    console.log("name/index.js");
-    console.log(store);
+    const store = useContext(StoreContext);
     let currentUserName = store.userName || '';
-    const [username, setUsername] = useState(currentUserName)
-
+    const [username, setUsername] = useState(currentUserName);
+    const [errorName, setErrorName] = useState('');
+    const [shakeNameBtn, setShakeNameBtn] = useState('');
     useEffect(()=> {
-        // console.log('username изменился', username);
         store.setUsername(username);
-    }, [username])
+    }, [username]);
 
 
     function onNextBtnClick(e) {
         e.persist();
 
         if (username) {
-            e.target.classList.remove(styles.namePageBtnAnimated)
+            setShakeNameBtn('');
             history.push('/guide');
-            // history.push('/quests');
         } else {
-            e.target.classList.add(styles.namePageBtnAnimated)
+            setErrorName(styles.error);
+            setShakeNameBtn(styles.namePageBtnAnimated);
             setTimeout( () => {
-                e.target.classList.remove(styles.namePageBtnAnimated)
+                setShakeNameBtn('');
             }, 820);
         }
     }
@@ -39,14 +37,14 @@ const NamePage = ({history}) => {
             <div className={styles.namePage__Container} >
                 <h1>Как вас зовут?</h1>
                 <input
-                    className={styles.namePageInput}
+                    className={`${styles.namePageInput} ${errorName}`}
                     type="text"
                     placeholder='Ваше имя'
                     value={username}
                     onChange={e => setUsername(e.target.value)}
                 />
                 <button
-                    className={`${styles.namePageBtn}`}
+                    className={`${styles.namePageBtn} ${shakeNameBtn}`}
                     onClick={e => onNextBtnClick(e)}
                 >
                     Продолжить 
