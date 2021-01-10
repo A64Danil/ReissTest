@@ -12,6 +12,10 @@ import {Redirect} from 'react-router-dom'
 
 import {db, dbFirestore} from "../../firebase";
 
+
+const collectionName = 'reissresults';
+// const collectionName = 'testArr';
+
 const Quest = ({questInfo, currentQuestNum, questsTotal, onAfterChange, onChange, answerPosition, answerValueForInputBg}) => {
     const store = useContext(StoreContext)
     let USER_NAME = store.userName;
@@ -61,7 +65,7 @@ const Quest = ({questInfo, currentQuestNum, questsTotal, onAfterChange, onChange
 
 
             if (!!!USER_NAME) USER_NAME = "Без имени =("
-            db.collection("testArr").add({
+            db.collection(collectionName).add({
                 name: USER_NAME,
                 answers: preparedAnswersArr,
                 resultUrl: urlFullLink,
