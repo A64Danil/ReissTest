@@ -6,8 +6,6 @@ import styles from "../../global.scss";
 import Arrow from "../../assets/svg/arrow_normal";
 
 const Contacts = ({location, match}) => {
-
-    const { innerWidth: width, innerHeight: height } = window;
     const [ textAreaValue, setTextAreaValue ] = useState('');
     const [ errorTextArea, setErrorTextArea ] = useState('');
     const [ emailInputValue, setEmailInputValue ] = useState('');
@@ -15,11 +13,6 @@ const Contacts = ({location, match}) => {
     const [ errorSendBtn, setErrorSendBtn ] = useState('');
     const [ shakeSendBtn, setShakeSendBtn ] = useState('');
     const [ errorList, setErrorList ] = useState([]);
-
-    const textAreaSize = {
-        cols: innerWidth < 480 ? 25 : 50,
-        rows: 6
-    }
 
     const errorMessages = {
         'mail': 'Вы не указали почту для ответа',
@@ -138,7 +131,6 @@ const Contacts = ({location, match}) => {
                             <textarea
                                 name="message"
                                 id=""
-                                cols={textAreaSize.cols}
                                 rows="6"
                                 placeholder="Ваше сообщение"
                                 value={textAreaValue}

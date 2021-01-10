@@ -905,106 +905,122 @@ $inputRange-c5: #F7E91B;
 }
 
 .compareResultsPage {
+  padding: $basePadTop 20px 15px;
 
-    padding: 15px 20px;
+  .compareResultsPage__Container {
 
-t
+    @include respond-to('xs') {
+      @include container(768px);
+    }
+
     h1 {
-        //text-transform: uppercase;
-        color: #474747;
-        font-size: 21px;
-        line-height: 32px;
-        font-weight: 800;
-        margin-bottom: 40px;
-        text-align: center;
+      //text-transform: uppercase;
+      color: #474747;
+      font-size: 21px;
+      line-height: 32px;
+      font-weight: 800;
+      margin-bottom: 40px;
+      text-align: center;
     }
 
 
     .compareResultsNames {
 
-        display: flex;
+      display: flex;
 
-        h2 {
-            color: #888;
-            width: 50%;
-            padding: 0 10px 0 0;
-            word-break: break-all;
-            &:last-of-type {
-                padding: 0 0 0 10px;
-                text-align: right;
-            }
+      h2 {
+        color: #888;
+        width: 50%;
+        padding: 0 10px 0 0;
+        word-break: break-all;
+
+        &:last-of-type {
+          padding: 0 0 0 10px;
+          text-align: right;
         }
+      }
     }
 
     .compareResultsBlock {
-        display: flex;
-        .resultListWrp {
-            width: 50%;
-            padding: 0 0 0 10px;
+      display: flex;
+
+      .resultListWrp {
+        width: 50%;
+        padding: 0 0 0 10px;
 
 
-            .resultList {
-                li {
-                    position: relative;
-                    .resultTitle {
-                        visibility: hidden;
-                        max-height: 1em;
-                        margin-bottom: 20px;
-                    }
-                    .resultBar {
-                        height: 65px;
-                        &.resultBar--100 {
-                            @include compareResultBarBg($inputRange-c1,#eee,#eee,#eee,#eee);
-                        }
-                        &.resultBar--200 {
-                            @include compareResultBarBg($inputRange-c1, $inputRange-c2,#eee,#eee,#eee);
-                        }
-                        &.resultBar--300 {
-                            @include compareResultBarBg($inputRange-c1, $inputRange-c2, $inputRange-c3,#eee,#eee);
-                        }
-                        &.resultBar--400 {
-                            @include compareResultBarBg($inputRange-c1, $inputRange-c2, $inputRange-c3, $inputRange-c4, #eee);
-                        }
-                        &.resultBar--500 {
-                            @include compareResultBarBg($inputRange-c1, $inputRange-c2, $inputRange-c3, $inputRange-c4, $inputRange-c5);
-                        }
-                    }
+        .resultList {
+          li {
+            position: relative;
 
-                }
-                
+            .resultTitle {
+              visibility: hidden;
+              max-height: 1em;
+              margin-bottom: 20px;
             }
-            
-            &.rotated {
-                padding: 0 10px 0 0;
 
-                .resultList {
-                    li {
+            .resultBar {
+              height: 65px;
 
-                        &:after {
-                            content: "";
-                            height: calc(100% - 50px);
-                            margin: 30px 0;
-                            position: absolute;
-                            width: 2px;
-                            background-color: #ccc;
-                            top: 0;
-                            right: -10px;
-                            transform: translate(50%, 0px);
-                        }
-                        .resultTitle {
-                            visibility: visible;
-                            text-align: center;
-                            width: calc(200% + 20px);
-                        }
-                        .resultBar {
-                            transform: rotateY(180deg);
-                        }
-                    }
+              &.resultBar--100 {
+                @include compareResultBarBg($inputRange-c1, #eee, #eee, #eee, #eee);
+              }
 
-                }
+              &.resultBar--200 {
+                @include compareResultBarBg($inputRange-c1, $inputRange-c2, #eee, #eee, #eee);
+              }
+
+              &.resultBar--300 {
+                @include compareResultBarBg($inputRange-c1, $inputRange-c2, $inputRange-c3, #eee, #eee);
+              }
+
+              &.resultBar--400 {
+                @include compareResultBarBg($inputRange-c1, $inputRange-c2, $inputRange-c3, $inputRange-c4, #eee);
+              }
+
+              &.resultBar--500 {
+                @include compareResultBarBg($inputRange-c1, $inputRange-c2, $inputRange-c3, $inputRange-c4, $inputRange-c5);
+              }
             }
+
+          }
+
         }
+
+        &.rotated {
+          padding: 0 10px 0 0;
+
+          .resultList {
+            li {
+
+              &:after {
+                content: "";
+                height: calc(100% - 50px);
+                margin: 30px 0;
+                position: absolute;
+                width: 2px;
+                background-color: #ccc;
+                top: 0;
+                right: -10px;
+                transform: translate(50%, 0px);
+              }
+
+              .resultTitle {
+                visibility: visible;
+                text-align: center;
+                width: calc(200% + 20px);
+              }
+
+              .resultBar {
+                transform: rotateY(180deg);
+              }
+            }
+
+          }
+        }
+      }
     }
+  }
 }
 
 .contactsPage {
@@ -1015,13 +1031,16 @@ t
         //flex-direction: column;
         //align-items: center;
         //justify-content: flex-start;
-        padding: $basePadTop 0 0;
-        //@media (min-width: 768px) {
-        //    margin-left: 8.3%;
-        //}
+        //padding: $basePadTop 0 0;
+        @media (min-width: 768px) {
+          padding: $basePadTop 20px 0;
+        }
 
         @media (min-width: 992px) {
             @include container(1140px);
+        }
+        @media (min-width: 1140px) {
+          padding: $basePadTop 0 0;
         }
 
 
@@ -1030,7 +1049,7 @@ t
             line-height: 26px;
             color: #474747;
             font-weight: 800;
-            padding: 0 20px 36px;
+            padding:  $basePadTop 20px 36px;
             background-color: #EEE;
             margin-bottom: 0;
 
@@ -1066,8 +1085,10 @@ t
                     border: 3px solid #E2E2E2;
                     box-sizing: border-box;
                     border-radius: 27px;
-                    padding: 50px 90px;
                     margin-bottom: 0;
+                }
+                @media (min-width: 992px) {
+                  padding: 50px 90px;
                 }
 
                 .authorDescript {
@@ -1100,7 +1121,10 @@ t
                 @media (min-width: 768px) {
                     width: 60%;
                     border-radius: 27px;
-                    padding: 50px 80px 90px;
+                    padding: 30px 20px 50px;
+                }
+                @media (min-width: 992px) {
+                  padding: 50px 80px 90px;
                 }
 
                 form {
@@ -1130,8 +1154,8 @@ t
                     width: 100%;
                     max-width: 450px;
                     @media (min-width: 768px) {
-                        width: auto;
-                        max-width: none;
+                      width: 100%;
+                      max-width: none;
                     }
                     &.error {
                         box-shadow: inset 0 0 0px 2px red;
@@ -1142,6 +1166,11 @@ t
                     display: flex;
                     flex-wrap: wrap;
                     justify-content: space-between;
+                    flex-direction: column;
+                    @media (min-width: 768px) {
+                      flex-direction: row;
+                    }
+
                     input[type='email'] {
                         padding: 12px 25px 16px;
                         font-size: 17px;
@@ -1157,7 +1186,8 @@ t
                         @media (min-width: 768px) {
                             margin-bottom: 0;
                             width: auto;
-                            max-width: none;
+                            margin-right: 20px;
+                            max-width: calc( 100% - 220px);
                         }
 
                         &.error {

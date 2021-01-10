@@ -16,11 +16,13 @@ const themesByPath = {
     '/guide':  "grayTheme",
     '/quests':  "hiddenTheme",
     '/result':  "grayTheme",
+    '/compare':  "grayTheme",
     default: "defaultTheme"
 }
 const menuThemesByPath = {
     '/contacts':  "wideMenu",
     '/result':  "narrowMenu",
+    '/compare':  "narrowMenu",
 }
 
 const Menu = () => {
@@ -67,7 +69,7 @@ const Menu = () => {
                     <ul className={styles.hamburgerItems}>
                         <li>
                             <NavLink to='/' exact activeClassName={styles.active}>
-                                Главная <span>(v0.8)</span>
+                                Главная <span>(v0.81)</span>
                             </NavLink>
                         </li>
                         <li>
