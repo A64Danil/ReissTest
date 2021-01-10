@@ -23,8 +23,8 @@ if((isset($_POST['email'])&&$_POST['email']!="")&&(isset($_POST['message'])&&$_P
 				$email = $_POST['email'];
 				
 
-//				$to = "a64danil@mail.ru,ann.po.work@gmail.com"; // адрес, куда слать письмо
-				$to = "a64danil@mail.ru"; // адрес, куда слать письмо
+				$to = "a64danil@mail.ru,ann.po.work@gmail.com"; // адрес, куда слать письмо
+//				$to = "a64danil@mail.ru"; // адрес, куда слать письмо
 				// формируем Тему письма
 
 				$subject = "Сообщение с сайта Тест Рисса  (от $email)";
