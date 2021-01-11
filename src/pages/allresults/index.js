@@ -8,7 +8,9 @@ import json from "./../../model/quests";
 
 import {db} from "../../firebase";
 
-const AllResults = ({props}) => {
+const collectionName = 'reissresults';
+
+const AllResults = () => {
     const store = useContext(StoreContext)
     const [isDbLoaded, setIsDbLoaded] = useState(false);
 
@@ -17,7 +19,7 @@ const AllResults = ({props}) => {
     useEffect(()=> {
         console.log("Start AllResult useEffect");
         let tempArr = []
-        db.collection("testArr").orderBy('timeStamp', 'desc').get().then(function(querySnapshot) {
+        db.collection(collectionName).orderBy('timeStamp', 'desc').get().then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
                 let origData = doc.data();
                 let newData = {

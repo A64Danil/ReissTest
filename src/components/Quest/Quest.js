@@ -14,7 +14,6 @@ import {db, dbFirestore} from "../../firebase";
 
 
 const collectionName = 'reissresults';
-// const collectionName = 'testArr';
 
 const Quest = ({questInfo, currentQuestNum, questsTotal, onAfterChange, onChange, answerPosition, answerValueForInputBg}) => {
     const store = useContext(StoreContext)
