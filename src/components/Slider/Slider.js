@@ -3,7 +3,6 @@ import styles from "./Slider.scss";
 
 import Quest from './../Quest/Quest'
 
-
 import Transition from "react-transition-group/Transition";
 
 import json from "./../../model/quests";
@@ -13,16 +12,13 @@ import {StoreContext} from "./../../model/Store";
 import Swal from 'sweetalert2';
 
 import ArrowThin from "./../../assets/svg/arrow_thin";
-import Arrow from "../../assets/svg/arrow_normal";
 
 const questsTotal = json.length;
 
 
 const Slider = ({history}) => {
 
-    const [currentQuestNum, setCurrentQuestNum] = useState(1)
     const [questInfo, setQuestInfo] =  useState()
-    const [parsedResults, setParsedResults] =  useState()
     const [currentAnswerIsChosen, setCurrentAnswerIsChosen] =  useState(false)
 
     const [answerPosition, setAnswerPosition] = useState(500);
@@ -32,8 +28,7 @@ const Slider = ({history}) => {
 
     const [slideDirection, setSlideDirecrtion] = useState('next');
 
-    // const [store, setStore] = useContext(StoreContext);
-    const store = useContext(StoreContext)
+    const store = useContext(StoreContext);
 
     let currentAnswerPosition;
     // 1. Страница рендерится со стейтом направления - next. Стейт меняет рисунок анимации
@@ -43,19 +38,11 @@ const Slider = ({history}) => {
     // т.к. после смены CurQuestNum сразу произойдёт слайд. Выход - изменить порядок на slideDir -> inMove -> currentQuestNum -> questInfo
     // После клика на кнопку мы задаём направление, рисуем анимацию, ЗАПОМИНАЕМ текущий ответ, из меняем текущий номер вопроса, прокидываем новую инфу
 
-    // useEffect(()=> {
-    //     console.log("Render Slider2")
-    //     console.log(store)
-    // })
-
     const duration = 250;
 
     const defaultStyle = {
         height: `100%`,
-        // height: `85%`,
-        // maxHeight: `380px`,
         maxHeight: `calc(100% - 85px)`,
-        // flexGrow: `1`,
         transition: `all 250ms ease-in-out`,
         transform: `translate(0%, 0)`
     }
@@ -108,15 +95,13 @@ const Slider = ({history}) => {
         // console.log('inMove изменился', inMove)
         if (inMove) return;
         // с задержкой, т.к. до перелистывания нужно анимировать выход и записать ответ
-        console.log("Текущий ответ")
+        // console.log("Текущий ответ")
         setTimeout(() => {
             if(slideDirection === "next") {
                 store.nextQuest()
-                // setCurrentQuestNum(currentQuestNum+1)
             }
             if(slideDirection === "prev") {
                 store.prevQuest()
-                // setCurrentQuestNum(currentQuestNum-1)
             }
             setInMove(true);
         }, duration)
@@ -127,11 +112,11 @@ const Slider = ({history}) => {
     // STEP 3 - вносим новые данные в компонент Quest
     useEffect(()=> {
         if (store.currentQuestNumber <= questsTotal) {
-            console.log("Поменялся store.currentQuestNumber на ", store.currentQuestNumber)
+            // console.log("Поменялся store.currentQuestNumber на ", store.currentQuestNumber)
             let quest = json[store.currentQuestNumber - 1]
             setQuestInfo(quest);
             setCurrentAnswerIsChosen(store.isChosenAnswers.get(quest.keyTitle));
-            console.log("currentAnswerIsChosen", currentAnswerIsChosen);
+            // console.log("currentAnswerIsChosen", currentAnswerIsChosen);
         }
     }, [store.currentQuestNumber])
 
@@ -140,7 +125,7 @@ const Slider = ({history}) => {
     useEffect(()=> {
         // В этом месте пробрасываем в inputRange новое значение
         if (!questInfo) return;
-        console.log("questInfo - step4")
+        // console.log("questInfo - step4")
         currentAnswerPosition = store.answers.get(questInfo.keyTitle) || 500;
         setAnswerPosition(currentAnswerPosition);
         setAnswerValueForInputBg(currentAnswerPosition);
