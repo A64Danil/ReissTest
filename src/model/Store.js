@@ -90,7 +90,6 @@ const QuestStore = types
             const newAnswers = cookie.load('answers') || {};
             newAnswers[quest.keyTitle] = quest.value;
             saveFastCookie('answers', newAnswers);
-            console.log(cookie.loadAll());
         },
         setIsChosenAnswer(keyTitle, value) {
             self.isChosenAnswers.set(keyTitle, value);
@@ -112,29 +111,22 @@ const QuestStore = types
             self.resultUrl = url;
         },
         nextQuest() {
-            // console.log("Нажали следующий вопрос")
             self.currentQuestNumber = self.currentQuestNumber + 1;
             saveFastCookie('currentQuestNumber', self.currentQuestNumber);
         },
         prevQuest() {
-            // console.log("Нажали предыдущий вопрос")
             self.currentQuestNumber = self.currentQuestNumber > 1 ? self.currentQuestNumber - 1 : 1;
             saveFastCookie('currentQuestNumber', self.currentQuestNumber);
         },
         resetState() {
-            console.log("TRY resetState");
             Object.keys(initialState).forEach(keyName => {
                 cookie.remove(keyName, { path: '/' })
             });
-            // self = initialState;
-            // self.userName = 'test';
             self.answers = initialState.answers;
             self.currentQuestNumber = initialState.currentQuestNumber;
             self.isChosenAnswers = initialState.isChosenAnswers;
             self.isResultSent = initialState.isResultSent;
             self.userName = initialState.userName;
-            console.log(self);
-            console.log(Object.keys(initialState));
         }
     }))
     // .views(self => {})
@@ -186,10 +178,7 @@ const StoreProvider = ({ children }) => {
             "Family": false
         }, cookie.load('isChosenAnswers'))
         
-    })
-    //"od", "lu", "po", "vl", "be", "ne", "st", "ob", "ro", "sp", "ch", "id", "me", "ed", "fi", "se",
-    // console.log("store")
-    // console.log(store)
+    });
 
     return (
         <StoreContext.Provider value={store}>

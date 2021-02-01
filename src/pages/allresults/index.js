@@ -17,7 +17,6 @@ const AllResults = () => {
     const [fireBaseData, setFireBaseData] = useState([]);
 
     useEffect(()=> {
-        console.log("Start AllResult useEffect");
         let tempArr = []
         db.collection(collectionName).orderBy('timeStamp', 'desc').get().then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
@@ -52,11 +51,11 @@ const AllResults = () => {
 
     }, [])
 
-    useEffect(()=> {
-        console.log("fireBaseData useEffect");
-        console.log(fireBaseData);
-
-    }, [fireBaseData, setFireBaseData])
+    // useEffect(()=> {
+    //     console.log("fireBaseData useEffect");
+    //     console.log(fireBaseData);
+    //
+    // }, [fireBaseData, setFireBaseData])
 
 
 

@@ -1,20 +1,22 @@
 import React, {useContext, useEffect, useState} from 'react'
 import {urlInlineParser, getAllUrlParams, urlResParse, checkUrlRes, sortResultDesc} from "../../helpers/parsers"
+import Swal from 'sweetalert2';
+
 import styles from "../../global.scss";
 
 import {StoreContext} from "../../model/Store.js";
 
-import json from "./../../model/quests";
+// import json from "./../../model/quests";
 
 const Compare = ({history}) => {
     const store = useContext(StoreContext)
-    const questResults = store.answers.toJS();
+    // const questResults = store.answers.toJS();
     const [finalResultArr, setFinalResultArr] = useState([]);
     const [finalResultArr2, setFinalResultArr2] = useState([]);
     const [urlLink, setUrlLink] = useState("");
+    const [isResultError, setIsResultError] = useState(false);
 
     useEffect(()=> {
-        console.log("Вы на финальной странице UseEffect")
         let allUrlParams = getAllUrlParams(window.location.search);
         let res1Url = urlInlineParser(allUrlParams.res);
         let userName1Url = decodeURIComponent(allUrlParams.username);
@@ -27,19 +29,21 @@ const Compare = ({history}) => {
         setUrlLink(tempLink)
 
         if (res1Url && res2Url) {
-            console.log("Берем результат из ссылки");
             let url1Cheker = checkUrlRes(res1Url);
             let url2Cheker = checkUrlRes(res2Url);
 
 
             if (url1Cheker !== "successful") {
-                alert("Неправильный адрес ссылки. В первой части ссылки какая-то ошибка: " + url1Cheker);
-                // if (store.resultUrl !== '')  history.push(store.resultUrl);
-                store.resultUrl !== '' ? history.push(store.resultUrl) : history.push(store.resultUrl);
+                setIsResultError(true);
+                Swal.fire('Ооххх...', "Неправильный адрес ссылки. В первой части ссылки какая-то ошибка: " + url1Cheker, 'error').then(function(){
+                    store.resultUrl !== '' ? history.push(store.resultUrl) : history.push('');
+                });
             }
             if (url2Cheker !== "successful") {
-                alert("Неправильный адрес ссылки. Во второй части ссылки какая-то ошибка: " + url2Cheker);
-                store.resultUrl !== '' ? history.push(store.resultUrl) : history.push(store.resultUrl);
+                setIsResultError(true);
+                Swal.fire('Ооххх...', "Неправильный адрес ссылки. Во второй части ссылки какая-то ошибка: " + url2Cheker, 'error').then(function(){
+                    store.resultUrl !== '' ? history.push(store.resultUrl) : history.push('');
+                });
             }
 
             let parsedResult1 = urlResParse(res1Url).sort(sortResultDesc);
@@ -55,32 +59,33 @@ const Compare = ({history}) => {
             setFinalResultArr2(parsedResult2sorted)
         }
         else {
-            alert("Неправильная ссылка для сравнения результатов")
+            setIsResultError(true);
+            Swal.fire('Ооххх...', 'Неправильная ссылка для сравнения результатов', 'error').then(function(){
+                store.resultUrl !== '' ? history.push(store.resultUrl) : history.push('');
+            });
         }
 
     }, [])
-
-
-    console.log(finalResultArr)
-    console.log(finalResultArr2)
-
 
     return (
         <div className={styles.compareResultsPage}>
             <div className={styles.compareResultsPage__Container} >
                 <h1>Сравнение результатов:</h1>
-
-                <div className={styles.compareResultsNames}>
-                    <h2>{store.userName}</h2>
-                    <h2>{store.userName2}</h2>
-                </div>
+                {isResultError ? (
+                    <h2 className={styles.error}>Ошибка в ссылке с результатами</h2>
+                ) : (
+                    <div className={styles.compareResultsNames}>
+                        <h2>{store.userName}</h2>
+                        <h2>{store.userName2}</h2>
+                    </div>
+                )}
                 <div className={styles.compareResultsBlock}>
                     <div className={`${styles.resultListWrp} ${styles.rotated}`}>
-                        {finalResultArr.length < 16 && (
+                        {!isResultError && finalResultArr.length < 16 && (
                             <h3>Что-то пошло не так. Вы ответили не на все вопросы.</h3>
                         )}
                         <ul className={styles.resultList}>
-                            { finalResultArr.map( (obj) => (
+                            {!isResultError && finalResultArr.map( (obj) => (
                                 <li key={obj.title}>
                                     <p key={obj.title + "_descr"} className={styles.resultTitle}>{obj.title}</p>
                                     <div key={obj.title + "_val"}  className={`${styles.resultBar}  ${styles["resultBar--" + obj.valueNum]}`} ></div>
@@ -90,12 +95,11 @@ const Compare = ({history}) => {
                     </div>
 
                     <div className={styles.resultListWrp}>
-                        {finalResultArr2.length < 16 && (
+                        {!isResultError && finalResultArr2.length < 16 && (
                             <h3>Что-то пошло не так. Вы ответили не на все вопросы.</h3>
                         )}
-
                         <ul className={styles.resultList}>
-                            { finalResultArr2.map( (obj) => (
+                            {!isResultError && finalResultArr2.map( (obj) => (
                                 <li key={obj.title}>
                                     <p key={obj.title + "_descr"} className={styles.resultTitle}>{obj.title}</p>
                                     <div key={obj.title + "_val"}  className={`${styles.resultBar}  ${styles["resultBar--" + obj.valueNum]}`} ></div>

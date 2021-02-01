@@ -21,14 +21,9 @@ const Quest = ({questInfo, currentQuestNum, questsTotal, onAfterChange, onChange
 
     // Формируем финальный УРЛ если отетил на 16 вопрсов
     if (currentQuestNum > questsTotal) {
-        console.log("------------------------ здесь собираем все ответы")
         let tempFinalRes = store.answers.toJS();
-
-        console.log("tempFinalRes")
-        console.log(tempFinalRes)
         let newObjUrl = {};
 
-        console.log(json)
         tempFinalRes.forEach( (val, key) => {
             let shortName;
             json.forEach((quest)=> {
@@ -40,28 +35,21 @@ const Quest = ({questInfo, currentQuestNum, questsTotal, onAfterChange, onChange
 
             newObjUrl[shortName] = val / 100;
 
-        })
-
-        console.log(newObjUrl);
+        });
 
         let urlAnswersString = "";
         for (const name in newObjUrl) {
             urlAnswersString += name + newObjUrl[name];
         }
-        console.log(urlAnswersString);
 
         let urlFullLink = "/result?res=" + urlAnswersString + "&username=" + USER_NAME;
 
         if (!store.isResultSent) {
-            console.log("Сейчас отправим в бд...")
             let preparedAnswersArr = [];
             tempFinalRes.forEach((value, keyName) => {
                 preparedAnswersArr.push({ keyName, value });
             });
             preparedAnswersArr.sort((prev, next) => next.value - prev.value);
-            console.log("preparedAnswersArr");
-            console.log(preparedAnswersArr);
-
 
             if (!!!USER_NAME) USER_NAME = "Без имени =("
             db.collection(collectionName).add({
@@ -71,7 +59,7 @@ const Quest = ({questInfo, currentQuestNum, questsTotal, onAfterChange, onChange
                 timeStamp: dbFirestore.FieldValue.serverTimestamp()
             })
                 .then(function () {
-                    console.log("Document successfully written!");
+                    // console.log("Document successfully written!");
                     store.setIsResultSent(true)
                 })
                 .catch(function (error) {

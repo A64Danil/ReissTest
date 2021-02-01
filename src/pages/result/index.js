@@ -28,7 +28,6 @@ const Result = ({props}) => {
 
 
     useEffect(()=> {
-        console.log("Вы на финальной странице UseEffect")
         const allUrlParams = getAllUrlParams(window.location.search);
         const stringUrlPath = urlInlineParser(allUrlParams.res);
         const userNameUrl = decodeURIComponent(allUrlParams.username);
@@ -37,12 +36,10 @@ const Result = ({props}) => {
         store.setResultUrl('result' + window.location.search);
 
         if (stringUrlPath) {
-            console.log("Берем результат из ссылки")
             let parsedResult = urlResParse(stringUrlPath).sort(sortResultDesc);
             setFinalResultArr(parsedResult);
         }
         else {
-            console.log("Берем результат из стора")
             let parsedResult = [];
             questResults.forEach( (val, key) =>  {
                 let fullName;
@@ -60,15 +57,11 @@ const Result = ({props}) => {
                 let newObj = {
                     title: fullName,
                     valueNum: val,
-                    // valuetext: valToText
                 }
                 parsedResult.push(newObj)
             })
-            console.log(parsedResult)
             setFinalResultArr(parsedResult);
         }
-        console.log(finalResultArr);
-        console.log(store);
     }, [])
 
 
