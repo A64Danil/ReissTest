@@ -1,10 +1,9 @@
-import React, {useContext, useEffect, useState} from 'react'
-
+import React, {useContext} from 'react'
 import styles from "./Quest.scss";
 
 import json from "./../../model/quests";
 
-import { Slider } from 'antd';
+import Slider from 'rc-slider/es/Slider';
 
 import {StoreContext} from "./../../model/Store";
 

@@ -1,6 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react'
-import {StoreContext} from "../../model/Store.js";
-
+import React from 'react';
 import styles from "../../global.scss";
 
 import Arrow from "./../../assets/svg/arrow_normal";

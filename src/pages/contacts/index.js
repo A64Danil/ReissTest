@@ -136,8 +136,7 @@ const Contacts = ({location, match}) => {
                                 value={textAreaValue}
                                 onChange={e => setTextAreaValue(e.target.value)}
                                 className={errorTextArea}
-                                // TODO: разблокировать в версии 0.9
-                                // required
+                                required
                             />
                             <div className={styles.flex}>
                                 <input
@@ -147,7 +146,7 @@ const Contacts = ({location, match}) => {
                                     value={emailInputValue}
                                     onChange={e => setEmailInputValue(e.target.value)}
                                     className={errorEmail}
-                                    // required
+                                    required
                                 />
                                 <button
                                     type="submit"

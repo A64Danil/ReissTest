@@ -1,11 +1,9 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useEffect} from 'react'
 import {NavLink} from 'react-router-dom';
 import {useLocation} from "react-router-dom";
 import styles from "./Menu.scss";
 // import {StoreContext} from "../../model/Store";
 
-// вроде пока не нужен
-// import { observer } from "mobx-react"
 
 import CrossIco from "./../../assets/svg/cross";
 

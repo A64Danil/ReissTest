@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import styles from "../../global.scss";
 import {Link} from "react-router-dom";
 import Arrow from "./../../assets/svg/arrow_normal";

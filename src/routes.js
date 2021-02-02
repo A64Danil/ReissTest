@@ -1,4 +1,4 @@
-import {Switch, Route } from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 import React from 'react';
 
 import StartPage from './pages/startpage/index'

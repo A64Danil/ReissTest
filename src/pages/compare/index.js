@@ -6,11 +6,8 @@ import styles from "../../global.scss";
 
 import {StoreContext} from "../../model/Store.js";
 
-// import json from "./../../model/quests";
-
 const Compare = ({history}) => {
-    const store = useContext(StoreContext)
-    // const questResults = store.answers.toJS();
+    const store = useContext(StoreContext);
     const [finalResultArr, setFinalResultArr] = useState([]);
     const [finalResultArr2, setFinalResultArr2] = useState([]);
     const [urlLink, setUrlLink] = useState("");

@@ -161,6 +161,14 @@ $breakpoints: (
     &:-ms-input-placeholder      {@content}
 }
 
+@mixin cursorPointer() {
+  @media (hover: hover) {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
 $baseMargBottom: 32px;
 $basePadTop: 75px;
 

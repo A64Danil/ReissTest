@@ -1,7 +1,7 @@
 import React from "react";
 import cookie from "react-cookies";
 
-import {types} from "mobx-state-tree"
+import {types} from "mobx-state-tree";
 
 const saveFastCookie = (cookieName, cookieValue) => {
     const expires = new Date();
